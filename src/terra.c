@@ -18,7 +18,7 @@ int main(int argc, char ** argv)
 	if (!terra_conf_read_glob(&conf, TERRA_CONF_PATH))
 		return 1;
 
-	terra_switch_set_pin(conf->tran_pin);
+	terra_switch_set_pin(conf.tran_pin);
 
 //execution handling
 
