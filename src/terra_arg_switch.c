@@ -1,0 +1,66 @@
+#include "terra.h"
+
+#include <stdio.h>
+#include <string.h>
+
+#define ARG_MODE_SWITCH_ON "on"
+#define ARG_MODE_SWITCH_OFF "off"
+
+BOOL terra_arg_switch(terra_switch_req * const switch_req, int const argc, char const * const * const argv)
+{
+	if (argc != 4)
+	{
+		fprintf(stderr, "insufficient switch argument count\n");
+		return FALSE;
+	}
+
+	if (strlen(argv[2]) != 1)
+	{
+		fprintf(stderr, "invalid socket argument length\n");
+		return FALSE;
+	}
+	
+	if (   argv[2][0] != 'a'
+		&& argv[2][0] != 'A'
+		&& argv[2][0] != 'b'
+		&& argv[2][0] != 'B'
+		&& argv[2][0] != 'c'
+		&& argv[2][0] != 'C'
+		)
+	{
+		fprintf(stderr, "not a valid socket\n");
+		return FALSE;
+	}
+
+	if (argv[2][0] == 'A')
+	{
+		conf->sock = 'a';
+	}
+	else if (argv[2][0] == 'B')
+	{
+		conf->sock = 'b';
+	}
+	else if (argv[2][0] == 'C')
+	{
+		conf->sock = 'c';
+	}
+	else
+	{
+		conf->sock = argv[2][0];
+	}
+
+	if (strcmp(argv[3], ARG_MODE_SWITCH_ON) == 0)
+	{
+		switch_req->set_on = TRUE;
+		return TRUE;
+	}
+
+	if (strcmp(argv[3], ARG_MODE_SWITCH_OFF) == 0)
+	{
+		switch_req->set_on = FALSE;
+		return TRUE;
+	}
+
+	fprintf(stderr, "invalid switch set argument\n");
+	return FALSE;
+}
