@@ -12,7 +12,7 @@ OBJ=terra_conf_read_glob_impl.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 all: clean $(OBJ)
-	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/ $(OBJ))
+	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
 
 clean:
 	@mkdir -p bin obj
