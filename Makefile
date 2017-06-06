@@ -1,5 +1,6 @@
 CC=@gcc
 CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
+DWPI=-DWPI_ENABLED
 
 OBJ=terra_conf_read_glob_impl.o \
 	terra_conf_read_glob.o \
@@ -13,6 +14,9 @@ OBJ=terra_conf_read_glob_impl.o \
 
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
+
+arm: clean $(OBJ)
+	$(CC) $(CFLAGS) $(DWPI) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
 
 clean:
 	@mkdir -p bin obj

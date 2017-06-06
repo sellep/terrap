@@ -13,15 +13,18 @@ extern BOOL terra_arg_power(terra_switch_req * const, int const, char const * co
 
 int main(int argc, char ** argv)
 {
+	#if WPI_ENABLED
+		printf("WPI_ENABLED!\n");
+	#endif
+
 	terra_conf conf;
-	//terra_switch_req switch_req;
+	terra_switch_req switch_req;
 
 //configuration and setup
 
 	if (!terra_conf_read_glob(&conf, TERRA_CONF_PATH))
 		return 1;
 
-	terra_conf_print(&conf);
 	//terra_setup(&conf);
 
 //execution handling
