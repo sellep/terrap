@@ -14,8 +14,10 @@ int main(int argc, char ** argv)
 	terra_switch_req switch_req;
 
 //configuration and setup
-	if (!terra_conf_read_glob(&conf, TERRA_CONF_PATH))
+	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;
+
+	terra_conf_print(&conf);
 
 	terra_switch_set_pin(conf.tran_pin);
 

@@ -10,7 +10,7 @@
 #define CONF_SOCK_CODE_C_ON "sock_code_c_on"
 #define CONF_SOCK_CODE_C_OFF "sock_code_c_off"
 
-BOOL terra_conf_read_glob_impl(terra_conf * const conf, FILE * const f)
+BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 {
 	char *line = NULL;
 	size_t buf_len = 0;

@@ -2,6 +2,8 @@
 
 void terra_conf_print(terra_conf const * const conf)
 {
+	size_t i;
+
 	printf("terra_conf:\n");
 	printf("[global] tran_pin: %u\n", conf->tran_pin);
 	printf("[global] tran_rep: %u\n", conf->tran_rep);
@@ -12,4 +14,10 @@ void terra_conf_print(terra_conf const * const conf)
 	printf("[global] sock_code_b_off: %u\n", conf->sock_code_b_off);
 	printf("[global] sock_code_c_on: %u\n", conf->sock_code_c_on);
 	printf("[global] sock_code_c_off: %u\n", conf->sock_code_c_off);
+
+	for (i = 0; i < conf->sched_clocks_len; i++)
+	{
+		printf("[sched_clock %u] name: %s\n", i, conf->sched_clocks[i].name);
+		printf("[sched_clock %u] name: %d\n", i, conf->sched_clocks[i].trig);
+	}
 }
