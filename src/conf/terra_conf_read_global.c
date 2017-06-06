@@ -32,7 +32,7 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		{
 			conf->tran_rep = atoi(line + sizeof(CONF_TRAN_REP));
 		}
-		else if (strncmp(line, CONF_SOCK_CHAN, sizeof(CONF_SOCK_CHAN) - 1) == 0
+		else if (strncmp(line, CONF_SOCK_CHAN, sizeof(CONF_SOCK_CHAN) - 1) == 0)
 		{
 			conf->sock_chan = atoi(line + sizeof(CONF_SOCK_CHAN));
 		}
@@ -56,7 +56,7 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		{
 			conf->sock_code_c_on = atoi(line + sizeof(CONF_SOCK_CODE_C_ON));
 		}
-		else if (strncmp(line, CONF_SOCK_CODE_C_OFF, sizeof(CONF_SOCK_CODE_C_OFF) - 1))
+		else if (strncmp(line, CONF_SOCK_CODE_C_OFF, sizeof(CONF_SOCK_CODE_C_OFF) - 1) == 0)
 		{
 			conf->sock_code_c_off = atoi(line + sizeof(CONF_SOCK_CODE_C_OFF));
 		}
