@@ -26,39 +26,39 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 
 		if (strncmp(line, CONF_TRAN_PIN, sizeof(CONF_TRAN_PIN) - 1) == 0)
 		{
-			conf->tran_pin = atoi(line + sizeof(CONF_TRAN_PIN));
+			conf->tran_pin = atoi(line + sizeof(CONF_TRAN_PIN) - 1);
 		}
 		else if (strncmp(line, CONF_TRAN_REP, sizeof(CONF_TRAN_REP) - 1) == 0)
 		{
-			conf->tran_rep = atoi(line + sizeof(CONF_TRAN_REP));
+			conf->tran_rep = atoi(line + sizeof(CONF_TRAN_REP) - 1);
 		}
 		else if (strncmp(line, CONF_SOCK_CHAN, sizeof(CONF_SOCK_CHAN) - 1) == 0)
 		{
-			conf->sock_chan = atoi(line + sizeof(CONF_SOCK_CHAN));
+			conf->sock_chan = atoi(line + sizeof(CONF_SOCK_CHAN) - 1);
 		}
 		else if (strncmp(line, CONF_SOCK_CODE_A_ON, sizeof(CONF_SOCK_CODE_A_ON) - 1) == 0)
 		{
-			conf->sock_code_a_on = atoi(line + sizeof(CONF_SOCK_CODE_A_ON));
+			conf->sock_code_a_on = atoi(line + sizeof(CONF_SOCK_CODE_A_ON) - 1);
 		}
 		else if (strncmp(line, CONF_SOCK_CODE_A_OFF, sizeof(CONF_SOCK_CODE_A_OFF) - 1) == 0)
 		{
-			conf->sock_code_a_off = atoi(line + sizeof(CONF_SOCK_CODE_A_OFF));
+			conf->sock_code_a_off = atoi(line + sizeof(CONF_SOCK_CODE_A_OFF) - 1);
 		}
 		else if (strncmp(line, CONF_SOCK_CODE_B_ON, sizeof(CONF_SOCK_CODE_B_ON) - 1) == 0)
 		{
-			conf->sock_code_b_on = atoi(line + sizeof(CONF_SOCK_CODE_B_ON));
+			conf->sock_code_b_on = atoi(line + sizeof(CONF_SOCK_CODE_B_ON) - 1);
 		}
 		else if (strncmp(line, CONF_SOCK_CODE_B_OFF, sizeof(CONF_SOCK_CODE_B_OFF) - 1) == 0)
 		{
-			conf->sock_code_b_off = atoi(line + sizeof(CONF_SOCK_CODE_B_OFF));
+			conf->sock_code_b_off = atoi(line + sizeof(CONF_SOCK_CODE_B_OFF) - 1);
 		}
 		else if (strncmp(line, CONF_SOCK_CODE_C_ON, sizeof(CONF_SOCK_CODE_C_ON) - 1) == 0)
 		{
-			conf->sock_code_c_on = atoi(line + sizeof(CONF_SOCK_CODE_C_ON));
+			conf->sock_code_c_on = atoi(line + sizeof(CONF_SOCK_CODE_C_ON) - 1);
 		}
 		else if (strncmp(line, CONF_SOCK_CODE_C_OFF, sizeof(CONF_SOCK_CODE_C_OFF) - 1) == 0)
 		{
-			conf->sock_code_c_off = atoi(line + sizeof(CONF_SOCK_CODE_C_OFF));
+			conf->sock_code_c_off = atoi(line + sizeof(CONF_SOCK_CODE_C_OFF) - 1);
 		}
 	}
 

@@ -12,9 +12,9 @@ typedef struct
 
 enum sched_triggers
 {
-	TRIGGER_CLOCK,
-	TRIGGER_TEMP,
-	TRIGGER_MOIS
+	TRIGGER_CLOCK = 1,
+	TRIGGER_TEMP = 2,
+	TRIGGER_MOIS = 3
 };
 
 typedef int sched_trig;
