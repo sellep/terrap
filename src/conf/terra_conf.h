@@ -3,6 +3,13 @@
 
 #include "../terra.h"
 
+typedef struct
+{
+	ssize_t hour;
+	ssize_t min;
+	ssize_t sec;
+} terra_time;
+
 enum sched_triggers
 {
 	TRIGGER_CLOCK,
@@ -22,6 +29,8 @@ typedef struct
 typedef struct
 {
 	terra_sched sched;
+	terra_time start;
+	terra_time end;
 } terra_sched_clock;
 
 typedef struct
