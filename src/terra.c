@@ -20,7 +20,7 @@ int main(int argc, char ** argv)
 	terra_switch_set_pin(conf.tran_pin);
 
 //execution handling
-	if (argc != 2)
+	if (argc < 2)
 	{
 		fprintf(stderr, "insufficient argument count\n");
 		return 1;
