@@ -35,6 +35,7 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		if (strncmp(line, CONF_SCHED_CLOCK_NAME, sizeof(CONF_SCHED_CLOCK_NAME) - 1) == 0 && line[sizeof(CONF_SCHED_CLOCK_NAME) - 1] == '=')
 		{
 			strncpy(&(conf->sched_clocks[conf->sched_clocks_len].sched.name), line + sizeof(CONF_SCHED_CLOCK_NAME), read - sizeof(CONF_SCHED_CLOCK_NAME) - 1);
+			conf->sched_clocks[conf->sched_clocks_len].sched.name[read - sizeof(CONF_SCHED_CLOCK_NAME) - 1] = '\n';
 		}
 		else
 			HANDLE_ERROR("clock schedule name expected\n");
