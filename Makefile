@@ -5,7 +5,8 @@ DWPI=-DWPI_ENABLED
 OBJ=terra_conf_read_glob_impl.o \
 	terra_conf_read_glob.o \
 	terra_conf_print.o \
-	terra_switch_set_pin.o
+	terra_switch_set_pin.o \
+	terra_arg_switch.o
 
 %.o : src/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<

@@ -14,29 +14,31 @@ int main(int argc, char ** argv)
 	terra_switch_req switch_req;
 
 //configuration and setup
-
 	if (!terra_conf_read_glob(&conf, TERRA_CONF_PATH))
 		return 1;
 
 	terra_switch_set_pin(conf.tran_pin);
 
 //execution handling
+	if (argc != 2)
+	{
+		fprintf(stderr, "insufficient argument count\n");
+		return 1;
+	}
 
-	//if (argc != 2)
-	//{
-	//	fprintf(stderr, "insufficient argument count\n");
-	//	return 1;
-	//}
-    //
-	//if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
-	//{
-	//	if (!terra_arg_switch(&switch_req, argc, argv))
-	//		return 1;
-    //
-	//	terra_switch_set(&conf, &switch_req);
-    //
-	//	return 0;
-	//}
+	if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
+	{
+		if (!terra_arg_switch(&switch_req, argc, argv))
+			return 1;
+
+		//terra_switch_set(&conf, &switch_req);
+		return 0;
+	}
+	else
+	{
+		fprintf(stderr, "invalid mode\n");
+		return 1;
+	}
 
 	return 0;
 }

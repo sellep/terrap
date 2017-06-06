@@ -1,12 +1,9 @@
-#include "terra.h"
-
-#include <stdio.h>
-#include <string.h>
+#include "terra_switch.h"
 
 #define ARG_MODE_SWITCH_ON "on"
 #define ARG_MODE_SWITCH_OFF "off"
 
-BOOL terra_arg_switch(terra_switch_req * const switch_req, int const argc, char const * const * const argv)
+BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char const * const * const argv)
 {
 	if (argc != 4)
 	{
