@@ -19,9 +19,10 @@ OBJ=terra_conf_read_glob_impl.o \
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
 
-arm: clean $(OBJ)
-	CFLAGS=$(CFLAGS) $(DWPI)
-	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
+wpi:
+	$(eval CFLAGS += "$(DWPI)")
+
+arm: wpi all
 
 clean:
 	@mkdir -p bin obj
