@@ -13,6 +13,4 @@ typedef struct
 	BOOL set_on;
 } terra_switch_req;
 
-BOOL terra_setup(terra_conf const * const);
-
 #endif
