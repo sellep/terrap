@@ -1,7 +1,6 @@
 #include "terra_conf.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define CONF_TRAN_PIN "tran_pin"
