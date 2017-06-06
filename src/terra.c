@@ -28,7 +28,7 @@ int main(int argc, char ** argv)
 
 	if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
 	{
-		if (!terra_arg_switch(&switch_req, argc, argv))
+		if (!terra_switch_arg(&switch_req, argc, argv))
 			return 1;
 
 		//terra_switch_set(&conf, &switch_req);
