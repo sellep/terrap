@@ -15,8 +15,8 @@
 
 BOOL terra_conf_read_glob_impl(terra_conf * const conf, FILE * const f)
 {
-	char *line;
-	size_t buf_len;
+	char *line = NULL;
+	size_t buf_len = 0;
 	size_t read;
 
 	while ((read = getline(&line, &buf_len, f)) != -1)

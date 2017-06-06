@@ -4,7 +4,7 @@
 
 void terra_conf_print(terra_conf const * const conf)
 {
-	printf("terra_conf:");
+	printf("terra_conf:\n");
 	printf("[global] tran_pin: %u\n", conf->tran_pin);
 	printf("[global] tran_rep: %u\n", conf->tran_rep);
 	printf("[global] sock_chan: %u\n", conf->sock_chan);
