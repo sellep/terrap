@@ -3,6 +3,12 @@
 
 #include "../terra.h"
 
+typedef struct
+{
+	char sock;
+	BOOL set_on;
+} terra_switch_req;
+
 void terra_switch_set_pin(ssize_t const);
 void terra_switch_set(terra_conf const * const, terra_switch_req const * const);
 

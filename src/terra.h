@@ -5,12 +5,11 @@
 #define TRUE 1
 #define FALSE 0
 
-#include <stdlib.h>
+#include "conf/terra_conf.h"
+#include "switch/terra_switch.h"
 
-typedef struct
-{
-	char sock;
-	BOOL set_on;
-} terra_switch_req;
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #endif

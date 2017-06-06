@@ -1,7 +1,5 @@
 #include "terra_conf.h"
 
-#include <stdio.h>
-
 void terra_conf_print(terra_conf const * const conf)
 {
 	printf("terra_conf:\n");

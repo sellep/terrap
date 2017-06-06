@@ -1,8 +1,5 @@
 #include "terra_conf.h"
 
-#include <stdio.h>
-#include <string.h>
-
 #define CONF_TRAN_PIN "tran_pin"
 #define CONF_TRAN_REP "tran_rep"
 #define CONF_SOCK_CHAN "sock_chan"

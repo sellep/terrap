@@ -1,9 +1,4 @@
 #include "terra.h"
-#include "conf/terra_conf.h"
-#include "switch/terra_switch.h"
-
-#include <stdio.h>
-#include <string.h>
 
 #define TERRA_CONF_PATH "res/terra.default.conf"
 
