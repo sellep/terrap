@@ -41,6 +41,12 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 			goto error;
 		}
 
+		if ((read = getline(&line, &buf_len, f)) == -1)
+		{
+			fprintf(stderr, "unexpected end of clock schedule section\n");
+			goto error;
+		}
+
 		if (strncmp(line, CONF_SCHED_CLOCK_SOCK, sizeof(CONF_SCHED_CLOCK_SOCK) - 1) == 0 && line[sizeof(CONF_SCHED_CLOCK_SOCK) - 1] == '=')
 		{
 			conf->sched_clocks[conf->sched_clocks_len].sched.sock = line[sizeof(CONF_SCHED_CLOCK_SOCK)];
