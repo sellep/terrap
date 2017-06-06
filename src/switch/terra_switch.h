@@ -2,6 +2,7 @@
 #define __P_TERRA_SWITCH_H
 
 #include "../terra.h"
+#include "../conf/terra_conf.h"
 
 typedef struct
 {
