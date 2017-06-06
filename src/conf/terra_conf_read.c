@@ -1,7 +1,7 @@
 #include "terra_conf.h"
 
 extern BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f);
-extern BOOL terra_conf_read_sched_clocks(terra_conf_conf * const, FILE * const);
+extern BOOL terra_conf_read_sched_clocks(terra_conf * const, FILE * const);
 
 BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 {

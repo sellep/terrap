@@ -22,8 +22,6 @@ typedef struct
 typedef struct
 {
 	terra_sched sched;
-	struct tm start;
-	struct tm end;
 } terra_sched_clock;
 
 typedef struct

@@ -17,7 +17,10 @@ void terra_conf_print(terra_conf const * const conf)
 
 	for (i = 0; i < conf->sched_clocks_len; i++)
 	{
-		printf("[sched_clock %u] name: %s\n", i, conf->sched_clocks[i].name);
-		printf("[sched_clock %u] name: %d\n", i, conf->sched_clocks[i].trig);
+		printf("[sched_clock %u] name: %s\n", i, conf->sched_clocks[i].sched.name);
+		printf("[sched_clock %u] trigger: %s\n", i,
+			conf->sched_clocks[i].sched.trig == TRIGGER_CLOCK ? "clock"
+			: conf->sched_clocks[i].sched.trig == TRIGGER_TEMP ? "temp"
+			: "mois");
 	}
 }

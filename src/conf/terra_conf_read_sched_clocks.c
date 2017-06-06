@@ -5,7 +5,7 @@
 
 #define CONF_SCHED_CLOCK_NAME "\tname"
 
-BOOL terra_conf_read_sched_clocks(terra_conf_conf * const conf, FILE * const f)
+BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 {
 	char *line = NULL;
 	size_t buf_len = 0;
@@ -24,23 +24,23 @@ BOOL terra_conf_read_sched_clocks(terra_conf_conf * const conf, FILE * const f)
 		if (strncmp(line, CONF_SCHED_CLOCK_BEGIN, sizeof(CONF_SCHED_CLOCK_BEGIN) - 1) != 0)
 			continue;
 
-		if (read = getline(&line, &buf_len, f)) == -1)
+		if ((read = getline(&line, &buf_len, f)) == -1)
 		{
-			frpintf(stderr, "unexpected end of clock schedule section\n");
+			fprintf(stderr, "unexpected end of clock schedule section\n");
 			goto error;
 		}
 
 		if (strncmp(line, CONF_SCHED_CLOCK_NAME, sizeof(CONF_SCHED_CLOCK_NAME) - 1) == 0 && line[sizeof(CONF_SCHED_CLOCK_NAME) - 1] == '=')
 		{
-			strcpy(&conf->sched_clocks[conf->sched_clocks_len].name, line + sizeof(CONF_SCHED_CLOCK_NAME));
+			strncpy(&(conf->sched_clocks[conf->sched_clocks_len].sched.name), line + sizeof(CONF_SCHED_CLOCK_NAME), read - sizeof(CONF_SCHED_CLOCK_NAME) - 1);
 		}
 		else
 		{
-			frpintf(stderr, "clock schedule name expected\n");
+			fprintf(stderr, "clock schedule name expected\n");
 			goto error;
 		}
 
-		conf->sched_clocks[conf->sched_clocks_len].trig = TRIGGER_CLOCK;
+		conf->sched_clocks[conf->sched_clocks_len].sched.trig = TRIGGER_CLOCK;
 		conf->sched_clocks_len++;
 		break;
 	}
