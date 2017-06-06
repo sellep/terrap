@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define TERRA_CONF_PATH "/etc/conf.d/terra.conf"
+#define TERRA_CONF_PATH "../res/terra.conf"
 
 #define ARG_MODE_SWITCH "switch"
 
