@@ -16,6 +16,7 @@ typedef struct
 	size_t sock_code_c_off;
 } terra_conf;
 
+void terra_conf_print(terra_conf const * const);
 BOOL terra_conf_read_glob(terra_conf * const, char const * const);
 
 #endif
