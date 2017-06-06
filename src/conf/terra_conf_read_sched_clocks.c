@@ -55,13 +55,6 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		if ((read = getline(&line, &buf_len, f)) == -1)
 			HANDLE_ERROR("unexpected end of clock schedule section\n");
 
-		if (strncmp(line, CONF_SCHED_CLOCK_SOCK, sizeof(CONF_SCHED_CLOCK_SOCK) - 1) == 0)
-		{
-			conf->sched_clocks[conf->sched_clocks_len].sched.sock = line[sizeof(CONF_SCHED_CLOCK_SOCK)];
-		}
-		else
-			HANDLE_ERROR("clock schedule sock expected\n");
-
 		conf->sched_clocks[conf->sched_clocks_len].sched.trig = TRIGGER_CLOCK;
 		conf->sched_clocks_len++;
 		break;
