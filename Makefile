@@ -4,7 +4,8 @@ DWPI=-DWPI_ENABLED
 
 OBJ=terra_conf_read_glob_impl.o \
 	terra_conf_read_glob.o \
-	terra_conf_print.o
+	terra_conf_print.o \
+	terra_switch_set_pin.o
 
 %.o : src/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
@@ -12,11 +13,15 @@ OBJ=terra_conf_read_glob_impl.o \
 %.o : src/conf/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
+%.o : src/switch/%.c
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
 
 arm: clean $(OBJ)
-	$(CC) $(CFLAGS) $(DWPI) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
+	CFLAGS=$(CFLAGS) $(DWPI)
+	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
 
 clean:
 	@mkdir -p bin obj
