@@ -31,19 +31,19 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 
 	if (argv[2][0] == 'A')
 	{
-		conf->sock = 'a';
+		switch_req->sock = 'a';
 	}
 	else if (argv[2][0] == 'B')
 	{
-		conf->sock = 'b';
+		switch_req->sock = 'b';
 	}
 	else if (argv[2][0] == 'C')
 	{
-		conf->sock = 'c';
+		switch_req->sock = 'c';
 	}
 	else
 	{
-		conf->sock = argv[2][0];
+		switch_req->sock = argv[2][0];
 	}
 
 	if (strcmp(argv[3], ARG_MODE_SWITCH_ON) == 0)
