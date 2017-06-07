@@ -1,5 +1,12 @@
 #include "terra_log.h"
 
+#if SYSLOG_ENABLED
+	#include <syslog.h>
+	#define TERRA_LOG_ID "terrad"
+#else
+	#include <stdio.h>
+#endif
+
 #define MAX_BUF_LEN 1024
 
 void terra_log_info(char const * const msg, ...)
