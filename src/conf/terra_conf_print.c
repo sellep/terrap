@@ -5,6 +5,7 @@ void terra_conf_print(terra_conf const * const conf)
 	size_t i;
 
 	terra_log_info("terra_conf:\n");
+	terra_log_info("[global] tick: %u\n", conf->tick);
 	terra_log_info("[global] tran_pin: %u\n", conf->tran_pin);
 	terra_log_info("[global] tran_rep: %u\n", conf->tran_rep);
 	terra_log_info("[global] sock_chan: %u\n", conf->sock_chan);
