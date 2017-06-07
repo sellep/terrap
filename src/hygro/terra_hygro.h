@@ -7,8 +7,8 @@ typedef struct
 {
 	float temp;
 	float humi;
-} hygro_res;
+} terra_hygro_res;
 
-BOOL terra_hygro_read(hygro_res * const, terra_conf const * const);
+BOOL terra_hygro_read(terra_hygro_res * const, terra_conf const * const);
 
 #endif
