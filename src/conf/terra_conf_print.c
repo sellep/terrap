@@ -16,6 +16,7 @@ void terra_conf_print(terra_conf const * const conf)
 	terra_log_info("[global] sock_code_c_on: %u\n", conf->sock_code_c_on);
 	terra_log_info("[global] sock_code_c_off: %u\n", conf->sock_code_c_off);
 	terra_log_info("[global] hygro_enabled: %u\n", conf->hygro_enabled);
+	terra_log_info("[global] hygro_pin: %u\n", conf->hygro_pin);
 	terra_log_info("[global] hygro_tick: %u\n", conf->hygro_tick);
 	terra_log_info("[global] hygro_sensor: %s\n", conf->hygro_sensor);
 

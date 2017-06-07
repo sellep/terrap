@@ -11,6 +11,7 @@
 #define CONF_SOCK_CODE_C_ON "sock_code_c_on="
 #define CONF_SOCK_CODE_C_OFF "sock_code_c_off="
 #define CONF_HYGRO_ENABLED "hygro_enabled="
+#define CONF_HYGRO_PIN "hygro_pin="
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_SENSOR "hygro_sensor="
 
@@ -76,6 +77,10 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		if (strncmp(line, CONF_HYGRO_ENABLED, sizeof(CONF_HYGRO_ENABLED) - 1) == 0)
 		{
 			conf->hygro_enabled = atoi(line + sizeof(CONF_HYGRO_ENABLED) - 1);
+		}
+		if (strncmp(line, CONF_HYGRO_PIN, sizeof(CONF_HYGRO_PIN) - 1) == 0)
+		{
+			conf->hygro_pin = atoi(line + sizeof(CONF_HYGRO_PIN) - 1);
 		}
 		else if (strncmp(line, CONF_HYGRO_TICK, sizeof(CONF_HYGRO_TICK) - 1) == 0)
 		{

@@ -55,6 +55,7 @@ typedef struct
 	size_t sock_code_c_off;
 
 	ssize_t hygro_enabled;
+	ssize_t hygro_pin;
 	ssize_t hygro_tick;
 	char hygro_sensor[6];
 
