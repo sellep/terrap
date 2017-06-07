@@ -4,5 +4,5 @@
 
 int main(int argc, char **argv)
 {
-	terra_log_info("huhuhu\n");
+	terra_log_info("huhuhu %i\n", 5);
 }
