@@ -12,9 +12,9 @@
 
 enum sock_modes
 {
-	SOCK_UNKNOWN,
-	SOCK_ON,
-	SOCK_OFF
+	SOCK_UNKNOWN = 0,
+	SOCK_ON = 1,
+	SOCK_OFF = 2
 };
 
 enum sched_triggers

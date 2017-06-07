@@ -8,6 +8,8 @@
 extern void terrad_run_clock_init(terra_conf const * const);
 extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
 
+static BOOL _terminate = FALSE;
+
 BOOL terrad_run(terra_conf const * const conf)
 {
 	terra_time sys_time;
@@ -17,8 +19,7 @@ BOOL terrad_run(terra_conf const * const conf)
 	terrad_run_clock_init(conf);
 
 	//scheduling
-
-	while (TRUE)
+	while (!_terminate)
 	{
 		terra_time_sys(&sys_time);
 

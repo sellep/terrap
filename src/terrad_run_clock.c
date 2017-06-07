@@ -3,12 +3,12 @@
 #include "conf/terra_conf.h"
 #include "utils/terra_time.h"
 
-static int terra_clock_mode[TERRA_CONF_MAX_SCHED_CLOCKS];
+static int _terra_clock_mode[TERRA_CONF_MAX_SCHED_CLOCKS];
 
-#define SOCK_CLOCK_NOT_ON(i)(terra_clock_mode[i] != SOCK_ON)
-#define SOCK_CLOCK_NOT_OFF(i)(terra_clock_mode[i] != SOCK_OFF)
-#define SOCK_CLOCK_SET_ON(i)(terra_clock_mode[i] = SOCK_ON)
-#define SOCK_CLOCK_SET_OFF(i)(terra_clock_mode[i] = SOCK_OFF)
+#define SOCK_CLOCK_NOT_ON(i)(_terra_clock_mode[i] != SOCK_ON)
+#define SOCK_CLOCK_NOT_OFF(i)(_terra_clock_mode[i] != SOCK_OFF)
+#define SOCK_CLOCK_SET_ON(i)(_terra_clock_mode[i] = SOCK_ON)
+#define SOCK_CLOCK_SET_OFF(i)(_terra_clock_mode[i] = SOCK_OFF)
 
 void terrad_run_clock_init(terra_conf const * const conf)
 {
@@ -16,7 +16,7 @@ void terrad_run_clock_init(terra_conf const * const conf)
 
 	for (i = 0; i < conf->sched_clocks_len; i++)
 	{
-		terra_clock_mode[i] = SOCK_UNKNOWN;
+		_terra_clock_mode[i] = SOCK_UNKNOWN;
 	}
 }
 
