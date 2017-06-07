@@ -22,6 +22,7 @@ void terra_conf_print(terra_conf const * const conf)
 			conf->sched_clocks[i].sched.trig == TRIGGER_CLOCK ? "clock"
 			: conf->sched_clocks[i].sched.trig == TRIGGER_TEMP ? "temp"
 			: "mois");
-		printf("[sched_sock %u] trigger: %c\n", i, conf->sched_clocks[i].sched.sock);
+		printf("[sched_sock %u] sock: %c\n", i, conf->sched_clocks[i].sched.sock);
+		printf("[sched_sock %u] enabled: %u\n", i, conf->sched_clocks[i].sched.enabled);
 	}
 }

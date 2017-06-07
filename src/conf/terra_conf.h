@@ -24,6 +24,7 @@ typedef struct
 	char name[20];
 	sched_trig trig;
 	char sock;
+	ssize_t enabled;
 } terra_sched;
 
 typedef struct
