@@ -21,10 +21,5 @@ void terra_time_print(terra_time const * const time)
 		printf("0");
 	}
 
-	if (time->sec < 100)
-	{
-		printf("0");
-	}
-
 	printf("%u\n", time->sec);
 }

@@ -25,6 +25,9 @@ OBJ=terra_log_info.o \
 %.o : src/switch/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
+%.o : src/utils/%.c
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
 	$(CC) $(CFLAGS) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ))
