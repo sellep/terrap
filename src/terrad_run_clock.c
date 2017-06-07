@@ -34,7 +34,7 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 		terra_log_info("switch clock %s to on\n", clock->sched.name);
 	}
 
-	diff = terra_time_diff(&sys_time, &clock->end);
+	diff = terra_time_diff(sys_time, &clock->end);
 	if (diff == 0 && SOCK_CLOCK_NOT_OFF(i))
 	{
 		SOCK_CLOCK_SET_OFF(i);
