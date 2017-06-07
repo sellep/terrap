@@ -2,7 +2,8 @@ CC=@gcc
 CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
 DWPI=-DWPI_ENABLED
 
-OBJ=terra_time_print.o \
+OBJ=terra_log_info.o \
+	terra_time_print.o \
 	terra_time_read.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
@@ -26,6 +27,7 @@ OBJ=terra_time_print.o \
 
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
+	$(CC) $(CFLAGS) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ))
 
 wpi:
 	$(eval CFLAGS += "$(DWPI)")
