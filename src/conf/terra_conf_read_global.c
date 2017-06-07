@@ -68,7 +68,7 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		}
 		else if (strncmp(line, CONF_HYGRO_SENSOR, sizeof(CONF_HYGRO_SENSOR) - 1) == 0)
 		{
-			if (strcpy(conf->hygro_sensor, line + sizeof(CONF_SOCK_CODE_C_OFF) - 1) == line + sizeof(CONF_SOCK_CODE_C_OFF) - 1)
+			if (strcpy(conf->hygro_sensor, line + sizeof(CONF_HYGRO_SENSOR) - 1) == line + sizeof(CONF_HYGRO_SENSOR) - 1)
 			{
 				terra_log_error("invalid hygro_sensor\n");
 				return FALSE;
