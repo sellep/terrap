@@ -27,7 +27,7 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		if (strncmp(line, CONF_SCHED_CLOCK_BEGIN, sizeof(CONF_SCHED_CLOCK_BEGIN) - 1) != 0)
 			continue;
 
-		clock = &conf->sched_clocks[sched_clocks_len];
+		clock = &conf->sched_clocks[conf->sched_clocks_len];
 
 		if(!terra_conf_read_sched(&clock->sched, f))
 			return FALSE;
@@ -60,7 +60,6 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		conf->sched_clocks_len++;
 	}
 
-exit:
 	if (line)
 	{
 		free(line);
