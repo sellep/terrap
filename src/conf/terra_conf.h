@@ -8,6 +8,8 @@
 	terra_log_error("%s", s);	\
 	goto error;}
 
+#define TERRA_CONF_MAX_SCHED_CLOCKS 10
+
 enum sched_triggers
 {
 	TRIGGER_CLOCK = 1,
@@ -44,7 +46,7 @@ typedef struct
 	size_t sock_code_c_on;
 	size_t sock_code_c_off;
 
-	terra_sched_clock sched_clocks[10];
+	terra_sched_clock sched_clocks[TERRA_CONF_MAX_SCHED_CLOCKS];
 	ssize_t sched_clocks_len;
 } terra_conf;
 

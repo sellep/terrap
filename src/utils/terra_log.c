@@ -1,6 +1,6 @@
 #include "terra_log.h"
 
-#if SYSLOG_ENABLED
+#ifdef SYSLOG_ENABLED
 	#include <syslog.h>
 	#define TERRA_LOG_ID "terrad"
 #else
@@ -16,7 +16,7 @@ void terra_log_info(char const * const msg, ...)
 	va_start(args, msg);
 	vsnprintf(buf, MAX_BUF_LEN - 1, msg, args);
 
-#if SYSLOG_ENABLED
+#ifdef SYSLOG_ENABLED
 	openlog(TERRA_LOG_ID, LOG_PID, LOG_DAEMON);
 	syslog(LOG_INFO, buf);
 	closelog();
@@ -34,7 +34,7 @@ void terra_log_error(char const * const msg, ...)
 	va_start(args, msg);
 	vsnprintf(buf, MAX_BUF_LEN - 1, msg, args);
 
-#if SYSLOG_ENABLED
+#ifdef SYSLOG_ENABLED
 	openlog(TERRA_LOG_ID, LOG_PID, LOG_DAEMON);
 	syslog(LOG_ERR, buf);
 	closelog();

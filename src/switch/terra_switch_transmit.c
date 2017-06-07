@@ -4,7 +4,7 @@
 
 void terra_switch_transmit(ssize_t const tran_pin, ssize_t const high, ssize_t const low, ssize_t const pulse_len)
 {
-#if WPI_ENABLED
+#ifdef WPI_ENABLED
 	digitalWrite(tran_pin, HIGH);
 	delayMicroseconds(SIGNAL_PULSE_LEN * high);
 	digitalWrite(tran_pin, LOW);

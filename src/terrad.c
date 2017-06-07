@@ -2,6 +2,8 @@
 
 #include "conf/terra_conf.h"
 
+extern BOOL terrad_run(terra_conf const * const);
+
 int main(int argc, char **argv)
 {
 	terra_conf conf;
@@ -21,6 +23,9 @@ int main(int argc, char **argv)
 		terra_log_error("failed to read config file\n");
 		return 1;
 	}
+
+	if (!terrad_run(&conf))
+		return 1;
 
 	return 0;
 }
