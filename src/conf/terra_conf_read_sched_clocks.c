@@ -64,12 +64,17 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 
 		if (strncmp(line, CONF_SCHED_CLOCK_ENABLED, sizeof(CONF_SCHED_CLOCK_ENABLED) - 1) == 0)
 		{
-			conf->sched_clocks[conf->sched_clocks_len].sched.enabled = atoi(line[sizeof(CONF_SCHED_CLOCK_ENABLED) - 1]);
+			conf->sched_clocks[conf->sched_clocks_len].sched.enabled = atoi(&line[sizeof(CONF_SCHED_CLOCK_ENABLED) - 1]);
 			if (conf->sched_clocks[conf->sched_clocks_len].sched.enabled > 1)
 				HANDLE_ERROR("invalid value for enabled\n");
 		}
 		else
 			HANDLE_ERROR("clock schedule enabled expected\n");
+
+		//schedule clock start
+
+		if ((read = getline(&line, &buf_len, f)) == -1)
+			HANDLE_ERROR("unexpected end of clock schedule section\n");
 
 		if (strncmp(line, CONF_SCHED_CLOCK_START, sizeof(CONF_SCHED_CLOCK_START) - 1) == 0)
 		{
@@ -77,6 +82,8 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		}
 		else
 			HANDLE_ERROR("clock schedule start expected\n");
+
+		//schedule clock end
 
 		if ((read = getline(&line, &buf_len, f)) == -1)
 			HANDLE_ERROR("unexpected end of clock schedule section\n");
