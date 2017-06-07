@@ -10,6 +10,7 @@
 #define CONF_SOCK_CODE_B_OFF "sock_code_b_off="
 #define CONF_SOCK_CODE_C_ON "sock_code_c_on="
 #define CONF_SOCK_CODE_C_OFF "sock_code_c_off="
+#define CONF_HYGRO_ENABLED "hygro_enabled="
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_SENSOR "hygro_sensor="
 
@@ -30,6 +31,11 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		if (strncmp(line, CONF_TICK, sizeof(CONF_TICK) - 1) == 0)
 		{
 			conf->tick = atoi(line + sizeof(CONF_TICK) - 1);
+			if (conf->tick == 0)
+			{
+				terra_log_error("invalid tick value\n");
+				return FALSE;
+			}
 		}
 		else if (strncmp(line, CONF_TRAN_PIN, sizeof(CONF_TRAN_PIN) - 1) == 0)
 		{
@@ -66,6 +72,10 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		else if (strncmp(line, CONF_SOCK_CODE_C_OFF, sizeof(CONF_SOCK_CODE_C_OFF) - 1) == 0)
 		{
 			conf->sock_code_c_off = atoi(line + sizeof(CONF_SOCK_CODE_C_OFF) - 1);
+		}
+		if (strncmp(line, CONF_HYGRO_ENABLED, sizeof(CONF_HYGRO_ENABLED) - 1) == 0)
+		{
+			conf->hygro_enabled = atoi(line + sizeof(CONF_HYGRO_ENABLED) - 1);
 		}
 		else if (strncmp(line, CONF_HYGRO_TICK, sizeof(CONF_HYGRO_TICK) - 1) == 0)
 		{
