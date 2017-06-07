@@ -38,7 +38,7 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 	if (SOCK_CLOCK_NOT_ON(i) && (diff == 0 || LAST_START_DIFF_SMALLER(i, diff)))
 	{
 		SOCK_CLOCK_SET_ON(i);
-		terra_log_info("switch clock %s to on\n", clock->sched.name);
+		terra_log_info("switch clock %s to on (diff: %us)\n", clock->sched.name, diff);
 	}
 
 	_terra_clock_ldiff_start[i] = diff;
@@ -47,7 +47,7 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 	if (SOCK_CLOCK_NOT_OFF(i) && (diff == 0 || LAST_END_DIFF_SMALLER(i, diff)))
 	{
 		SOCK_CLOCK_SET_OFF(i);
-		terra_log_info("switch clock %s to off\n", clock->sched.name);
+		terra_log_info("switch clock %s to off (diff: %us)\n", clock->sched.name, diff);
 	}
 
 	_terra_clock_ldiff_end[i] = diff;
