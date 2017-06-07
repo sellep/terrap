@@ -14,7 +14,7 @@ void signal_handler(int signum)
 {
 	if (signum == SIGINT || signum == SIGTERM)
 	{
-		terra_log_info("received termination signal (%u)\n", signum);
+		terra_log_info("received signal %s(%u)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
 		_terminate = TRUE;
 	}
 }
