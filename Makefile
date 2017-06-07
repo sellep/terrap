@@ -24,6 +24,9 @@ OBJ=terra_time_print.o \
 %.o : src/switch/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
+%.o : src/utils/%.c
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ))
 
