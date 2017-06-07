@@ -22,13 +22,13 @@ BOOL terrad_run(terra_conf const * const conf)
 		{
 			clock = &conf->sched_clocks[i];
 
-			if (!clock->enabled)
+			if (!clock->sched.enabled)
 				continue;
 
 			diff = terra_time_diff(&sys_time, &clock->start);
 			if (diff == 0)
 			{
-				terra_log_info("switch clock %s to on\n", clock->name);
+				terra_log_info("switch clock %s to on\n", clock->sched.name);
 			}
 		}
 
