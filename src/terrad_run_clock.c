@@ -38,6 +38,6 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 	if (diff == 0 && SOCK_CLOCK_NOT_OFF(i))
 	{
 		SOCK_CLOCK_SET_OFF(i);
-		terra_log_info("switch clock %s to off\n", clock->name);
+		terra_log_info("switch clock %s to off\n", clock->sched.name);
 	}
 }
