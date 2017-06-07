@@ -10,6 +10,7 @@
 #define CONF_SOCK_CODE_B_OFF "sock_code_b_off="
 #define CONF_SOCK_CODE_C_ON "sock_code_c_on="
 #define CONF_SOCK_CODE_C_OFF "sock_code_c_off="
+#define CONF_HYGRO_SENSOR "hygro_sensor="
 
 BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 {
@@ -64,6 +65,14 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		else if (strncmp(line, CONF_SOCK_CODE_C_OFF, sizeof(CONF_SOCK_CODE_C_OFF) - 1) == 0)
 		{
 			conf->sock_code_c_off = atoi(line + sizeof(CONF_SOCK_CODE_C_OFF) - 1);
+		}
+		else if (strncmp(line, CONF_HYGRO_SENSOR, sizeof(CONF_HYGRO_SENSOR) - 1) == 0)
+		{
+			if (strcpy(conf->hygro_sensor, line + sizeof(CONF_SOCK_CODE_C_OFF) - 1) == line + sizeof(CONF_SOCK_CODE_C_OFF) - 1)
+			{
+				terra_log_error("invalid hygro_sensor\n");
+				return FALSE;
+			}
 		}
 	}
 

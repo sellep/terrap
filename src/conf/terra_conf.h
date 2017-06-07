@@ -54,6 +54,8 @@ typedef struct
 	size_t sock_code_c_on;
 	size_t sock_code_c_off;
 
+	char hygro_sensor[6];
+
 	terra_sched_clock sched_clocks[TERRA_CONF_MAX_SCHED_CLOCKS];
 	ssize_t sched_clocks_len;
 } terra_conf;
