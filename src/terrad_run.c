@@ -4,6 +4,7 @@
 
 #include "conf/terra_conf.h"
 #include "utils/terra_time.h"
+#include "hygro/terra_hygro.h"
 
 extern void terrad_run_clock_init(terra_conf const * const);
 extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
