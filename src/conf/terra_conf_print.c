@@ -24,5 +24,9 @@ void terra_conf_print(terra_conf const * const conf)
 			: "mois");
 		printf("[sched_clock %u] sock: %c\n", i, conf->sched_clocks[i].sched.sock);
 		printf("[sched_clock %u] enabled: %u\n", i, conf->sched_clocks[i].sched.enabled);
+		printf("[sched_clock %u] start: ", i);
+		terra_time_print(&conf->sched_clocks[i].start);
+		printf("[sched_clock %u] end: ", i);
+		terra_time_print(&conf->sched_clocks[i].end);
 	}
 }

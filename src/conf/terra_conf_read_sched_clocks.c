@@ -39,7 +39,8 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 
 		if (strncmp(line, CONF_SCHED_CLOCK_START, sizeof(CONF_SCHED_CLOCK_START) - 1) == 0)
 		{
-			//handle start
+			if(!terra_time_read(&clock->start, line + sizeof(CONF_SCHED_CLOCK_START) - 1))
+				HANDLE_ERROR("invalid start time\n");
 		}
 		else
 			HANDLE_ERROR("clock schedule start expected\n");
@@ -51,7 +52,8 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 
 		if (strncmp(line, CONF_SCHED_CLOCK_END, sizeof(CONF_SCHED_CLOCK_END) - 1) == 0)
 		{
-			//handle end
+			if(!terra_time_read(&clock->end, line + sizeof(CONF_SCHED_CLOCK_END) - 1))
+				HANDLE_ERROR("invalid end time\n");
 		}
 		else
 			HANDLE_ERROR("clock schedule end expected\n");
@@ -65,6 +67,7 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		free(line);
 	}
 	return TRUE;
+
 error:
 	if (line)
 	{

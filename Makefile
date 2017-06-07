@@ -2,7 +2,9 @@ CC=@gcc
 CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
 DWPI=-DWPI_ENABLED
 
-OBJ=terra_conf_read_global.o \
+OBJ=terra_time_print.o \
+	terra_time_read.o \
+	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_clocks.o \
 	terra_conf_read.o \

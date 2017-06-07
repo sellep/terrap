@@ -2,17 +2,11 @@
 #define __P_TERRA_CONF_H
 
 #include "../terra.h"
+#include "../utils/terra_time.h"
 
 #define HANDLE_ERROR(s){		\
 	fprintf(stderr, "%s", s);	\
 	goto error;}
-
-typedef struct
-{
-	ssize_t hour;
-	ssize_t min;
-	ssize_t sec;
-} terra_time;
 
 enum sched_triggers
 {
