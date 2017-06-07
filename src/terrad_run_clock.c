@@ -22,8 +22,8 @@ void terrad_run_clock_init(terra_conf const * const conf)
 	for (i = 0; i < conf->sched_clocks_len; i++)
 	{
 		_terra_clock_mode[i] = SOCK_UNKNOWN;
-		_terra_clock_ldiff_start[i] = SIZE_MAX;
-		_terra_clock_ldiff_end[i] = SIZE_MAX;
+		_terra_clock_ldiff_start[i] = (size_t)-1;
+		_terra_clock_ldiff_end[i] = (size_t)-1;
 	}
 }
 
