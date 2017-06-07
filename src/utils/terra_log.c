@@ -11,13 +11,20 @@ void terra_log_info(char const * const msg, va_list ap)
 #endif
 }
 
-void terra_log_error(char const * const msg, va_list ap)
+void terra_log_error(char const * const msg, ...)
 {
 #if SYSLOG_ENABLED
 	openlog(TERRA_LOG_ID, LOG_PID, LOG_DAEMON);
 	syslog(LOG_ERR, msg, ap);
 	closelog();
 #else
+	char buffer[256];
+	va_list args;
+	va_start (args, format);
+	vsnprintf (buffer, 255, format, args);
+
 	fprintf(stderr, msg, ap);
+
+	va_end (args);
 #endif
 }

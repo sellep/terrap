@@ -11,6 +11,6 @@
 #include <stdarg.h>
 
 void terra_log_info(char const * const, va_list);
-void terra_log_error(char const * const, va_list);
+void terra_log_error(char const * const, ...);
 
 #endif
