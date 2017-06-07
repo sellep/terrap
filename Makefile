@@ -32,6 +32,7 @@ OBJ=terra_log.o \
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o
+	rm -f obj/terra_log.o
 	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c utils/terra_log.c
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o
 

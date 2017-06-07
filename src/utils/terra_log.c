@@ -3,8 +3,6 @@
 #if SYSLOG_ENABLED
 	#include <syslog.h>
 	#define TERRA_LOG_ID "terrad"
-#else
-	#include <stdio.h>
 #endif
 
 #define MAX_BUF_LEN 1024
