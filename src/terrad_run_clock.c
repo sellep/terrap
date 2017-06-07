@@ -1,6 +1,6 @@
 #include "terra.h"
 
-#include "config/terra_config.h"
+#include "conf/terra_conf.h"
 #include "utils/terra_time.h"
 
 static int terra_clock_mode[TERRA_CONF_MAX_SCHED_CLOCKS];
@@ -20,7 +20,7 @@ void terrad_run_clock_init()
 	}
 }
 
-void terrad_run_clock(terra_sched_clock const * const clock, terra_time const * const sys_time)
+void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, terra_time const * const sys_time)
 {
 	size_t diff;
 
