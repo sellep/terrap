@@ -3,8 +3,7 @@ CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
 DWPI=-DWPI_ENABLED
 DAEMON=-DSYSLOG_ENABLED
 
-OBJ=terra_log.o \
-	terra_time_print.o \
+OBJ=terra_time_print.o \
 	terra_time_read.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
@@ -30,10 +29,10 @@ OBJ=terra_log.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 all: clean $(OBJ)
-	$(CC) $(CFLAGS) -o obj/terra_log.o -c utils/terra_log.c
+	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o
 	rm -f obj/terra_log.o
-	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c utils/terra_log.c
+	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o
 
 wpi:
