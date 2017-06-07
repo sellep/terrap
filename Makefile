@@ -8,6 +8,7 @@ OBJ=terra_time_print.o \
 	terra_time_sys.o \
 	terra_time_diff.o \
 	terra_time_sleep.o \
+	terra_time_cmp.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_clocks.o \

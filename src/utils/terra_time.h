@@ -3,6 +3,14 @@
 
 #include "../terra.h"
 
+enum time_compares {
+	TIME_BELOW = -1,
+	TIME_EQUAL = 0,
+	TIME_ABOVE = 1
+};
+
+typedef int time_compare;
+
 typedef struct
 {
 	ssize_t hour;
@@ -10,6 +18,7 @@ typedef struct
 	ssize_t sec;
 } terra_time;
 
+time_compare terra_time_cmp(terra_time const * const, terra_time const * const);
 void terra_time_sleep(size_t const);
 void terra_time_sys(terra_time * const);
 void terra_time_print(terra_time const * const);
