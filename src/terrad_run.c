@@ -3,8 +3,6 @@
 #include "conf/terra_conf.h"
 #include "utils/terra_time.h"
 
-#define SLEEP_MS 500
-
 extern void terrad_run_clock_init(terra_conf const * const);
 extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
 
@@ -28,6 +26,6 @@ BOOL terrad_run(terra_conf const * const conf)
 			terrad_run_clock(&(conf->sched_clocks[i]), i, &sys_time);
 		}
 
-		terra_time_sleep(SLEEP_MS);
+		terra_time_sleep(conf->tick);
 	}
 }

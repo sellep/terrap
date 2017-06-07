@@ -1,5 +1,6 @@
 #include "terra_conf.h"
 
+#define CONF_TICK "tick="
 #define CONF_TRAN_PIN "tran_pin="
 #define CONF_TRAN_REP "tran_rep="
 #define CONF_SOCK_CHAN "sock_chan="
@@ -24,7 +25,11 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		if (line[0] == '#')
 			continue;
 
-		if (strncmp(line, CONF_TRAN_PIN, sizeof(CONF_TRAN_PIN) - 1) == 0)
+		if (strncmp(line, CONF_TICK, sizeof(CONF_TICK) - 1) == 0)
+		{
+			conf->tick = atoi(line + sizeof(CONF_TICK) - 1);
+		}
+		else if (strncmp(line, CONF_TRAN_PIN, sizeof(CONF_TRAN_PIN) - 1) == 0)
 		{
 			conf->tran_pin = atoi(line + sizeof(CONF_TRAN_PIN) - 1);
 		}

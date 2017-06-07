@@ -43,6 +43,7 @@ typedef struct
 
 typedef struct
 {
+	ssize_t tick;
 	ssize_t tran_pin;
 	ssize_t tran_rep;
 	size_t sock_chan;
