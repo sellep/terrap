@@ -1,30 +1,39 @@
 #include "terra_log.h"
 
-void terra_log_info(char const * const msg, va_list ap)
+#define MAX_BUF_LEN 1024
+
+void terra_log_info(char const * const msg, ...)
 {
+	char buf[MAX_BUF_LEN];
+	va_list args;
+	va_start(args, msg);
+	vsnprintf(buf, MAX_BUF_LEN - 1, msg, args);
+
 #if SYSLOG_ENABLED
 	openlog(TERRA_LOG_ID, LOG_PID, LOG_DAEMON);
-	syslog(LOG_INFO, msg, ap);
+	syslog(LOG_INFO, buf);
 	closelog();
 #else
-	printf(msg, ap);
+	printf(buf);
 #endif
+
+	va_end(args);
 }
 
 void terra_log_error(char const * const msg, ...)
 {
+	char buf[MAX_BUF_LEN];
+	va_list args;
+	va_start(args, msg);
+	vsnprintf(buf, MAX_BUF_LEN - 1, msg, args);
+
 #if SYSLOG_ENABLED
 	openlog(TERRA_LOG_ID, LOG_PID, LOG_DAEMON);
-	syslog(LOG_ERR, msg, ap);
+	syslog(LOG_ERR, buf);
 	closelog();
 #else
-	char buffer[256];
-	va_list args;
-	va_start (args, format);
-	vsnprintf (buffer, 255, format, args);
-
-	fprintf(stderr, msg, ap);
-
-	va_end (args);
+	fprintf(stderr, buf);
 #endif
+
+	va_end(args);
 }
