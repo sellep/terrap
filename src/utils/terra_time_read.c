@@ -36,6 +36,6 @@ BOOL terra_time_read(terra_time * const time, char const * const line)
 	return TRUE;
 
 error:
-	fprintf(stderr, "failed to read time\n");
+	terra_log_error("failed to read time\n");
 	return FALSE;
 }

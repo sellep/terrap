@@ -7,13 +7,13 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 {
 	if (argc != 4)
 	{
-		fprintf(stderr, "insufficient switch argument count\n");
+		terra_log_error("insufficient switch argument count\n");
 		return FALSE;
 	}
 
 	if (strlen(argv[2]) != 1)
 	{
-		fprintf(stderr, "invalid socket argument length\n");
+		terra_log_error("invalid socket argument length\n");
 		return FALSE;
 	}
 	
@@ -25,7 +25,7 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 		&& argv[2][0] != 'C'
 		)
 	{
-		fprintf(stderr, "not a valid socket\n");
+		terra_log_error("not a valid socket\n");
 		return FALSE;
 	}
 
@@ -58,6 +58,6 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 		return TRUE;
 	}
 
-	fprintf(stderr, "invalid switch set argument\n");
+	terra_log_error("invalid switch set argument\n");
 	return FALSE;
 }

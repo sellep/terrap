@@ -1,6 +1,5 @@
 #include "terra.h"
 
-#include "utils/terra_log.h"
 #include "conf/terra_conf.h"
 
 int main(int argc, char **argv)

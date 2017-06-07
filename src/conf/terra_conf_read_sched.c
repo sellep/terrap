@@ -56,6 +56,7 @@ BOOL terra_conf_read_sched(terra_sched * const sched, FILE * const f)
 		free(line);
 	}
 	return TRUE;
+
 error:
 	if (line)
 	{

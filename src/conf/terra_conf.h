@@ -5,7 +5,7 @@
 #include "../utils/terra_time.h"
 
 #define HANDLE_ERROR(s){		\
-	fprintf(stderr, "%s", s);	\
+	terra_log_error("%s", s);	\
 	goto error;}
 
 enum sched_triggers

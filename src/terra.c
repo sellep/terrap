@@ -24,7 +24,7 @@ int main(int argc, char ** argv)
 //execution handling
 	if (argc < 2)
 	{
-		fprintf(stderr, "insufficient argument count\n");
+		terra_log_error("insufficient argument count\n");
 		return 1;
 	}
 
@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
 	}
 	else
 	{
-		fprintf(stderr, "invalid mode\n");
+		terra_log_error("invalid mode\n");
 		return 1;
 	}
 

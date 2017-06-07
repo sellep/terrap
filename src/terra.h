@@ -9,4 +9,6 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "utils/terra_log.h"
+
 #endif

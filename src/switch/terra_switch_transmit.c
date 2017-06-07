@@ -9,7 +9,5 @@ void terra_switch_transmit(ssize_t const tran_pin, ssize_t const high, ssize_t c
 	delayMicroseconds(SIGNAL_PULSE_LEN * high);
 	digitalWrite(tran_pin, LOW);
 	delayMicroseconds(SIGNAL_PULSE_LEN * low);
-#else
-	printf("[terra_switch_transmit] wpi disabled!\n");
 #endif
 }

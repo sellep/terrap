@@ -10,7 +10,7 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 	f = fopen(path, "r");
 	if (!f)
 	{
-		fprintf(stderr, "unable to read config file\n");
+		terra_log_error("unable to read config file\n");
 		return FALSE;
 	}
 
