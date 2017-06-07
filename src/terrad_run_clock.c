@@ -16,7 +16,7 @@ void terrad_run_clock_init()
 
 	for (i = 0; i < conf->sched_clocks_len; i++)
 	{
-		terra_clock_mode[i] = TERRA_SOCK_UNKNOWN;
+		terra_clock_mode[i] = SOCK_UNKNOWN;
 	}
 }
 
@@ -25,7 +25,7 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 	size_t diff;
 
 	if (!clock->sched.enabled)
-		continue;
+		return;
 
 	diff = terra_time_diff(&sys_time, &clock->start);
 	if (diff == 0 && SOCK_CLOCK_NOT_ON(i))
