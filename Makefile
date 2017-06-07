@@ -31,6 +31,9 @@ OBJ=terra_time_print.o \
 %.o : src/switch/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
+%.o : src/hygro/%.c
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
 %.o : src/utils/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
