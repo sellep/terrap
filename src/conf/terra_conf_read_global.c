@@ -18,6 +18,8 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 	size_t buf_len = 0;
 	size_t read;
 
+	char *tmp;
+
 	while ((read = getline(&line, &buf_len, f)) != -1)
 	{
 		if (line[0] == '\0')
@@ -68,11 +70,14 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		}
 		else if (strncmp(line, CONF_HYGRO_SENSOR, sizeof(CONF_HYGRO_SENSOR) - 1) == 0)
 		{
-			if (strcpy(conf->hygro_sensor, line + sizeof(CONF_HYGRO_SENSOR) - 1) == line + sizeof(CONF_HYGRO_SENSOR) - 1)
+			tmp = strcpy(conf->hygro_sensor, line + sizeof(CONF_HYGRO_SENSOR) - 1);
+			if (tmp == line + sizeof(CONF_HYGRO_SENSOR) - 1)
 			{
 				terra_log_error("invalid hygro_sensor\n");
 				return FALSE;
 			}
+
+			*tmp = '\0';
 		}
 	}
 
