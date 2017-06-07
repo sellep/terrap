@@ -3,6 +3,10 @@
 
 #include "../terra.h"
 
+#define HANDLE_ERROR(s){		\
+	fprintf(stderr, "%s", s);	\
+	goto error;}
+
 typedef struct
 {
 	ssize_t hour;
