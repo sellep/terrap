@@ -10,7 +10,7 @@ static int terra_clock_mode[TERRA_CONF_MAX_SCHED_CLOCKS];
 #define SOCK_CLOCK_SET_ON(i)(terra_clock_mode[i] = SOCK_ON)
 #define SOCK_CLOCK_SET_OFF(i)(terra_clock_mode[i] = SOCK_OFF)
 
-void terrad_run_clock_init()
+void terrad_run_clock_init(terra_conf const * const conf)
 {
 	ssize_t i;
 

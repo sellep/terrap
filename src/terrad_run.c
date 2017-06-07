@@ -5,7 +5,7 @@
 
 #define SLEEP_MS 500
 
-extern void terrad_run_clock_init();
+extern void terrad_run_clock_init(terra_conf const * const);
 extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
 
 BOOL terrad_run(terra_conf const * const conf)
@@ -14,7 +14,7 @@ BOOL terrad_run(terra_conf const * const conf)
 	ssize_t i;
 
 	//initialization
-	terrad_run_clock_init();
+	terrad_run_clock_init(conf);
 
 	//scheduling
 
