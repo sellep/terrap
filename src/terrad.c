@@ -27,5 +27,6 @@ int main(int argc, char **argv)
 	if (!terrad_run(&conf))
 		return 1;
 
+	terra_log_info("terra daemon stopped\n");
 	return 0;
 }

@@ -1,12 +1,40 @@
 #include "terra.h"
 
+#include <signal.h>
+
 #include "conf/terra_conf.h"
 #include "utils/terra_time.h"
 
 extern void terrad_run_clock_init(terra_conf const * const);
 extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
 
-static BOOL _terminate = FALSE;
+void signal_handler(int signum)
+{
+	if (signum == SIGINT || signum == SIGTERM)
+	{
+		terra_log_info("received termination signal (%u)\n", signum);
+		_terminate = true;
+	}
+}
+
+BOOL register_signal_handler()
+{
+	if (signal(SIGINT, signal_handler) == SIG_ERR)
+	{
+		terra_log_error("unable to register signal handler for SIGINT\n");
+		return FALSE;
+	}
+
+	if (signal(SIGTERM, signal_handler) == SIG_ERR)
+	{
+		terra_log_error("unable to register signal handler for SIGTERM\n");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static BOOL volatile _terminate = FALSE;
 
 BOOL terrad_run(terra_conf const * const conf)
 {
@@ -14,9 +42,14 @@ BOOL terrad_run(terra_conf const * const conf)
 	ssize_t i;
 
 	//initialization
+
+	if (!register_signal_handler())
+		return FALSE;
+
 	terrad_run_clock_init(conf);
 
 	//scheduling
+
 	while (!_terminate)
 	{
 		terra_time_sys(&sys_time);
@@ -28,4 +61,6 @@ BOOL terrad_run(terra_conf const * const conf)
 
 		terra_time_sleep(conf->tick);
 	}
+
+	return TRUE;
 }
