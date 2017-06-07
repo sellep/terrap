@@ -5,14 +5,18 @@
 
 #define SLEEP_MS 500
 
+extern void terrad_run_clock_init();
+extern void terrad_run_clock(terra_sched_clock const * const, terra_time const * const);
+
 BOOL terrad_run(terra_conf const * const conf)
 {
 	terra_time sys_time;
-	terra_sched_clock *clock;
 	ssize_t i;
-	size_t diff;
 
-	//do we need to check here, what to switch on and what off?
+	//initialization
+	terrad_run_clock_init();
+
+	//scheduling
 
 	while (TRUE)
 	{
@@ -20,16 +24,7 @@ BOOL terrad_run(terra_conf const * const conf)
 
 		for (i = 0 ; i < conf->sched_clocks_len; i++)
 		{
-			clock = &conf->sched_clocks[i];
-
-			if (!clock->sched.enabled)
-				continue;
-
-			diff = terra_time_diff(&sys_time, &clock->start);
-			if (diff == 0)
-			{
-				terra_log_info("switch clock %s to on\n", clock->sched.name);
-			}
+			terrad_run_clock(&(conf->sched_clocks[i]));
 		}
 
 		terra_time_sleep(SLEEP_MS);

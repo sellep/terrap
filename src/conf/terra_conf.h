@@ -10,6 +10,13 @@
 
 #define TERRA_CONF_MAX_SCHED_CLOCKS 10
 
+enum sock_modes
+{
+	SOCK_UNKNOWN,
+	SOCK_ON,
+	SOCK_OFF
+};
+
 enum sched_triggers
 {
 	TRIGGER_CLOCK = 1,

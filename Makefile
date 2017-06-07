@@ -18,6 +18,7 @@ OBJ=terra_time_print.o \
 	terra_switch_get_sock_code.o \
 	terra_switch_transmit.o \
 	terra_switch_set.o \
+	terrad_run_clock.o \
 	terrad_run.o
 
 %.o : src/%.c
