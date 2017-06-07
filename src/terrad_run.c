@@ -12,11 +12,8 @@ static BOOL volatile _terminate = FALSE;
 
 void signal_handler(int signum)
 {
-	if (signum == SIGINT || signum == SIGTERM)
-	{
-		terra_log_info("received signal %s(%u)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
-		_terminate = TRUE;
-	}
+	terra_log_info("received signal %s(%u)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
+	_terminate = TRUE;
 }
 
 BOOL register_signal_handler()
