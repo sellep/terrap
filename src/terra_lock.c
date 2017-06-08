@@ -14,7 +14,7 @@ static int _sm_mutex;
 static pthread_mutex_t *_mutex;
 static pthread_mutexattr_t _mutex_attr;
 
-BOOL map_mutex_to_address_space()
+static BOOL map_mutex_to_address_space()
 {
 	_mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
 	if (_mutex == MAP_FAILED)
@@ -26,7 +26,7 @@ BOOL map_mutex_to_address_space()
 	return TRUE;
 }
 
-void init_mutex()
+static void init_mutex()
 {
 	pthread_mutexattr_init(&_mutex_attr);
 	pthread_mutexattr_setpshared(&_mutex_attr, PTHREAD_PROCESS_SHARED);
