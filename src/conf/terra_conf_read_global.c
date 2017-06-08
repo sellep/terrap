@@ -27,6 +27,9 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 	{
 		if (line[0] == '\0')
 			continue;
+
+		if (line[0] == '\n')
+			continue;
 		
 		if (line[0] == '#')
 			continue;
