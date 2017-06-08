@@ -6,8 +6,10 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <pthread.h>
+#include <errno.h>
+#include <string.h>
 
-#define LOCK_FILE "/terra/lock"
+#define LOCK_FILE "terra_lock"
 
 static int sm_mutex;
 static pthread_mutex_t *mutex;
@@ -17,7 +19,7 @@ int init_sm()
 	sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU | S_IRWXG);
 	if (sm_mutex < 0)
 	{
-		fprintf(stderr, "failed to create shared memory object (%u)\n", sm_mutex);
+		fprintf(stderr, "failed to create shared memory object (%s)\n", strerror(errno));
 		return 0;
 	}
 
