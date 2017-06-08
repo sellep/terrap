@@ -1,5 +1,5 @@
 CC=@gcc
-CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
+CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe -lrt -pthread
 DWPI=-DWPI_ENABLED
 DAEMON=-DSYSLOG_ENABLED
 
