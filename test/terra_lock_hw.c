@@ -20,7 +20,9 @@ static pthread_mutexattr_t _mutex_attr;
 
 int map_mutex()
 {
+	printf("map map\n");
 	_mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
+	printf("map map end\n");
 	if (_mutex == MAP_FAILED)
 	{
 		fprintf(stderr, "failed to map memory\n");
@@ -40,7 +42,6 @@ int init_lock()
 			printf("shared memory object already exists\n");
 
 			_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_RDWR, S_IRWXU | S_IRWXG);
-			printf("%i\n", _sm_mutex);
 			if (_sm_mutex < 0)
 			{
 				fprintf(stderr, "failed to open existing shared memory object (%s)\n", strerror(errno));
