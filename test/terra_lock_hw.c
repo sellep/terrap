@@ -33,7 +33,7 @@ int map_mutex()
 
 int init_lock()
 {
-	_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_EXCL | O_TRUNC, S_IRWXU | S_IRWXG);
+	_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_EXCL | O_TRUNC | O_RDWR, S_IRWXU | S_IRWXG);
 	if (_sm_mutex < 0)
 	{
 		if (errno == EEXIST)
