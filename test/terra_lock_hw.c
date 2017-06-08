@@ -42,7 +42,7 @@ int init_lock()
 		}
 
 		fprintf(stderr, "failed to create shared memory object\n");
-		return 0
+		return 0;
 	}
 
 	if (ftruncate(_sm_mutex, sizeof(pthread_mutex_t)) == -1)
