@@ -41,13 +41,13 @@ int init_lock()
 			return map_mutex();
 		}
 
-		fprintf(stderr, "failed to create shared memory object\n");
+		fprintf(stderr, "failed to create shared memory object (%s)\n", strerror(errno));
 		return 0;
 	}
 
 	if (ftruncate(_sm_mutex, sizeof(pthread_mutex_t)) == -1)
 	{
-		fprintf(stderr, "failed to truncate shared memory object\n");
+		fprintf(stderr, "failed to truncate shared memory object (%s)\n", strerror(errno));
 		return 0;
 	}
 
