@@ -4,6 +4,7 @@
 
 extern BOOL terrad_run(terra_conf const * const);
 
+
 int main(int argc, char **argv)
 {
 	terra_conf conf;
@@ -31,7 +32,8 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	terra_switch_set_pin(conf.switch_pin);
+	terra_pin_set_output(conf.led_pin);
+	terra_pin_set_output(conf.switch_pin);
 
 //run
 	if (!terrad_run(&conf))

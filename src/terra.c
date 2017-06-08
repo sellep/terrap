@@ -1,12 +1,11 @@
 #include "terra.h"
+#include "utils/terra_pin.h"
 #include "conf/terra_conf.h"
 #include "switch/terra_switch.h"
 
 #define TERRA_CONF_PATH "res/terra.default.conf"
 
 #define ARG_MODE_SWITCH "switch"
-
-extern BOOL terra_arg_switch(terra_switch_req * const, int const, char const * const * const);
 
 int main(int argc, char ** argv)
 {
@@ -25,7 +24,7 @@ int main(int argc, char ** argv)
 
 	terra_conf_print(&conf);
 
-	terra_switch_set_pin(conf.switch_pin);
+	terra_set_output_pin(conf.switch_pin);
 
 //execution handling
 	if (argc < 2)

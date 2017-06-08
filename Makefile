@@ -11,12 +11,12 @@ OBJ=terra_lock.o \
 	terra_time_diff.o \
 	terra_time_sleep.o \
 	terra_time_cmp.o \
+	terra_pin_set_output.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_clocks.o \
 	terra_conf_read.o \
 	terra_conf_print.o \
-	terra_switch_set_pin.o \
 	terra_switch_arg.o \
 	terra_switch_get_code.o \
 	terra_switch_transmit.o \
