@@ -69,10 +69,10 @@ BOOL terra_lock_init()
 
 void terra_lock()
 {
-	pthread_mutex_lock(_mutex)
+	pthread_mutex_lock(_mutex);
 }
 
 void terra_unlock()
 {
-	pthread_mutex_unlock(_mutex)
+	pthread_mutex_unlock(_mutex);
 }
