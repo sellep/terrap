@@ -40,39 +40,39 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		}
 		else if (strncmp(line, CONF_SWITCH_PIN, sizeof(CONF_SWITCH_PIN) - 1) == 0)
 		{
-			conf->tran_pin = atoi(line + sizeof(CONF_SWITCH_PIN) - 1);
+			conf->switch_pin = atoi(line + sizeof(CONF_SWITCH_PIN) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_REP, sizeof(CONF_SWITCH_REP) - 1) == 0)
 		{
-			conf->tran_rep = atoi(line + sizeof(CONF_SWITCH_REP) - 1);
+			conf->switch_rep = atoi(line + sizeof(CONF_SWITCH_REP) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_CHAN, sizeof(CONF_SWITCH_CHAN) - 1) == 0)
 		{
-			conf->sock_chan = atoi(line + sizeof(CONF_SWITCH_CHAN) - 1);
+			conf->switch_chan = atoi(line + sizeof(CONF_SWITCH_CHAN) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_CODE_AON, sizeof(CONF_SWITCH_CODE_AON) - 1) == 0)
 		{
-			conf->sock_code_a_on = atoi(line + sizeof(CONF_SWITCH_CODE_AON) - 1);
+			conf->switch_code_aon = atoi(line + sizeof(CONF_SWITCH_CODE_AON) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_CODE_AOFF, sizeof(CONF_SWITCH_CODE_AOFF) - 1) == 0)
 		{
-			conf->sock_code_a_off = atoi(line + sizeof(CONF_SWITCH_CODE_AOFF) - 1);
+			conf->switch_code_aoff = atoi(line + sizeof(CONF_SWITCH_CODE_AOFF) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_CODE_BON, sizeof(CONF_SWITCH_CODE_BON) - 1) == 0)
 		{
-			conf->sock_code_b_on = atoi(line + sizeof(CONF_SWITCH_CODE_BON) - 1);
+			conf->switch_code_bon = atoi(line + sizeof(CONF_SWITCH_CODE_BON) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_CODE_BOFF, sizeof(CONF_SWITCH_CODE_BOFF) - 1) == 0)
 		{
-			conf->sock_code_b_off = atoi(line + sizeof(CONF_SWITCH_CODE_BOFF) - 1);
+			conf->switch_code_boff = atoi(line + sizeof(CONF_SWITCH_CODE_BOFF) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_CODE_CON, sizeof(CONF_SWITCH_CODE_CON) - 1) == 0)
 		{
-			conf->sock_code_c_on = atoi(line + sizeof(CONF_SWITCH_CODE_CON) - 1);
+			conf->switch_code_con = atoi(line + sizeof(CONF_SWITCH_CODE_CON) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_CODE_COFF, sizeof(CONF_SWITCH_CODE_COFF) - 1) == 0)
 		{
-			conf->sock_code_c_off = atoi(line + sizeof(CONF_SWITCH_CODE_COFF) - 1);
+			conf->switch_code_coff = atoi(line + sizeof(CONF_SWITCH_CODE_COFF) - 1);
 		}
 		if (strncmp(line, CONF_HYGRO_ENABLED, sizeof(CONF_HYGRO_ENABLED) - 1) == 0)
 		{
