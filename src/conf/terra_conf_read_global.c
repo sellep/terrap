@@ -12,8 +12,7 @@
 #define CONF_SWITCH_CODE_CON "switch_code_con="
 #define CONF_SWITCH_CODE_COFF "switch_code_coff="
 #define CONF_HYGRO_ENABLED "hygro_enabled="
-#define CONF_HYGRO_PIN_OUT "hygro_pin_out="
-#define CONF_HYGRO_PIN_IN "hygro_pin_in="
+#define CONF_HYGRO_PIN_IO "hygro_pin_io="
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_SENSOR "hygro_sensor="
 
@@ -84,13 +83,9 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		{
 			conf->hygro_enabled = atoi(line + sizeof(CONF_HYGRO_ENABLED) - 1);
 		}
-		else if (strncmp(line, CONF_HYGRO_PIN_OUT, sizeof(CONF_HYGRO_PIN_OUT) - 1) == 0)
+		else if (strncmp(line, CONF_HYGRO_PIN_IO, sizeof(CONF_HYGRO_PIN_IO) - 1) == 0)
 		{
-			conf->hygro_pin_out = atoi(line + sizeof(CONF_HYGRO_PIN_OUT) - 1);
-		}
-		else if (strncmp(line, CONF_HYGRO_PIN_IN, sizeof(CONF_HYGRO_PIN_IN) - 1) == 0)
-		{
-			conf->hygro_pin_in = atoi(line + sizeof(CONF_HYGRO_PIN_IN) - 1);
+			conf->hygro_pin_io = atoi(line + sizeof(CONF_HYGRO_PIN_IO) - 1);
 		}
 		else if (strncmp(line, CONF_HYGRO_TICK, sizeof(CONF_HYGRO_TICK) - 1) == 0)
 		{
