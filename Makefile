@@ -1,5 +1,6 @@
 CC=@gcc
-CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe -lrt -pthread
+CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
+LIBS=-lrt -pthread
 DWPI=-DWPI_ENABLED
 DAEMON=-DSYSLOG_ENABLED
 
@@ -35,16 +36,15 @@ OBJ=terra_lock.o \
 
 %.o : src/hygro/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
-
 %.o : src/utils/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 all: clean $(OBJ)
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
-	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o
+	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 	rm -f obj/terra_log.o
 	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c src/utils/terra_log.c
-	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o
+	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
 wpi:
 	$(eval CFLAGS += "$(DWPI)")
