@@ -14,6 +14,9 @@ int main(int argc, char ** argv)
 	terra_switch_req switch_req;
 
 //configuration and setup
+	if (!terra_lock_init())
+		return 1;
+
 	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;
 

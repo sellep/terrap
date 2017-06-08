@@ -18,13 +18,31 @@ static pthread_mutexattr_t _mutex_attr;
 #define LOCK()(pthread_mutex_lock(_mutex))
 #define UNLOCK()(pthread_mutex_unlock(_mutex))
 
+int map_mutex()
+{
+	_mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
+	if (_mutex == MAP_FAILED)
+	{
+		fprintf(stderr, "failed to map memory\n");
+		return 0;
+	}
+
+	return 1;
+}
+
 int init_lock()
 {
-	_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU | S_IRWXG);
+	_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_EXCL , S_IRWXU | S_IRWXG);
 	if (_sm_mutex < 0)
 	{
-		fprintf(stderr, "failed to create shared memory object (%s)\n", strerror(errno));
-		return 0;
+		if (errno == EEXIST)
+		{
+			printf("shared memory object already exists\n");
+			return map_mutex();
+		}
+
+		fprintf(stderr, "failed to create shared memory object\n");
+		return 0
 	}
 
 	if (ftruncate(_sm_mutex, sizeof(pthread_mutex_t)) == -1)
@@ -33,12 +51,9 @@ int init_lock()
 		return 0;
 	}
 
-	_mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
-	if (_mutex == MAP_FAILED)
-	{
-		fprintf(stderr, "failed to map memory\n");
+
+	if (!map_mutex())
 		return 0;
-	}
 
 	pthread_mutexattr_init(&_mutex_attr);
 	pthread_mutexattr_setpshared(&_mutex_attr, PTHREAD_PROCESS_SHARED);
@@ -56,29 +71,21 @@ void cleanup_lock()
 
 int main()
 {
+	if (fork() == 0)
+	{
+		//child
+		sleep(1);
+	}
+
 	if (!init_lock())
 	{
 		exit(1);
 	}
-	
-	if (fork() > 0)
-	{
-		//i'm the parent process, so let me sleep!
-		sleep(1);
 
-		LOCK();
-		printf("hello from parent!\n");
-		UNLOCK();
-
-		cleanup_lock();
-	}
-	else
-	{
-		LOCK();
-		printf("hello from child!\n");
-		sleep(5);
-		UNLOCK();
-	}
+	LOCK();
+	printf("hello!\n");
+	sleep(2);
+	UNLOCK();
 
 	return 0;
 }
