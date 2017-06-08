@@ -22,21 +22,21 @@ void terra_switch_set(terra_conf const * const conf, terra_switch_req const * co
 
 	LOCK();
 
-	for (rep = 0; rep < conf->tran_rep; rep++)
+	for (rep = 0; rep < conf->switch_rep; rep++)
 	{
-		for (i = conf->sock_chan - 1; i >= 0; i--)
+		for (i = conf->switch_chan - 1; i >= 0; i--)
 		{
 			if (sock_code & (1L << i))
 			{
-				terra_switch_transmit(conf->tran_pin, SIGNAL_ONE_HIGH, SIGNAL_ONE_LOW);
+				terra_switch_transmit(conf->switch_pin, SIGNAL_ONE_HIGH, SIGNAL_ONE_LOW);
 			}
 			else
 			{
-				terra_switch_transmit(conf->tran_pin, SIGNAL_ZERO_HIGH, SIGNAL_ZERO_LOW);
+				terra_switch_transmit(conf->switch_pin, SIGNAL_ZERO_HIGH, SIGNAL_ZERO_LOW);
 			}
 		}
 
-		terra_switch_transmit(conf->tran_pin, SIGNAL_SYNC_HIGH, SIGNAL_SYNC_LOW);
+		terra_switch_transmit(conf->switch_pin, SIGNAL_SYNC_HIGH, SIGNAL_SYNC_LOW);
 	}
 
 	UNLOCK();
