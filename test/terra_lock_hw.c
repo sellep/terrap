@@ -38,6 +38,14 @@ int init_lock()
 		if (errno == EEXIST)
 		{
 			printf("shared memory object already exists\n");
+
+			_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_RDWR | O_TRUNC , S_IRWXU | S_IRWXG);
+			if (_sm_mutex < 0)
+			{
+				fprintf(stderr, "failed to open existing shared memory object (%s)\n", strerror(errno));
+				return 0;
+			}
+
 			return map_mutex();
 		}
 
