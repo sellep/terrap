@@ -64,7 +64,7 @@ int main()
 	if (fork() > 0)
 	{
 		//i'm the parent process, so let me sleep!
-		sleep(10);
+		sleep(1);
 
 		LOCK();
 		printf("hello from parent!\n");
@@ -76,7 +76,7 @@ int main()
 	{
 		LOCK();
 		printf("hello from child!\n");
-		sleep(5000);
+		sleep(5);
 		UNLOCK();
 	}
 
