@@ -3,7 +3,7 @@
 #include "conf/terra_conf.h"
 #include "switch/terra_switch.h"
 
-#define TERRA_CONF_PATH "res/terra.default.conf"
+#define TERRA_CONF_PATH "/etc/default/terra"
 
 #define ARG_MODE_SWITCH "switch"
 
