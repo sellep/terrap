@@ -3,7 +3,8 @@ CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
 DWPI=-DWPI_ENABLED
 DAEMON=-DSYSLOG_ENABLED
 
-OBJ=terra_time_print.o \
+OBJ=terra_lock.o \
+	terra_time_print.o \
 	terra_time_read.o \
 	terra_time_sys.o \
 	terra_time_diff.o \
