@@ -15,7 +15,10 @@ int main(int argc, char ** argv)
 
 //configuration and setup
 	if (!terra_lock_init())
+	{
+		terra_log_error("failed to initialize terra lock\n");
 		return 1;
+	}
 
 	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;

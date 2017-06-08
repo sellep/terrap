@@ -18,6 +18,12 @@ int main(int argc, char **argv)
 
 	terra_log_info("config file path: %s\n", argv[1]);
 
+	if (!terra_lock_init())
+	{
+		terra_log_error("failed to initialize terra lock\n");
+		return 1;
+	}
+
 	if (!terra_conf_read(&conf, argv[1]))
 	{
 		terra_log_error("failed to read config file\n");

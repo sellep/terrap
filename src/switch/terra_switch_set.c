@@ -20,6 +20,8 @@ void terra_switch_set(terra_conf const * const conf, terra_switch_req const * co
 
 	sock_code = terra_switch_get_sock_code(conf, req);
 
+	LOCK();
+
 	for (rep = 0; rep < conf->tran_rep; rep++)
 	{
 		for (i = conf->sock_chan - 1; i >= 0; i--)
@@ -36,4 +38,6 @@ void terra_switch_set(terra_conf const * const conf, terra_switch_req const * co
 
 		terra_switch_transmit(conf->tran_pin, SIGNAL_SYNC_HIGH, SIGNAL_SYNC_LOW);
 	}
+
+	UNLOCK();
 }
