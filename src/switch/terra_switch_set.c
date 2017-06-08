@@ -10,7 +10,7 @@
 #define SIGNAL_ONE_LOW 1
 
 extern void terra_switch_transmit(ssize_t const, ssize_t const high, ssize_t const low);
-extern size_t terra_switch_get_sock_code(terra_conf const * const, terra_switch_req const * const);
+extern size_t terra_switch_get_code(terra_conf const * const, terra_switch_req const * const);
 
 void terra_switch_set(terra_conf const * const conf, terra_switch_req const * const req)
 {
@@ -18,7 +18,7 @@ void terra_switch_set(terra_conf const * const conf, terra_switch_req const * co
 	ssize_t sock_code;
 	int i;
 
-	sock_code = terra_switch_get_sock_code(conf, req);
+	sock_code = terra_switch_get_code(conf, req);
 
 	LOCK();
 

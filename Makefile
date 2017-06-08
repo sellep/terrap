@@ -18,7 +18,7 @@ OBJ=terra_lock.o \
 	terra_conf_print.o \
 	terra_switch_set_pin.o \
 	terra_switch_arg.o \
-	terra_switch_get_sock_code.o \
+	terra_switch_get_code.o \
 	terra_switch_transmit.o \
 	terra_switch_set.o \
 	terra_hygro_read.o \

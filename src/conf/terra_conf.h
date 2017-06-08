@@ -44,15 +44,15 @@ typedef struct
 typedef struct
 {
 	ssize_t tick;
-	ssize_t tran_pin;
-	ssize_t tran_rep;
-	size_t sock_chan;
-	size_t sock_code_a_on;
-	size_t sock_code_a_off;
-	size_t sock_code_b_on;
-	size_t sock_code_b_off;
-	size_t sock_code_c_on;
-	size_t sock_code_c_off;
+	ssize_t switch_pin;
+	ssize_t switch_rep;
+	size_t switch_chan;
+	size_t switch_code_aon;
+	size_t switch_code_aoff;
+	size_t switch_code_bon;
+	size_t switch_code_boff;
+	size_t switch_code_con;
+	size_t switch_code_coff;
 
 	ssize_t hygro_enabled;
 	ssize_t hygro_pin;

@@ -6,15 +6,15 @@ void terra_conf_print(terra_conf const * const conf)
 
 	terra_log_info("terra_conf:\n");
 	terra_log_info("[global] tick: %u\n", conf->tick);
-	terra_log_info("[global] tran_pin: %u\n", conf->tran_pin);
-	terra_log_info("[global] tran_rep: %u\n", conf->tran_rep);
-	terra_log_info("[global] sock_chan: %u\n", conf->sock_chan);
-	terra_log_info("[global] sock_code_a_on: %u\n", conf->sock_code_a_on);
-	terra_log_info("[global] sock_code_a_off: %u\n", conf->sock_code_a_off);
-	terra_log_info("[global] sock_code_b_on: %u\n", conf->sock_code_b_on);
-	terra_log_info("[global] sock_code_b_off: %u\n", conf->sock_code_b_off);
-	terra_log_info("[global] sock_code_c_on: %u\n", conf->sock_code_c_on);
-	terra_log_info("[global] sock_code_c_off: %u\n", conf->sock_code_c_off);
+	terra_log_info("[global] switch_pin: %u\n", conf->switch_pin);
+	terra_log_info("[global] switch_rep: %u\n", conf->switch_rep);
+	terra_log_info("[global] switch_chan: %u\n", conf->switch_chan);
+	terra_log_info("[global] switch_code_aon: %u\n", conf->switch_code_aon);
+	terra_log_info("[global] switch_code_aoff: %u\n", conf->switch_code_aoff);
+	terra_log_info("[global] switch_code_bon: %u\n", conf->switch_code_bon);
+	terra_log_info("[global] switch_code_boff: %u\n", conf->switch_code_boff);
+	terra_log_info("[global] switch_code_con: %u\n", conf->switch_code_con);
+	terra_log_info("[global] switch_code_coff: %u\n", conf->switch_code_coff);
 	terra_log_info("[global] hygro_enabled: %u\n", conf->hygro_enabled);
 	terra_log_info("[global] hygro_pin: %u\n", conf->hygro_pin);
 	terra_log_info("[global] hygro_tick: %u\n", conf->hygro_tick);

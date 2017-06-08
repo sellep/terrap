@@ -1,15 +1,15 @@
 #include "terra_conf.h"
 
 #define CONF_TICK "tick="
-#define CONF_TRAN_PIN "tran_pin="
-#define CONF_TRAN_REP "tran_rep="
-#define CONF_SOCK_CHAN "sock_chan="
-#define CONF_SOCK_CODE_A_ON "sock_code_a_on="
-#define CONF_SOCK_CODE_A_OFF "sock_code_a_off="
-#define CONF_SOCK_CODE_B_ON "sock_code_b_on="
-#define CONF_SOCK_CODE_B_OFF "sock_code_b_off="
-#define CONF_SOCK_CODE_C_ON "sock_code_c_on="
-#define CONF_SOCK_CODE_C_OFF "sock_code_c_off="
+#define CONF_SWITCH_PIN "tran_pin="
+#define CONF_SWITCH_REP "tran_rep="
+#define CONF_SWITCH_CHAN "sock_chan="
+#define CONF_SWITCH_CODE_AON "switch_code_aon="
+#define CONF_SWITCH_CODE_AOFF "switch_code_aoff="
+#define CONF_SWITCH_CODE_BON "switch_code_bon="
+#define CONF_SWITCH_CODE_BOFF "switch_code_boff="
+#define CONF_SWITCH_CODE_CON "switch_code_con="
+#define CONF_SWITCH_CODE_COFF "switch_code_coff="
 #define CONF_HYGRO_ENABLED "hygro_enabled="
 #define CONF_HYGRO_PIN "hygro_pin="
 #define CONF_HYGRO_TICK "hygro_tick="
@@ -38,41 +38,41 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 				return FALSE;
 			}
 		}
-		else if (strncmp(line, CONF_TRAN_PIN, sizeof(CONF_TRAN_PIN) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_PIN, sizeof(CONF_SWITCH_PIN) - 1) == 0)
 		{
-			conf->tran_pin = atoi(line + sizeof(CONF_TRAN_PIN) - 1);
+			conf->tran_pin = atoi(line + sizeof(CONF_SWITCH_PIN) - 1);
 		}
-		else if (strncmp(line, CONF_TRAN_REP, sizeof(CONF_TRAN_REP) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_REP, sizeof(CONF_SWITCH_REP) - 1) == 0)
 		{
-			conf->tran_rep = atoi(line + sizeof(CONF_TRAN_REP) - 1);
+			conf->tran_rep = atoi(line + sizeof(CONF_SWITCH_REP) - 1);
 		}
-		else if (strncmp(line, CONF_SOCK_CHAN, sizeof(CONF_SOCK_CHAN) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_CHAN, sizeof(CONF_SWITCH_CHAN) - 1) == 0)
 		{
-			conf->sock_chan = atoi(line + sizeof(CONF_SOCK_CHAN) - 1);
+			conf->sock_chan = atoi(line + sizeof(CONF_SWITCH_CHAN) - 1);
 		}
-		else if (strncmp(line, CONF_SOCK_CODE_A_ON, sizeof(CONF_SOCK_CODE_A_ON) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_CODE_AON, sizeof(CONF_SWITCH_CODE_AON) - 1) == 0)
 		{
-			conf->sock_code_a_on = atoi(line + sizeof(CONF_SOCK_CODE_A_ON) - 1);
+			conf->sock_code_a_on = atoi(line + sizeof(CONF_SWITCH_CODE_AON) - 1);
 		}
-		else if (strncmp(line, CONF_SOCK_CODE_A_OFF, sizeof(CONF_SOCK_CODE_A_OFF) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_CODE_AOFF, sizeof(CONF_SWITCH_CODE_AOFF) - 1) == 0)
 		{
-			conf->sock_code_a_off = atoi(line + sizeof(CONF_SOCK_CODE_A_OFF) - 1);
+			conf->sock_code_a_off = atoi(line + sizeof(CONF_SWITCH_CODE_AOFF) - 1);
 		}
-		else if (strncmp(line, CONF_SOCK_CODE_B_ON, sizeof(CONF_SOCK_CODE_B_ON) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_CODE_BON, sizeof(CONF_SWITCH_CODE_BON) - 1) == 0)
 		{
-			conf->sock_code_b_on = atoi(line + sizeof(CONF_SOCK_CODE_B_ON) - 1);
+			conf->sock_code_b_on = atoi(line + sizeof(CONF_SWITCH_CODE_BON) - 1);
 		}
-		else if (strncmp(line, CONF_SOCK_CODE_B_OFF, sizeof(CONF_SOCK_CODE_B_OFF) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_CODE_BOFF, sizeof(CONF_SWITCH_CODE_BOFF) - 1) == 0)
 		{
-			conf->sock_code_b_off = atoi(line + sizeof(CONF_SOCK_CODE_B_OFF) - 1);
+			conf->sock_code_b_off = atoi(line + sizeof(CONF_SWITCH_CODE_BOFF) - 1);
 		}
-		else if (strncmp(line, CONF_SOCK_CODE_C_ON, sizeof(CONF_SOCK_CODE_C_ON) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_CODE_CON, sizeof(CONF_SWITCH_CODE_CON) - 1) == 0)
 		{
-			conf->sock_code_c_on = atoi(line + sizeof(CONF_SOCK_CODE_C_ON) - 1);
+			conf->sock_code_c_on = atoi(line + sizeof(CONF_SWITCH_CODE_CON) - 1);
 		}
-		else if (strncmp(line, CONF_SOCK_CODE_C_OFF, sizeof(CONF_SOCK_CODE_C_OFF) - 1) == 0)
+		else if (strncmp(line, CONF_SWITCH_CODE_COFF, sizeof(CONF_SWITCH_CODE_COFF) - 1) == 0)
 		{
-			conf->sock_code_c_off = atoi(line + sizeof(CONF_SOCK_CODE_C_OFF) - 1);
+			conf->sock_code_c_off = atoi(line + sizeof(CONF_SWITCH_CODE_COFF) - 1);
 		}
 		if (strncmp(line, CONF_HYGRO_ENABLED, sizeof(CONF_HYGRO_ENABLED) - 1) == 0)
 		{
