@@ -32,14 +32,14 @@ int map_mutex()
 
 int init_lock()
 {
-	_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_EXCL , S_IRWXU | S_IRWXG);
+	_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_EXCL | O_TRUNC, S_IRWXU | S_IRWXG);
 	if (_sm_mutex < 0)
 	{
 		if (errno == EEXIST)
 		{
 			printf("shared memory object already exists\n");
 
-			_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_RDWR | O_TRUNC , S_IRWXU | S_IRWXG);
+			_sm_mutex = shm_open(LOCK_FILE, O_RDWR, S_IRWXU | S_IRWXG);
 			if (_sm_mutex < 0)
 			{
 				fprintf(stderr, "failed to open existing shared memory object (%s)\n", strerror(errno));
