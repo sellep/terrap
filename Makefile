@@ -1,7 +1,6 @@
 CC=@gcc
-CFLAGS=-Wall -v -march=haswell -fomit-frame-pointer -O3 -pipe
+CFLAGS=-Wall -v -fomit-frame-pointer -O3 -pipe
 LIBS=-lrt -pthread
-DWPI=-DWPI_ENABLED
 DAEMON=-DSYSLOG_ENABLED
 
 OBJ=terra_lock.o \
@@ -47,10 +46,11 @@ all: clean $(OBJ)
 	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
-wpi:
-	$(eval CFLAGS += "$(DWPI)")
+#https://gcc.gnu.org/onlinedocs/gcc-4.9.2/gcc/ARM-Options.html
+armflags:
+	$(eval CFLAGS += "-DWPI_ENABLED -march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard")
 
-arm: wpi all
+arm: armflags all
 
 clean:
 	@mkdir -p bin obj
