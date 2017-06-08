@@ -17,7 +17,8 @@ void terra_conf_print(terra_conf const * const conf)
 	terra_log_info("[global] switch_code_con: %u\n", conf->switch_code_con);
 	terra_log_info("[global] switch_code_coff: %u\n", conf->switch_code_coff);
 	terra_log_info("[global] hygro_enabled: %u\n", conf->hygro_enabled);
-	terra_log_info("[global] hygro_pin: %u\n", conf->hygro_pin);
+	terra_log_info("[global] hygro_pin_out: %u\n", conf->hygro_pin_out);
+	terra_log_info("[global] hygro_pin_in: %u\n", conf->hygro_pin_in);
 	terra_log_info("[global] hygro_tick: %u\n", conf->hygro_tick);
 	terra_log_info("[global] hygro_sensor: %s\n", conf->hygro_sensor);
 

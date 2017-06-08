@@ -56,7 +56,8 @@ typedef struct
 	size_t switch_code_coff;
 
 	ssize_t hygro_enabled;
-	ssize_t hygro_pin;
+	ssize_t hygro_pin_out;
+	ssize_t hygro_pin_in;
 	ssize_t hygro_tick;
 	char hygro_sensor[6];
 

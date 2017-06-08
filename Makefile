@@ -11,7 +11,7 @@ OBJ=terra_lock.o \
 	terra_time_diff.o \
 	terra_time_sleep.o \
 	terra_time_cmp.o \
-	terra_pin_set_output.o \
+	terra_pin_set.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_clocks.o \
