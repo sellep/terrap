@@ -16,6 +16,8 @@
 #define LOCK()(terra_lock())
 #define UNLOCK()(terra_unlock())
 
+void terra_led_set(ssize_t const, BOOL const);
+
 BOOL terra_lock_init();
 void terra_lock();
 void terra_unlock();

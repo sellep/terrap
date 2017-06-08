@@ -6,7 +6,7 @@
 
 #endif
 
-void terrad_led_set(ssize_t const pin, BOOL const on)
+void terra_led_set(ssize_t const pin, BOOL const on)
 {
 #ifdef WPI_ENABLED
 	LOCK();

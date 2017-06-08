@@ -11,6 +11,7 @@ OBJ=terra_lock.o \
 	terra_time_sleep.o \
 	terra_time_cmp.o \
 	terra_pin_set.o \
+	terra_led_set.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_clocks.o \
@@ -21,7 +22,6 @@ OBJ=terra_lock.o \
 	terra_switch_transmit.o \
 	terra_switch_set.o \
 	terra_hygro_read.o \
-	terrad_led_set.o \
 	terrad_run_clock.o \
 	terrad_run.o
 
