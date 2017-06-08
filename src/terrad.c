@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 
 	terra_log_info("config file path: %s\n", argv[1]);
 
+//initialization and setup
 	if (!terra_lock_init())
 	{
 		terra_log_error("failed to initialize terra lock\n");
@@ -30,6 +31,9 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
+	terra_switch_set_pin(conf.switch_pin);
+
+//run
 	if (!terrad_run(&conf))
 		return 1;
 
