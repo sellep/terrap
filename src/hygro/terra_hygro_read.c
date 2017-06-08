@@ -4,6 +4,8 @@
 
 #ifdef WPI_ENABLED
 
+#include <wiringPi.h>
+
 #define MAX_TIMINGS 85
 #define MIN_BITS_READ 40
 #define FIRST_IGNORABLE_TRANSITIONS 3
