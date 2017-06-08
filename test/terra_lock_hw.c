@@ -20,9 +20,8 @@ static pthread_mutexattr_t _mutex_attr;
 
 int map_mutex()
 {
-	printf("map map\n");
+	printf("map to address space\n");
 	_mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
-	printf("map map end\n");
 	if (_mutex == MAP_FAILED)
 	{
 		fprintf(stderr, "failed to map memory\n");
@@ -55,16 +54,18 @@ int init_lock()
 		return 0;
 	}
 
+	printf("truncate\n");
+	
 	if (ftruncate(_sm_mutex, sizeof(pthread_mutex_t)) == -1)
 	{
 		fprintf(stderr, "failed to truncate shared memory object (%s)\n", strerror(errno));
 		return 0;
 	}
 
-
 	if (!map_mutex())
 		return 0;
 
+	printf("init mutex\n");
 	pthread_mutexattr_init(&_mutex_attr);
 	pthread_mutexattr_setpshared(&_mutex_attr, PTHREAD_PROCESS_SHARED);
 	pthread_mutex_init(_mutex, &_mutex_attr);
@@ -92,10 +93,10 @@ int main()
 		exit(1);
 	}
 
-	LOCK();
-	printf("hello!\n");
-	sleep(2);
-	UNLOCK();
+	//LOCK();
+	//printf("hello!\n");
+	//sleep(2);
+	//UNLOCK();
 
 	return 0;
 }
