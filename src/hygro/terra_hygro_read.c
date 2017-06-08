@@ -20,11 +20,11 @@ static void terra_hygro_read_sync(ssize_t const pin)
 {
 	pinMode(pin, OUTPUT);
 
-	digitalWrite(conf->hygro_pin_out, HIGH);
+	digitalWrite(pin, HIGH);
 	delay(10);
-	digitalWrite(conf->hygro_pin_out, LOW);
+	digitalWrite(pin, LOW);
 	delay(18);
-	digitalWrite(conf->hygro_pin_out, HIGH);
+	digitalWrite(pin, HIGH);
 	delayMicroseconds(40);
 }
 
