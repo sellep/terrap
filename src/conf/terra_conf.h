@@ -44,7 +44,8 @@ typedef struct
 typedef struct
 {
 	ssize_t tick;
-	ssize_t led_pin;
+	ssize_t led_pin_alert;
+	ssize_t led_pin_warn;
 	ssize_t switch_pin;
 	ssize_t switch_rep;
 	size_t switch_chan;

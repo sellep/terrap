@@ -54,6 +54,9 @@ armvars:
 
 arm: armvars all
 
+install:
+	cp res/terra.conf /etc/default/terra
+
 clean:
 	@mkdir -p bin obj
 	@rm -rf bin/*

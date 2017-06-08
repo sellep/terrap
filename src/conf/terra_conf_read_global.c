@@ -1,7 +1,8 @@
 #include "terra_conf.h"
 
 #define CONF_TICK "tick="
-#define CONF_LED_PIN "led_pin="
+#define CONF_LED_PIN_ALERT "led_pin_alert="
+#define CONF_LED_PIN_WARN "led_pin_warn="
 #define CONF_SWITCH_PIN "switch_pin="
 #define CONF_SWITCH_REP "switch_rep="
 #define CONF_SWITCH_CHAN "switch_chan="
@@ -38,6 +39,14 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 				terra_log_error("invalid tick value\n");
 				return FALSE;
 			}
+		}
+		else if (strncmp(line, CONF_LED_PIN_ALERT, sizeof(CONF_LED_PIN_ALERT) - 1) == 0)
+		{
+			conf->led_pin_alert = atoi(line + sizeof(CONF_LED_PIN_ALERT) - 1);
+		}
+		else if (strncmp(line, CONF_LED_PIN_WARN, sizeof(CONF_LED_PIN_WARN) - 1) == 0)
+		{
+			conf->led_pin_warn = atoi(line + sizeof(CONF_LED_PIN_WARN) - 1);
 		}
 		else if (strncmp(line, CONF_LED_PIN, sizeof(CONF_LED_PIN) - 1) == 0)
 		{
