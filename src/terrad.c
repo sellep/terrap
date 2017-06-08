@@ -12,9 +12,12 @@ int main(int argc, char **argv)
 
 	terra_log_info("terra daemon started\n");
 
+	terra_pin_set_output(LED_PIN_ERR);
+
 	if (argc != 2)
 	{
 		terra_log_error("insufficient argument count\n");
+		terrad_led_set(LED_PIN_ERR, TRUE);
 		return 1;
 	}
 
@@ -24,16 +27,17 @@ int main(int argc, char **argv)
 	if (!terra_lock_init())
 	{
 		terra_log_error("failed to initialize terra lock\n");
+		terrad_led_set(LED_PIN_ERR, TRUE);
 		return 1;
 	}
 
 	if (!terra_conf_read(&conf, argv[1]))
 	{
 		terra_log_error("failed to read config file\n");
+		terrad_led_set(LED_PIN_ERR, TRUE);
 		return 1;
 	}
 
-	terra_pin_set_output(LED_PIN_ERR);
 	terra_pin_set_output(conf.led_pin_warn);
 	terra_pin_set_output(conf.switch_pin);
 
