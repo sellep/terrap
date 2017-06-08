@@ -82,21 +82,21 @@ void cleanup_lock()
 
 int main()
 {
-	//if (fork() == 0)
-	//{
-	//	//child
-	//	sleep(1);
-	//}
+	if (fork() == 0)
+	{
+		//child
+		sleep(1);
+	}
 
 	if (!init_lock())
 	{
 		exit(1);
 	}
 
-	//LOCK();
-	//printf("hello!\n");
-	//sleep(2);
-	//UNLOCK();
+	LOCK();
+	printf("hello!\n");
+	sleep(2);
+	UNLOCK();
 
 	return 0;
 }
