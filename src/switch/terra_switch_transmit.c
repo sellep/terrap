@@ -1,6 +1,12 @@
 #include "terra_switch.h"
 
+#ifdef WPI_ENABLED
+
+#include <wiringPi.h>
+
 #define SIGNAL_PULSE_LEN 350
+
+#endif
 
 void terra_switch_transmit(ssize_t const tran_pin, ssize_t const high, ssize_t const low, ssize_t const pulse_len)
 {

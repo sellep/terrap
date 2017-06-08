@@ -1,5 +1,11 @@
 #include "terra.h"
 
+#ifdef WPI_ENABLED
+
+#include <wiringPi.h>
+
+#endif
+
 void terrad_led_set(ssize_t const pin, BOOL const on)
 {
 #ifdef WPI_ENABLED

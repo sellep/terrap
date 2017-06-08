@@ -1,5 +1,11 @@
 #include "terra_pin.h"
 
+#ifdef WPI_ENABLED
+
+#include <wiringPi.h>
+
+#endif
+
 void terra_pin_set_output(ssize_t const pin)
 {
 #ifdef WPI_ENABLED
