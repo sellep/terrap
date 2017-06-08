@@ -1,0 +1,7 @@
+todo file
+
+1. usb ventilator
+
+1.1 plug the ventilator in an usb interface
+		perform lsusb -v
+		check endpoint address (bEndpointAddress     0x81  EP 1 IN   means IN endpoint at address 0x81)
