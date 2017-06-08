@@ -93,7 +93,7 @@ static BOOL terra_hygro_read_convert(terra_hygro_res * const res, ssize_t const 
 	t = (float)(_dht22_data[2] & 0x7F)* 256 + (float)_dht22_data[3];
 	t /= 10;
 
-	if (_dht22_data[2] & 0x80) != 0)
+	if ((_dht22_data[2] & 0x80) != 0)
 	{
 		NEG(t);
 	}
