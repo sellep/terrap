@@ -56,6 +56,8 @@ arm: armvars all
 
 install:
 	@cp res/terra.conf /etc/default/terra
+	@cp res/terrad.init.script /etc/init.d/terra
+	@chmod +x /etc/init.d/terra
 
 clean:
 	@mkdir -p bin obj
