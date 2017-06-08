@@ -2,6 +2,8 @@
 
 //https://github.com/technion/lol_dht22/blob/master/dht22.c
 
+#ifdef WPI_ENABLED
+
 #define MAX_TIMINGS 85
 #define MIN_BITS_READ 40
 #define FIRST_IGNORABLE_TRANSITIONS 3
@@ -104,12 +106,15 @@ static BOOL terra_hygro_read_convert(terra_hygro_res * const res, ssize_t const 
 	return TRUE;
 }
 
+#endif
+
 BOOL terra_hygro_read(terra_hygro_res * const res, terra_conf const * const conf)
 {
 	BOOL result;
-	ssize_t j;
 
 #ifdef WPI_ENABLED
+	ssize_t j;
+
 	LOCK();
 
 	terra_hygro_read_sync(conf->hygro_pin_io);
