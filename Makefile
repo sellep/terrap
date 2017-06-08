@@ -47,10 +47,12 @@ all: clean $(OBJ)
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
 #https://gcc.gnu.org/onlinedocs/gcc-4.9.2/gcc/ARM-Options.html
-armflags:
+armvars:
 	$(eval CFLAGS += "-DWPI_ENABLED -march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard")
+	$(eval LIBS += "-lwiringPi")
+	
 
-arm: armflags all
+arm: armvars all
 
 clean:
 	@mkdir -p bin obj
