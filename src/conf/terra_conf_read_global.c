@@ -15,6 +15,7 @@
 #define CONF_HYGRO_PIN_IO "hygro_pin_io="
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_SENSOR "hygro_sensor="
+#define CONF_GLOBAL_END "GLOBAL END"
 
 BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 {
@@ -116,9 +117,14 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 			strncpy(conf->hygro_sensor, line + sizeof(CONF_HYGRO_SENSOR) - 1, read - sizeof(CONF_HYGRO_SENSOR));
 			conf->hygro_sensor[read - sizeof(CONF_HYGRO_SENSOR)] = '\0';
 		}
+		else if (strncmp(line, CONF_GLOBAL_END, sizeof(CONF_GLOBAL_END) - 1) == 0)
+		{
+			break;
+		}
 		else
 		{
 			terra_log_error("unknown config line: %s\n", line);
+			return FALSE;
 		}
 	}
 
