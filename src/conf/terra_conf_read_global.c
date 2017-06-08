@@ -1,7 +1,6 @@
 #include "terra_conf.h"
 
 #define CONF_TICK "tick="
-#define CONF_LED_PIN_ALERT "led_pin_alert="
 #define CONF_LED_PIN_WARN "led_pin_warn="
 #define CONF_SWITCH_PIN "switch_pin="
 #define CONF_SWITCH_REP "switch_rep="
@@ -36,25 +35,27 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 			conf->tick = atoi(line + sizeof(CONF_TICK) - 1);
 			if (conf->tick == 0)
 			{
-				terra_log_error("invalid tick value\n");
+				terra_log_error("tick cannot be zero\n");
 				return FALSE;
 			}
-		}
-		else if (strncmp(line, CONF_LED_PIN_ALERT, sizeof(CONF_LED_PIN_ALERT) - 1) == 0)
-		{
-			conf->led_pin_alert = atoi(line + sizeof(CONF_LED_PIN_ALERT) - 1);
 		}
 		else if (strncmp(line, CONF_LED_PIN_WARN, sizeof(CONF_LED_PIN_WARN) - 1) == 0)
 		{
 			conf->led_pin_warn = atoi(line + sizeof(CONF_LED_PIN_WARN) - 1);
-		}
-		else if (strncmp(line, CONF_LED_PIN, sizeof(CONF_LED_PIN) - 1) == 0)
-		{
-			conf->led_pin = atoi(line + sizeof(CONF_LED_PIN) - 1);
+			if (conf->led_pin_warn == 0)
+			{
+				terra_log_error("led_pin_warn cannot use pin zero\n");
+				return FALSE;
+			}
 		}
 		else if (strncmp(line, CONF_SWITCH_PIN, sizeof(CONF_SWITCH_PIN) - 1) == 0)
 		{
 			conf->switch_pin = atoi(line + sizeof(CONF_SWITCH_PIN) - 1);
+			if (conf->switch_pin == 0)
+			{
+				terra_log_error("switch_pin cannot use pin zero\n");
+				return FALSE;
+			}
 		}
 		else if (strncmp(line, CONF_SWITCH_REP, sizeof(CONF_SWITCH_REP) - 1) == 0)
 		{
@@ -95,6 +96,11 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		else if (strncmp(line, CONF_HYGRO_PIN_IO, sizeof(CONF_HYGRO_PIN_IO) - 1) == 0)
 		{
 			conf->hygro_pin_io = atoi(line + sizeof(CONF_HYGRO_PIN_IO) - 1);
+			if (conf->hygro_pin_io == 0)
+			{
+				terra_log_error("hygro_pin_io cannot use pin zero\n");
+				return FALSE;
+			}
 		}
 		else if (strncmp(line, CONF_HYGRO_TICK, sizeof(CONF_HYGRO_TICK) - 1) == 0)
 		{

@@ -11,6 +11,8 @@
 
 #include "utils/terra_log.h"
 
+#define LED_PIN_ERR 0
+
 #define LOCK()(terra_lock())
 #define UNLOCK()(terra_unlock())
 

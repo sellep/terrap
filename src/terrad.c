@@ -33,18 +33,18 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	terra_pin_set_output(conf.led_pin_alert);
+	terra_pin_set_output(LED_PIN_ERR);
 	terra_pin_set_output(conf.led_pin_warn);
 	terra_pin_set_output(conf.switch_pin);
 
-	terrad_led_set(conf.led_pin_alert, FALSE);
+	terrad_led_set(LED_PIN_ERR, FALSE);
 	terrad_led_set(conf.led_pin_warn, FALSE);
 
 //run
 	run_result = terrad_run(&conf);
 	terra_log_info("terra daemon stopped\n");
 
-	terrad_led_set(conf.led_pin_alert, TRUE);
+	terrad_led_set(LED_PIN_ERR, TRUE);
 
 	if (!run_result)
 		return 1;
