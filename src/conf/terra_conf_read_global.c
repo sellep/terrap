@@ -1,9 +1,9 @@
 #include "terra_conf.h"
 
 #define CONF_TICK "tick="
-#define CONF_SWITCH_PIN "tran_pin="
-#define CONF_SWITCH_REP "tran_rep="
-#define CONF_SWITCH_CHAN "sock_chan="
+#define CONF_SWITCH_PIN "switch_pin="
+#define CONF_SWITCH_REP "switch_rep="
+#define CONF_SWITCH_CHAN "switch_chan="
 #define CONF_SWITCH_CODE_AON "switch_code_aon="
 #define CONF_SWITCH_CODE_AOFF "switch_code_aoff="
 #define CONF_SWITCH_CODE_BON "switch_code_bon="
