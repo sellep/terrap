@@ -12,6 +12,8 @@ OBJ=terra_lock.o \
 	terra_time_cmp.o \
 	terra_pin_set.o \
 	terra_led_set.o \
+	terra_led_arg.o \
+	terra_led_set_from_cmd.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_clocks.o \
@@ -31,11 +33,15 @@ OBJ=terra_lock.o \
 %.o : src/conf/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
+%.o : src/led/%.c
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
 %.o : src/switch/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 %.o : src/hygro/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
 %.o : src/utils/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 

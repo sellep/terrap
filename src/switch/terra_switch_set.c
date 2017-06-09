@@ -20,8 +20,6 @@ void terra_switch_set(terra_conf const * const conf, terra_switch_req const * co
 
 	sock_code = terra_switch_get_code(conf, req);
 
-	printf("code %zu\n", sock_code);
-
 	LOCK();
 
 	for (rep = 0; rep < conf->switch_rep; rep++)

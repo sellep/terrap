@@ -16,7 +16,7 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 		terra_log_error("invalid socket argument length\n");
 		return FALSE;
 	}
-	
+
 	if (   argv[2][0] != 'a'
 		&& argv[2][0] != 'A'
 		&& argv[2][0] != 'b'

@@ -1,4 +1,4 @@
-#include "terra.h"
+#include "terra_led.h"
 
 #ifdef WIRINGPI
 
@@ -6,11 +6,11 @@
 
 #endif
 
-void terra_led_set(ssize_t const pin, BOOL const on)
+void terra_led_set(ssize_t const pin, terra_led_cmd const set)
 {
 #ifdef WIRINGPI
 	LOCK();
-	digitalWrite(pin, on ? 1 : 0);
+	digitalWrite(pin, set & LED_ON ? 1 : 0);
 	UNLOCK();
 #else
 	terra_log_info("[terrad_led_set] wiringPi disabled!\n");
