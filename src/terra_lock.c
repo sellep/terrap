@@ -35,18 +35,23 @@ static void init_mutex()
 
 BOOL terra_lock_init()
 {
+	printf("\acq lockn");
 	_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_EXCL | O_TRUNC | O_RDWR, S_IRWXU | S_IRWXG);
+	printf("lock acq\n");
 	if (_sm_mutex < 0)
 	{
+printf("_sm_mutex < 0\n");
 		if (errno == EEXIST)
 		{
+			printf("EEXIST\n");
 			_sm_mutex = shm_open(LOCK_FILE, O_CREAT | O_RDWR, S_IRWXU | S_IRWXG);
+			printf("_sm_mutex\n");
 			if (_sm_mutex < 0)
 			{
 				terra_log_error("failed to open existing shared memory object (%s)\n", strerror(errno));
 				return FALSE;
 			}
-
+			printf("map_mutex_to_address_space\n");
 			return map_mutex_to_address_space();
 		}
 
@@ -54,6 +59,7 @@ BOOL terra_lock_init()
 		return 0;
 	}
 
+	printf("ftruncate\n");
 	if (ftruncate(_sm_mutex, sizeof(pthread_mutex_t)) == -1)
 	{
 		terra_log_error("failed to truncate shared memory object (%s)\n", strerror(errno));
@@ -63,6 +69,7 @@ BOOL terra_lock_init()
 	if (!map_mutex_to_address_space())
 		return FALSE;
 
+	printf("init_mutex\n");
 	init_mutex();
 	return TRUE;
 }
