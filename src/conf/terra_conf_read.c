@@ -20,6 +20,8 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		return FALSE;
 	}
 
+	printf("terra_conf_read_global\n");
+
 	rewind(f);
 
 	if (!terra_conf_read_sched_clocks(conf, f))
@@ -27,6 +29,8 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		fclose(f);
 		return FALSE;
 	}
+
+	printf("terra_conf_read_sched_clocks\n");
 
 	fclose(f);
 	return TRUE;
