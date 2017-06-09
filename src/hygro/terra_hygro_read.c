@@ -2,7 +2,7 @@
 
 //https://github.com/technion/lol_dht22/blob/master/dht22.c
 
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 
 #include <wiringPi.h>
 
@@ -114,7 +114,7 @@ BOOL terra_hygro_read(terra_hygro_res * const res, terra_conf const * const conf
 {
 	BOOL result;
 
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 	ssize_t j;
 
 	LOCK();

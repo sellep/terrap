@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
 		if (!terra_switch_arg(&switch_req, argc, argv))
 			return 1;
 
-		//terra_switch_set(&conf, &switch_req);
+		terra_switch_set(&conf, &switch_req);
 		return 0;
 	}
 	else

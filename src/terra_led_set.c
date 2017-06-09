@@ -1,6 +1,6 @@
 #include "terra.h"
 
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 
 #include <wiringPi.h>
 
@@ -8,7 +8,7 @@
 
 void terra_led_set(ssize_t const pin, BOOL const on)
 {
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 	LOCK();
 	digitalWrite(pin, on ? 1 : 0);
 	UNLOCK();

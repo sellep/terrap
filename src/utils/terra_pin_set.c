@@ -1,6 +1,6 @@
 #include "terra_pin.h"
 
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 
 #include <wiringPi.h>
 
@@ -8,7 +8,7 @@
 
 void terra_pin_set_output(ssize_t const pin)
 {
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 	LOCK();
 	pinMode(pin, OUTPUT);
 	UNLOCK();

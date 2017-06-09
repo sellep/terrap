@@ -48,7 +48,7 @@ all: clean $(OBJ)
 
 #https://gcc.gnu.org/onlinedocs/gcc-4.9.2/gcc/ARM-Options.html
 armvars:
-	$(eval CFLAGS += "-DWPI_ENABLED -march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard")
+	$(eval CFLAGS += "-DWIRINGPI -march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard")
 	$(eval LIBS += "-lwiringPi")
 
 arm: armvars all

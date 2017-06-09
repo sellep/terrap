@@ -1,6 +1,6 @@
 #include "terra_switch.h"
 
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 
 #include <wiringPi.h>
 
@@ -10,7 +10,7 @@
 
 void terra_switch_transmit(ssize_t const tran_pin, ssize_t const high, ssize_t const low, ssize_t const pulse_len)
 {
-#ifdef WPI_ENABLED
+#ifdef WIRINGPI
 	digitalWrite(tran_pin, HIGH);
 	delayMicroseconds(SIGNAL_PULSE_LEN * high);
 	digitalWrite(tran_pin, LOW);
