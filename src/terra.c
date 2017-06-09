@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
 		terra_switch_set(&conf, &switch_req);
 		return 0;
 	}
-	else if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
+	else if (strcmp(argv[1], ARG_LED_SWITCH) == 0)
 	{
 		if (!(led_cmd = terra_led_arg(argc, argv)))
 			return 1;
