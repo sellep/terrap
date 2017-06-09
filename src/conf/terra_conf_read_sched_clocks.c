@@ -35,6 +35,8 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		{
 			if ((read = getline(&line, &buf_len, f)) == -1) HANDLE_ERROR("unexpected end of clock schedule section\n");
 
+			printf("quick: %s\n", line);
+
 			if (strncmp(line, CONF_SCHED_CLOCK_SECTION_END, sizeof(CONF_SCHED_CLOCK_SECTION_END) - 1) != 0)
 				break;
 
