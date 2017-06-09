@@ -53,8 +53,9 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 			if (strncmp(line, CONF_SCHED_CLOCK_TIME_STOP, sizeof(CONF_SCHED_CLOCK_TIME_STOP) - 1) == 0)
 			{
 				if(!terra_time_read(&(clock->times[clock->times_len].stop), line + sizeof(CONF_SCHED_CLOCK_TIME_STOP) - 1)) HANDLE_ERROR("invalid end time\n");
+			}
+			else HANDLE_ERROR("clock schedule end expected\n");
 		}
-		else HANDLE_ERROR("clock schedule end expected\n");
 
 		conf->sched_clocks[conf->sched_clocks_len].sched.trig = TRIGGER_CLOCK;
 		conf->sched_clocks_len++;
