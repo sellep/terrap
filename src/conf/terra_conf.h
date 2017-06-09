@@ -10,6 +10,11 @@
 
 #define TERRA_CONF_MAX_SCHED_CLOCKS 10
 
+#define TRY_CONTINUE(l)(\
+	if (l[0] == '\0') continue; \
+	if (l[0] == '\n') continue; \
+	if (l[0] == '#') continue;
+
 enum switch_modes
 {
 	SWITCH_UNKNOWN = 0,

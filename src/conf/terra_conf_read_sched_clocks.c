@@ -18,11 +18,7 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 
 	while ((read = getline(&line, &buf_len, f)) != -1)
 	{
-		if (line[0] == '\0')
-			continue;
-		
-		if (line[0] == '#')
-			continue;
+		TRY_CONTINUE(line);
 
 		if (strncmp(line, CONF_SCHED_CLOCK_BEGIN, sizeof(CONF_SCHED_CLOCK_BEGIN) - 1) != 0)
 			continue;

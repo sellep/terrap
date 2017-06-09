@@ -1,5 +1,7 @@
 #include "terra_conf.h"
 
+#define CONF_GLOBAL_BEGIN "GLOBAL BEGIN"
+#define CONF_GLOBAL_END "GLOBAL END"
 #define CONF_TICK "tick="
 #define CONF_LED_PIN_WARN "led_pin_warn="
 #define CONF_SWITCH_PIN "switch_pin="
@@ -15,7 +17,6 @@
 #define CONF_HYGRO_PIN_IO "hygro_pin_io="
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_SENSOR "hygro_sensor="
-#define CONF_GLOBAL_END "GLOBAL END"
 
 BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 {
@@ -25,14 +26,20 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 
 	while ((read = getline(&line, &buf_len, f)) != -1)
 	{
-		if (line[0] == '\0')
-			continue;
+		TRY_CONTINUE(line);
 
-		if (line[0] == '\n')
-			continue;
-		
-		if (line[0] == '#')
-			continue;
+		if (strncmp(line, CONF_GLOBAL_BEGIN, sizeof(CONF_GLOBAL_BEGIN) - 1) != 0)
+		{
+			terra_log_error("global begin missing\n");
+			return FALSE;
+		}
+
+		break;
+	}
+
+	while ((read = getline(&line, &buf_len, f)) != -1)
+	{
+		TRY_CONTINUE(line);
 
 		if (strncmp(line, CONF_TICK, sizeof(CONF_TICK) - 1) == 0)
 		{
