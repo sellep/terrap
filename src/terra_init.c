@@ -10,12 +10,13 @@
 BOOL terra_init()
 {
 #ifdef WIRINGPI
+	printf("setup wiringPi\n");
 	if (wiringPiSetup()  == -1)
 		return FALSE;
 #else
 	terra_log_info("[terra_init] wiringPi disabled!\n");
 #endif
-
+	printf("set output error pin\n");
 	terra_pin_set_output(LED_PIN_ERR);
 
 	if (!terra_lock_init())
