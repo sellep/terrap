@@ -2,7 +2,7 @@
 
 void terra_conf_print(terra_conf const * const conf)
 {
-	size_t i;
+	size_t i, j;
 
 	terra_log_info("terra_conf:\n");
 	terra_log_info("[global] tick: %u\n", conf->tick);
@@ -30,9 +30,13 @@ void terra_conf_print(terra_conf const * const conf)
 			: "mois");
 		terra_log_info("[sched_clock %u] sock: %c\n", i, conf->sched_clocks[i].sched.sock);
 		terra_log_info("[sched_clock %u] enabled: %u\n", i, conf->sched_clocks[i].sched.enabled);
-		terra_log_info("[sched_clock %u] start: ", i);
-		terra_time_print(&conf->sched_clocks[i].start);
-		terra_log_info("[sched_clock %u] end: ", i);
-		terra_time_print(&conf->sched_clocks[i].end);
+
+		for (j = 0; j < &conf->sched_clocks[i]->times_len; j++)
+		{
+			terra_log_info("[sched_clock %u] start: ", i);
+			terra_time_print(&conf->sched_clocks[i].times[j].start);
+			terra_log_info("[sched_clock %u] end: ", i);
+			terra_time_print(&conf->sched_clocks[i].times[j].end);
+		}
 	}
 }

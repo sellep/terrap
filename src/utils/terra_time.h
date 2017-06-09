@@ -18,6 +18,12 @@ typedef struct
 	ssize_t sec;
 } terra_time;
 
+typedef struct
+{
+	terra_time start;
+	terra_time stop;
+} terra_start_stop;
+
 time_compare terra_time_cmp(terra_time const * const, terra_time const * const);
 void terra_time_sleep(size_t const);
 void terra_time_sys(terra_time * const);

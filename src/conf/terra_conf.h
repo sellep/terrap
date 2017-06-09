@@ -9,6 +9,7 @@
 	goto error;}
 
 #define TERRA_CONF_MAX_SCHED_CLOCKS 10
+#define TERRA_CONF_MAX_SCHED_CLOCKS_START_STOP 10
 
 #define TRY_CONTINUE(l) \
 	if (l[0] == '\0') continue; \
@@ -42,8 +43,8 @@ typedef struct
 typedef struct
 {
 	terra_sched sched;
-	terra_time start;
-	terra_time end;
+	terra_start_stop times[TERRA_CONF_MAX_SCHED_CLOCKS_START_STOP];
+	ssize_t times_len;
 } terra_sched_clock;
 
 typedef struct

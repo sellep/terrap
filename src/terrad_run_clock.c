@@ -29,17 +29,17 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 	if (!clock->sched.enabled)
 		return;
 
-	diff = terra_time_diff(sys_time, &clock->start);
-	if (SWITCH_NOT_ON(i) && (diff == 0 || TIME_BETWEEN(sys_time, &clock->start, &clock->end)))
-	{
-		SWITCH_SET_ON(i);
-		terra_log_info("switch clock %s to on (diff: %us)\n", clock->sched.name, diff);
-	}
-
-	diff = terra_time_diff(sys_time, &clock->end);
-	if (SWITCH_NOT_OFF(i) && (diff == 0 || terra_time_cmp(sys_time, &clock->end) == TIME_ABOVE))
-	{
-		SWITCH_SET_OFF(i);
-		terra_log_info("switch clock %s to off (diff: %us)\n", clock->sched.name, diff);
-	}
+	//diff = terra_time_diff(sys_time, &clock->start);
+	//if (SWITCH_NOT_ON(i) && (diff == 0 || TIME_BETWEEN(sys_time, &clock->start, &clock->end)))
+	//{
+	//	SWITCH_SET_ON(i);
+	//	terra_log_info("switch clock %s to on (diff: %us)\n", clock->sched.name, diff);
+	//}
+    //
+	//diff = terra_time_diff(sys_time, &clock->end);
+	//if (SWITCH_NOT_OFF(i) && (diff == 0 || terra_time_cmp(sys_time, &clock->end) == TIME_ABOVE))
+	//{
+	//	SWITCH_SET_OFF(i);
+	//	terra_log_info("switch clock %s to off (diff: %us)\n", clock->sched.name, diff);
+	//}
 }
