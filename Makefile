@@ -24,6 +24,7 @@ OBJ=terra_lock.o \
 	terra_switch_transmit.o \
 	terra_switch_set.o \
 	terra_hygro_read.o \
+	terra_init.o \
 	terrad_run_clock.o \
 	terrad_run.o
 

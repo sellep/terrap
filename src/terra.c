@@ -15,12 +15,10 @@ int main(int argc, char ** argv)
 	terra_led_cmd led_cmd;
 	terra_switch_req switch_req;
 
-	terra_pin_set_output(LED_PIN_ERR);
-
-//configuration and setup
-	if (!terra_lock_init())
+//initialization and setup
+	if (!terra_init())
 	{
-		terra_log_error("failed to initialize terra lock\n");
+		terra_log_error("failed to initialize terra\n");
 		return 1;
 	}
 

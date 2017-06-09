@@ -14,6 +14,7 @@
 #define LOCK()(terra_lock())
 #define UNLOCK()(terra_unlock())
 
+BOOL terra_init();
 BOOL terra_lock_init();
 void terra_lock();
 void terra_unlock();

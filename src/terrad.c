@@ -13,7 +13,12 @@ int main(int argc, char **argv)
 
 	terra_log_info("terra daemon started\n");
 
-	terra_pin_set_output(LED_PIN_ERR);
+//initialization and setup
+	if (!terra_init())
+	{
+		terra_log_error("failed to initialize terra\n");
+		return 1;
+	}
 
 	if (argc != 2)
 	{
@@ -23,14 +28,6 @@ int main(int argc, char **argv)
 	}
 
 	terra_log_info("config file path: %s\n", argv[1]);
-
-//initialization and setup
-	if (!terra_lock_init())
-	{
-		terra_log_error("failed to initialize terra lock\n");
-		terra_led_set(LED_PIN_ERR, TRUE);
-		return 1;
-	}
 
 	if (!terra_conf_read(&conf, argv[1]))
 	{
