@@ -22,7 +22,5 @@ BOOL terra_init()
 	}
 
 	terra_pin_set_output(LED_PIN_ERR);
-
-	printf("lock init success\n");
 	return TRUE;
 }
