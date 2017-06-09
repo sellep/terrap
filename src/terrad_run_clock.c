@@ -50,12 +50,9 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 			//nothing todo anymore for this schedule
 			return;
 		}
-
-		
 	}
 
 	//here, switch should be off
-
 	if (SWITCH_NOT_OFF(i))
 	{
 		SWITCH_SET_OFF(i);
