@@ -51,6 +51,9 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 			}
 			else HANDLE_ERROR("clock schedule start time expected\n");
 
+			printf("start: ");
+			terra_time_print(&(clock->times[clock->times_len].start));
+			
 			//schedule clock time stop
 
 			if ((read = getline(&line, &buf_len, f)) == -1) HANDLE_ERROR("unexpected end of clock schedule section\n");
