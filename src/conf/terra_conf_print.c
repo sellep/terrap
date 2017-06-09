@@ -35,8 +35,8 @@ void terra_conf_print(terra_conf const * const conf)
 		{
 			terra_log_info("[sched_clock %u] start: ", i);
 			terra_time_print(&(conf->sched_clocks[i].times[j].start));
-			terra_log_info("[sched_clock %u] end: ", i);
-			terra_time_print(&(conf->sched_clocks[i].times[j].end));
+			terra_log_info("[sched_clock %u] stop: ", i);
+			terra_time_print(&(conf->sched_clocks[i].times[j].stop));
 		}
 	}
 }

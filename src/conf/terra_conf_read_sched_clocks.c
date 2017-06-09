@@ -4,7 +4,7 @@
 #define CONF_SCHED_CLOCK_SECTION_END "CLOCK SCHEDULE END"
 
 #define CONF_SCHED_CLOCK_TIME_START "\tstart="
-#define CONF_SCHED_CLOCK_TIME_END "\tend="
+#define CONF_SCHED_CLOCK_TIME_STOP "\tstop="
 
 extern BOOL terra_conf_read_sched(terra_sched * const, FILE * const);
 
@@ -50,9 +50,9 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 
 			if ((read = getline(&line, &buf_len, f)) == -1) HANDLE_ERROR("unexpected end of clock schedule section\n");
 
-			if (strncmp(line, CONF_SCHED_CLOCK_TIME_END, sizeof(CONF_SCHED_CLOCK_TIME_END) - 1) == 0)
+			if (strncmp(line, CONF_SCHED_CLOCK_TIME_STOP, sizeof(CONF_SCHED_CLOCK_TIME_STOP) - 1) == 0)
 			{
-				if(!terra_time_read(&(clock->times[clock->times_len].end), line + sizeof(CONF_SCHED_CLOCK_TIME_END) - 1)) HANDLE_ERROR("invalid end time\n");
+				if(!terra_time_read(&(clock->times[clock->times_len].stop), line + sizeof(CONF_SCHED_CLOCK_TIME_STOP) - 1)) HANDLE_ERROR("invalid end time\n");
 		}
 		else HANDLE_ERROR("clock schedule end expected\n");
 
