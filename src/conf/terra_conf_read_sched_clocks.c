@@ -35,8 +35,6 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		{
 			if ((read = getline(&line, &buf_len, f)) == -1) HANDLE_ERROR("unexpected end of clock schedule section\n");
 
-			printf("line 1: %s\n", line);
-
 			if (strncmp(line, CONF_SCHED_CLOCK_SECTION_END, sizeof(CONF_SCHED_CLOCK_SECTION_END) - 1) == 0)
 			{
 				printf("clock section end -> break\n");
@@ -51,9 +49,9 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 			}
 			else HANDLE_ERROR("clock schedule start time expected\n");
 
-			printf("start: ");
+			printf("start %zu: ", clock->times_len);
 			terra_time_print(&(clock->times[clock->times_len].start));
-			
+
 			//schedule clock time stop
 
 			if ((read = getline(&line, &buf_len, f)) == -1) HANDLE_ERROR("unexpected end of clock schedule section\n");
@@ -63,6 +61,9 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 				if(!terra_time_read(&(clock->times[clock->times_len].stop), line + sizeof(CONF_SCHED_CLOCK_TIME_STOP) - 1)) HANDLE_ERROR("invalid stop time\n");
 			}
 			else HANDLE_ERROR("clock schedule stop time expected\n");
+			
+			printf("end %zu: ", clock->times_len);
+			terra_time_print(&(clock->times[clock->times_len].end));
 		}
 
 		conf->sched_clocks[conf->sched_clocks_len].sched.trig = TRIGGER_CLOCK;
