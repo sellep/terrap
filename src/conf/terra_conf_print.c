@@ -31,6 +31,8 @@ void terra_conf_print(terra_conf const * const conf)
 		terra_log_info("[sched_clock %u] sock: %c\n", i, conf->sched_clocks[i].sched.sock);
 		terra_log_info("[sched_clock %u] enabled: %u\n", i, conf->sched_clocks[i].sched.enabled);
 
+		terra_log_info("[sched_clock %u] times: %u\n", i, &conf->sched_clocks[i].times_len);
+
 		for (j = 0; j < &conf->sched_clocks[i].times_len; j++)
 		{
 			terra_log_info("[sched_clock %u] start: ", i);

@@ -44,7 +44,7 @@ typedef struct
 {
 	terra_sched sched;
 	terra_start_stop times[TERRA_CONF_MAX_SCHED_CLOCK_TIMES];
-	ssize_t times_len = 0;
+	ssize_t times_len;
 } terra_sched_clock;
 
 typedef struct
