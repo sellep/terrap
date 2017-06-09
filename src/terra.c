@@ -25,7 +25,6 @@ int main(int argc, char ** argv)
 	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;
 
-	return 1;
 	terra_conf_print(&conf);
 
 	terra_pin_set_output(conf.switch_pin);
