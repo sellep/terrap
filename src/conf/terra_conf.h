@@ -4,8 +4,8 @@
 #include "../terra.h"
 #include "../utils/terra_time.h"
 
-#define HANDLE_ERROR(s){		\
-	terra_log_error("%s", s);	\
+#define HANDLE_ERROR(s){ \
+	terra_log_error("%s", s); \
 	goto error;}
 
 #define TERRA_CONF_MAX_SCHED_CLOCKS 10
