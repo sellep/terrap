@@ -28,7 +28,7 @@ int main(int argc, char ** argv)
 	terra_conf_print(&conf);
 
 	terra_pin_set_output(conf.switch_pin);
-	terra_pin_set_output(conf.led_pin_warn);
+	terra_pin_set_output(conf.led_pin_heart);
 
 //execution handling
 	if (argc < 2)

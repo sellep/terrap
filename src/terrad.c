@@ -36,11 +36,11 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	terra_pin_set_output(conf.led_pin_warn);
+	terra_pin_set_output(conf.led_pin_heart);
 	terra_pin_set_output(conf.switch_pin);
 
 	terra_led_set(LED_PIN_ERR, FALSE);
-	terra_led_set(conf.led_pin_warn, FALSE);
+	terra_led_set(conf.led_pin_heart, FALSE);
 
 //run
 	run_result = terrad_run(&conf);

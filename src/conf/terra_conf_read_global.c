@@ -3,7 +3,9 @@
 #define CONF_GLOBAL_BEGIN "GLOBAL BEGIN"
 #define CONF_GLOBAL_END "GLOBAL END"
 #define CONF_TICK "tick="
-#define CONF_LED_PIN_WARN "led_pin_warn="
+#define CONF_LED_PIN_HEART "led_pin_heart="
+#define CONF_HEART_TICK "heart_tick="
+#define CONF_HEART_DUR "heart_dur="
 #define CONF_SWITCH_PIN "switch_pin="
 #define CONF_SWITCH_REP "switch_rep="
 #define CONF_SWITCH_CHAN "switch_chan="
@@ -50,12 +52,30 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 				return FALSE;
 			}
 		}
-		else if (strncmp(line, CONF_LED_PIN_WARN, sizeof(CONF_LED_PIN_WARN) - 1) == 0)
+		else if (strncmp(line, CONF_LED_PIN_HEART, sizeof(CONF_LED_PIN_HEART) - 1) == 0)
 		{
-			conf->led_pin_warn = atoi(line + sizeof(CONF_LED_PIN_WARN) - 1);
-			if (conf->led_pin_warn == 0)
+			conf->led_pin_heart = atoi(line + sizeof(CONF_LED_PIN_HEART) - 1);
+			if (conf->led_pin_heart == 0)
 			{
-				terra_log_error("led_pin_warn cannot use pin zero\n");
+				terra_log_error("led_pin_heart cannot use pin zero\n");
+				return FALSE;
+			}
+		}
+		else if (strncmp(line, CONF_HEART_TICK, sizeof(CONF_HEART_TICK) - 1) == 0)
+		{
+			conf->heart_tick = atoi(line + sizeof(CONF_HEART_TICK) - 1);
+			if (conf->heart_tick == 0)
+			{
+				terra_log_error("heart_tick cannot be zero\n");
+				return FALSE;
+			}
+		}
+		else if (strncmp(line, CONF_HEART_DUR, sizeof(CONF_HEART_DUR) - 1) == 0)
+		{
+			conf->heart_dur = atoi(line + sizeof(CONF_HEART_DUR) - 1);
+			if (conf->heart_dur == 0)
+			{
+				terra_log_error("heart_dur cannot be zero\n");
 				return FALSE;
 			}
 		}

@@ -1,7 +1,7 @@
 #include "terra_led.h"
 
 #define ARG_LED_ERR "err"
-#define ARG_LED_WARN "warn"
+#define ARG_LED_HEART "heart"
 
 #define ARG_LED_ON "on"
 #define ARG_LED_OFF "off"
@@ -21,9 +21,9 @@ terra_led_cmd terra_led_arg(int const argc, char const * const * const argv)
 	{
 		res = LED_ERR;
 	}
-	else if (strcmp(argv[2], ARG_LED_WARN) == 0)
+	else if (strcmp(argv[2], ARG_LED_HEART) == 0)
 	{
-		res = LED_WARN;
+		res = LED_HEART;
 	}
 	else
 	{

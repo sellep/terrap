@@ -10,7 +10,7 @@ enum led_cmds
 {
 	LED_NONE = 0,
 	LED_ERR = 2,
-	LED_WARN = 4,
+	LED_HEART = 4,
 	LED_ON = 8,
 	LED_OFF = 16
 };

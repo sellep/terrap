@@ -10,9 +10,9 @@ BOOL terra_led_set_from_cmd(terra_conf const * const conf, terra_led_cmd const c
 		terra_led_set(LED_PIN_ERR, cmd);
 		return TRUE;
 	}
-	else if (cmd & LED_WARN)
+	else if (cmd & LED_HEART)
 	{
-		terra_led_set(conf->led_pin_warn, cmd);
+		terra_led_set(conf->led_pin_heart, cmd);
 		return TRUE;
 	}
 

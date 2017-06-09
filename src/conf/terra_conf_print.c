@@ -6,7 +6,9 @@ void terra_conf_print(terra_conf const * const conf)
 
 	terra_log_info("terra_conf:\n");
 	terra_log_info("[global] tick: %u\n", conf->tick);
-	terra_log_info("[global] led_pin_warn: %u\n", conf->led_pin_warn);
+	terra_log_info("[global] led_pin_heart: %u\n", conf->led_pin_heart);
+	terra_log_info("[global] heart_tick: %u\n", conf->heart_tick);
+	terra_log_info("[global] heart_dur: %u\n", conf->heart_dur);
 	terra_log_info("[global] switch_pin: %u\n", conf->switch_pin);
 	terra_log_info("[global] switch_rep: %u\n", conf->switch_rep);
 	terra_log_info("[global] switch_chan: %u\n", conf->switch_chan);
