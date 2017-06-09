@@ -2,6 +2,7 @@
 #define __P_TERRA_LED_H
 
 #include "../terra.h"
+#include "../conf/terra_conf.h"
 
 #define LED_PIN_ERR 0
 
