@@ -50,7 +50,6 @@ all: clean $(OBJ)
 armvars:
 	$(eval CFLAGS += "-DWPI_ENABLED -march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard")
 	$(eval LIBS += "-lwiringPi")
-	
 
 arm: armvars all
 
