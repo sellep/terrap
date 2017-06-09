@@ -9,7 +9,7 @@
 	goto error;}
 
 #define TERRA_CONF_MAX_SCHED_CLOCKS 10
-#define TERRA_CONF_MAX_SCHED_CLOCKS_START_STOP 10
+#define TERRA_CONF_MAX_SCHED_CLOCK_TIMES 10
 
 #define TRY_CONTINUE(l) \
 	if (l[0] == '\0') continue; \
