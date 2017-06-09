@@ -49,6 +49,14 @@ typedef struct
 
 typedef struct
 {
+	terra_sched sched;
+	ssize_t limit_up;
+	ssize_t limit_low;
+	ssize_t invert;
+} terra_sched_temp;
+
+typedef struct
+{
 	ssize_t tick;
 	ssize_t led_pin_warn;
 	ssize_t switch_pin;
