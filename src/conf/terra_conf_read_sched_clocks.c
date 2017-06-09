@@ -66,6 +66,8 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 			terra_time_print(&(clock->times[clock->times_len].stop));
 		}
 
+		printf("clock times_len %zu\n", clock->times_len);
+
 		conf->sched_clocks[conf->sched_clocks_len].sched.trig = TRIGGER_CLOCK;
 		conf->sched_clocks_len++;
 	}
