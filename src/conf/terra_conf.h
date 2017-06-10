@@ -10,6 +10,7 @@
 
 #define TERRA_CONF_MAX_SCHED_CLOCKS 10
 #define TERRA_CONF_MAX_SCHED_CLOCK_TIMES 5
+#define TERRA_CONF_MAX_SCHED_CLOCK_PERIOD 5
 
 #define TRY_CONTINUE(l) \
 	if (l[0] == '\0') continue; \
@@ -47,6 +48,13 @@ typedef struct
 	terra_start_stop times[TERRA_CONF_MAX_SCHED_CLOCK_TIMES];
 	ssize_t times_len;
 } terra_sched_clock;
+
+typedef struct
+{
+	terra_sched sched;
+	terra_time on_dur;
+	terra_time off_dur
+} terra_sched_period;
 
 typedef struct
 {
