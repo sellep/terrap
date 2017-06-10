@@ -20,7 +20,7 @@ static inline BOOL pin_valid(ssize_t const pin)
 	return FALSE;
 }
 
-static inline BOOL terra_conf_valid_clock(terra_sched_clock const * const clock)
+static inline BOOL terra_conf_valid_clock(terra_sched_clock * const clock)
 {
 	ssize_t i;
 
@@ -42,17 +42,17 @@ static inline BOOL terra_conf_valid_clock(terra_sched_clock const * const clock)
 
 	for (i = 0; i < clock->times_len; i++)
 	{
-		if (clock->times[i].start >= clock->times[i].stop)
+		if (terra_time_cmp(&(clock->times[i].stop), &(clock->times[i].start)) != TIME_ABOVE)
 		{
 			terra_log_error("clock->times[%zu].start cannot be after stop\n", i);
 			return FALSE;
 		}
 	}
 
-	return true;
+	return TRUE;
 }
 
-BOOL terra_conf_valid(terra_conf const * const conf)
+BOOL terra_conf_valid(terra_conf * const conf)
 {
 	ssize_t i;
 
@@ -173,7 +173,7 @@ BOOL terra_conf_valid(terra_conf const * const conf)
 		}
 	}
 
-	for (i = 0, i < conf->sched_clocks_len; i++)
+	for (i = 0; i < conf->sched_clocks_len; i++)
 	{
 		if (!terra_conf_valid_clock(&(conf->sched_clocks[i])))
 			return FALSE;

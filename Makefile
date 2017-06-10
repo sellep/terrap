@@ -5,6 +5,7 @@ DAEMON=-DSYSLOG_ENABLED
 
 OBJ=terra_lock.o \
 	terra_time_print.o \
+	terra_time_cpy.o \
 	terra_time_read.o \
 	terra_time_sys.o \
 	terra_time_diff.o \
@@ -18,6 +19,7 @@ OBJ=terra_lock.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_clocks.o \
 	terra_conf_read.o \
+	terra_conf_valid.o \
 	terra_conf_print.o \
 	terra_switch_arg.o \
 	terra_switch_get_code.o \
@@ -26,6 +28,7 @@ OBJ=terra_lock.o \
 	terra_hygro_read.o \
 	terra_heart_beat.o \
 	terra_init.o \
+	terrad_run_period.o \
 	terrad_run_clock.o \
 	terrad_run.o
 

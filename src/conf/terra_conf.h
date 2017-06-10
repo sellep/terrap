@@ -9,13 +9,15 @@
 	goto error;}
 
 #define TERRA_CONF_MAX_SCHED_CLOCKS 10
+#define TERRA_CONF_MAX_SCHED_PERIODS 5
 #define TERRA_CONF_MAX_SCHED_CLOCK_TIMES 5
-#define TERRA_CONF_MAX_SCHED_CLOCK_PERIOD 5
 
 #define TRY_CONTINUE(l) \
 	if (l[0] == '\0') continue; \
 	if (l[0] == '\n') continue; \
 	if (l[0] == '#') continue;
+
+#define SCHED_DISABLED(s)(((terra_sched*) s)->enabled == 0)
 
 enum switch_modes
 {
@@ -23,6 +25,8 @@ enum switch_modes
 	SWITCH_ON = 1,
 	SWITCH_OFF = 2
 };
+
+typedef ssize_t switch_mode;
 
 enum sched_triggers
 {
@@ -87,11 +91,14 @@ typedef struct
 
 	terra_sched_clock sched_clocks[TERRA_CONF_MAX_SCHED_CLOCKS];
 	ssize_t sched_clocks_len;
+
+	terra_sched_period sched_periods[TERRA_CONF_MAX_SCHED_PERIODS];
+	ssize_t sched_periods_len;
 } terra_conf;
 
 void terra_conf_print(terra_conf const * const);
 BOOL terra_conf_read(terra_conf * const, char const * const);
 BOOL terra_setup(terra_conf const * const);
-BOOL terra_conf_valid(terra_conf const * const);
+BOOL terra_conf_valid(terra_conf * const);
 
 #endif

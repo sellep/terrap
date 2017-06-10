@@ -29,7 +29,7 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 	size_t diff;
 	size_t j;
 
-	if (!clock->sched.enabled)
+	if (SCHED_DISABLED(clock))
 		return;
 
 	for (j = 0; j < clock->times_len; j++)

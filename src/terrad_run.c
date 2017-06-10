@@ -10,6 +10,8 @@
 extern void terrad_run_clock_init(terra_conf const * const);
 extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
 extern void terra_heart_beat(terra_conf const * const);
+extern void terrad_run_period_init(terra_conf const * const, terra_time const * const);
+extern BOOL terrad_run_period(terra_conf const * const, terra_time const * const);
 
 static BOOL volatile _terminate = FALSE;
 
@@ -48,7 +50,10 @@ BOOL terrad_run(terra_conf const * const conf)
 	if (!register_signal_handler())
 		return FALSE;
 
+	terra_time_sys(&sys_time);
+
 	terrad_run_clock_init(conf);
+	terrad_run_period_init(conf, &sys_time);
 
 	//scheduling
 
@@ -60,6 +65,8 @@ BOOL terrad_run(terra_conf const * const conf)
 		{
 			terra_heart_beat(conf);
 		}
+
+		terrad_run_period(conf, &sys_time);
 
 		if (conf->hygro_enabled && tick % conf->hygro_tick == 0)
 		{

@@ -25,6 +25,7 @@ typedef struct
 } terra_start_stop;
 
 time_compare terra_time_cmp(terra_time const * const, terra_time const * const);
+void terra_time_cpy(terra_time * const, terra_time const * const);
 void terra_time_sleep(size_t const);
 void terra_time_sys(terra_time * const);
 void terra_time_print(terra_time const * const);
