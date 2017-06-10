@@ -27,7 +27,8 @@ enum sched_triggers
 {
 	TRIGGER_CLOCK = 1,
 	TRIGGER_TEMP = 2,
-	TRIGGER_MOIS = 3
+	TRIGGER_MOIS = 3,
+	TRIGGER_PERIOD = 4
 };
 
 typedef int sched_trig;
