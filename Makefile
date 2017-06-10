@@ -3,7 +3,8 @@ CFLAGS=-Wall -v -fomit-frame-pointer -O3 -pipe
 LIBS=-lrt -pthread
 DAEMON=-DSYSLOG_ENABLED
 
-OBJ=terra_lock.o \
+OBJ=pi_2_mmio.o \
+	terra_lock.o \
 	terra_time_print.o \
 	terra_time_cpy.o \
 	terra_time_read.o \

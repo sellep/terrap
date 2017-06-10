@@ -1,138 +1,146 @@
 #include "terra_hygro.h"
 
-//https://github.com/technion/lol_dht22/blob/master/dht22.c
+#include <stdbool.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <sched.h>
+#include <string.h>
+#include <sys/time.h>
+#include <time.h>
 
-#ifdef WIRINGPI
+#include "pi_2_dht_read.h"
+#include "pi_2_mmio.h"
 
-#include <wiringPi.h>
+#define DHT_MAXCOUNT 32000
 
-#define MAX_TIMINGS 85
-#define MIN_BITS_READ 40
-#define FIRST_IGNORABLE_TRANSITIONS 3
-#define IS_EVEN(i)(i % 2 == 0)
-#define NEG(t)(t *= -1)
+#define DHT_PULSES 41
 
-static int _dht22_data[5] = { 0, 0, 0, 0, 0 };
+#define DELAY() ( \
+	volatile ssize_t x; \
+	for (x = 0; x < 50; x++) { })
 
-#define CHECKSUM_BYTE (_dht22_data[4])
-
-static void terra_hygro_read_sync(ssize_t const pin)
+static inline BOOL dht_sync(ssize_t const pin)
 {
-	pinMode(pin, OUTPUT);
+	size_t i = 0;
 
-	digitalWrite(pin, HIGH);
-	delay(10);
-	digitalWrite(pin, LOW);
-	delay(18);
-	digitalWrite(pin, HIGH);
-	delayMicroseconds(40);
-}
+	pi_2_mmio_set_output(pin);
 
-static ssize_t assert_data_read(int const read)
-{
-	if (read > 255 || read < 0)
+	pi_2_mmio_set_high(pin);
+	sleep_milliseconds(500);
+
+	pi_2_mmio_set_low(pin);
+	busy_wait_milliseconds(20);
+
+	pi_2_mmio_set_input(pin);
+	DELAY();
+
+	while (pi_2_mmio_input(pin))
 	{
-		terra_log_error("CRITICAL: invalid data from wiringPi\n");
-	}
-	return (ssize_t)read;
-}
+		if (++i < DHT_MAXCOUNT)
+			continue;
 
-static ssize_t terra_hygro_read_impl(ssize_t const pin)
-{
-	ssize_t i;
-	ssize_t j = 0;
-	ssize_t counter;
-	ssize_t last = HIGH;
-
-	pinMode(pin, INPUT);
-
-	for (i = 0; i < MAX_TIMINGS; i++)
-	{
-		counter = 0;
-
-		while (assert_data_read(digitalRead(pin)) == last)
-		{
-			counter++;
-			delayMicroseconds(1);
-
-			if (counter == 255)
-				break;
-		}
-
-		last = assert_data_read(digitalRead(pin));
-
-		if (counter == 255)
-			break;
-
-		if (i > FIRST_IGNORABLE_TRANSITIONS && IS_EVEN(i))
-		{
-			//shove each bit into the storage bytes
-			_dht22_data[j / 8] <<= 1;
-
-			if (counter > 16)
-			{
-				_dht22_data[j / 8] |= 1;
-			}
-
-			j++;
-		}
-	}
-
-	return j;
-}
-
-static BOOL terra_hygro_read_convert(terra_hygro_res * const res, ssize_t const j)
-{
-	float t;
-	float h;
-
-	if (j < MIN_BITS_READ)
+		set_default_priority();
 		return FALSE;
-
-	if (CHECKSUM_BYTE != ((_dht22_data[0] + _dht22_data[1] + _dht22_data[2] + _dht22_data[3]) & 0xFF))
-		return FALSE;
-
-//this is for DHT22
-	h = (float)_dht22_data[0] * 256 + (float)_dht22_data[1];
-	h /= 10;
-	t = (float)(_dht22_data[2] & 0x7F)* 256 + (float)_dht22_data[3];
-	t /= 10;
-
-	if ((_dht22_data[2] & 0x80) != 0)
-	{
-		NEG(t);
 	}
-
-//this is for DHT11
-      	//h = (float)data[0];
-      	//t = (float)data[2];
-
-	res->temp = t;
-	res->humi = h;
 
 	return TRUE;
 }
 
-#endif
-
-BOOL terra_hygro_read(terra_hygro_res * const res, terra_conf const * const conf)
+static inline BOOL dht_record_pulse(ssize_t const pin, size_t * const pulses)
 {
-	BOOL result;
+	ssize_t i;
 
-#ifdef WIRINGPI
-	ssize_t j;
+	for (i = 0; i < DHT_PULSES * 2; i += 2)
+	{
+		while (!pi_2_mmio_input(pin))
+		{
+			if (++pulses[i] < DHT_MAXCOUNT)
+				continue;
 
-	LOCK();
+			return FALSE;
+		}
 
-	terra_hygro_read_sync(conf->hygro_pin_io);
-	j = terra_hygro_read_impl(conf->hygro_pin_io);
+		while (pi_2_mmio_input(pin))
+		{
+			if (++pulses[i + 1] < DHT_MAXCOUNT)
+				continue;
 
-	UNLOCK();
+			return FALSE;
+		}
+	}
 
-	result = terra_hygro_read_convert(res, j);
-#else
-	result = FALSE;
-#endif
+	return TRUE;
+}
 
-	return result;
+static inline size_t pulses_avg_low(size_t const * const pulses)
+{
+	size_t avg = 0;
+	ssize_t i;
+
+	for (i = 2; i < DHT_PULSES * 2; i += 2)
+	{
+		avg += pulses[i];
+	}
+
+	return (avg / DHT_PULSES - 1);
+}
+
+static inline void pulses_to_data(size_t const * const pulses, uint8_t * const data)
+{
+	size_t avg_low;
+	ssize_t idx;
+
+	avg_low = pulses_avg_low(pulses);
+
+	for (i = 3; i < DHT_PULSES * 2; i += 2)
+	{
+		idx = (i - 3) / 16;
+		data[idx] <<= 1;
+
+		if (pulses[i] >= avg_low)
+		{
+			data[idx] |= 1;
+		}
+	}
+}
+
+static inline BOOL dht_verify_checksum()
+{
+	if (data[4] != ((data[0] + data[1] + data[2] + data[3]) & 0xFF))
+		return FALSE;
+	return TRUE;
+}
+
+hygro_err terra_hygro_read(ssize_t const pin, float * const humidity, float * const temperature)
+{
+	size_t pulses[DHT_PULSES * 2] = { 0 };
+	uint8_t data[5] = {0};
+
+	set_max_priority();
+
+	if (!dht_sync(pin))
+		return HYGRO_ERROR_TIMEOUT;
+
+	if (!dht_record(pin, pulses))
+	{
+		set_default_priority();
+		return HYGRO_ERROR_TIMEOUT;
+	}
+
+	set_default_priority();
+
+	pulses_to_data(pulses, data);
+
+	if (!dht_verify_checksum())
+		return HYGRO_ERROR_CHECKSUM;
+
+	*humidity = (data[0] * 256 + data[1]) / 10.0f;
+	*temperature = ((data[2] & 0x7F) * 256 + data[3]) / 10.0f;
+
+	if (data[2] & 0x80)
+	{
+		*temperature *= -1.0f;
+	}
+
+	return HYGRO_SUCCESS;
 }

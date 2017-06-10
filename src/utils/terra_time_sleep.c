@@ -1,19 +1,49 @@
 #include "terra_time.h"
 
-#ifdef _POSIX_C_SOURCE >= 199309L
-	#include <time.h>
-#else
-	#include <unistd.h>
-#endif
-
-void terra_time_sleep(size_t const ms)
+void busy_wait_milliseconds(size_t const ms)
 {
-#ifdef _POSIX_C_SOURCE >= 199309L
-	struct timespec ts;
-	ts.tv_sec = ms / 1000;
-	ts.tv_nsec = (ms % 1000) * 1000000;
-	nanosleep(&ts, NULL);
-#else
-	usleep(ms * 1000);
-#endif
+	struct timeval deltatime;
+	struct timeval walltime;
+	struct timeval endtime;
+
+	deltatime.tv_sec = ms / 1000;
+	deltatime.tv_usec = (ms % 1000) * 1000;
+
+	gettimeofday(&walltime, NULL);
+
+	timeradd(&walltime, &deltatime, &endtime);
+
+	while (timercmp(&walltime, &endtime, <))
+	{
+		gettimeofday(&walltime, NULL);
+	}
+}
+
+void sleep_milliseconds(size_t const ms)
+{
+	struct timespec sleep;
+
+	sleep.tv_sec = ms / 1000;
+	sleep.tv_nsec = (ms % 1000) * 1000000L;
+
+	while (clock_nanosleep(CLOCK_MONOTONIC, 0, &sleep, &sleep) && errno == EINTR);
+}
+
+void set_max_priority()
+{
+	struct sched_param sched;
+	memset(&sched, 0, sizeof(sched));
+
+	sched.sched_priority = sched_get_priority_max(SCHED_FIFO);
+	sched_setscheduler(0, SCHED_FIFO, &sched);
+}
+
+void set_default_priority()
+{
+	struct sched_param sched;
+	memset(&sched, 0, sizeof(sched));
+
+	sched.sched_priority = 0;
+	sched_setscheduler(0, SCHED_OTHER, &sched);
+}
 }

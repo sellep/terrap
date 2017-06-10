@@ -1,14 +1,14 @@
 #ifndef __P_TERRA_HYGRO_H
 #define __P_TERRA_HYGRO_H
 
-#include "../conf/terra_conf.h"
+#define HYGRO_ERROR_TIMEOUT -1
+#define HYGRO_ERROR_CHECKSUM -2
+#define HYGRO_ERROR_ARGUMENT -3
+#define HYGRO_ERROR_GPIO -4
+#define HYGRO_SUCCESS 0
 
-typedef struct
-{
-	float temp;
-	float humi;
-} terra_hygro_res;
+typedef int hygro_err;
 
-BOOL terra_hygro_read(terra_hygro_res * const, terra_conf const * const);
+hygro_err terra_hygro_read(ssize_t const, float * const, float * const);
 
 #endif

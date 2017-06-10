@@ -79,7 +79,7 @@ BOOL terrad_run(terra_conf const * const conf)
 			terrad_run_clock(&(conf->sched_clocks[i]), i, &sys_time);
 		}
 
-		terra_time_sleep(conf->tick);
+		sleep_milliseconds(conf->tick);
 
 		tick++;
 	}
