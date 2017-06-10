@@ -28,7 +28,7 @@ static void terra_hygro_read_sync(ssize_t const pin)
 	delayMicroseconds(40);
 }
 
-static ssize_t assert_data_read(const int read)
+static ssize_t assert_data_read(int const read)
 {
 	if (read > 255 || read < 0)
 	{
@@ -92,6 +92,7 @@ static BOOL terra_hygro_read_convert(terra_hygro_res * const res, ssize_t const 
 	if (CHECKSUM_BYTE != ((_dht22_data[0] + _dht22_data[1] + _dht22_data[2] + _dht22_data[3]) & 0xFF))
 		return FALSE;
 
+//this is for DHT22
 	h = (float)_dht22_data[0] * 256 + (float)_dht22_data[1];
 	h /= 10;
 	t = (float)(_dht22_data[2] & 0x7F)* 256 + (float)_dht22_data[3];
@@ -101,6 +102,10 @@ static BOOL terra_hygro_read_convert(terra_hygro_res * const res, ssize_t const 
 	{
 		NEG(t);
 	}
+
+//this is for DHT11
+      	//h = (float)data[0];
+      	//t = (float)data[2];
 
 	res->temp = t;
 	res->humi = h;
