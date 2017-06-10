@@ -70,7 +70,6 @@ static inline size_t pulses_avg_low(size_t const * const pulses)
 	size_t avg = 0;
 	ssize_t i;
 
-	//ignore the first two readings since they are a constant 80 microsecond pulse.
 	for (i = 2; i < DHT_PULSES * 2; i += 2)
 	{
 		avg += pulses[i];
@@ -109,9 +108,6 @@ int dht_read(ssize_t const pin, float * const humidity, float * const temperatur
 {
 	size_t pulses[DHT_PULSES * 2] = { 0 };
 	uint8_t data[5] = {0};
-	size_t avg_low;
-	size_t count = 0;
-	size_t i, j;
 
 	set_max_priority();
 
@@ -126,7 +122,7 @@ int dht_read(ssize_t const pin, float * const humidity, float * const temperatur
 
 	pulses_to_data(pulses, data);
 
-	if (dht_verify_checksum < 0)
+	if (dht_verify_checksum() < 0)
 		return DHT_ERROR_CHECKSUM;
 
 	*humidity = (data[0] * 256 + data[1]) / 10.0f;
