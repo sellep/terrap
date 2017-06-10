@@ -34,6 +34,7 @@ size_t terra_time_diff(terra_time const * const, terra_time const * const);
 void set_default_priority();
 void set_max_priority();
 void sleep_milliseconds(size_t const);
+void sleep_microseconds(size_t const);
 void busy_wait_milliseconds(size_t const);
 
 #endif
