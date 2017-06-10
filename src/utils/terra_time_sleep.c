@@ -1,5 +1,7 @@
 #include "terra_time.h"
 
+#include <time.h>
+
 void busy_wait_milliseconds(size_t const ms)
 {
 	struct timeval deltatime;
@@ -29,6 +31,39 @@ void sleep_milliseconds(size_t const ms)
 	while (clock_nanosleep(CLOCK_MONOTONIC, 0, &sleep, &sleep) && errno == EINTR);
 }
 
+void busy_wait_microseconds(size_t const ms)
+{
+	struct timeval tNow, tLong, tEnd;
+
+	gettimeofday (&tNow, NULL) ;
+	tLong.tv_sec  = howLong / 1000000 ;
+	tLong.tv_usec = howLong % 1000000 ;
+	timeradd (&tNow, &tLong, &tEnd) ;
+
+	while (timercmp (&tNow, &tEnd, <)) gettimeofday (&tNow, NULL);
+}
+
+void sleep_microseconds(size_t const ms)
+{
+	struct timespec sleeper;
+
+	if (ms == 0)
+		return;
+
+	if (ms  < 100)
+	{
+		busy_wait_microseconds(howLong);
+		return;
+	}
+	
+	size_t uSecs = howLong % 1000000;
+	size_t wSecs = howLong / 1000000;
+
+	sleeper.tv_sec  = wSecs;
+	sleeper.tv_nsec = (long)(uSecs * 1000L);
+	nanosleep(&sleeper, NULL);
+}
+
 void set_max_priority()
 {
 	struct sched_param sched;
@@ -45,5 +80,4 @@ void set_default_priority()
 
 	sched.sched_priority = 0;
 	sched_setscheduler(0, SCHED_OTHER, &sched);
-}
 }
