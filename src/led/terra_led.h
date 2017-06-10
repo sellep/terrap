@@ -4,7 +4,7 @@
 #include "../terra.h"
 #include "../conf/terra_conf.h"
 
-#define LED_PIN_ERR 0
+#define LED_PIN_ERR 17
 
 enum led_cmds
 {
