@@ -46,47 +46,22 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		if (strncmp(line, CONF_TICK, sizeof(CONF_TICK) - 1) == 0)
 		{
 			conf->tick = atoi(line + sizeof(CONF_TICK) - 1);
-			if (conf->tick == 0)
-			{
-				terra_log_error("tick cannot be zero\n");
-				return FALSE;
-			}
 		}
 		else if (strncmp(line, CONF_LED_PIN_HEART, sizeof(CONF_LED_PIN_HEART) - 1) == 0)
 		{
 			conf->led_pin_heart = atoi(line + sizeof(CONF_LED_PIN_HEART) - 1);
-			if (conf->led_pin_heart == 0)
-			{
-				terra_log_error("led_pin_heart cannot use pin zero\n");
-				return FALSE;
-			}
 		}
 		else if (strncmp(line, CONF_HEART_TICK, sizeof(CONF_HEART_TICK) - 1) == 0)
 		{
 			conf->heart_tick = atoi(line + sizeof(CONF_HEART_TICK) - 1);
-			if (conf->heart_tick == 0)
-			{
-				terra_log_error("heart_tick cannot be zero\n");
-				return FALSE;
-			}
 		}
 		else if (strncmp(line, CONF_HEART_DUR, sizeof(CONF_HEART_DUR) - 1) == 0)
 		{
 			conf->heart_dur = atoi(line + sizeof(CONF_HEART_DUR) - 1);
-			if (conf->heart_dur == 0)
-			{
-				terra_log_error("heart_dur cannot be zero\n");
-				return FALSE;
-			}
 		}
 		else if (strncmp(line, CONF_SWITCH_PIN, sizeof(CONF_SWITCH_PIN) - 1) == 0)
 		{
 			conf->switch_pin = atoi(line + sizeof(CONF_SWITCH_PIN) - 1);
-			if (conf->switch_pin == 0)
-			{
-				terra_log_error("switch_pin cannot use pin zero\n");
-				return FALSE;
-			}
 		}
 		else if (strncmp(line, CONF_SWITCH_REP, sizeof(CONF_SWITCH_REP) - 1) == 0)
 		{
@@ -127,20 +102,10 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		else if (strncmp(line, CONF_HYGRO_PIN_IO, sizeof(CONF_HYGRO_PIN_IO) - 1) == 0)
 		{
 			conf->hygro_pin_io = atoi(line + sizeof(CONF_HYGRO_PIN_IO) - 1);
-			if (conf->hygro_pin_io == 0)
-			{
-				terra_log_error("hygro_pin_io cannot use pin zero\n");
-				return FALSE;
-			}
 		}
 		else if (strncmp(line, CONF_HYGRO_TICK, sizeof(CONF_HYGRO_TICK) - 1) == 0)
 		{
 			conf->hygro_tick = atoi(line + sizeof(CONF_HYGRO_TICK) - 1);
-			if (conf->hygro_tick == 0)
-			{
-				terra_log_error("invalid hygro_tick value\n");
-				return FALSE;
-			}
 		}
 		else if (strncmp(line, CONF_HYGRO_SENSOR, sizeof(CONF_HYGRO_SENSOR) - 1) == 0)
 		{

@@ -83,5 +83,6 @@ typedef struct
 void terra_conf_print(terra_conf const * const);
 BOOL terra_conf_read(terra_conf * const, char const * const);
 BOOL terra_setup(terra_conf const * const);
+BOOL terra_conf_valid(terra_conf const * const);
 
 #endif
