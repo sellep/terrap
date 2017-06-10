@@ -120,6 +120,8 @@ int dht_read(ssize_t const pin, float * const humidity, float * const temperatur
 		return DHT_ERROR_TIMEOUT;
 	}
 
+	set_default_priority();
+
 	pulses_to_data(pulses, data);
 
 	if (dht_verify_checksum() < 0)
