@@ -53,7 +53,7 @@ typedef struct
 {
 	terra_sched sched;
 	terra_time on_dur;
-	terra_time off_dur
+	terra_time off_dur;
 } terra_sched_period;
 
 typedef struct
