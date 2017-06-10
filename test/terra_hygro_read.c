@@ -14,6 +14,9 @@ int main()
 
 	int status;
 
+	if (pi_2_mmio_init() < 0)
+		return DHT_ERROR_GPIO;
+
 	do
 	{
 		printf("pi_2_dht_read\n");
