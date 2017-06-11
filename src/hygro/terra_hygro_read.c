@@ -94,7 +94,7 @@ static inline void pulses_to_data(size_t const * const pulses, uint8_t * const d
 	}
 }
 
-static inline BOOL dht_verify_checksum()
+static inline BOOL dht_verify_checksum(uint8_t * const data)
 {
 	if (data[4] != ((data[0] + data[1] + data[2] + data[3]) & 0xFF))
 		return FALSE;
@@ -121,7 +121,7 @@ hygro_err terra_hygro_read(ssize_t const pin, float * const humidity, float * co
 
 	pulses_to_data(pulses, data);
 
-	if (!dht_verify_checksum())
+	if (!dht_verify_checksum(data))
 		return HYGRO_ERROR_CHECKSUM;
 
 	*humidity = (data[0] * 256 + data[1]) / 10.0f;
