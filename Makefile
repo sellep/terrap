@@ -1,5 +1,5 @@
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -O3 -pipe
+CFLAGS=-Wall -v -fomit-frame-pointer -O3 -pipe -march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard
 LIBS=-lrt -pthread
 DAEMON=-DSYSLOG_ENABLED
 
@@ -57,13 +57,6 @@ all: clean $(OBJ)
 	rm -f obj/terra_log.o
 	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
-
-#https://gcc.gnu.org/onlinedocs/gcc-4.9.2/gcc/ARM-Options.html
-armvars:
-	$(eval CFLAGS += "-march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard")
-	$(eval LIBS += "-lwiringPi")
-
-arm: armvars all
 
 install:
 	@cp res/terra.conf /etc/default/terra

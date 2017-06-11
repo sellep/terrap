@@ -1,6 +1,6 @@
 #include "terra_time.h"
 
-#include <time.h>
+#include <sys/time.h>
 
 void busy_wait_milliseconds(size_t const ms)
 {
