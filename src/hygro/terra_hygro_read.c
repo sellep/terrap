@@ -5,6 +5,34 @@
 #define DHT_MAXCOUNT 32000
 #define DHT_PULSES 41
 
+#define HYGRO_ERROR_TIMEOUT_STR "hygro read timed out"
+#define HYGRO_ERROR_CHECKSUM_STR "hygro read checksum failed"
+#define HYGRO_SUCCESS_STR "hygro read success"
+
+static char hygro_err_str[40];
+
+char* terra__hygro_errstr(hygro_err const err)
+{
+	if (err == HYGRO_ERROR_TIMEOUT)
+	{
+		strcpy(hygro_err_str, HYGRO_ERROR_TIMEOUT_STR);
+	}
+	else if (err == HYGRO_ERROR_CHECKSUM)
+	{
+		strcpy(hygro_err_str, HYGRO_ERROR_CHECKSUM_STR);
+	}
+	else if (err == HYGRO_SUCCESS)
+	{
+		strcpy(hygro_err_str, HYGRO_SUCCESS_STR);
+	}
+	else
+	{
+		return NULL;
+	}
+
+	return hygro_err_str;
+}
+
 static inline BOOL dht_sync(ssize_t const pin)
 {
 	volatile ssize_t x;

@@ -11,6 +11,7 @@
 
 typedef int hygro_err;
 
+char* terra__hygro_errstr(hygro_err const);
 hygro_err terra_hygro_read(ssize_t const, float * const, float * const);
 
 #endif
