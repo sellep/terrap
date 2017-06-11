@@ -37,8 +37,8 @@ void busy_wait_microseconds(size_t const ms)
 	struct timeval tNow, tLong, tEnd;
 
 	gettimeofday (&tNow, NULL) ;
-	tLong.tv_sec  = howLong / 1000000 ;
-	tLong.tv_usec = howLong % 1000000 ;
+	tLong.tv_sec  = ms / 1000000 ;
+	tLong.tv_usec = ms % 1000000 ;
 	timeradd (&tNow, &tLong, &tEnd) ;
 
 	while (timercmp (&tNow, &tEnd, <)) gettimeofday (&tNow, NULL);
@@ -53,12 +53,12 @@ void sleep_microseconds(size_t const ms)
 
 	if (ms  < 100)
 	{
-		busy_wait_microseconds(howLong);
+		busy_wait_microseconds(ms);
 		return;
 	}
 	
-	size_t uSecs = howLong % 1000000;
-	size_t wSecs = howLong / 1000000;
+	size_t uSecs = ms % 1000000;
+	size_t wSecs = ms / 1000000;
 
 	sleeper.tv_sec  = wSecs;
 	sleeper.tv_nsec = (long)(uSecs * 1000L);
