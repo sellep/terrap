@@ -3,6 +3,7 @@
 #include "conf/terra_conf.h"
 #include "led/terra_led.h"
 #include "switch/terra_switch.h"
+#include "hygro/terra_hygro.h"
 
 #define TERRA_CONF_PATH "/etc/default/terra"
 
