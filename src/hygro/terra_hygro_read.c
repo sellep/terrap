@@ -1,15 +1,5 @@
 #include "terra_hygro.h"
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <sched.h>
-#include <string.h>
-#include <sys/time.h>
-#include <time.h>
-
-#include "pi_2_dht_read.h"
-#include "pi_2_mmio.h"
 
 #define DHT_MAXCOUNT 32000
 
