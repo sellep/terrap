@@ -64,7 +64,7 @@ int main(int argc, char ** argv)
 		float t;
 		float h;
 
-		if (hygro_err terra_hygro_read(conf.hygro_pin_io, &h, &t) < 0)
+		if (terra_hygro_read(conf.hygro_pin_io, &h, &t) < 0)
 			return 1;
 
 		terra_log_info("temperatur: %f.2, humidity: %f.2\n", t, h);
