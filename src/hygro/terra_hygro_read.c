@@ -78,6 +78,7 @@ static inline void pulses_to_data(size_t const * const pulses, uint8_t * const d
 {
 	size_t avg_low;
 	ssize_t idx;
+	ssize_t i;
 
 	avg_low = pulses_avg_low(pulses);
 
@@ -110,7 +111,7 @@ hygro_err terra_hygro_read(ssize_t const pin, float * const humidity, float * co
 	if (!dht_sync(pin))
 		return HYGRO_ERROR_TIMEOUT;
 
-	if (!dht_record(pin, pulses))
+	if (!dht_record_pulse(pin, pulses))
 	{
 		set_default_priority();
 		return HYGRO_ERROR_TIMEOUT;
