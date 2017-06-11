@@ -2,7 +2,6 @@
 
 #include <sys/time.h>
 #include <time.h>
-#include <sched.h>
 #include <errno.h>
 
 void busy_wait_milliseconds(size_t const ms)
@@ -65,22 +64,4 @@ void sleep_microseconds(size_t const ms)
 	sleeper.tv_sec  = wSecs;
 	sleeper.tv_nsec = (long)(uSecs * 1000L);
 	nanosleep(&sleeper, NULL);
-}
-
-void set_max_priority()
-{
-	struct sched_param sched;
-	memset(&sched, 0, sizeof(sched));
-
-	sched.sched_priority = sched_get_priority_max(SCHED_FIFO);
-	sched_setscheduler(0, SCHED_FIFO, &sched);
-}
-
-void set_default_priority()
-{
-	struct sched_param sched;
-	memset(&sched, 0, sizeof(sched));
-
-	sched.sched_priority = 0;
-	sched_setscheduler(0, SCHED_OTHER, &sched);
 }

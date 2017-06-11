@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "utils/terra_log.h"
+#include "utils/terra_proc.h"
 #include "pi_2_mmio.h"
 
 #define LOCK()(terra_lock())
