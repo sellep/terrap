@@ -1,5 +1,5 @@
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -O3 -pipe -march=armv7 -mtune=arm710 -mfpu=vfpv4 -mfloat-abi=hard
+CFLAGS=-Wall -v -fomit-frame-pointer -O3 -pipe
 LIBS=-lrt -pthread
 DAEMON=-DSYSLOG_ENABLED
 
