@@ -41,7 +41,6 @@ BOOL register_signal_handler()
 BOOL terrad_run(terra_conf const * const conf)
 {
 	terra_time sys_time;
-	terra_hygro_res hygro_res;
 	ssize_t i;
 	uint64_t tick = 0;
 
@@ -68,11 +67,11 @@ BOOL terrad_run(terra_conf const * const conf)
 
 		terrad_run_period(conf, &sys_time);
 
-		if (conf->hygro_enabled && tick % conf->hygro_tick == 0)
-		{
-			if (!terra_hygro_read(&hygro_res, conf))
-				return FALSE;
-		}
+		//if (conf->hygro_enabled && tick % conf->hygro_tick == 0)
+		//{
+		//	if (!terra_hygro_read(&hygro_res, conf))
+		//		return FALSE;
+		//}
 
 		for (i = 0 ; i < conf->sched_clocks_len; i++)
 		{
