@@ -8,6 +8,7 @@
 
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
+#define ARG_MODE_HYGRO "hygro"
 
 int main(int argc, char ** argv)
 {
@@ -55,6 +56,18 @@ int main(int argc, char ** argv)
 
 		if (!terra_led_set_from_cmd(&conf, led_cmd))
 			return 1;
+
+		return 0;
+	}
+	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
+	{
+		float t;
+		float h;
+
+		if (hygro_err terra_hygro_read(conf.hygro_pin_io, &h, &t) < 0)
+			return 1;
+
+		terra_log_info("temperatur: %f.2, humidity: %f.2\n", t, h);
 
 		return 0;
 	}
