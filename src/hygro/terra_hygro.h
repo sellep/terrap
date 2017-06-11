@@ -1,6 +1,8 @@
 #ifndef __P_TERRA_HYGRO_H
 #define __P_TERRA_HYGRO_H
 
+#include "../terra.h"
+
 #define HYGRO_ERROR_TIMEOUT -1
 #define HYGRO_ERROR_CHECKSUM -2
 #define HYGRO_ERROR_ARGUMENT -3
