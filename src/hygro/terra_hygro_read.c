@@ -3,15 +3,11 @@
 #include "../utils/terra_time.h"
 
 #define DHT_MAXCOUNT 32000
-
 #define DHT_PULSES 41
-
-#define DELAY() ( \
-	volatile ssize_t x; \
-	for (x = 0; x < 50; x++) { })
 
 static inline BOOL dht_sync(ssize_t const pin)
 {
+	volatile ssize_t x;
 	size_t i = 0;
 
 	pi_2_mmio_set_output(pin);
@@ -23,7 +19,9 @@ static inline BOOL dht_sync(ssize_t const pin)
 	busy_wait_milliseconds(20);
 
 	pi_2_mmio_set_input(pin);
-	DELAY();
+
+	//short delay
+	for (x = 0; x < 50; x++) { }
 
 	while (pi_2_mmio_input(pin))
 	{
