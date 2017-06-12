@@ -22,12 +22,11 @@ BOOL terra_conf_read_sched_periods(terra_conf * const conf, FILE * const f)
 		TRY_CONTINUE(line);
 
 		if (strncmp(line, CONF_SCHED_PERIOD_SECTION_BEGIN, sizeof(CONF_SCHED_PERIOD_SECTION_BEGIN) - 1) != 0)
-			break;
+			continue;
 
 		period = &conf->sched_periods[conf->sched_periods_len];
 
-		if(!terra_conf_read_sched(&period->sched, f))
-			return FALSE;
+		if(!terra_conf_read_sched(&period->sched, f)) HANDLE_ERROR("failed to parse period schedule\n");
 
 		//schedule period on_dur
 

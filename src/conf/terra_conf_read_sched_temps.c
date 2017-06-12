@@ -27,8 +27,7 @@ BOOL terra_conf_read_sched_temps(terra_conf * const conf, FILE * const f)
 
 		temp = &conf->sched_temps[conf->sched_temps_len];
 
-		if(!terra_conf_read_sched(&temp->sched, f))
-			return FALSE;
+		if(!terra_conf_read_sched(&temp->sched, f)) HANDLE_ERROR("failed to parse temp schedule\n");
 
 		//schedule temp act_lim
 
