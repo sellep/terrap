@@ -18,6 +18,7 @@ OBJ=pi_2_mmio.o \
 	terra_led_set_from_cmd.o \
 	terra_conf_read_global.o \
 	terra_conf_read_sched.o \
+	terra_conf_read_sched_periods.o \
 	terra_conf_read_sched_clocks.o \
 	terra_conf_read.o \
 	terra_conf_valid.o \

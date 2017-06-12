@@ -57,7 +57,7 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 			else HANDLE_ERROR("clock schedule stop time expected\n");
 		}
 
-		conf->sched_clocks[conf->sched_clocks_len].sched.trig = TRIGGER_CLOCK;
+		clock->sched.trig = TRIGGER_CLOCK;
 		conf->sched_clocks_len++;
 	}
 

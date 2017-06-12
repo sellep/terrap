@@ -2,6 +2,7 @@
 
 extern BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f);
 extern BOOL terra_conf_read_sched_clocks(terra_conf * const, FILE * const);
+extern BOOL terra_conf_read_sched_periods(terra_conf * const, FILE * const);
 
 BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 {
@@ -20,7 +21,11 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		return FALSE;
 	}
 
-	rewind(f);
+	if (!terra_conf_read_sched_periods(conf, f))
+	{
+		fclose(f);
+		return FALSE;
+	}
 
 	if (!terra_conf_read_sched_clocks(conf, f))
 	{
