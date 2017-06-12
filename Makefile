@@ -65,6 +65,8 @@ debug_flags:
 debug: debug_flags all
 
 install:
+	@cp bin/terra /usr/local/bin/
+	@cp bin/terrad /usr/local/bin/
 	@cp res/terra.conf /etc/default/terra
 	@cp res/terrad.init.script /etc/init.d/terra
 	@chmod +x /etc/init.d/terra
@@ -73,3 +75,7 @@ clean:
 	@mkdir -p bin obj
 	@rm -rf bin/*
 	@rm -rf obj/*
+	@rm -f /usr/local/terra
+	@rm -f /usr/local/terrad
+	@rm -f /etc/default/terra
+	@rm -f /etc/init.d/terra
