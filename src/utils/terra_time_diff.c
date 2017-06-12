@@ -26,3 +26,20 @@ size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
 
 	return terra_time_diff_raw(a, b);
 }
+
+void terra_time_cpy(terra_time * const dest, terra_time const * const src)
+{
+	dest->hour = src->hour;
+	dest->min = src->min;
+	dest->sec = src->sec;
+}
+
+void terra_time_difft(terra_time * const c, terra_time const * const a, terra_time const * const b)
+{
+	size_t secs;
+	secs = terra_time_diff(a, b);
+
+	c->hour = secs / 60 / 60;
+	c->min = (secs - c->hour) / 60;
+	c->sec = secs - c->hour - c->min;
+}

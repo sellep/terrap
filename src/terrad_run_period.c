@@ -11,7 +11,7 @@ typedef struct
 
 static sched_period_cache _sched_period_caches[TERRA_CONF_MAX_SCHED_PERIODS];
 
-inline void change_switch(
+static inline void change_switch(
 	terra_conf const * const conf,
 	terra_sched_period const * const period,
 	sched_period_cache * const cache,

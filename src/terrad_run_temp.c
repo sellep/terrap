@@ -8,7 +8,7 @@ static switch_mode _switch_modes[TERRA_CONF_MAX_SCHED_TEMPS];
 #define IS_SWITCH_ON(i) (_switch_modes[i] == SWITCH_ON)
 #define IS_SWITCH_OFF(i) (_switch_modes[i] == SWITCH_OFF)
 
-inline void change_switch(terra_conf const * const conf, terra_sched_temp const * const temp, ssize_t const i, switch_mode const mode)
+static inline void change_switch(terra_conf const * const conf, terra_sched_temp const * const temp, ssize_t const i, switch_mode const mode)
 {
 	terra_switch_req req;
 
