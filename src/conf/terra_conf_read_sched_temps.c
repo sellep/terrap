@@ -23,7 +23,7 @@ BOOL terra_conf_read_sched_temps(terra_conf * const conf, FILE * const f)
 		TRY_CONTINUE(line);
 
 		if (strncmp(line, CONF_SCHED_TEMP_SECTION_BEGIN, sizeof(CONF_SCHED_TEMP_SECTION_BEGIN) - 1) != 0)
-			break;
+			continue;
 
 		temp = &conf->sched_temps[conf->sched_temps_len];
 
