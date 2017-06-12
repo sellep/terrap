@@ -71,11 +71,13 @@ install:
 	@cp res/terrad.init.script /etc/init.d/terra
 	@chmod +x /etc/init.d/terra
 
-clean:
-	@mkdir -p bin obj
-	@rm -rf bin/*
-	@rm -rf obj/*
+uninstall:
 	@rm -f /usr/local/terra
 	@rm -f /usr/local/terrad
 	@rm -f /etc/default/terra
 	@rm -f /etc/init.d/terra
+
+clean:
+	@mkdir -p bin obj
+	@rm -rf bin/*
+	@rm -rf obj/*
