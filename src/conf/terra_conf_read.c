@@ -20,7 +20,7 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		fclose(f);
 		return FALSE;
 	}
-
+	printf("aaaa\n");
 	if (!terra_conf_read_sched_periods(conf, f))
 	{
 		fclose(f);
