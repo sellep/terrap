@@ -67,9 +67,9 @@ int main(int argc, char ** argv)
 		float t;
 		float h;
 
-		if ((err = terra_hygro_read(conf.hygro_pin_io, &h, &t)) < 0)
+		if (terra_hygro_read_rep(conf, &h, &t))
 		{
-			terra_log_error(terra__hygro_errstr(err));
+			terra_log_error("failed to read hygrometer\n");
 			return 1;
 		}
 

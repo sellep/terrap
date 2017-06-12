@@ -32,6 +32,7 @@ OBJ=pi_2_mmio.o \
 	terra_init.o \
 	terrad_run_period.o \
 	terrad_run_clock.o \
+	terrad_run_temp.o \
 	terrad_run.o
 
 %.o : src/%.c
