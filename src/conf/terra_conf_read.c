@@ -14,7 +14,7 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		terra_log_error("unable to read config file\n");
 		return FALSE;
 	}
-
+	printf("bbb\n");
 	if (!terra_conf_read_global(conf, f))
 	{
 		fclose(f);
