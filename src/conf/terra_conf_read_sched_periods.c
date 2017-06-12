@@ -19,9 +19,9 @@ BOOL terra_conf_read_sched_periods(terra_conf * const conf, FILE * const f)
 
 	while ((read = getline(&line, &buf_len, f)) != -1)
 	{
+		printf("line: %s\n", line);
 		TRY_CONTINUE(line);
 
-		printf("line: %s\n", line);
 		if (strncmp(line, CONF_SCHED_PERIOD_SECTION_BEGIN, sizeof(CONF_SCHED_PERIOD_SECTION_BEGIN) - 1) != 0)
 		{
 			printf("break\n");
