@@ -74,7 +74,7 @@ BOOL terrad_run_period(terra_conf const * const conf, terra_time const * const s
 		}
 		else if (terra_time_cmp(&diff, &(period->off_dur)) != TIME_BELOW)
 		{
-			change_switch(conf, period, cache, sys_time, SWITCH_OFF);
+			change_switch(conf, period, cache, sys_time, SWITCH_ON);
 		}
 	}
 
