@@ -20,6 +20,8 @@ void terra_switch_set(terra_conf const * const conf, terra_switch_req const * co
 
 	sock_code = terra_switch_get_code(conf, req);
 
+	terra_log_info("[terra_switch_set] set switch %c to %s\n", req->sock, req->set_on ? "on" : "off");
+
 	LOCK();
 
 	for (rep = 0; rep < conf->switch_rep; rep++)
