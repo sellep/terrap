@@ -5,6 +5,7 @@ DAEMON=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
 	terra_lock.o \
+	terra_proc.o \
 	terra_time_print.o \
 	terra_time_read.o \
 	terra_time_sys.o \
