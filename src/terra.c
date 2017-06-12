@@ -18,13 +18,12 @@ int main(int argc, char ** argv)
 	terra_switch_req switch_req;
 
 //initialization and setup
-	printf("init\n");
 	if (!terra_init())
 	{
 		terra_log_error("failed to initialize terra\n");
 		return 1;
 	}
-	printf("conf read\n");
+
 	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;
 
