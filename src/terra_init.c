@@ -13,16 +13,14 @@ BOOL terra_init()
 		terra_log_error("failed to initialize mmio\n");
 		return FALSE;
 	}
-#endif
-
 
 	if (!terra_lock_init())
 	{
 		terra_log_error("failed to initialize terra lock\n");
 		return FALSE;
 	}
+#endif
 
 	terra_pin_set_output(LED_PIN_ERR);
-	printf("terra_pin_set_output finished\n");
 	return TRUE;
 }

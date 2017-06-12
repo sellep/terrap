@@ -23,13 +23,22 @@ void terra_conf_print(terra_conf const * const conf)
 	terra_log_info("[global] hygro_tick: %u\n", conf->hygro_tick);
 	terra_log_info("[global] hygro_sensor: %s\n", conf->hygro_sensor);
 
+	for (i = 0; i < conf->sched_periods_len; i++)
+	{
+		terra_log_info("[sched_period %u] name: %s\n", i, conf->sched_periods[i].sched.name);
+		terra_log_info("[sched_period %u] trigger: period\n", i);
+		terra_log_info("[sched_period %u] sock: %c\n", i, conf->sched_periods[i].sched.sock);
+		terra_log_info("[sched_period %u] enabled: %u\n", i, conf->sched_periods[i].sched.enabled);
+		terra_log_info("[sched_period %u] on_dur: ", i);
+		terra_time_print(&(conf->sched_periods[i].on_dur));
+		terra_log_info("[sched_period %u] off_dur: ", i);
+		terra_time_print(&(conf->sched_periods[i].off_dur));
+	}
+
 	for (i = 0; i < conf->sched_clocks_len; i++)
 	{
 		terra_log_info("[sched_clock %u] name: %s\n", i, conf->sched_clocks[i].sched.name);
-		terra_log_info("[sched_clock %u] trigger: %s\n", i,
-			conf->sched_clocks[i].sched.trig == TRIGGER_CLOCK ? "clock"
-			: conf->sched_clocks[i].sched.trig == TRIGGER_TEMP ? "temp"
-			: "mois");
+		terra_log_info("[sched_clock %u] trigger: clock\n", i);
 		terra_log_info("[sched_clock %u] sock: %c\n", i, conf->sched_clocks[i].sched.sock);
 		terra_log_info("[sched_clock %u] enabled: %u\n", i, conf->sched_clocks[i].sched.enabled);
 
