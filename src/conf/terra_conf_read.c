@@ -22,7 +22,7 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		return FALSE;
 	}
 
-	frewind(f);
+	rewind(f);
 
 	if (!terra_conf_read_sched_periods(conf, f))
 	{
@@ -30,7 +30,7 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		return FALSE;
 	}
 
-	frewind(f);
+	rewind(f);
 
 	if (!terra_conf_read_sched_temps(conf, f))
 	{
@@ -38,7 +38,7 @@ BOOL terra_conf_read(terra_conf * const conf, char const * const path)
 		return FALSE;
 	}
 
-	frewind(f);
+	rewind(f);
 
 	if (!terra_conf_read_sched_clocks(conf, f))
 	{
