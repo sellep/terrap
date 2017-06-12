@@ -15,7 +15,7 @@ extern void terrad_run_period_init(terra_conf const * const, terra_time const * 
 extern BOOL terrad_run_period(terra_conf const * const, terra_time const * const);
 
 extern void terrad_run_temp_init(terra_conf const * const);
-extern void terrad_run_temp(terra_conf const * const, float const, float const);
+extern void terrad_run_temp(terra_conf const * const, float const);
 
 extern void terrad_run_clock_init(terra_conf const * const);
 extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
@@ -81,7 +81,7 @@ BOOL terrad_run(terra_conf const * const conf)
 			if (!terra_hygro_read_rep(conf, &humi, &temp))
 				return FALSE;
 
-			terrad_run_temp(conf, humi, temp);
+			terrad_run_temp(conf, temp);
 		}
 
 		terrad_run_period(conf, &sys_time);

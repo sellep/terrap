@@ -9,7 +9,7 @@ typedef struct
 	switch_mode mode;
 } sched_period_cache;
 
-static sched_period_cache sched_period_caches[TERRA_CONF_MAX_SCHED_PERIODS];
+static sched_period_cache _sched_period_caches[TERRA_CONF_MAX_SCHED_PERIODS];
 
 inline void change_switch(
 	terra_conf const * const conf,
@@ -41,7 +41,7 @@ void terrad_run_period_init(terra_conf const * const conf, terra_time const * co
 		if (SCHED_DISABLED(period))
 			continue;
 
-		cache = &(sched_period_caches[i]);
+		cache = &(_sched_period_caches[i]);
 
 		change_switch(conf, period, cache, sys_time, SWITCH_ON);
 	}
@@ -61,7 +61,7 @@ BOOL terrad_run_period(terra_conf const * const conf, terra_time const * const s
 		if (SCHED_DISABLED(period))
 			continue;
 
-		cache = &(sched_period_caches[i]);
+		cache = &(_sched_period_caches[i]);
 
 		terra_time_difft(&diff, sys_time, &(cache->begin));
 

@@ -8,8 +8,9 @@
 	terra_log_error("%s", s); \
 	goto error;}
 
-#define TERRA_CONF_MAX_SCHED_CLOCKS 10
+#define TERRA_CONF_MAX_SCHED_TEMPS 5
 #define TERRA_CONF_MAX_SCHED_PERIODS 5
+#define TERRA_CONF_MAX_SCHED_CLOCKS 5
 #define TERRA_CONF_MAX_SCHED_CLOCK_TIMES 5
 
 #define TRY_CONTINUE(l) \
@@ -63,8 +64,8 @@ typedef struct
 typedef struct
 {
 	terra_sched sched;
-	float act_limit;
-	float deact_limit;
+	float act_lim;
+	float deact_lim;
 	ssize_t invert;
 } terra_sched_temp;
 
@@ -92,6 +93,9 @@ typedef struct
 
 	terra_sched_clock sched_clocks[TERRA_CONF_MAX_SCHED_CLOCKS];
 	ssize_t sched_clocks_len;
+
+	terra_sched_temp sched_temps[TERRA_CONF_MAX_SCHED_TEMPS];
+	ssize_t sched_temps_len;
 
 	terra_sched_period sched_periods[TERRA_CONF_MAX_SCHED_PERIODS];
 	ssize_t sched_periods_len;
