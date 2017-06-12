@@ -63,11 +63,10 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
 	{
-		hygro_err err;
 		float t;
 		float h;
 
-		if (terra_hygro_read_rep(conf, &h, &t))
+		if (terra_hygro_read_rep(&conf, &h, &t))
 		{
 			terra_log_error("failed to read hygrometer\n");
 			return 1;
