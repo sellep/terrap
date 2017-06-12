@@ -18,6 +18,7 @@
 #define CONF_HYGRO_ENABLED "hygro_enabled="
 #define CONF_HYGRO_PIN_IO "hygro_pin_io="
 #define CONF_HYGRO_TICK "hygro_tick="
+#define CONF_HYGRO_REP "hygro_rep="
 #define CONF_HYGRO_SENSOR "hygro_sensor="
 
 BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
@@ -106,6 +107,10 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		else if (strncmp(line, CONF_HYGRO_TICK, sizeof(CONF_HYGRO_TICK) - 1) == 0)
 		{
 			conf->hygro_tick = atoi(line + sizeof(CONF_HYGRO_TICK) - 1);
+		}
+		else if (strncmp(line, CONF_HYGRO_REP, sizeof(CONF_HYGRO_REP) - 1) == 0)
+		{
+			conf->hygro_rep = atoi(line + sizeof(CONF_HYGRO_REP) - 1);
 		}
 		else if (strncmp(line, CONF_HYGRO_SENSOR, sizeof(CONF_HYGRO_SENSOR) - 1) == 0)
 		{

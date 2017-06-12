@@ -7,11 +7,18 @@
 #include "utils/terra_time.h"
 #include "hygro/terra_hygro.h"
 
-extern void terrad_run_clock_init(terra_conf const * const);
-extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
+#define DO_HYGRO_READ(conf, tick) (conf->hygro_enabled && tick % conf->hygro_tick == 0)
+
 extern void terra_heart_beat(terra_conf const * const);
+
 extern void terrad_run_period_init(terra_conf const * const, terra_time const * const);
 extern BOOL terrad_run_period(terra_conf const * const, terra_time const * const);
+
+extern void terrad_run_temp_init(terra_conf const * const);
+extern void terrad_run_temp(terra_conf const * const, float const, float const);
+
+extern void terrad_run_clock_init(terra_conf const * const);
+extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
 
 static BOOL volatile _terminate = FALSE;
 
@@ -44,6 +51,9 @@ BOOL terrad_run(terra_conf const * const conf)
 	ssize_t i;
 	uint64_t tick = 0;
 
+	float temp;
+	float humi;
+
 	//initialization
 
 	if (!register_signal_handler())
@@ -51,8 +61,9 @@ BOOL terrad_run(terra_conf const * const conf)
 
 	terra_time_sys(&sys_time);
 
-	terrad_run_clock_init(conf);
+	terrad_run_temp_init(conf);
 	terrad_run_period_init(conf, &sys_time);
+	terrad_run_clock_init(conf);
 
 	//scheduling
 
@@ -65,13 +76,15 @@ BOOL terrad_run(terra_conf const * const conf)
 			terra_heart_beat(conf);
 		}
 
-		terrad_run_period(conf, &sys_time);
+		if (DO_HYGRO_READ(conf, tick))
+		{
+			if (!terra_hygro_read_rep(conf, &humi, &temp))
+				return FALSE;
 
-		//if (conf->hygro_enabled && tick % conf->hygro_tick == 0)
-		//{
-		//	if (!terra_hygro_read(&hygro_res, conf))
-		//		return FALSE;
-		//}
+			terrad_run_temp(conf, &humi, &temp);
+		}
+
+		terrad_run_period(conf, &sys_time);
 
 		for (i = 0 ; i < conf->sched_clocks_len; i++)
 		{

@@ -63,8 +63,8 @@ typedef struct
 typedef struct
 {
 	terra_sched sched;
-	ssize_t limit_up;
-	ssize_t limit_low;
+	float act_limit;
+	float deact_limit;
 	ssize_t invert;
 } terra_sched_temp;
 
@@ -87,6 +87,7 @@ typedef struct
 	ssize_t hygro_enabled;
 	ssize_t hygro_pin_io;
 	ssize_t hygro_tick;
+	ssize_t hygro_rep;
 	char hygro_sensor[6];
 
 	terra_sched_clock sched_clocks[TERRA_CONF_MAX_SCHED_CLOCKS];
