@@ -25,6 +25,7 @@ inline void change_switch(
 
 	req.sock = period->sched.sock;
 	req.set_on = mode == SWITCH_ON ? TRUE : FALSE;
+	printf("debug: %i\n", req.set_on);
 	terra_switch_set(conf, &req);
 }
 
