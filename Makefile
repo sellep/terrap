@@ -20,6 +20,7 @@ OBJ=pi_2_mmio.o \
 	terra_conf_read_sched.o \
 	terra_conf_read_sched_periods.o \
 	terra_conf_read_sched_clocks.o \
+	terra_conf_read.sched_temps.o \
 	terra_conf_read.o \
 	terra_conf_valid.o \
 	terra_conf_print.o \
