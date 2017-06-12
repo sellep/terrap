@@ -10,22 +10,27 @@ typedef struct
 
 static sched_period_cache sched_period_caches[TERRA_CONF_MAX_SCHED_PERIODS];
 
-void terrad_run_period_init(terra_conf const * const conf, terra_time const * const sys_time)
+inline void change_switch(
+	terra_conf const * const conf,
+	terra_sched_period const * const period,
+	sched_period_cache const * const cache,
+	terra_time const * const sys_time,
+	switch_mode const mode)
 {
-	ssize_t i;
+	terra_switch_req req;
 
-	for (i = 0; i < conf->sched_periods_len; i++)
-	{
-		terra_time_cpy(&(sched_period_caches[i].begin), sys_time);
-		sched_period_caches[i].mode = SWITCH_ON;
+	terra_time_cpy(&cache->begin, sys_time);
+	cache->mode = mode;
 
-		//here, if enabled, we need to turn on the switches
-	}	
+	req.sock = period->sched.sock;
+	req.set_on = mode == SWITCH_ON ? TRUE : FALSE;
+	terra_switch_set(conf, &req);
 }
 
-BOOL terrad_run_period(terra_conf const * const conf, terra_time const * const sys_time)
+void terrad_run_period_init(terra_conf const * const conf, terra_time const * const sys_time)
 {
 	terra_sched_period *period;
+	sched_period_cache *cache;
 	ssize_t i;
 
 	for (i = 0; i < conf->sched_periods_len; i++)
@@ -35,7 +40,41 @@ BOOL terrad_run_period(terra_conf const * const conf, terra_time const * const s
 		if (SCHED_DISABLED(period))
 			continue;
 
-		
+		cache = &sched_period_caches[i];
+
+		change_switch(conf, period, cache, sys_time, SWITCH_ON);
+	}
+}
+
+BOOL terrad_run_period(terra_conf const * const conf, terra_time const * const sys_time)
+{
+	terra_sched_period *period;
+	sched_period_cache *cache;
+	terra_time diff;
+	ssize_t i;
+
+	for (i = 0; i < conf->sched_periods_len; i++)
+	{
+		period = &conf->sched_periods[i];
+
+		if (SCHED_DISABLED(period))
+			continue;
+
+		cache = &sched_period_caches[i];
+
+		terra_time_difft(&diff, &sys, &cache->begin);
+
+		if (cache->mode == SWITCH_ON)
+		{
+			if (terra_time_cmp(&diff, &period->on_dur) != TIME_BELOW)
+			{
+				change_switch(conf, period, cache, sys_time, SWITCH_ON);
+			}
+		}
+		else if (terra_time_cmp(&diff, &period->off_dur) != TIME_BELOW)
+		{
+			change_switch(conf, period, cache, sys_time, SWITCH_OFF);
+		}
 	}
 
 	return TRUE;

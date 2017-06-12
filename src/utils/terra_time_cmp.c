@@ -1,6 +1,6 @@
 #include "terra_time.h"
 
-time_compare terra_time_cmp(terra_time const * const a, terra_time const * const b)
+time_cmp terra_time_cmp(terra_time const * const a, terra_time const * const b)
 {
 	if (a->hour > b->hour)
 		return TIME_ABOVE;

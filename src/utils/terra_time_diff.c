@@ -1,8 +1,9 @@
 #include "terra_time.h"
 
-#define DIFF(a,b)(a>b?a-b:b-a)
+static terra_time time_end = { 24, 0, 0 };
+static terra_time time_begin = { 0, 0, 0 };
 
-size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
+inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const * const b)
 {
 	size_t secs_a;
 	size_t secs_b;
@@ -15,5 +16,13 @@ size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
 	secs_b += b->min * 60;
 	secs_b += b->sec;
 
-	return DIFF(secs_a, secs_b);
+	return secs_a - secs_b;
+}
+
+size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
+{
+	if (terra_time_cmp(a, b) == TIME_BELOW)
+		return terra_time_diff_raw(&time_end, b) + terra_time_diff_raw(a, &time_begin);
+
+	return terra_time_diff_raw(a, b);
 }
