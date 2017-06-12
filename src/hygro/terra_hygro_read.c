@@ -152,4 +152,5 @@ BOOL terra_hygro_read_rep(terra_conf const * const conf, float * const h, float 
 		}
 	}
 
-	return
+	return FALSE;
+}
