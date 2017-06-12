@@ -8,7 +8,7 @@ static switch_mode _switch_modes[TERRA_CONF_MAX_SCHED_TEMPS];
 #define IS_SWITCH_ON(i) (_switch_modes[i] == SWITCH_ON)
 #define IS_SWITCH_OFF(i) (_switch_modes[i] == SWITCH_OFF)
 
-inline void change_switch(terra_sched_temp const * const temp, ssize_t const i, switch_mode const mode)
+inline void change_switch(terra_conf const * const conf, terra_sched_temp const * const temp, ssize_t const i, switch_mode const mode)
 {
 	terra_switch_req req;
 
@@ -46,14 +46,14 @@ void terrad_run_temp(terra_conf const * const conf, float const t)
 		{
 			if (t > temp->act_lim)
 			{
-				change_switch(temp, i, SWITCH_ON);
+				change_switch(conf, temp, i, SWITCH_ON);
 			}
 		}
 		else if (IS_SWITCH_ON(i))
 		{
 			if (t < temp->deact_lim)
 			{
-				change_switch(temp, i, SWITCH_OFF);
+				change_switch(conf, temp, i, SWITCH_OFF);
 			}
 		}
 	}
