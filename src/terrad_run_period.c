@@ -63,7 +63,7 @@ BOOL terrad_run_period(terra_conf const * const conf, terra_time const * const s
 
 		cache = &(sched_period_caches[i]);
 
-		terra_time_difft(&diff, &sys, &(cache->begin));
+		terra_time_difft(&diff, sys_time, &(cache->begin));
 
 		if (cache->mode == SWITCH_ON)
 		{
