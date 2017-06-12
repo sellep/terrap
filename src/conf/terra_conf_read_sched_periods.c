@@ -26,7 +26,7 @@ BOOL terra_conf_read_sched_periods(terra_conf * const conf, FILE * const f)
 
 		period = &conf->sched_periods[conf->sched_periods_len];
 
-		if(!terra_conf_read_sched(&periods->sched, f))
+		if(!terra_conf_read_sched(&period->sched, f))
 			return FALSE;
 
 		//schedule period on_dur
