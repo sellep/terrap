@@ -71,10 +71,14 @@ BOOL terra_lock_init()
 
 void terra_lock()
 {
+#ifndef DEBUG
 	pthread_mutex_lock(_mutex);
+#endif
 }
 
 void terra_unlock()
 {
+#ifndef DEBUG
 	pthread_mutex_unlock(_mutex);
+#endif
 }
