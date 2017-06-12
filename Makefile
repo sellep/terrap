@@ -59,6 +59,11 @@ all: clean $(OBJ)
 	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
+debug_flags:
+	$(eval CFLAGS += "-DDEBUG")
+
+debug: debug_flags all
+
 install:
 	@cp res/terra.conf /etc/default/terra
 	@cp res/terrad.init.script /etc/init.d/terra

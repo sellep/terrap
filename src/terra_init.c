@@ -7,11 +7,13 @@ BOOL terra_init()
 {
 	mmio_status mstat;
 
+#ifndef DEBUG
 	if ((mstat = pi_2_mmio_init()) != MMIO_SUCCESS)
 	{
 		terra_log_error("failed to initialize mmio\n");
 		return FALSE;
 	}
+#endif
 
 	if (!terra_lock_init())
 	{
