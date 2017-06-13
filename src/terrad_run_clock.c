@@ -7,8 +7,6 @@ static int _terra_clock_mode[TERRA_CONF_MAX_SCHED_CLOCKS];
 #define SWITCH_SET_ON(i)(_terra_clock_mode[i] = SWITCH_ON)
 #define SWITCH_SET_OFF(i)(_terra_clock_mode[i] = SWITCH_OFF)
 
-#define TIME_BETWEEN(c, a, b)(terra_time_cmp(a, c) == TIME_BELOW && terra_time_cmp(b, c) == TIME_ABOVE)
-
 void terrad_run_clock_init(terra_conf const * const conf)
 {
 	ssize_t i;
@@ -36,7 +34,7 @@ void terrad_run_clock(terra_sched_clock const * const clock, ssize_t const i, te
 
 		diff = terra_time_diff(sys_time, start);
 
-		if (diff == 0 || TIME_BETWEEN(sys_time, start, stop))
+		if (diff == 0 || terra_time_between(sys_time, start, stop))
 		{
 			if (SWITCH_NOT_ON(i))
 			{
