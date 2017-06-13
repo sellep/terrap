@@ -41,32 +41,32 @@ void terra_conf_print(terra_conf const * const conf)
 		terra_time_print(&(conf->sched_periods[i].deact));
 	}
 
-	for (i = 0; i < conf->sched_temps_len; i++)
-	{
-		terra_log_info("[sched_temp %u] name: %s\n", i, conf->sched_temps[i].sched.name);
-		terra_log_info("[sched_temp %u] trigger: temp\n", i);
-		terra_log_info("[sched_temp %u] sock: %c\n", i, conf->sched_temps[i].sched.sock);
-		terra_log_info("[sched_temp %u] enabled: %u\n", i, conf->sched_temps[i].sched.enabled);
-		terra_log_info("[sched_temp %u] act_lim: %f\n", i, conf->sched_temps[i].act_lim);
-		terra_log_info("[sched_temp %u] deact_lim: %f\n", i, conf->sched_temps[i].deact_lim);
-		terra_log_info("[sched_temp %u] invert: %i\n", i, conf->sched_temps[i].invert);
-	}
-
-	for (i = 0; i < conf->sched_clocks_len; i++)
-	{
-		terra_log_info("[sched_clock %u] name: %s\n", i, conf->sched_clocks[i].sched.name);
-		terra_log_info("[sched_clock %u] trigger: clock\n", i);
-		terra_log_info("[sched_clock %u] sock: %c\n", i, conf->sched_clocks[i].sched.sock);
-		terra_log_info("[sched_clock %u] enabled: %u\n", i, conf->sched_clocks[i].sched.enabled);
-
-		terra_log_info("[sched_clock %u] times: %u\n", i, conf->sched_clocks[i].times_len);
-
-		for (j = 0; j < conf->sched_clocks[i].times_len; j++)
-		{
-			terra_log_info("[sched_clock %u] start: ", i);
-			terra_time_print(&(conf->sched_clocks[i].times[j].start));
-			terra_log_info("[sched_clock %u] stop: ", i);
-			terra_time_print(&(conf->sched_clocks[i].times[j].stop));
-		}
-	}
+	//for (i = 0; i < conf->sched_temps_len; i++)
+	//{
+	//	terra_log_info("[sched_temp %u] name: %s\n", i, conf->sched_temps[i].sched.name);
+	//	terra_log_info("[sched_temp %u] trigger: temp\n", i);
+	//	terra_log_info("[sched_temp %u] sock: %c\n", i, conf->sched_temps[i].sched.sock);
+	//	terra_log_info("[sched_temp %u] enabled: %u\n", i, conf->sched_temps[i].sched.enabled);
+	//	terra_log_info("[sched_temp %u] act_lim: %f\n", i, conf->sched_temps[i].act_lim);
+	//	terra_log_info("[sched_temp %u] deact_lim: %f\n", i, conf->sched_temps[i].deact_lim);
+	//	terra_log_info("[sched_temp %u] invert: %i\n", i, conf->sched_temps[i].invert);
+	//}
+    //
+	//for (i = 0; i < conf->sched_clocks_len; i++)
+	//{
+	//	terra_log_info("[sched_clock %u] name: %s\n", i, conf->sched_clocks[i].sched.name);
+	//	terra_log_info("[sched_clock %u] trigger: clock\n", i);
+	//	terra_log_info("[sched_clock %u] sock: %c\n", i, conf->sched_clocks[i].sched.sock);
+	//	terra_log_info("[sched_clock %u] enabled: %u\n", i, conf->sched_clocks[i].sched.enabled);
+    //
+	//	terra_log_info("[sched_clock %u] times: %u\n", i, conf->sched_clocks[i].times_len);
+    //
+	//	for (j = 0; j < conf->sched_clocks[i].times_len; j++)
+	//	{
+	//		terra_log_info("[sched_clock %u] start: ", i);
+	//		terra_time_print(&(conf->sched_clocks[i].times[j].start));
+	//		terra_log_info("[sched_clock %u] stop: ", i);
+	//		terra_time_print(&(conf->sched_clocks[i].times[j].stop));
+	//	}
+	//}
 }

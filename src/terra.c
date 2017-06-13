@@ -14,8 +14,6 @@ int main(int argc, char ** argv)
 	terra_led_cmd led_cmd;
 	terra_switch_req switch_req;
 
-	printf("11111\n");
-	
 //initialization and setup
 	if (!terra_init())
 	{
@@ -23,8 +21,6 @@ int main(int argc, char ** argv)
 		return 1;
 	}
 
-	printf("aaaa\n");
-	
 	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;
 
