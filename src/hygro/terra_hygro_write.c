@@ -29,7 +29,7 @@ static BOOL terra_hygro_fwrite(float const h, float const t)
 		return FALSE;
 	}
 
-	fprintf(f, "%zu:%zu:%zu h: %f.2 t: %f.2\n", d.tm_hour, d.tm_min, d.tm_sec, h, t);
+	fprintf(f, "%zu:%zu:%zu\t%f.2\t%f.2\n", d.tm_hour, d.tm_min, d.tm_sec, h, t);
 
 	fclose(f);
 	return TRUE;
