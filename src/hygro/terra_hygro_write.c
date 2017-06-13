@@ -39,7 +39,6 @@ static BOOL terra_hygro_fwrite(float const h, float const t)
 
 BOOL terra_hygro_write(terra_conf const * const conf, terra_time const * const sys, float const h, float const f)
 {
-	return TRUE;
 	size_t diff;
 	BOOL res;
 
@@ -48,7 +47,6 @@ BOOL terra_hygro_write(terra_conf const * const conf, terra_time const * const s
 	if (diff < conf->hygro_write_secs)
 		return TRUE;
 
-	return TRUE;
 	res = terra_hygro_fwrite(h, f);
 
 	if (res)
