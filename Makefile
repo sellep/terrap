@@ -66,6 +66,7 @@ debug_flags:
 	$(eval CFLAGS += "-DDEBUG -g")
 
 debug: debug_flags all
+	echo $(LDFLAGS)
 
 install:
 	@cp bin/terra /usr/local/bin/
