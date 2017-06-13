@@ -127,12 +127,6 @@ BOOL terra_conf_valid(terra_conf * const conf)
 			terra_log_error("hygro_tick cannot be zero\n");
 			return FALSE;
 		}
-
-		if (strcmp(conf->hygro_sensor, "DHT22") != 0)
-		{
-			terra_log_error("hygro_sensor not supported\n");
-			return FALSE;
-		}
 	}
 
 	for (i = 0; i < conf->sched_clocks_len; i++)

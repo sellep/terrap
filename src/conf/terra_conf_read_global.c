@@ -20,7 +20,6 @@
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_REP "hygro_rep="
 //#define CONF_HYGRO_WRITE_SECS "hygro_write_secs="
-#define CONF_HYGRO_SENSOR "hygro_sensor="
 
 BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 {
@@ -117,11 +116,6 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		//{
 		//	conf->hygro_write_secs = atoi(line + sizeof(CONF_HYGRO_WRITE_SECS) - 1);
 		//}
-		else if (strncmp(line, CONF_HYGRO_SENSOR, sizeof(CONF_HYGRO_SENSOR) - 1) == 0)
-		{
-			strncpy(conf->hygro_sensor, line + sizeof(CONF_HYGRO_SENSOR) - 1, read - sizeof(CONF_HYGRO_SENSOR));
-			conf->hygro_sensor[read - sizeof(CONF_HYGRO_SENSOR)] = '\0';
-		}
 		else if (strncmp(line, CONF_GLOBAL_END, sizeof(CONF_GLOBAL_END) - 1) == 0)
 		{
 			break;

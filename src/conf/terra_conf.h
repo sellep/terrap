@@ -93,7 +93,6 @@ typedef struct
 	ssize_t hygro_tick;
 	ssize_t hygro_rep;
 	ssize_t hygro_write_secs;
-	char hygro_sensor[6];
 
 	terra_sched_clock sched_clocks[TERRA_CONF_MAX_SCHED_CLOCKS];
 	ssize_t sched_clocks_len;
