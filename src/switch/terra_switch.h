@@ -4,6 +4,7 @@
 #include "../terra_defs.h"
 #include "../pi_2_mmio.h"
 #include "../utils/terra_log.h"
+#include "../utils/terra_lock.h"
 #include "../utils/terra_time.h"
 #include "../conf/terra_conf.h"
 
