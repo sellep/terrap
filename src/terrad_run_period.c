@@ -46,7 +46,7 @@ void terrad_run_period_init(terra_conf const * const conf, terra_time const * co
 		}
 		else
 		{
-			cache->SWITCH_OFF;
+			cache->mode = SWITCH_OFF;
 			cache->begin = sys_time;
 		}
 	}
