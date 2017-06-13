@@ -42,7 +42,7 @@ typedef int sched_trig;
 
 typedef struct
 {
-	char name[20];
+	char name[30];
 	sched_trig trig;
 	char sock;
 	ssize_t enabled;
