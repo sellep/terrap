@@ -1,7 +1,5 @@
 #include "terra_conf.h"
 
-#include <string.h>
-
 static inline BOOL terra_conf_valid_clock(terra_sched_clock * const clock)
 {
 	ssize_t i;

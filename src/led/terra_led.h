@@ -1,7 +1,9 @@
 #ifndef __P_TERRA_LED_H
 #define __P_TERRA_LED_H
 
-#include "../terra.h"
+#include "../terra_defs.h"
+#include "../pi_2_mmio.h"
+#include "../utils/terra_log.h"
 #include "../conf/terra_conf.h"
 
 #define LED_PIN_ERR 17

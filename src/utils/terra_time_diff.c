@@ -1,8 +1,5 @@
 #include "terra_time.h"
 
-static terra_time time_end = { 24, 0, 0 };
-static terra_time time_begin = { 0, 0, 0 };
-
 inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const * const b)
 {
 	size_t secs_a;
@@ -22,7 +19,7 @@ inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const *
 size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
 {
 	if (terra_time_cmp(a, b) == TIME_BELOW)
-		return terra_time_diff_raw(&time_end, b) + terra_time_diff_raw(a, &time_begin);
+		return terra_time_diff_raw(&_day_end, b) + terra_time_diff_raw(a, &_day_begin);
 
 	return terra_time_diff_raw(a, b);
 }

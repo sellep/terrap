@@ -1,24 +1,16 @@
 #ifndef __P_TERRA_H
 #define __P_TERRA_H
 
-#define BOOL int
-#define TRUE 1
-#define FALSE 0
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#include "utils/terra_log.h"
-#include "utils/terra_proc.h"
+#include "terra_defs.h"
 #include "pi_2_mmio.h"
-
-#define LOCK()(terra_lock())
-#define UNLOCK()(terra_unlock())
-
-BOOL terra_init();
-BOOL terra_lock_init();
-void terra_lock();
-void terra_unlock();
+#include "utils/terra_log.h"
+#include "utils/terra_lock.h"
+#include "utils/terra_pin.h"
+#include "utils/terra_proc.h"
+#include "utils/terra_time.h"
+#include "conf/terra_conf.h"
+#include "switch/terra_switch.h"
+#include "hygro/terra_hygro.h"
+#include "led/terra_led.h"
 
 #endif

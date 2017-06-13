@@ -1,7 +1,11 @@
 #ifndef __P_TERRA_HYGRO_H
 #define __P_TERRA_HYGRO_H
 
-#include "../terra.h"
+#include "../terra_defs.h"
+#include "../pi_2_mmio.h"
+#include "../utils/terra_log.h"
+#include "../utils/terra_proc.h"
+#include "../utils/terra_time.h"
 #include "../conf/terra_conf.h"
 
 #define HYGRO_ERROR_TIMEOUT -1

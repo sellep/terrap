@@ -1,15 +1,12 @@
 #include "terra.h"
-#include "utils/terra_pin.h"
-#include "conf/terra_conf.h"
-#include "led/terra_led.h"
-#include "switch/terra_switch.h"
-#include "hygro/terra_hygro.h"
 
 #define TERRA_CONF_PATH "/etc/default/terra"
 
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
 #define ARG_MODE_HYGRO "hygro"
+
+extern BOOL terra_init();
 
 int main(int argc, char ** argv)
 {

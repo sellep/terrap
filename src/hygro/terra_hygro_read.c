@@ -1,7 +1,5 @@
 #include "terra_hygro.h"
 
-#include "../utils/terra_time.h"
-
 #define DHT_MAXCOUNT 32000
 #define DHT_PULSES 41
 

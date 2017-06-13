@@ -12,7 +12,7 @@ OBJ=pi_2_mmio.o \
 	terra_time_diff.o \
 	terra_time_sleep.o \
 	terra_time_cmp.o \
-	terra_pin_set.o \
+	terra_pin.o \
 	terra_led_set.o \
 	terra_led_arg.o \
 	terra_led_set_from_cmd.o \

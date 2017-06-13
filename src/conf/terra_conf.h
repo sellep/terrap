@@ -1,7 +1,8 @@
 #ifndef __P_TERRA_CONF_H
 #define __P_TERRA_CONF_H
 
-#include "../terra.h"
+#include "../terra_defs.h"
+#include "../utils/terra_log.h"
 #include "../utils/terra_time.h"
 
 #define HANDLE_ERROR(s){ \

@@ -1,8 +1,5 @@
 #include "terra.h"
 
-#include "conf/terra_conf.h"
-#include "switch/terra_switch.h"
-
 static switch_mode _switch_modes[TERRA_CONF_MAX_SCHED_TEMPS];
 
 #define IS_SWITCH_ON(i) (_switch_modes[i] == SWITCH_ON)

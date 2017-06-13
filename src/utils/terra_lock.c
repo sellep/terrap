@@ -5,7 +5,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#include <pthread.h>
 #include <errno.h>
 
 #define LOCK_FILE "terra_lock"
@@ -67,18 +66,4 @@ BOOL terra_lock_init()
 
 	init_mutex();
 	return TRUE;
-}
-
-void terra_lock()
-{
-#ifndef DEBUG
-	pthread_mutex_lock(_mutex);
-#endif
-}
-
-void terra_unlock()
-{
-#ifndef DEBUG
-	pthread_mutex_unlock(_mutex);
-#endif
 }

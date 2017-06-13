@@ -1,10 +1,7 @@
 #include "terra.h"
 
-#include "conf/terra_conf.h"
-#include "led/terra_led.h"
-
+extern BOOL terra_init();
 extern BOOL terrad_run(terra_conf const * const);
-extern void terrad_led_set(ssize_t const, BOOL const);
 
 int main(int argc, char **argv)
 {

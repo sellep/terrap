@@ -1,11 +1,5 @@
 #include "terra.h"
 
-#include "conf/terra_conf.h"
-#include "switch/terra_switch.h"
-
-#define SCHED_ACTIVE(sys, period)(terra_time_cmp(sys, &period->act) == TIME_ABOVE && terra_time_cmp(sys, &period->deact) == TIME_BELOW)
-#define SCHED_DEACTIVE(sys, period)(!SCHED_ACTIVE(sys, period))
-
 typedef struct
 {
 	terra_time begin;
@@ -46,7 +40,7 @@ void terrad_run_period_init(terra_conf const * const conf, terra_time const * co
 
 		cache = &(_sched_period_caches[i]);
 
-		if (SCHED_ACTIVE(sys_time, period))
+		if (terra_time_between(sys_time, &period->act, &period->deact))
 		{
 			change_switch(conf, period, cache, sys_time, SWITCH_ON);
 		}
@@ -76,7 +70,7 @@ BOOL terrad_run_period(terra_conf const * const conf, terra_time const * const s
 		cache = &(_sched_period_caches[i]);
 
 		//check scheduler deactive
-		if (SCHED_DEACTIVE(sys_time, period))
+		if (!terra_time_between(sys_time, &period->act, &period->deact))
 		{
 			if (cache->mode == SWITCH_ON)
 			{

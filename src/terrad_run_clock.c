@@ -1,8 +1,5 @@
 #include "terra.h"
 
-#include "conf/terra_conf.h"
-#include "utils/terra_time.h"
-
 static int _terra_clock_mode[TERRA_CONF_MAX_SCHED_CLOCKS];
 
 #define SWITCH_NOT_ON(i)(_terra_clock_mode[i] != SWITCH_ON)

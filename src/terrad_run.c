@@ -3,10 +3,6 @@
 #include <stdint.h>
 #include <signal.h>
 
-#include "conf/terra_conf.h"
-#include "utils/terra_time.h"
-#include "hygro/terra_hygro.h"
-
 #define DO_HYGRO_READ(conf, tick) (conf->hygro_enabled && tick % conf->hygro_tick == 0)
 
 extern void terra_heart_beat(terra_conf const * const);
@@ -24,7 +20,10 @@ static BOOL volatile _terminate = FALSE;
 
 void signal_handler(int signum)
 {
+#ifdef DEBUG
 	terra_log_info("received signal %s(%u)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
+#endif
+
 	_terminate = TRUE;
 }
 
