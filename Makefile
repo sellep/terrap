@@ -1,5 +1,5 @@
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -pipe
+CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3
 LIBS=-lrt -pthread
 DAEMON=-DSYSLOG_ENABLED
 

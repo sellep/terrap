@@ -1,6 +1,6 @@
 #include "terra_time.h"
 
-inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const * const b)
+static inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const * const b)
 {
 	size_t secs_a;
 	size_t secs_b;
