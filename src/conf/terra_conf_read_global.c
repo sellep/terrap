@@ -19,7 +19,7 @@
 #define CONF_HYGRO_PIN_IO "hygro_pin_io="
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_REP "hygro_rep="
-#define CONF_HYGRO_WRITE_SECS "hygro_write_secs="
+//#define CONF_HYGRO_WRITE_SECS "hygro_write_secs="
 #define CONF_HYGRO_SENSOR "hygro_sensor="
 
 BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
