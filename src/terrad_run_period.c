@@ -46,7 +46,15 @@ void terrad_run_period_init(terra_conf const * const conf, terra_time const * co
 
 		cache = &(_sched_period_caches[i]);
 
-		change_switch(conf, period, cache, sys_time, SWITCH_ON);
+		if (SCHED_ACTIVE(sys_time, period))
+		{
+			change_switch(conf, period, cache, sys_time, SWITCH_ON);
+		}
+		else
+		{
+			cache->SWITCH_OFF;
+			cache->begin = sys_time;
+		}
 	}
 }
 
