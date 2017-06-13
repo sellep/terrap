@@ -29,6 +29,7 @@ OBJ=pi_2_mmio.o \
 	terra_switch_transmit.o \
 	terra_switch_set.o \
 	terra_hygro_read.o \
+	terra_hygro_write.o \
 	terra_heart_beat.o \
 	terra_init.o \
 	terrad_run_period.o \
@@ -72,12 +73,14 @@ install:
 	@cp res/terra.conf /etc/default/terra
 	@cp res/terrad.init.script /etc/init.d/terra
 	@chmod +x /etc/init.d/terra
+	@mkdir -p /var/opt/terra
 
 uninstall:
 	@rm -f /usr/local/terra
 	@rm -f /usr/local/terrad
 	@rm -f /etc/default/terra
 	@rm -f /etc/init.d/terra
+	@rm -rf /var/opt/terra
 
 clean:
 	@mkdir -p bin obj

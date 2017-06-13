@@ -80,6 +80,9 @@ BOOL terrad_run(terra_conf const * const conf)
 			if (!terra_hygro_read_rep(conf, &humi, &temp))
 				return FALSE;
 
+			if(!terra_hygro_write(conf, &sys_time, humi, temp))
+				return FALSE;
+
 			terrad_run_temp(conf, temp);
 		}
 

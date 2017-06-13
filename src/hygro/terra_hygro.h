@@ -15,7 +15,7 @@
 typedef int hygro_err;
 
 hygro_err terra_hygro_read(ssize_t const, float * const, float * const);
-
 BOOL terra_hygro_read_rep(terra_conf const * const, float * const, float * const);
+BOOL terra_hygro_write(terra_conf const * const, terra_time const * const, float const, float const);
 
 #endif
