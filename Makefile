@@ -1,5 +1,5 @@
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -O3 -pipe
+CFLAGS=-Wall -v -fomit-frame-pointer -pipe
 LIBS=-lrt -pthread
 DAEMON=-DSYSLOG_ENABLED
 
@@ -63,10 +63,10 @@ all: clean $(OBJ)
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
 debug_flags:
-	$(eval CFLAGS += "-DDEBUG -g")
+	$(eval CFLAGS += "-DDEBUG")
+	$(eval CFLAGS += "-g")
 
 debug: debug_flags all
-	echo $(LDFLAGS)
 
 install:
 	@cp bin/terra /usr/local/bin/
