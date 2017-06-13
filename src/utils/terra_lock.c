@@ -1,4 +1,4 @@
-#include "terra.h"
+#include "terra_lock.h"
 
 #include <unistd.h>
 #include <sys/mman.h>
