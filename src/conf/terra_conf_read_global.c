@@ -113,10 +113,10 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		{
 			conf->hygro_rep = atoi(line + sizeof(CONF_HYGRO_REP) - 1);
 		}
-		else if (strncmp(line, CONF_HYGRO_WRITE_SECS, sizeof(CONF_HYGRO_WRITE_SECS) - 1) == 0)
-		{
-			conf->hygro_write_secs = atoi(line + sizeof(CONF_HYGRO_WRITE_SECS) - 1);
-		}
+		//else if (strncmp(line, CONF_HYGRO_WRITE_SECS, sizeof(CONF_HYGRO_WRITE_SECS) - 1) == 0)
+		//{
+		//	conf->hygro_write_secs = atoi(line + sizeof(CONF_HYGRO_WRITE_SECS) - 1);
+		//}
 		else if (strncmp(line, CONF_HYGRO_SENSOR, sizeof(CONF_HYGRO_SENSOR) - 1) == 0)
 		{
 			strncpy(conf->hygro_sensor, line + sizeof(CONF_HYGRO_SENSOR) - 1, read - sizeof(CONF_HYGRO_SENSOR));
