@@ -38,7 +38,7 @@ void busy_wait_milliseconds(size_t const);
 void terra_time_cpy(terra_time * const, terra_time const * const);
 void terra_time_difft(terra_time * const, terra_time const * const, terra_time const * const);
 
-static terra_time _day_end = { 24, 0, 0 };
+static terra_time _day_end = { 23, 59, 59 };
 static terra_time _day_begin = { 0, 0, 0 };
 
 static inline BOOL terra_time_between(terra_time const * const tim, terra_time const * const begin, terra_time const * const end)
