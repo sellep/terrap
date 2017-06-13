@@ -98,8 +98,10 @@ static inline void pulses_to_data(size_t const * const pulses, uint8_t * const d
 
 static inline BOOL dht_verify_checksum(uint8_t * const data)
 {
+#ifndef DEBUG
 	if (data[4] != ((data[0] + data[1] + data[2] + data[3]) & 0xFF))
 		return FALSE;
+#endif
 	return TRUE;
 }
 
