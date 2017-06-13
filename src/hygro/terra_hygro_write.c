@@ -15,7 +15,7 @@ inline static DATE sys_date()
 
 static BOOL terra_hygro_fwrite(float const h, float const t)
 {
-	static char buf[40];
+	static char buf[50];
 
 	DATE d;
 	FILE *f;
