@@ -27,6 +27,7 @@ int main(int argc, char ** argv)
 #ifdef DEBUG
 	//terra_conf_print(&conf);
 #endif
+	return 0;
 
 	if (!terra_conf_valid(&conf))
 		return 1;
