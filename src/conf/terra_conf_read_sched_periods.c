@@ -5,6 +5,8 @@
 
 #define CONF_SCHED_PERIOD_ON_DURATION "\ton_dur="
 #define CONF_SCHED_PERIOD_OFF_DURATION "\toff_dur="
+#define CONF_SCHED_PERIOD_ACTIVE "\tactive="
+#define CONF_SCHED_PERIOD_DEACTIVE "\tdeactive="
 
 extern BOOL terra_conf_read_sched(terra_sched * const, FILE * const);
 
@@ -47,6 +49,26 @@ BOOL terra_conf_read_sched_periods(terra_conf * const conf, FILE * const f)
 			if(!terra_time_read(&period->off_dur, line + sizeof(CONF_SCHED_PERIOD_OFF_DURATION) - 1)) HANDLE_ERROR("invalid off_dur\n");
 		}
 		else HANDLE_ERROR("period schedule off_dur expected\n");
+
+		//schedule period active
+
+		if ((read = getline(&line, &buf_len, f)) == -1) HANDLE_ERROR("unexpected end of period schedule section\n");
+
+		if (strncmp(line, CONF_SCHED_PERIOD_ACTIVE, sizeof(CONF_SCHED_PERIOD_ACTIVE) - 1) == 0)
+		{
+			if(!terra_time_read(&period->act, line + sizeof(CONF_SCHED_PERIOD_ACTIVE) - 1)) HANDLE_ERROR("invalid act\n");
+		}
+		else HANDLE_ERROR("period schedule active expected\n");
+
+		//schedule period deactive
+
+		if ((read = getline(&line, &buf_len, f)) == -1) HANDLE_ERROR("unexpected end of period schedule section\n");
+
+		if (strncmp(line, CONF_SCHED_PERIOD_DEACTIVE, sizeof(CONF_SCHED_PERIOD_DEACTIVE) - 1) == 0)
+		{
+			if(!terra_time_read(&period->deact, line + sizeof(CONF_SCHED_PERIOD_DEACTIVE) - 1)) HANDLE_ERROR("invalid deact\n");
+		}
+		else HANDLE_ERROR("period schedule deactive expected\n");
 
 		//schedule period end
 

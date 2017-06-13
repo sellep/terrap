@@ -59,6 +59,8 @@ typedef struct
 	terra_sched sched;
 	terra_time on_dur;
 	terra_time off_dur;
+	terra_time act;
+	terra_time deact;
 } terra_sched_period;
 
 typedef struct

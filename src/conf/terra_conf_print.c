@@ -34,6 +34,10 @@ void terra_conf_print(terra_conf const * const conf)
 		terra_time_print(&(conf->sched_periods[i].on_dur));
 		terra_log_info("[sched_period %u] off_dur: ", i);
 		terra_time_print(&(conf->sched_periods[i].off_dur));
+		terra_log_info("[sched_period %u] active: ", i);
+		terra_time_print(&(conf->sched_periods[i].act));
+		terra_log_info("[sched_period %u] deactive: ", i);
+		terra_time_print(&(conf->sched_periods[i].deact));
 	}
 
 	for (i = 0; i < conf->sched_temps_len; i++)
