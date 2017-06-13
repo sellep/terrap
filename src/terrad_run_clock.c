@@ -13,7 +13,7 @@ void terrad_run_clock_init(terra_conf const * const conf)
 
 	for (i = 0; i < conf->sched_clocks_len; i++)
 	{
-		_terra_clock_mode[i] = SWITCH_UNKNOWN;
+		_terra_clock_mode[i] = SWITCH_OFF;
 	}
 }
 

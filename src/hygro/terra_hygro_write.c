@@ -47,6 +47,8 @@ BOOL terra_hygro_write(terra_conf const * const conf, terra_time const * const s
 	if (diff < conf->hygro_write_secs)
 		return TRUE;
 
+	printf("terra hygro write\n");
+	
 	res = terra_hygro_fwrite(h, f);
 
 	if (res)

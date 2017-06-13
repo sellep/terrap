@@ -23,7 +23,7 @@ void terrad_run_temp_init(terra_conf const * const conf)
 
 	for (i = 0 ; i < conf->sched_temps_len; i++)
 	{
-		_switch_modes[i] = SWITCH_UNKNOWN;
+		_switch_modes[i] = SWITCH_OFF;
 	}
 }
 
