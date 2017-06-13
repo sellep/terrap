@@ -10,7 +10,7 @@
 #define LOCK_FILE "terra_lock"
 
 static int _sm_mutex;
-static pthread_mutex_t *_mutex;
+volatile static pthread_mutex_t *_mutex;
 static pthread_mutexattr_t _mutex_attr;
 
 static BOOL map_mutex_to_address_space()
