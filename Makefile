@@ -63,7 +63,7 @@ all: clean $(OBJ)
 	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
 debug_flags:
-	$(eval CFLAGS += "-DDEBUG")
+	$(eval CFLAGS += "-DDEBUG -ggdb")
 
 debug: debug_flags all
 
