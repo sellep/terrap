@@ -20,6 +20,8 @@ int main(int argc, char ** argv)
 		terra_log_error("failed to initialize terra\n");
 		return 1;
 	}
+	
+	return 0;
 
 	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;
