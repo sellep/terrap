@@ -2,12 +2,11 @@
 
 #include <time.h>
 
-#define DATE struct tm
 #define FORMAT_PATH "/var/opt/terra/hygro_%zu.%zu.%zu"
 
 static terra_time _last_write = { 0, 0, 0 };
 
-inline static DATE sys_date()
+inline static struct tm sys_date()
 {
 	time_t t = time(NULL);
 	return *localtime(&t);
@@ -17,7 +16,7 @@ static BOOL terra_hygro_fwrite(float const h, float const t)
 {
 	static char buf[50];
 
-	DATE d;
+	struct tm d;
 	FILE *f;
 
 	d = sys_date();
