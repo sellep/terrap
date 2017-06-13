@@ -21,7 +21,7 @@ static BOOL terra_hygro_fwrite(float const h, float const t)
 	FILE *f;
 
 	d = sys_date();
-	sprintf(buf, FORMAT_PATH, d.tm_tmday, d.tm_mon + 1, d.tm_year);
+	sprintf(buf, FORMAT_PATH, d.tm_mday, d.tm_mon + 1, d.tm_year);
 
 	f = fopen(buf, "a+");
 	if (!f)
