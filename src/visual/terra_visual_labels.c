@@ -5,7 +5,7 @@ inline static ssize_t labels_remove_secs(char * const lbl)
 	size_t i = 0;
 	size_t c = 0;
 
-	while (1)
+	while (TRUE)
 	{
 		if (lbl[i++] != ':')
 			continue;
