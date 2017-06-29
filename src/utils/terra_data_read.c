@@ -85,7 +85,7 @@ BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, c
 	i = 0;
 	while ((read = getline(&line, &buf_len, f)) > 0)
 	{
-		if (!terra_data_read_entry(&(entries[0][i]), line))
+		if (!terra_data_read_entry(&(entries[0][i++]), line))
 		{
 			terra_log_error("[terra_data_read] failed to read line %zu of file %s\n", i, path);
 			goto error;
