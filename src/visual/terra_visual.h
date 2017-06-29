@@ -40,6 +40,7 @@ inline static BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const 
 	}
 
 	cmd[0] = atoi(argv[2]);
+	terra_log_error("[terra_visual_arg] %zu\n", *cmd);
 	return TRUE;
 }
 

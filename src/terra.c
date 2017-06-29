@@ -72,7 +72,7 @@ int main(int argc, char ** argv)
 		if (!terra_visual_arg(&visual_cmd, argc, argv))
 			return 1;
 
-		if (!terra_visual_show(&visual_cmd))
+		if (!terra_visual_show(visual_cmd))
 			return 1;
 	}
 	else
