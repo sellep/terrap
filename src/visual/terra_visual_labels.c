@@ -22,13 +22,15 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 
 	mvprintw(10, 10, "labels on x: %zu\n", lbls);
 	mvprintw(11, 10, "step size on x: %f\n", step);
-	return;
+	
 	
 	for (i = 0; i < lbls; i++)
 	{
 		mvprintw(height - GRID_OFFSET_BOTTOM - i * GRID_MARKER_Y, 1, "%.1f", y_val);
 		y_val += step;
 	}
+	
+	return;
 
 	x_min = terra_time_to_int(&bounds->xmin);
 	x_max = terra_time_to_int(&bounds->xmax);
