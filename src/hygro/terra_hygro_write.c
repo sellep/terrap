@@ -1,5 +1,7 @@
 #include "terra_hygro.h"
 
+#include "../utils/terra_data.h"
+
 static terra_time _last_write = { 0, 0, 0 };
 
 BOOL terra_hygro_write(terra_conf const * const conf, terra_time const * const sys, float const h, float const t)
