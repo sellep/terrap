@@ -46,7 +46,7 @@ BOOL register_signal_handler()
 
 BOOL terrad_run(terra_conf const * const conf)
 {
-	terra_time sys_time;
+	terra_time now;
 	ssize_t i;
 	uint64_t tick = 0;
 
@@ -58,17 +58,17 @@ BOOL terrad_run(terra_conf const * const conf)
 	if (!register_signal_handler())
 		return FALSE;
 
-	terra_time_sys(&sys_time);
+	terra_time_now(&now);
 
 	terrad_run_temp_init(conf);
-	terrad_run_period_init(conf, &sys_time);
+	terrad_run_period_init(conf, &now);
 	terrad_run_clock_init(conf);
 
 	//scheduling
 
 	while (!_terminate)
 	{
-		terra_time_sys(&sys_time);
+		terra_time_sys(&now);
 
 		if (tick % conf->heart_tick == 0)
 		{
@@ -80,17 +80,17 @@ BOOL terrad_run(terra_conf const * const conf)
 			if (!terra_hygro_read_rep(conf, &humi, &temp))
 				return FALSE;
 
-			if(!terra_hygro_write(conf, &sys_time, humi, temp))
+			if(!terra_hygro_write(conf, &now, humi, temp))
 				return FALSE;
 
 			terrad_run_temp(conf, temp);
 		}
 
-		terrad_run_period(conf, &sys_time);
+		terrad_run_period(conf, &now);
 
 		for (i = 0 ; i < conf->sched_clocks_len; i++)
 		{
-			terrad_run_clock(&(conf->sched_clocks[i]), i, &sys_time);
+			terrad_run_clock(&(conf->sched_clocks[i]), i, &now);
 		}
 
 		sleep_milliseconds(conf->tick);
