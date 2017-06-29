@@ -4,7 +4,7 @@
 
 #include <time.h>
 
-#define DATA_FORMAT "%02zu:%02zu:%02zu %f.2 %f.2\n"
+#define DATA_FORMAT "%02zu:%02zu:%02zu %.2f %.2f\n"
 
 static char _buf[50];
 
