@@ -5,18 +5,16 @@
 
 BOOL terra_init()
 {
-	mmio_status mstat;
-
 #ifndef DEBUG
-	if ((mstat = pi_2_mmio_init()) != MMIO_SUCCESS)
+	if (pi_2_mmio_init() != MMIO_SUCCESS)
 	{
-		terra_log_error("failed to initialize mmio\n");
+		terra_log_error("[terra_init] failed to initialize mmio\n");
 		return FALSE;
 	}
 
 	if (!terra_lock_init())
 	{
-		terra_log_error("failed to initialize terra lock\n");
+		terra_log_error("[terra_init] failed to initialize terra lock\n");
 		return FALSE;
 	}
 #endif
