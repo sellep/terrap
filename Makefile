@@ -1,6 +1,6 @@
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3 -DNCURSES
-LIBS=-lrt -pthread
+CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3 -DNCURSES `ncursesw5-config --cflags`
+LIBS=-lrt -pthread `ncursesw5-config --libs`
 DAEMON=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
