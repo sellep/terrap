@@ -68,7 +68,7 @@ BOOL terrad_run(terra_conf const * const conf)
 
 	while (!_terminate)
 	{
-		terra_time_sys(&now);
+		terra_time_now(&now);
 
 		if (tick % conf->heart_tick == 0)
 		{
