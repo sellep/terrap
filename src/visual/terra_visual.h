@@ -14,6 +14,13 @@
 #define GRID_OFFSET_RIGHT 2
 
 #define DRAW_HEIGHT (height - GRID_OFFSET_TOP - GRID_OFFSET_BOTTOM)
+#define DRAW_WIDTH (width - GRID_OFFSET_LEFT - GRID_OFFSET_RIGHT)
+
+#define SET_COLOR_DEFAULT() (attron(COLOR_PAIR(1)))
+#define SET_COLOR_GRID() (attron(COLOR_PAIR(2)))
+#define SET_COLOR_LEGEND() (attron(COLOR_PAIR(3)))
+#define SET_COLOR_TEMP() (attron(COLOR_PAIR(4)))
+#define SET_COLOR_HUMI() (attron(COLOR_PAIR(5)))
 
 typedef struct
 {
@@ -40,7 +47,6 @@ inline static BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const 
 	}
 
 	cmd[0] = atoi(argv[2]);
-	terra_log_error("[terra_visual_arg] %zu\n", *cmd);
 	return TRUE;
 }
 

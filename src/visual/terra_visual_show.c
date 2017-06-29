@@ -50,7 +50,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	terra_visual_eval(width, height, &bounds, pts, entries, count);
 
 	terra_visual_title(title, width);
-	//terra_draw_grid(width, height);
+	terra_visual_grid(width, height);
 	//terra_draw_labels(width, height, &bounds);
 	//terra_draw_legend(width, height);
 	//terra_draw_points(width, height, pts);
@@ -66,7 +66,7 @@ BOOL terra_visual_show(terra_visual_cmd const cmd)
 	terra_data_entry *entries;
 	size_t count;
 	char path[50];
-terra_log_error("[terra_visual_show] cmd %zu\n", cmd);
+
 	if (!terra_data_read(&entries, &count, path, cmd))
 	{
 		terra_log_error("[terra_visual_show] failed to read entries\n");
