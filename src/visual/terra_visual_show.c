@@ -39,11 +39,11 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	curs_set(FALSE);
 
 	start_color();
-	init_pair(1, COLOR_WHITE, COLOR_BLACK);
-	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(3, COLOR_RED, COLOR_BLACK);
-	init_pair(4, COLOR_CYAN, COLOR_BLACK);
-	init_pair(5, COLOR_GREEN, COLOR_BLACK);
+	init_pair(1, COLOR_DEFAULT, COLOR_BLACK);
+	init_pair(2, COLOR_GRID, COLOR_BLACK);
+	init_pair(3, COLOR_LEGEND, COLOR_BLACK);
+	init_pair(4, COLOR_TEMP, COLOR_BLACK);
+	init_pair(5, COLOR_HUMI, COLOR_BLACK);
 
 	getmaxyx(stdscr, height, width);
 
