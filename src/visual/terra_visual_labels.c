@@ -1,51 +1,74 @@
 #include "terra_visual.h"
 
+inline static ssize_t labels_remove_secs(char * const lbl)
+{
+	size_t i = 0;
+	size_t c = 0;
+
+	while (1)
+	{
+		if (lbl[i++] != ':')
+			continue;
+
+		if (c++ == 0)
+			continue;
+
+		lbl[i - 1] = '\0';
+		return i - 1;
+	}
+}
+
 void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds)
 {
 #ifdef NCURSES
 	float y_val;
-	float step;
+	float y_step;
 
 	terra_time tt;
 	size_t x_min;
 	size_t x_max;
 	size_t x_val;
+	size_t x_step;
 	ssize_t mlen;
-	char buf[8];
+	char buf[10];
 
 	ssize_t lbls;
 	ssize_t i;
 
-	lbls = (height - GRID_OFFSET_BOTTOM - GRID_OFFSET_TOP) / GRID_MARKER_Y + 1;
-	step = (bounds->ymax - bounds->ymin) / (lbls - 1);
+	lbls = DRAW_HEIGHT / GRID_MARKER_Y;	
+	if (lbls * GRID_MARKER_Y < DRAW_HEIGHT)
+	{
+		lbls++;
+	}
+
+	y_step = (bounds->ymax - bounds->ymin) / (lbls - 1);
 	y_val = bounds->ymin;
 
-	mvprintw(10, 10, "labels on x: %zu\n", lbls);
-	mvprintw(11, 10, "step size on x: %f\n", step);
 	
-	
-	for (i = 0; i < lbls; i++)
+	for (i = 0; i < lbls; i++, y_val += y_step)
 	{
 		mvprintw(height - GRID_OFFSET_BOTTOM - i * GRID_MARKER_Y, 1, "%.1f", y_val);
-		y_val += step;
 	}
 	
-	return;
 
 	x_min = terra_time_to_int(&bounds->xmin);
 	x_max = terra_time_to_int(&bounds->xmax);
 
-	lbls = (width - GRID_OFFSET_LEFT - GRID_OFFSET_RIGHT) / GRID_MARKER_X + 1;
-	step = (x_max - x_min) / (lbls - 1);
+	lbls = DRAW_WIDTH / GRID_MARKER_X;
+	if (lbls * GRID_MARKER_X < DRAW_WIDTH)
+	{
+		lbls++;
+	}
+
+	x_step = (x_max - x_min) / (lbls - 1);
 	x_val = x_min;
 
-	for (i = 0; i < lbls; i++)
+	for (i = 0; i < lbls; i++, x_val += x_step)
 	{
 		terra_time_from_int(&tt, x_val);
-		mlen = terra_time_to_arr(buf, &tt);
+		terra_time_to_arr(buf, &tt);
+		mlen = labels_remove_secs(buf);
 		mvprintw(height - GRID_OFFSET_BOTTOM + 1, GRID_OFFSET_LEFT + i * GRID_MARKER_X - (mlen / 2), "%s", buf);
-		x_val += step;
 	}
 #endif
 }
-
