@@ -47,6 +47,11 @@ void busy_wait_milliseconds(size_t const);
 void terra_time_cpy(terra_time * const, terra_time const * const);
 void terra_time_difft(terra_time * const, terra_time const * const, terra_time const * const);
 
+//static terra_time _day_end = { 23, 59, 59 };
+//static terra_time _day_begin = { 0, 0, 0 };
+#define DAY_BEGIN ((terra_time) { 0, 0, 0 })
+#define DAY_END ((terra_time) { 23, 59, 59 })
+
 static inline BOOL terra_time_between(terra_time const * const tim, terra_time const * const begin, terra_time const * const end)
 {
 	if (terra_time_cmp(begin, end) == TIME_BELOW)

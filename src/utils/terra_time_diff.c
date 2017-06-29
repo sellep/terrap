@@ -18,8 +18,11 @@ inline static size_t terra_time_diff_raw(terra_time const * const a, terra_time 
 
 size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
 {
+	terra_time begin = DAY_BEGIN;
+	terra_time end = DAY_END;
+
 	if (terra_time_cmp(a, b) == TIME_BELOW)
-		return terra_time_diff_raw(&_day_end, b) + terra_time_diff_raw(a, &_day_begin);
+		return terra_time_diff_raw(&end, b) + terra_time_diff_raw(a, &begin);
 
 	return terra_time_diff_raw(a, b);
 }
