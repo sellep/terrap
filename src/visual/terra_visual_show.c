@@ -22,8 +22,8 @@ inline static void terra_visual_eval(ssize_t const width, ssize_t const height, 
 
 	for (x = 0; x < width -1; x++)
 	{
-		pts[x].temp = (size_t)((entries[(size_t)(x * step)].temp - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
-		pts[x].humi = (size_t)((entries[(size_t)(x * step)].humi - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
+		pts[x].temp = (size_t)((entries[(size_t)(x * step)].temp - bounds->ymin) / (bounds->ymax - bounds->ymin) * (DRAW_HEIGHT - GRID_PADDING_TOP - GRID_PADDING_BOTTOM));
+		pts[x].humi = (size_t)((entries[(size_t)(x * step)].humi - bounds->ymin) / (bounds->ymax - bounds->ymin) * (DRAW_HEIGHT - GRID_PADDING_TOP - GRID_PADDING_BOTTOM));
 	}
 }
 
