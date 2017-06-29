@@ -66,7 +66,7 @@ BOOL terra_visual_show(terra_visual_cmd const cmd)
 	terra_data_entry *entries;
 	size_t count;
 	char path[50];
-
+terra_log_error("[terra_visual_show] cmd %zu\n", cmd);
 	if (!terra_data_read(&entries, &count, path, cmd))
 	{
 		terra_log_error("[terra_visual_show] failed to read entries\n");
