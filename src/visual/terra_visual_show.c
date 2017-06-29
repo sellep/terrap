@@ -32,6 +32,10 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	int height;
 
 	terra_visual_bounding(&bounds, entries, count);
+	printf("BOUNDS: ymin %.2f ymax %.2f", bounds.ymin, bounds.xmax);
+	terra_time_print(&bounds.xmin);
+	terra_time_print(&bounds.xmax);
+	return;
 
 	setlocale(LC_CTYPE, "en_US.UTF-8");
 
@@ -53,7 +57,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 
 	terra_visual_title(title, width);
 	terra_visual_grid(width, height);
-	//terra_visual_labels(width, height, &bounds);
+	terra_visual_labels(width, height, &bounds);
 	//terra_draw_legend(width, height);
 	//terra_draw_points(width, height, pts);
 
