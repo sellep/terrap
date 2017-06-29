@@ -1,6 +1,6 @@
 #include "terra_visual.h"
 
-void terra_visual_labels(ssize_t const width, ssize_t const height, terra_draw_bounds const * const bounds)
+void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds)
 {
 #ifdef NCURSES
 	float y_val;

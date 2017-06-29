@@ -8,7 +8,7 @@
 extern void terra_visual_title(char const * const, ssize_t const);
 extern void terra_visual_bounding(terra_visual_bounds * const, terra_data_entry const * const, size_t const);
 extern void terra_visual_grid(ssize_t const, ssize_t const);
-extern void terra_visual_labels(ssize_t const, ssize_t const, terra_draw_bounds const * const);
+extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
 
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
