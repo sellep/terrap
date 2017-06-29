@@ -46,7 +46,7 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 	
 	for (i = 0; i < lbls; i++, y_val += y_step)
 	{
-		mvprintw(height - GRID_OFFSET_BOTTOM - i * GRID_MARKER_Y, 1, "%.1f", y_val);
+		mvprintw(height - GRID_OFFSET_BOTTOM - 1 - i * GRID_MARKER_Y, 1, "%.1f", y_val);
 	}	
 
 	x_min = terra_time_to_int(&bounds->xmin);
@@ -66,7 +66,7 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 		terra_time_from_int(&tt, x_val);
 		terra_time_to_arr(buf, &tt);
 		mlen = labels_remove_secs(buf);
-		mvprintw(height - GRID_OFFSET_BOTTOM + 1, GRID_OFFSET_LEFT + i * GRID_MARKER_X - (mlen / 2), "%s", buf);
+		mvprintw(height - GRID_OFFSET_BOTTOM, GRID_OFFSET_LEFT + i * GRID_MARKER_X - (mlen / 2), "%s", buf);
 	}
 #endif
 }

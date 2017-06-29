@@ -5,10 +5,10 @@
 #include "../utils/terra_time.h"
 #include "../utils/terra_data.h"
 
-#define GRID_PADDING_TOP 5
-#define GRID_PADDING_BOTTOM 2
+#define GRID_PADDING_TOP 2
+#define GRID_PADDING_BOTTOM 1
 
-#define GRID_OFFSET_TOP 4
+#define GRID_OFFSET_TOP 2
 #define GRID_OFFSET_BOTTOM 1
 #define GRID_OFFSET_LEFT 5
 #define GRID_OFFSET_RIGHT 2

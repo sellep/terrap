@@ -53,4 +53,7 @@ void terra_visual_bounding(terra_visual_bounds * const bounds, terra_data_entry 
 			}
 		}
 	}
+
+	bounds->ymin -= GRID_PADDING_BOTTOM;
+	bounds->ymax += GRID_PADDING_TOP;
 }

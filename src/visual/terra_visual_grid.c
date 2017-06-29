@@ -10,7 +10,7 @@ inline static void visual_grid_y(ssize_t width, ssize_t height)
 
 	ssize_t y, x, m;
 
-	for (y = height - GRID_OFFSET_BOTTOM - 1, m = 1; y > GRID_OFFSET_TOP; y--, m++)
+	for (y = height - GRID_OFFSET_BOTTOM - 2, m = 1; y > GRID_OFFSET_TOP; y--, m++)
 	{
 		mvaddnwstr(y, GRID_OFFSET_LEFT, m % GRID_MARKER_Y == 0 ? &cross : &line, 1);
 	}
@@ -38,7 +38,7 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 
 	for (x = GRID_OFFSET_LEFT + 1, m = 1; x < width - GRID_OFFSET_RIGHT; x++, m++)
 	{
-		mvaddnwstr(height - GRID_OFFSET_BOTTOM, x, m % GRID_MARKER_X == 0 ? &cross : &line, 1);
+		mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1, x, m % GRID_MARKER_X == 0 ? &cross : &line, 1);
 	}
 
 	SET_COLOR_GRID();
@@ -47,7 +47,7 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 	{
 		for (x = 1; x < DRAW_WIDTH; x++)
 		{
-			mvaddnwstr(height - GRID_OFFSET_BOTTOM - y, x + GRID_OFFSET_LEFT, x % GRID_MARKER_X == 0 ? &cross : &line, 1);
+			mvaddnwstr(height - GRID_OFFSET_BOTTOM - y - 1, x + GRID_OFFSET_LEFT, x % GRID_MARKER_X == 0 ? &cross : &line, 1);
 		}
 	}
 
@@ -60,7 +60,7 @@ void terra_visual_grid(ssize_t const width, ssize_t const height)
 #ifdef NCURSES
 	const wchar_t origin = L'\x253c';
 
-	mvaddnwstr(height - GRID_OFFSET_BOTTOM, GRID_OFFSET_LEFT, &origin, 1);
+	mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1, GRID_OFFSET_LEFT, &origin, 1);
 	visual_grid_y(width, height);
 	visual_grid_x(width, height);
 #endif

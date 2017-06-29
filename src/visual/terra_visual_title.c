@@ -29,6 +29,6 @@ void terra_visual_title(char const * const title, ssize_t const width, size_t co
 		printw("-");
 	}
 
-	mvaddnwstr(2, 1, DETAILS_FORMAT, entries, bounds->temp_min, bounds->temp_max, bounds->humi_min, bounds->humi_max);
+	mvprintw(1, 1, DETAILS_FORMAT, entries, bounds->temp_min, bounds->temp_max, bounds->humi_min, bounds->humi_max);
 #endif
 }

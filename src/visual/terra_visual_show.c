@@ -22,8 +22,8 @@ inline static void terra_visual_eval(ssize_t const width, ssize_t const height, 
 
 	for (x = 0; x < width -1; x++)
 	{
-		pts[x].temp = (size_t)((entries[(size_t)(x * step)].temp - bounds->ymin) / (bounds->ymax - bounds->ymin) * (DRAW_HEIGHT - GRID_PADDING_TOP - GRID_PADDING_BOTTOM));
-		pts[x].humi = (size_t)((entries[(size_t)(x * step)].humi - bounds->ymin) / (bounds->ymax - bounds->ymin) * (DRAW_HEIGHT - GRID_PADDING_TOP - GRID_PADDING_BOTTOM));
+		pts[x].temp = (size_t)((entries[(size_t)(x * step)].temp - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
+		pts[x].humi = (size_t)((entries[(size_t)(x * step)].humi - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
 	}
 }
 
@@ -56,9 +56,9 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 
 	terra_visual_title(title, width, count, &bounds);
 	terra_visual_grid(width, height);
-	terra_visual_labels(width, height, &bounds);
-	terra_visual_legend(width, height);
+	terra_visual_labels(width, height, &bounds);	
 	terra_visual_points(width, height, pts);
+	terra_visual_legend(width, height);
 
 	getch();
 	endwin();
