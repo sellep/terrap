@@ -1,7 +1,5 @@
 #include "terra_data.h"
 
-static char _buf[50];
-
 inline static size_t get_line_count(FILE * const f, char * * const line, size_t * const buf_len)
 {
 	size_t lines = 0;
@@ -9,7 +7,7 @@ inline static size_t get_line_count(FILE * const f, char * * const line, size_t 
 	return lines;
 }
 
-static BOOL terra_data_read_entry(terra_data_entry * const entry, char const * const line)
+inline static BOOL terra_data_read_entry(terra_data_entry * const entry, char const * const line)
 {
 	ssize_t i;
 
@@ -53,7 +51,7 @@ static BOOL terra_data_read_entry(terra_data_entry * const entry, char const * c
 	return TRUE;
 }
 
-BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, ssize_t const back)
+BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, char * const path, ssize_t const back)
 {
 	terra_date date;
 	FILE *f;
@@ -65,19 +63,19 @@ BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, s
 	size_t i;
 
 	terra_date_now(&date, -back);
-	sprintf(_buf, DATA_PATH, date.day, date.mon, date.year);
+	sprintf(path, DATA_PATH, date.day, date.mon, date.year);
 
-	f = fopen(_buf, "r");
+	f = fopen(path, "r");
 	if (!f)
 	{
-		terra_log_error("[terra_data_read] failed to open file %s\n", _buf);
+		terra_log_error("[terra_data_read] failed to open file %s\n", path);
 		return FALSE;
 	}
 
 	lines[0] = get_line_count(f, &line, &buf_len);
 	if (lines[0] == 0)
 	{
-		terra_log_error("[terra_data_read] failed to read file %s\n", _buf);
+		terra_log_error("[terra_data_read] failed to read file %s\n", path);
 		goto error;
 	}
 
@@ -89,7 +87,7 @@ BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, s
 	{
 		if (!terra_data_read_entry(&entries[0][i], line))
 		{
-			terra_log_error("[terra_data_read] failed to read line %zu of file %s\n", i, _buf);
+			terra_log_error("[terra_data_read] failed to read line %zu of file %s\n", i, path);
 			goto error;
 		}
 	}

@@ -14,6 +14,6 @@ typedef struct
 } terra_data_entry;
 
 BOOL terra_data_append(terra_data_entry const * const);
-BOOL terra_data_read(terra_data_entry * * const, size_t * const, ssize_t const);
+BOOL terra_data_read(terra_data_entry * * const, size_t * const, char * const, ssize_t const);
 
 #endif

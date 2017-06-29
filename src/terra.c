@@ -5,6 +5,7 @@
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
 #define ARG_MODE_HYGRO "hygro"
+#define ARG_MODE_VISUAL "show"
 
 extern BOOL terra_init();
 
@@ -14,6 +15,7 @@ int main(int argc, char ** argv)
 	terra_led_cmd led_cmd;
 	terra_switch_req switch_req;
 	terra_hygro_cmd hygro_cmd;
+	terra_visual_cmd visual_cmd;
 
 //initialization and setup
 	if (!terra_init())
@@ -63,6 +65,14 @@ int main(int argc, char ** argv)
 			return 1;
 
 		if (!terra_hygro_run(&conf, &hygro_cmd))
+			return 1;
+	}
+	else if (strcmp(argv[1], ARG_MODE_VISUAL) == 0)
+	{
+		if (!terra_visual_arg(&visual_cmd, argc, argv))
+			return 1;
+
+		if (!terra_visual_show(&visual_cmd))
 			return 1;
 	}
 	else
