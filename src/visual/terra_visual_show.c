@@ -34,12 +34,6 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	setlocale(LC_CTYPE, "en_US.UTF-8");
 
 	terra_visual_bounding(&bounds, entries, count);
-	printf("BOUNDS: ymin %.2f ymax %.2f\n", bounds.ymin, bounds.xmax);
-	terra_time_print(&bounds.xmin);
-	terra_time_print(&bounds.xmax);
-	return;
-
-	
 
 	initscr();
 	noecho();

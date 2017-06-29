@@ -32,9 +32,4 @@ void terra_visual_bounding(terra_visual_bounds * const bounds, terra_data_entry 
 
 	bounds->ymin -= GRID_PADDING_BOTTOM;
 	bounds->ymax += GRID_PADDING_TOP;
-
-	printf("bounds ymin: %.2f", bounds->ymin);
-	printf("bounds ymax: %.2f", bounds->ymax);
-	terra_time_print(&bounds->xmin);
-	terra_time_print(&bounds->xmax);
 }
