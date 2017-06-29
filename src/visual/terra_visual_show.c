@@ -10,6 +10,7 @@ extern void terra_visual_bounding(terra_visual_bounds * const, terra_data_entry 
 extern void terra_visual_grid(ssize_t const, ssize_t const);
 extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
 extern void terra_visual_legend(ssize_t const, ssize_t const);
+extern void terra_visual_points(ssize_t const, ssize_t const, terra_visual_point const * const);
 
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
@@ -56,7 +57,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	terra_visual_grid(width, height);
 	terra_visual_labels(width, height, &bounds);
 	terra_visual_legend(width, height);
-	//terra_draw_points(width, height, pts);
+	terra_visual_points(width, height, pts);
 
 	getch();
 	endwin();

@@ -39,6 +39,7 @@ OBJ=pi_2_mmio.o \
 	terra_visual_grid.o \
 	terra_visual_labels.o \
 	terra_visual_legend.o \
+	terra_visual_points.o \
 	terra_heart_beat.o \
 	terra_init.o \
 	terrad_run_period.o \
