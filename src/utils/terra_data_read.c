@@ -62,7 +62,7 @@ BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, c
 	int read;
 	size_t i;
 
-	terra_date_now(&date, -back);
+	terra_date_now(&date, -((short)back));
 	sprintf(path, DATA_PATH, date.day, date.mon, date.year);
 
 	f = fopen(path, "r");
