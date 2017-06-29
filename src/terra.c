@@ -13,11 +13,12 @@ int main(int argc, char ** argv)
 	terra_conf conf;
 	terra_led_cmd led_cmd;
 	terra_switch_req switch_req;
+	terra_hygro_cmd hygro_cmd;
 
 //initialization and setup
 	if (!terra_init())
 	{
-		terra_log_error("failed to initialize terra\n");
+		terra_log_error("[terra] failed to initialize terra\n");
 		return 1;
 	}
 
@@ -37,7 +38,7 @@ int main(int argc, char ** argv)
 //execution handling
 	if (argc < 2)
 	{
-		terra_log_error("insufficient argument count\n");
+		terra_log_error("[terra] insufficient argument count\n");
 		return 1;
 	}
 
@@ -47,7 +48,6 @@ int main(int argc, char ** argv)
 			return 1;
 
 		terra_switch_set(&conf, &switch_req);
-		return 0;
 	}
 	else if (strcmp(argv[1], ARG_MODE_LED) == 0)
 	{
@@ -56,23 +56,14 @@ int main(int argc, char ** argv)
 
 		if (!terra_led_set_from_cmd(&conf, led_cmd))
 			return 1;
-
-		return 0;
 	}
 	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
 	{
-		float t;
-		float h;
-
-		if (!terra_hygro_read_rep(&conf, &h, &t))
-		{
-			terra_log_error("failed to read hygrometer\n");
+		if (!terra_hygro_arg(&hygro_cmd, argc, argv))
 			return 1;
-		}
 
-		terra_log_info("temperatur: %f.2, humidity: %f.2\n", t, h);
-
-		return 0;
+		if (!terra_hygro_run(&conf, &hygro_cmd))
+			return 1;
 	}
 	else
 	{

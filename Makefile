@@ -8,7 +8,6 @@ OBJ=pi_2_mmio.o \
 	terra_proc.o \
 	terra_time_print.o \
 	terra_time_read.o \
-	terra_time_sys.o \
 	terra_time_diff.o \
 	terra_time_sleep.o \
 	terra_time_cmp.o \
@@ -31,6 +30,7 @@ OBJ=pi_2_mmio.o \
 	terra_switch_get_code.o \
 	terra_switch_transmit.o \
 	terra_switch_set.o \
+	terra_hygro_run.o \
 	terra_hygro_read.o \
 	terra_hygro_write.o \
 	terra_heart_beat.o \

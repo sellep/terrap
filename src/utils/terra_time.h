@@ -1,6 +1,8 @@
 #ifndef __P_TERRA_UTILS_TIME_H
 #define __P_TERRA_UTILS_TIME_H
 
+#include <time.h>
+
 #include "../terra_defs.h"
 #include "../utils/terra_log.h"
 
@@ -35,7 +37,6 @@ typedef struct
 void terra_date_now(terra_date * const, short const);
 
 time_cmp terra_time_cmp(terra_time const * const, terra_time const * const);
-void terra_time_sys(terra_time * const);
 void terra_time_print(terra_time const * const);
 BOOL terra_time_read(terra_time * const, char const * const);
 size_t terra_time_diff(terra_time const * const a, terra_time const * const b);
@@ -70,6 +71,16 @@ static inline BOOL terra_time_between(terra_time const * const tim, terra_time c
 		return TRUE;
 
 	return FALSE;
+}
+
+static inline void terra_time_now(terra_time * const tim)
+{
+	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
+
+	tim->hour = tm.tm_hour;
+	tim->min = tm.tm_min;
+	tim->sec = tm.tm_sec;
 }
 
 #endif
