@@ -61,28 +61,27 @@ BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, s
 
 	char *line = NULL;
 	size_t buf_len;
-	size_t lines;
 	int read;
 	size_t i;
 
 	terra_date_now(&date, -back);
 	sprintf(_buf, DATA_PATH, date.day, date.mon, date.year);
 
-	f = fopen(_buf);
+	f = fopen(_buf, "r");
 	if (!f)
 	{
 		terra_log_error("[terra_data_read] failed to open file %s\n", _buf);
 		return FALSE;
 	}
 
-	lines = get_line_count(f, &line, &buf_len);
-	if (lines == 0)
+	lines[0] = get_line_count(f, &line, &buf_len);
+	if (lines[0] == 0)
 	{
 		terra_log_error("[terra_data_read] failed to read file %s\n", _buf);
 		goto error;
 	}
 
-	terra_data_entry[0] = (terra_data_entry*) malloc(sizeof(terra_data_entry) * lines);
+	entries[0] = (terra_data_entry*) malloc(sizeof(terra_data_entry) * lines[0]);
 	rewind(f);
 
 	i = 0;
