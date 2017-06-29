@@ -90,8 +90,8 @@ install:
 	@mkdir -p /var/opt/terra
 
 uninstall:
-	@rm -f /usr/local/terra
-	@rm -f /usr/local/terrad
+	@rm -f /opt/terra
+	@rm -f /opt/terrad
 	@rm -f /etc/default/terra
 	@rm -f /etc/init.d/terra
 	@rm -rf /var/opt/terra
