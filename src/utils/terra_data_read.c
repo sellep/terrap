@@ -21,7 +21,7 @@ inline static BOOL terra_data_read_entry(terra_data_entry * const entry, char co
 	if (line[5] != ':')
 		return FALSE;
 
-	entry->tm.min = atoi(line + 6);
+	entry->tm.sec = atoi(line + 6);
 
 	if (line[8] != ' ')
 		return FALSE;
@@ -48,6 +48,9 @@ inline static BOOL terra_data_read_entry(terra_data_entry * const entry, char co
 
 	entry->temp = atof(line + i + 1);
 
+	printf("humi: %.2f, temp: %2.f\n", entry->humi, entry->temp);
+	terra_time_print(&(entry->tm));
+	
 	return TRUE;
 }
 
