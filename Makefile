@@ -1,6 +1,8 @@
+NCURSES_VERSION=6
+
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3 -DNCURSES `ncursesw5-config --cflags`
-LIBS=-lrt -pthread `ncursesw5-config --libs`
+CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3 -DNCURSES `ncursesw$(NCURSES_VERSION)-config --cflags`
+LIBS=-lrt -pthread `ncursesw$(NCURSES_VERSION)-config --libs`
 DAEMON=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
