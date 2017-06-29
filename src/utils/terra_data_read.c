@@ -48,7 +48,7 @@ inline static BOOL terra_data_read_entry(terra_data_entry * const entry, char co
 
 	entry->temp = atof(line + i + 1);
 
-	printf("humi: %.2f, temp: %2.f\n", entry->humi, entry->temp);
+	printf("humi: %.2f, temp: %.2f\n", entry->humi, entry->temp);
 	terra_time_print(&(entry->tm));
 	
 	return TRUE;
