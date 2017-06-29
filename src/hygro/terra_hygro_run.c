@@ -52,7 +52,7 @@ BOOL terra_hygro_run(terra_conf const * const conf, terra_hygro_cmd const * cons
 			return FALSE;
 		}
 
-		terra_log_info("[terra_hygro_run] temperature: %f.2, humidity: %f.2\n", t, h);
+		terra_log_info("[terra_hygro_run] temperature: %.2f, humidity: %.2f\n", t, h);
 	}
 	else
 	{
