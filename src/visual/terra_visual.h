@@ -2,7 +2,7 @@
 #define __P_TERRA_VISUAL_H
 
 #include "../terra_defs.h"
-#include "terra_time.h"
+#include "../utils/terra_time.h"
 
 #define GRID_PADDING_TOP 5
 #define GRID_PADDING_BOTTOM 2
