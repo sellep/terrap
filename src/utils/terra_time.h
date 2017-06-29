@@ -51,9 +51,10 @@ void terra_time_difft(terra_time * const, terra_time const * const, terra_time c
 #define DAY_BEGIN ((terra_time) { 0, 0, 0 })
 #define DAY_END ((terra_time) { 23, 59, 59 })
 
-#define itott(tt,val) (terra_time_from_int(tt,val))
-#define tttoi(tt) ((tt)->hour * 60 * 60 + (tt)->min * 60 + (tt)->sec)
-#define tttoa(buf,tt) (terra_time_to_array((buf), (tt)))
+inline static size_t terra_time_to_int(terra_time const * const tt)
+{
+	return tt->hour * 60 * 60 + tt->min * 60 + tt->sec;
+}
 
 inline static ssize_t terra_time_to_array(char * const buf, terra_time const * const tt)
 {

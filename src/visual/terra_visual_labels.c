@@ -26,8 +26,8 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 		y_val += step;
 	}
 
-	x_min = tttoi(&bounds->xmin);
-	x_max = tttoi(&bounds->xmax);
+	x_min = terra_time_to_int(&bounds->xmin);
+	x_max = terra_time_to_int(&bounds->xmax);
 
 	lbls = (width - GRID_OFFSET_LEFT - GRID_OFFSET_RIGHT) / GRID_MARKER_X + 1;
 	step = (x_max - x_min) / (lbls - 1);
@@ -35,7 +35,7 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 
 	for (i = 0; i < lbls; i++)
 	{
-		itott(&tt, x_val);
+		terra_time_from_int(&tt, x_val);
 		mlen = tttoa(buf, &tt);
 		mvprintw(height - GRID_OFFSET_BOTTOM + 1, GRID_OFFSET_LEFT + i * GRID_MARKER_X - (mlen / 2), "%s", buf);
 		x_val += step;
