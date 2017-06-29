@@ -1,7 +1,5 @@
 #include "terra_visual.h"
 
-#include "../utils/terra_data.h"
-
 #include <unistd.h>
 #include <locale.h>
 #include <wchar.h>
