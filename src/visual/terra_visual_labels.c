@@ -43,13 +43,11 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 
 	y_step = (bounds->ymax - bounds->ymin) / (lbls - 1);
 	y_val = bounds->ymin;
-
 	
 	for (i = 0; i < lbls; i++, y_val += y_step)
 	{
 		mvprintw(height - GRID_OFFSET_BOTTOM - i * GRID_MARKER_Y, 1, "%.1f", y_val);
-	}
-	
+	}	
 
 	x_min = terra_time_to_int(&bounds->xmin);
 	x_max = terra_time_to_int(&bounds->xmax);
