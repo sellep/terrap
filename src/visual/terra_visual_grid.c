@@ -54,7 +54,7 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 	SET_COLOR_DEFAULT();
 }
 
-static void terra_visual_grid(ssize_t const width, ssize_t const height)
+void terra_visual_grid(ssize_t const width, ssize_t const height)
 {
 	const wchar_t origin = L'\x253c';
 

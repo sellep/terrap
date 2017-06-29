@@ -10,6 +10,7 @@
 
 extern void terra_visual_title(char const * const, ssize_t const);
 extern void terra_visual_bounding(terra_visual_bounds * const, terra_data_entry const * const, size_t const);
+extern void terra_visual_grid(ssize_t const, ssize_t const);
 
 inline static void terra_visual_eval(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds, terra_visual_point * const pts, terra_data_entry const * const entries, size_t const count)
 {
