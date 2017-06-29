@@ -21,9 +21,18 @@ typedef struct
 
 typedef struct
 {
+	ssize_t day;
+	ssize_t mon;
+	ssize_t year;
+} terra_date;
+
+typedef struct
+{
 	terra_time start;
 	terra_time stop;
 } terra_start_stop;
+
+void terra_date_now(terra_date * const, short const);
 
 time_cmp terra_time_cmp(terra_time const * const, terra_time const * const);
 void terra_time_sys(terra_time * const);
@@ -45,7 +54,6 @@ static inline BOOL terra_time_between(terra_time const * const tim, terra_time c
 {
 	//undefined behavior for begin equals end
 
-	//begin < end
 	if (terra_time_cmp(begin, end) == TIME_BELOW)
 	{
 		if (terra_time_cmp(tim, begin) != TIME_ABOVE)
@@ -56,8 +64,6 @@ static inline BOOL terra_time_between(terra_time const * const tim, terra_time c
 
 		return TRUE;
 	}
-
-	//begin > end
 
 	if (terra_time_cmp(tim, begin) == TIME_ABOVE)
 		return TRUE;

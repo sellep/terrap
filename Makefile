@@ -12,6 +12,9 @@ OBJ=pi_2_mmio.o \
 	terra_time_diff.o \
 	terra_time_sleep.o \
 	terra_time_cmp.o \
+	terra_date_now.o \
+	terra_data_append.o \
+	terra_data_read.o \
 	terra_pin.o \
 	terra_led_set.o \
 	terra_led_arg.o \
