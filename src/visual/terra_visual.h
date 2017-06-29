@@ -4,6 +4,16 @@
 #include "../terra_defs.h"
 #include "terra_time.h"
 
+#define GRID_PADDING_TOP 5
+#define GRID_PADDING_BOTTOM 2
+
+#define GRID_OFFSET_TOP 2
+#define GRID_OFFSET_BOTTOM 3
+#define GRID_OFFSET_LEFT 5
+#define GRID_OFFSET_RIGHT 2
+
+#define DRAW_HEIGHT (height - GRID_OFFSET_TOP - GRID_OFFSET_BOTTOM)
+
 typedef struct
 {
 	float ymin;

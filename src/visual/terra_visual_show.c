@@ -10,42 +10,8 @@
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
 
-#define GRID_PADDING_TOP 5
-#define GRID_PADDING_BOTTOM 2
-
-#define GRID_OFFSET_TOP 2
-#define GRID_OFFSET_BOTTOM 3
-#define GRID_OFFSET_LEFT 5
-#define GRID_OFFSET_RIGHT 2
-
-#define DRAW_HEIGHT (height - GRID_OFFSET_TOP - GRID_OFFSET_BOTTOM)
-
-inline static void terra_visual_title(char const * const title, ssize_t const width)
-{
-	ssize_t tlen;
-	ssize_t len;
-	ssize_t i, j;
-
-	tlen = strlen(title);
-	len = (width - tlen) / 2;
-
-	for (i = 0, j = tlen; i < len; i++, j++)
-	{
-		printw("-");
-	}
-
-	printw(title);
-
-	for (i = 0; i < len; i++, j++)
-	{
-		printw("-");
-	}
-
-	if (j < width)
-	{
-		printw("-");
-	}
-}
+extern void terra_visual_title(char const * const, ssize_t const);
+extern void terra_visual_bounding(terra_visual_bounds * const, terra_data_entry const * const, size_t const);
 
 inline static void terra_visual_eval(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds, terra_visual_point * const pts, terra_data_entry const * const entries, size_t const count)
 {
@@ -56,40 +22,6 @@ inline static void terra_visual_eval(ssize_t const width, ssize_t const height, 
 	{
 		pts[x].temp = (size_t)((entries[(size_t)(x * step)].temp - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
 	}
-}
-
-inline static void terra_visual_bounding(terra_visual_bounds * const bounds, terra_data_entry const * const entries, size_t const len)
-{
-	size_t i;
-
-	bounds->ymin = entries[0].humi < entries[0].temp ? entries[0].humi : entries[0].temp;
-	bounds->ymax = entries[0].humi > entries[0].temp ? entries[0].humi : entries[0].temp;
-	bounds->xmin = entries[0].tm;
-	bounds->xmax = entries[len - 1].tm;
-
-	for (i = 1; i < len; i++)
-	{
-		if (entries[i].humi > bounds->ymax)
-		{
-			bounds->ymax = entries[i].humi;
-		}
-		else if (entries[i].humi < bounds->ymin)
-		{
-			bounds->ymin = entries[i].humi;
-		}
-
-		if (entries[i].temp > bounds->ymax)
-		{
-			bounds->ymax = entries[i].temp;
-		}
-		else if (entries[i].temp < bounds->ymin)
-		{
-			bounds->ymin = entries[i].temp;
-		}
-	}
-
-	bounds->ymin -= GRID_PADDING_BOTTOM;
-	bounds->ymax += GRID_PADDING_TOP;
 }
 
 void terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)

@@ -1,5 +1,5 @@
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3
+CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3 -DNCURSES
 LIBS=-lrt -pthread
 DAEMON=-DSYSLOG_ENABLED
 
@@ -33,6 +33,9 @@ OBJ=pi_2_mmio.o \
 	terra_hygro_run.o \
 	terra_hygro_read.o \
 	terra_hygro_write.o \
+	terra_visual_show.o \
+	terra_visual_bounding.o \
+	terra_visual_title.o \
 	terra_heart_beat.o \
 	terra_init.o \
 	terrad_run_period.o \
@@ -56,6 +59,9 @@ OBJ=pi_2_mmio.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 %.o : src/utils/%.c
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
+%.o : src/visual/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 all: clean $(OBJ)
