@@ -38,7 +38,7 @@ inline static BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const 
 		return FALSE;
 	}
 
-	cmd = atoi(argv[2]);
+	cmd[0] = atoi(argv[2]);
 	return TRUE;
 }
 
