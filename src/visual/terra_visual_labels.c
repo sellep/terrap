@@ -36,7 +36,7 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 	for (i = 0; i < lbls; i++)
 	{
 		terra_time_from_int(&tt, x_val);
-		mlen = tttoa(buf, &tt);
+		mlen = terra_time_to_arr(buf, &tt);
 		mvprintw(height - GRID_OFFSET_BOTTOM + 1, GRID_OFFSET_LEFT + i * GRID_MARKER_X - (mlen / 2), "%s", buf);
 		x_val += step;
 	}

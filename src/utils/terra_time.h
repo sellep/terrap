@@ -56,7 +56,7 @@ inline static size_t terra_time_to_int(terra_time const * const tt)
 	return tt->hour * 60 * 60 + tt->min * 60 + tt->sec;
 }
 
-inline static ssize_t terra_time_to_array(char * const buf, terra_time const * const tt)
+inline static ssize_t terra_time_to_arr(char * const buf, terra_time const * const tt)
 {
 	return sprintf(buf, "%zu:%02zu:%02zu", tt->hour, tt->min, tt->sec);
 }
