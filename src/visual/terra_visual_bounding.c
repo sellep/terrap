@@ -11,6 +11,9 @@ void terra_visual_bounding(terra_visual_bounds * const bounds, terra_data_entry 
 
 	for (i = 1; i < len; i++)
 	{
+		printf("humi: %.2f, temp: %2.f\n", entries[i].humi, entries[i].temp);
+		terra_time_print(&entries[i].tm);
+		
 		if (entries[i].humi > bounds->ymax)
 		{
 			bounds->ymax = entries[i].humi;

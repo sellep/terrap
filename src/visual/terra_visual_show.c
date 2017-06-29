@@ -32,7 +32,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	int height;
 
 	terra_visual_bounding(&bounds, entries, count);
-	printf("BOUNDS: ymin %.2f ymax %.2f", bounds.ymin, bounds.xmax);
+	printf("BOUNDS: ymin %.2f ymax %.2f\n", bounds.ymin, bounds.xmax);
 	terra_time_print(&bounds.xmin);
 	terra_time_print(&bounds.xmax);
 	return;
