@@ -5,7 +5,7 @@
 #include <wchar.h>
 #include <stddef.h>
 
-extern void terra_visual_title(char const * const, ssize_t const);
+extern void terra_visual_title(char const * const, ssize_t const, size_t const, terra_visual_bounds const * const);
 extern void terra_visual_bounding(terra_visual_bounds * const, terra_data_entry const * const, size_t const);
 extern void terra_visual_grid(ssize_t const, ssize_t const);
 extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
@@ -54,7 +54,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	pts = (terra_visual_point*) malloc(sizeof(terra_visual_point) * (width - 1));
 	terra_visual_eval(width, height, &bounds, pts, entries, count);
 
-	terra_visual_title(title, width);
+	terra_visual_title(title, width, count, &bounds);
 	terra_visual_grid(width, height);
 	terra_visual_labels(width, height, &bounds);
 	terra_visual_legend(width, height);

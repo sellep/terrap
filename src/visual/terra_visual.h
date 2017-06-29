@@ -35,6 +35,10 @@ typedef struct
 {
 	float ymin;
 	float ymax;
+	float temp_min;
+	float temp_max;
+	float humi_min;
+	float humi_max;
 	terra_time xmin;
 	terra_time xmax;
 } terra_visual_bounds;
