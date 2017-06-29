@@ -5,12 +5,13 @@
 #include <wchar.h>
 #include <stddef.h>
 
-#ifdef NCURSES
-#include <ncursesw/ncurses.h>
-
 extern void terra_visual_title(char const * const, ssize_t const);
 extern void terra_visual_bounding(terra_visual_bounds * const, terra_data_entry const * const, size_t const);
 extern void terra_visual_grid(ssize_t const, ssize_t const);
+extern void terra_visual_labels(ssize_t const, ssize_t const, terra_draw_bounds const * const);
+
+#ifdef NCURSES
+#include <ncursesw/ncurses.h>
 
 inline static void terra_visual_eval(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds, terra_visual_point * const pts, terra_data_entry const * const entries, size_t const count)
 {
@@ -52,7 +53,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 
 	terra_visual_title(title, width);
 	terra_visual_grid(width, height);
-	//terra_draw_labels(width, height, &bounds);
+	terra_visual_labels(width, height, &bounds);
 	//terra_draw_legend(width, height);
 	//terra_draw_points(width, height, pts);
 

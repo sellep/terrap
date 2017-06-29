@@ -53,14 +53,16 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 
 	SET_COLOR_DEFAULT();
 }
+#endif
 
 void terra_visual_grid(ssize_t const width, ssize_t const height)
 {
+#ifdef NCURSES
 	const wchar_t origin = L'\x253c';
 
 	mvaddnwstr(height - GRID_OFFSET_BOTTOM, GRID_OFFSET_LEFT, &origin, 1);
 	visual_grid_y(width, height);
 	visual_grid_x(width, height);
+#endif
 }
 
-#endif

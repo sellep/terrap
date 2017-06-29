@@ -51,6 +51,19 @@ void terra_time_difft(terra_time * const, terra_time const * const, terra_time c
 #define DAY_BEGIN ((terra_time) { 0, 0, 0 })
 #define DAY_END ((terra_time) { 23, 59, 59 })
 
+#define itott(tt,val) (terra_time_from_int(tt,val))
+
+static inline void terra_time_from_int(terra_time * const tt, size_t const val)
+{
+	size_t copy = val;
+
+	tt->hour = copy / 60 / 60;
+	copy -= tt->hour * 60 * 60;
+	tt->min = copy / 60;
+	copy -= tt->min * 60;
+	tt->sec = copy;
+}
+
 static inline BOOL terra_time_between(terra_time const * const tim, terra_time const * const begin, terra_time const * const end)
 {
 	if (terra_time_cmp(begin, end) == TIME_BELOW)
