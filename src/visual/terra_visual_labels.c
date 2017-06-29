@@ -20,6 +20,10 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 	step = (bounds->ymax - bounds->ymin) / (lbls - 1);
 	y_val = bounds->ymin;
 
+	printf("labels on x: %zu\n", lbls);
+	printf("step size on x: %f\n", step);
+	return;
+	
 	for (i = 0; i < lbls; i++)
 	{
 		mvprintw(height - GRID_OFFSET_BOTTOM - i * GRID_MARKER_Y, 1, "%.1f", y_val);
