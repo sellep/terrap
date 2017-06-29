@@ -20,8 +20,8 @@ void terra_visual_labels(ssize_t const width, ssize_t const height, terra_visual
 	step = (bounds->ymax - bounds->ymin) / (lbls - 1);
 	y_val = bounds->ymin;
 
-	printf("labels on x: %zu\n", lbls);
-	printf("step size on x: %f\n", step);
+	mvprintw(10, 10, "labels on x: %zu\n", lbls);
+	mvprintw(11, 10, "step size on x: %f\n", step);
 	return;
 	
 	for (i = 0; i < lbls; i++)
