@@ -52,8 +52,15 @@ void terra_time_difft(terra_time * const, terra_time const * const, terra_time c
 #define DAY_END ((terra_time) { 23, 59, 59 })
 
 #define itott(tt,val) (terra_time_from_int(tt,val))
+#define tttoi(tt) (tt->hour * 60 * 60 + tt->min * 60 + tt->sec)
+#define tttoa(buf, tt) (terra_time_to_array(buf, tt))
 
-static inline void terra_time_from_int(terra_time * const tt, size_t const val)
+inline static ssize_t terra_time_to_array(char * const buf, terra_time const * const tt)
+{
+	return sprintf(buf, "%zu:%02zu:%02zu", tt->hour, tt->min, tt->sec);
+}
+
+inline static void terra_time_from_int(terra_time * const tt, size_t const val)
 {
 	size_t copy = val;
 
@@ -64,7 +71,7 @@ static inline void terra_time_from_int(terra_time * const tt, size_t const val)
 	tt->sec = copy;
 }
 
-static inline BOOL terra_time_between(terra_time const * const tim, terra_time const * const begin, terra_time const * const end)
+inline static BOOL terra_time_between(terra_time const * const tim, terra_time const * const begin, terra_time const * const end)
 {
 	if (terra_time_cmp(begin, end) == TIME_BELOW)
 	{
@@ -86,7 +93,7 @@ static inline BOOL terra_time_between(terra_time const * const tim, terra_time c
 	return FALSE;
 }
 
-static inline void terra_time_now(terra_time * const tim)
+inline static void terra_time_now(terra_time * const tim)
 {
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
