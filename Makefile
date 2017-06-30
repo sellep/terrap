@@ -2,8 +2,8 @@ NCURSESW6 := $(shell which ncursesw6-config)
 NCURSESW5 := $(shell which ncursesw5-config)
 
 CC=@gcc
-CFLAGS=-fomit-frame-pointer -pipe -O3 `ncursesw5-config --cflags`
-LIBS=-lrt -pthread `ncursesw5-config --libs`
+CFLAGS=-fomit-frame-pointer -pipe -O3
+LIBS=-lrt -pthread
 SYSLOG=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
@@ -72,15 +72,15 @@ OBJ=pi_2_mmio.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 all: clean $(OBJ)
-#ifneq (, $(NCURSESW6))
-#	$(eval CFLAGS += "-DNCURSES")
-#	$(eval CFLAGS += "`ncursesw6-config --cflags`")
-#	$(eval LIBS += "`ncursesw6-config --libs`")
-#else ifneq (, $(NCURSESW5))
-#	$(eval CFLAGS += "-DNCURSES")
-#	$(eval CFLAGS += "`ncursesw5-config --cflags`")
-#	$(eval LIBS += "`ncursesw5-config --libs`")
-#endif
+ifneq (, $(NCURSESW6))
+	$(eval CFLAGS += "-DNCURSES")
+	$(eval CFLAGS += `ncursesw6-config --cflags`)
+	$(eval LIBS += `ncursesw6-config --libs`)
+else ifneq (, $(NCURSESW5))
+	$(eval CFLAGS += "-DNCURSES")
+	$(eval CFLAGS += `ncursesw5-config --cflags`)
+	$(eval LIBS += `ncursesw5-config --libs`)
+endif
 
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
