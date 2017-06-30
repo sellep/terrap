@@ -4,7 +4,7 @@ NCURSESW5 := $(shell which ncursesw5-config)
 CC=@gcc
 CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3
 LIBS=-lrt -pthread
-DAEMON=-DSYSLOG_ENABLED
+SYSLOG=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
 	terra_lock.o \
@@ -79,14 +79,14 @@ ifneq (, $(NCURSESW6))
 else ifneq (, $(NCURSESW5))
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval CFLAGS += "`ncursesw5-config --cflags`")
-	$(eval LIBS += "`ncursesw5-config --libs`")
+	$(eval LIBS += "-lncursesw")
 endif
 
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 	rm -f obj/terra_log.o
-	$(CC) $(CFLAGS) $(DAEMON) -o obj/terra_log.o -c src/utils/terra_log.c
-	$(CC) $(CFLAGS) $(DAEMON) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
+	$(CC) $(CFLAGS) $(SYSLOG) -o obj/terra_log.o -c src/utils/terra_log.c
+	$(CC) $(CFLAGS) $(SYSLOG) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
 debug_flags:
 	$(eval CFLAGS += "-DDEBUG")
