@@ -10,7 +10,7 @@ inline static void visual_grid_y(ssize_t width, ssize_t height)
 
 	ssize_t y, x, m;
 
-	for (y = height - GRID_OFFSET_BOTTOM - 2, m = 1; y > GRID_OFFSET_TOP; y--, m++)
+	for (y = height - GRID_OFFSET_BOTTOM - 2, m = 1; y >= GRID_OFFSET_TOP; y--, m++)
 	{
 		mvaddnwstr(y, GRID_OFFSET_LEFT, m % GRID_MARKER_Y == 0 ? &cross : &line, 1);
 	}
