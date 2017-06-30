@@ -116,3 +116,5 @@ clean:
 	@mkdir -p bin obj
 	@rm -rf bin/*
 	@rm -rf obj/*
+
+.PHONY: clean uninstall install debug debug_flags all ncursesw_flags
