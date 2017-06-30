@@ -2,7 +2,7 @@ NCURSESW6 := $(shell which ncursesw6-config)
 NCURSESW5 := $(shell which ncursesw5-config)
 
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3
+CFLAGS=-Wall -fomit-frame-pointer -pipe -O3
 LIBS=-lrt -pthread
 SYSLOG=-DSYSLOG_ENABLED
 
