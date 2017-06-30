@@ -73,15 +73,13 @@ OBJ=pi_2_mmio.o \
 
 all: clean $(OBJ)
 ifneq (, $(NCURSESW6))
-	echo ncw6
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval CFLAGS += "`ncursesw6-config --cflags`")
 	$(eval LIBS += "`ncursesw6-config --libs`")
 else ifneq (, $(NCURSESW5))
-	echo ncw5
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval CFLAGS += "`ncursesw5-config --cflags`")
-	$(eval LIBS += "-lncursesw")
+	$(eval LIBS += "`ncursesw5-config --libs`")
 endif
 
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
