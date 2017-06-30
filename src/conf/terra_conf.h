@@ -7,7 +7,8 @@
 
 #define HANDLE_ERROR(s){ \
 	terra_log_error("%s", s); \
-	goto error;}
+	status = FALSE; \
+	goto exit; }
 
 #define TERRA_CONF_MAX_SCHED_TEMPS 5
 #define TERRA_CONF_MAX_SCHED_PERIODS 5
