@@ -72,6 +72,7 @@ OBJ=pi_2_mmio.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 ncursesw_flags:
+	@echo no ncursesw
 ifneq (, $(NCURSESW6))
 	$(eval CFLAGS += "-DNCURSES")
 else ifneq (, $(NCURSESW5))
