@@ -55,10 +55,10 @@ typedef ssize_t terra_visual_cmd;
 
 inline static BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)
 {
-	if (argc != 3)
+	if (argc != 2)
 	{
-		terra_log_error("[terra_visual_arg] insufficient args");
-		return FALSE;
+		cmd[0] = 0;
+		return TRUE;
 	}
 
 	cmd[0] = atoi(argv[2]);
