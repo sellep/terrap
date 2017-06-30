@@ -8,11 +8,13 @@ BOOL terra_hygro_write(terra_conf const * const conf, terra_time const * const s
 {
 	terra_data_entry entry;
 	size_t diff;
+	size_t delay;
 	BOOL res;
 
 	diff = terra_time_diff(sys, &_last_write);
+	delay = terra_time_to_int(&conf->hygro_write_delay);
 
-	if (diff < conf->hygro_write_secs)
+	if (diff < delay)
 		return TRUE;
 
 	terra_time_cpy(&entry.tm, sys);

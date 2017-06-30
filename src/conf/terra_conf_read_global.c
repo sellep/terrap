@@ -19,7 +19,7 @@
 #define CONF_HYGRO_PIN_IO "hygro_pin_io="
 #define CONF_HYGRO_TICK "hygro_tick="
 #define CONF_HYGRO_REP "hygro_rep="
-#define CONF_HYGRO_WRITE_SECS "hygro_write_secs="
+#define CONF_HYGRO_WRITE_DELAY "hygro_write_delay="
 
 BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 {
@@ -112,9 +112,9 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		{
 			conf->hygro_rep = atoi(line + sizeof(CONF_HYGRO_REP) - 1);
 		}
-		else if (strncmp(line, CONF_HYGRO_WRITE_SECS, sizeof(CONF_HYGRO_WRITE_SECS) - 1) == 0)
+		else if (strncmp(line, CONF_HYGRO_WRITE_DELAY, sizeof(CONF_HYGRO_WRITE_SECS) - 1) == 0)
 		{
-			conf->hygro_write_secs = atoi(line + sizeof(CONF_HYGRO_WRITE_SECS) - 1);
+			if(!terra_time_read(&conf->hygro_write_delay, line + sizeof(CONF_HYGRO_WRITE_DELAY) - 1)) HANDLE_ERROR("invalid hygro_write_delay\n");
 		}
 		else if (strncmp(line, CONF_GLOBAL_END, sizeof(CONF_GLOBAL_END) - 1) == 0)
 		{

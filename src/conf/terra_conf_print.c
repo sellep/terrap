@@ -22,7 +22,8 @@ void terra_conf_print(terra_conf const * const conf)
 	terra_log_info("[global] hygro_pin_io: %u\n", conf->hygro_pin_io);
 	terra_log_info("[global] hygro_tick: %u\n", conf->hygro_tick);
 	terra_log_info("[global] hygro_rep: %u\n", conf->hygro_rep);
-	terra_log_info("[global] hygro_write_secs: %u\n", conf->hygro_write_secs);
+	terra_log_info("[global] hygro_write_delay: ");
+	terra_time_print(&conf->hygro_write_delay);
 
 	for (i = 0; i < conf->sched_periods_len; i++)
 	{
