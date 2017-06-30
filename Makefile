@@ -1,8 +1,9 @@
-NCURSES_VERSION=6
+NCURSESW6 := $(shell which ncursesw6-config)
+NCURSESW5 := $(shell which ncursesw5-config)
 
 CC=@gcc
-CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3 -DNCURSES `ncursesw$(NCURSES_VERSION)-config --cflags`
-LIBS=-lrt -pthread `ncursesw$(NCURSES_VERSION)-config --libs`
+CFLAGS=-Wall -v -fomit-frame-pointer -pipe -O3
+LIBS=-lrt -pthread
 DAEMON=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
@@ -70,7 +71,7 @@ OBJ=pi_2_mmio.o \
 %.o : src/visual/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
-all: clean $(OBJ)
+all: flags clean $(OBJ)
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 	rm -f obj/terra_log.o
@@ -82,6 +83,17 @@ debug_flags:
 	$(eval CFLAGS += "-g")
 
 debug: debug_flags all
+
+flags:
+ifndef (, $(NCURSESW6))
+	$(eval CFLAGS += "`ncursesw6-config --cflags`")
+	$(eval CFLAGS += "-DNCURSES")
+	$(eval LIBS += "`ncursesw6-config --libs`")
+else ifndef (, $(NCURSESW5))
+	$(eval CFLAGS += "`ncursesw6-config --cflags`")
+	$(eval CFLAGS += "-DNCURSES")
+	$(eval LIBS += "`ncursesw5-config --libs`")
+endif	
 
 install:
 	@cp bin/terra /usr/local/bin/
