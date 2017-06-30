@@ -71,12 +71,12 @@ OBJ=pi_2_mmio.o \
 %.o : src/visual/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
-flags:
-ifndef (, $(NCURSESW6))
+ncursesw_flags:
+ifneq (, $(NCURSESW6))
 	$(eval CFLAGS += "`ncursesw6-config --cflags`")
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval LIBS += "`ncursesw6-config --libs`")
-else ifndef (, $(NCURSESW5))
+else ifneq (, $(NCURSESW5))
 	$(eval CFLAGS += "`ncursesw6-config --cflags`")
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval LIBS += "`ncursesw5-config --libs`")
@@ -84,7 +84,7 @@ else
 	@echo no ncursesw
 endif
 
-all: flags clean $(OBJ)
+all: clean ncursesw_flags $(OBJ)
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 	rm -f obj/terra_log.o
