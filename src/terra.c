@@ -6,6 +6,7 @@
 #define ARG_MODE_LED "led"
 #define ARG_MODE_HYGRO "hygro"
 #define ARG_MODE_VISUAL "show"
+#define ARG_MODE_CONFIG "conf"
 
 extern BOOL terra_init();
 
@@ -26,10 +27,6 @@ int main(int argc, char ** argv)
 
 	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
 		return 1;
-
-#ifdef DEBUG
-	terra_conf_print(&conf);
-#endif
 
 	if (!terra_conf_valid(&conf))
 		return 1;
@@ -74,6 +71,10 @@ int main(int argc, char ** argv)
 
 		if (!terra_visual_show(visual_cmd))
 			return 1;
+	}
+	else if (strcmp(argv[1], ARG_MODE_CONFIG) == 0)
+	{
+		terra_conf_print(&conf);
 	}
 	else
 	{
