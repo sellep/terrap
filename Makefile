@@ -2,7 +2,7 @@ NCURSESW6 := $(shell which ncursesw6-config)
 NCURSESW5 := $(shell which ncursesw5-config)
 
 CC=@gcc
-CFLAGS=-Wall -fomit-frame-pointer -pipe -O3
+CFLAGS=-fomit-frame-pointer -pipe -O3
 LIBS=-lrt -pthread
 SYSLOG=-DSYSLOG_ENABLED
 
@@ -73,10 +73,12 @@ OBJ=pi_2_mmio.o \
 
 all: clean $(OBJ)
 ifneq (, $(NCURSESW6))
+	echo ncw6
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval CFLAGS += "`ncursesw6-config --cflags`")
 	$(eval LIBS += "`ncursesw6-config --libs`")
 else ifneq (, $(NCURSESW5))
+	echo ncw5
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval CFLAGS += "`ncursesw5-config --cflags`")
 	$(eval LIBS += "-lncursesw")
