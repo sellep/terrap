@@ -48,6 +48,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	init_pair(3, COLOR_LEGEND, COLOR_BLACK);
 	init_pair(4, COLOR_TEMP, COLOR_BLACK);
 	init_pair(5, COLOR_HUMI, COLOR_BLACK);
+	init_pair(6, COLOR_BOTH, COLOR_BLACK);
 
 	getmaxyx(stdscr, height, width);
 

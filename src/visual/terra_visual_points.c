@@ -10,6 +10,9 @@ void terra_visual_points(ssize_t const width, ssize_t const height, terra_visual
 
 	for (x = 1; x < DRAW_WIDTH; x++)
 	{
+		if (pts[x].temp == pts[x].humi)
+			continue;
+
 		mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1 - pts[x].temp, x + GRID_OFFSET_LEFT, &chr, 1);
 	}
 
@@ -17,7 +20,16 @@ void terra_visual_points(ssize_t const width, ssize_t const height, terra_visual
 	
 	for (x = 1; x < DRAW_WIDTH; x++)
 	{
-		mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1 - pts[x].humi, x + GRID_OFFSET_LEFT, &chr, 1);
+		if (pts[x].humi == pts[x].temp)
+		{
+			SET_COLOR_BOTH();
+			mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1 - pts[x].humi, x + GRID_OFFSET_LEFT, &chr, 1);
+			SET_COLOR_HUMI();
+		}
+		else
+		{
+			mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1 - pts[x].humi, x + GRID_OFFSET_LEFT, &chr, 1);
+		}
 	}
 #endif
 }

@@ -20,16 +20,18 @@
 #define DRAW_WIDTH (width - GRID_OFFSET_LEFT - GRID_OFFSET_RIGHT)
 
 #define COLOR_DEFAULT COLOR_WHITE
-#define COLOR_GRID COLOR_BLUE
+#define COLOR_GRID COLOR_RED
 #define COLOR_LEGEND COLOR_WHITE
 #define COLOR_TEMP COLOR_CYAN
 #define COLOR_HUMI COLOR_MAGENTA
+#define COLOR_BOTH COLOR_BLUE
 
 #define SET_COLOR_DEFAULT() (attron(COLOR_PAIR(1)))
 #define SET_COLOR_GRID() (attron(COLOR_PAIR(2)))
 #define SET_COLOR_LEGEND() (attron(COLOR_PAIR(3)))
 #define SET_COLOR_TEMP() (attron(COLOR_PAIR(4)))
 #define SET_COLOR_HUMI() (attron(COLOR_PAIR(5)))
+#define SET_COLOR_BOTH() (attron(COLOR_PAIR(6)))
 
 typedef struct
 {
