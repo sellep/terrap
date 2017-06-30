@@ -79,6 +79,7 @@ typedef struct
 	ssize_t led_pin_heart;
 	ssize_t heart_tick;
 	ssize_t heart_dur;
+	ssize_t read_only;
 	ssize_t switch_pin;
 	ssize_t switch_rep;
 	size_t switch_chan;

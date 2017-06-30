@@ -83,14 +83,20 @@ BOOL terrad_run(terra_conf const * const conf)
 			if(!terra_hygro_write(conf, &now, humi, temp))
 				return FALSE;
 
-			terrad_run_temp(conf, temp);
+			if (!conf->read_only)
+			{
+				terrad_run_temp(conf, temp);
+			}
 		}
 
-		terrad_run_period(conf, &now);
-
-		for (i = 0 ; i < conf->sched_clocks_len; i++)
+		if (!conf->read_only)
 		{
-			terrad_run_clock(&(conf->sched_clocks[i]), i, &now);
+			terrad_run_period(conf, &now);
+
+			for (i = 0 ; i < conf->sched_clocks_len; i++)
+			{
+				terrad_run_clock(&(conf->sched_clocks[i]), i, &now);
+			}
 		}
 
 		sleep_milliseconds(conf->tick);

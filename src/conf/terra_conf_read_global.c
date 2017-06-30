@@ -6,6 +6,7 @@
 #define CONF_LED_PIN_HEART "led_pin_heart="
 #define CONF_HEART_TICK "heart_tick="
 #define CONF_HEART_DUR "heart_dur="
+#define CONF_READ_ONLY "read_only="
 #define CONF_SWITCH_PIN "switch_pin="
 #define CONF_SWITCH_REP "switch_rep="
 #define CONF_SWITCH_CHAN "switch_chan="
@@ -61,6 +62,10 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		else if (strncmp(line, CONF_HEART_DUR, sizeof(CONF_HEART_DUR) - 1) == 0)
 		{
 			conf->heart_dur = atoi(line + sizeof(CONF_HEART_DUR) - 1);
+		}
+		else if (strncmp(line, CONF_READ_ONLY, sizeof(CONF_READ_ONLY) - 1) == 0)
+		{
+			conf->read_only = atoi(line + sizeof(CONF_READ_ONLY) - 1);
 		}
 		else if (strncmp(line, CONF_SWITCH_PIN, sizeof(CONF_SWITCH_PIN) - 1) == 0)
 		{
