@@ -71,7 +71,14 @@ OBJ=pi_2_mmio.o \
 %.o : src/visual/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
-all: clean $(OBJ)
+all: clean ncursesd_flags $(OBJ)
+	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
+	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
+	rm -f obj/terra_log.o
+	$(CC) $(CFLAGS) $(SYSLOG) -o obj/terra_log.o -c src/utils/terra_log.c
+	$(CC) $(CFLAGS) $(SYSLOG) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
+
+ncursesd_flags:
 ifneq (, $(NCURSESW6))
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval CFLAGS += `ncursesw6-config --cflags`)
@@ -80,13 +87,9 @@ else ifneq (, $(NCURSESW5))
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval CFLAGS += `ncursesw5-config --cflags`)
 	$(eval LIBS += `ncursesw5-config --libs`)
+else
+	@echo no ncursesw
 endif
-
-	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
-	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
-	rm -f obj/terra_log.o
-	$(CC) $(CFLAGS) $(SYSLOG) -o obj/terra_log.o -c src/utils/terra_log.c
-	$(CC) $(CFLAGS) $(SYSLOG) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 
 debug_flags:
 	$(eval CFLAGS += "-DDEBUG")
@@ -114,4 +117,4 @@ clean:
 	@rm -rf bin/*
 	@rm -rf obj/*
 
-.PHONY: clean uninstall install debug debug_flags all
+.PHONY: clean uninstall install debug debug_flags all ncursesd_flags
