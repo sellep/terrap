@@ -93,6 +93,8 @@ else ifndef (, $(NCURSESW5))
 	$(eval CFLAGS += "`ncursesw6-config --cflags`")
 	$(eval CFLAGS += "-DNCURSES")
 	$(eval LIBS += "`ncursesw5-config --libs`")
+else
+	@echo no ncursesw
 endif	
 
 install:
