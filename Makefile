@@ -73,13 +73,9 @@ OBJ=pi_2_mmio.o \
 
 ncursesw_flags:
 ifneq (, $(NCURSESW6))
-	$(eval CFLAGS += "`ncursesw6-config --cflags`")
 	$(eval CFLAGS += "-DNCURSES")
-	$(eval LIBS += "`ncursesw6-config --libs`")
 else ifneq (, $(NCURSESW5))
-	$(eval CFLAGS += "`ncursesw6-config --cflags`")
 	$(eval CFLAGS += "-DNCURSES")
-	$(eval LIBS += "`ncursesw5-config --libs`")
 else
 	@echo no ncursesw
 endif
