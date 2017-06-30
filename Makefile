@@ -71,17 +71,17 @@ OBJ=pi_2_mmio.o \
 %.o : src/visual/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
-ncursesw:
-	@echo no ncursesw
+all: clean $(OBJ)
 ifneq (, $(NCURSESW6))
 	$(eval CFLAGS += "-DNCURSES")
+	$(eval CFLAGS += "`ncursesw6-config --cflags`")
+	$(eval LIBS += "`ncursesw6-config --libs`")
 else ifneq (, $(NCURSESW5))
 	$(eval CFLAGS += "-DNCURSES")
-else
-	@echo no ncursesw
+	$(eval CFLAGS += "`ncursesw5-config --cflags`")
+	$(eval LIBS += "`ncursesw5-config --libs`")
 endif
 
-all: ncursesw clean $(OBJ)
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 	rm -f obj/terra_log.o
@@ -114,4 +114,4 @@ clean:
 	@rm -rf bin/*
 	@rm -rf obj/*
 
-.PHONY: clean uninstall install debug debug_flags all ncursesw
+.PHONY: clean uninstall install debug debug_flags all
