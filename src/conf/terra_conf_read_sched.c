@@ -51,7 +51,7 @@ BOOL terra_conf_read_sched(terra_sched * const sched, FILE * const f)
 	else
 		HANDLE_ERROR("[terra_conf_read_sched] schedule enabled expected\n");
 
-goto exit:
+exit:
 	if (line)
 	{
 		free(line);

@@ -71,7 +71,7 @@ BOOL terra_conf_read_sched_temps(terra_conf * const conf, FILE * const f)
 		conf->sched_temps_len++;
 	}
 
-goto exit:
+exit:
 	if (line)
 	{
 		free(line);

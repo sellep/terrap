@@ -62,7 +62,7 @@ BOOL terra_conf_read_sched_clocks(terra_conf * const conf, FILE * const f)
 		conf->sched_clocks_len++;
 	}
 
-goto exit:
+exit:
 	if (line)
 	{
 		free(line);

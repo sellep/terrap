@@ -129,7 +129,7 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		}
 	}
 
-goto exit:
+exit:
 	if (line)
 	{
 		free(line);

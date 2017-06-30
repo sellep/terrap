@@ -82,7 +82,7 @@ BOOL terra_conf_read_sched_periods(terra_conf * const conf, FILE * const f)
 		conf->sched_periods_len++;
 	}
 
-goto exit:
+exit:
 	if (line)
 	{
 		free(line);
