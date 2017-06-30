@@ -1,5 +1,5 @@
-NCURSESW6 := $(shell which ncursesw6-config)
-NCURSESW5 := $(shell which ncursesw5-config)
+NCURSESW6 := $(shell which ncursesw6-config 2> /dev/null)
+NCURSESW5 := $(shell which ncursesw5-config 2> /dev/null)
 
 CC=@gcc
 CFLAGS=-fomit-frame-pointer -pipe -O3
