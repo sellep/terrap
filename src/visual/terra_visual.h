@@ -55,7 +55,7 @@ typedef ssize_t terra_visual_cmd;
 
 inline static BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)
 {
-	if (argc != 2)
+	if (argc == 2)
 	{
 		cmd[0] = 0;
 		return TRUE;
