@@ -71,7 +71,7 @@ OBJ=pi_2_mmio.o \
 %.o : src/visual/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
-ncursesw_flags:
+ncursesw:
 	@echo no ncursesw
 ifneq (, $(NCURSESW6))
 	$(eval CFLAGS += "-DNCURSES")
@@ -81,7 +81,7 @@ else
 	@echo no ncursesw
 endif
 
-all: clean ncursesw_flags $(OBJ)
+all: ncursesw clean $(OBJ)
 	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
 	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
 	rm -f obj/terra_log.o
@@ -114,4 +114,4 @@ clean:
 	@rm -rf bin/*
 	@rm -rf obj/*
 
-.PHONY: clean uninstall install debug debug_flags all ncursesw_flags
+.PHONY: clean uninstall install debug debug_flags all ncursesw
