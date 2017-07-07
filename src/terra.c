@@ -1,6 +1,6 @@
 #include "terra.h"
 
-#define TERRA_CONF_PATH "/etc/default/terra"
+#define TERRA_CONF_PATH "/etc/conf.d/terra"
 
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
