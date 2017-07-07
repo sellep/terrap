@@ -102,7 +102,7 @@ debug: debug_flags all
 install:
 	@cp bin/terra /usr/local/bin/
 	@cp bin/terrad /usr/local/bin/
-	@cp res/terra.conf /etc/default/terra
+	@cp res/terra.conf /etc/conf.d/terra
 	@cp res/terrad.init.script /etc/init.d/terra
 	@chmod +x /etc/init.d/terra
 	@mkdir -p /var/opt/terra
@@ -110,7 +110,7 @@ install:
 uninstall:
 	@rm -f /opt/terra
 	@rm -f /opt/terrad
-	@rm -f /etc/default/terra
+	@rm -f /etc/conf.d/terra
 	@rm -f /etc/init.d/terra
 	@rm -rf /var/opt/terra
 
