@@ -2,6 +2,7 @@
 
 #include <sched.h>
 
+/*
 void set_max_priority()
 {
 	struct sched_param sched;
@@ -18,4 +19,4 @@ void set_default_priority()
 
 	sched.sched_priority = 0;
 	sched_setscheduler(0, SCHED_OTHER, &sched);
-}
+}*/

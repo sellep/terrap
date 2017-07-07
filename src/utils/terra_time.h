@@ -41,9 +41,12 @@ void terra_time_print(terra_time const * const);
 BOOL terra_time_read(terra_time * const, char const * const);
 size_t terra_time_diff(terra_time const * const a, terra_time const * const b);
 
-void sleep_milliseconds(size_t const);
 void sleep_microseconds(size_t const);
+
+/*
+void sleep_milliseconds(size_t const);
 void busy_wait_milliseconds(size_t const);
+*/
 
 void terra_time_cpy(terra_time * const, terra_time const * const);
 void terra_time_difft(terra_time * const, terra_time const * const, terra_time const * const);

@@ -2,6 +2,7 @@
 #define __P_TERRA_SWITCH_H
 
 #include "../terra_defs.h"
+#include "../common_dht_read.h"
 #include "../pi_2_mmio.h"
 #include "../utils/terra_log.h"
 #include "../utils/terra_lock.h"

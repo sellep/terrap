@@ -1,5 +1,7 @@
 #include "terra_hygro.h"
 
+#include "../pi_2_dht_read.h"
+
 #define HYGRO_READ_MODE "read"
 #define HYGRO_WRITE_MODE "write"
 
@@ -40,15 +42,41 @@ BOOL terra_hygro_arg(terra_hygro_cmd * const cmd, ssize_t const argc, char const
 BOOL terra_hygro_run(terra_conf const * const conf, terra_hygro_cmd const * const cmd)
 {
 	terra_time now;
+	int i;
+	int status;
 
 	if (cmd->read)
 	{
 		float t;
 		float h;
 
+		/*
+			obsolete		
 		if (!terra_hygro_read_rep(&conf, &h, &t))
 		{
 			terra_log_error("[terra_hygro_run] failed to read hygro\n");
+			return FALSE;
+		}*/
+
+		for (i = 0; i <= 10; i++)
+		{
+			status = pi_2_dht_read(DHT22, conf->hygro_pin_io, &h, &t);
+			if (status == DHT_SUCCESS)
+				break;
+
+			if (status == DHT_ERROR_TIMEOUT)
+				continue;
+
+			if (status == DHT_ERROR_CHECKSUM)
+				continue;
+
+			terra_log_error("[terra_hygro_run] failed to read dht (%i)\n", status);
+			return FALSE;
+		}
+
+		if (i > 10)
+		{
+			terra_log_error("[terra_hygro_run] failed to read dht repeated\n");
 			return FALSE;
 		}
 

@@ -2,11 +2,13 @@ NCURSESW6 := $(shell which ncursesw6-config 2> /dev/null)
 NCURSESW5 := $(shell which ncursesw5-config 2> /dev/null)
 
 CC=@gcc
-CFLAGS=-fomit-frame-pointer -pipe -O3
+CFLAGS=-v -fomit-frame-pointer -pipe -O3
 LIBS=-lrt -pthread
 SYSLOG=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
+	common_dht_read.o \
+	pi_2_dht_read.o \
 	terra_lock.o \
 	terra_proc.o \
 	terra_time_print.o \

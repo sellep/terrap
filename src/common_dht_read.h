@@ -40,7 +40,7 @@
 void busy_wait_milliseconds(uint32_t millis);
 
 // General delay that sleeps so CPU usage is low, but accuracy is potentially bad.
-//void sleep_milliseconds(uint32_t millis);
+void sleep_milliseconds(uint32_t millis);
 
 // Increase scheduling priority and algorithm to try to get 'real time' results.
 void set_max_priority(void);
