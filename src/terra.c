@@ -12,7 +12,6 @@ extern BOOL terra_init();
 
 int main(int argc, char ** argv)
 {
-	terra_conf conf;
 	terra_led_cmd led_cmd;
 	terra_switch_req switch_req;
 	terra_hygro_cmd hygro_cmd;
@@ -24,15 +23,6 @@ int main(int argc, char ** argv)
 		terra_log_error("[terra] failed to initialize terra\n");
 		return 1;
 	}
-
-	if (!terra_conf_read(&conf, TERRA_CONF_PATH))
-		return 1;
-
-	if (!terra_conf_valid(&conf))
-		return 1;
-
-	terra_pin_set_output(conf.switch_pin);
-	terra_pin_set_output(conf.led_pin_heart);
 
 //execution handling
 	if (argc < 2)

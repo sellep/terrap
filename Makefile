@@ -9,7 +9,6 @@ SYSLOG=-DSYSLOG_ENABLED
 OBJ=pi_2_mmio.o \
 	common_dht_read.o \
 	pi_2_dht_read.o \
-	terra_lock.o \
 	terra_proc.o \
 	terra_time_print.o \
 	terra_time_read.o \
@@ -19,7 +18,6 @@ OBJ=pi_2_mmio.o \
 	terra_date_now.o \
 	terra_data_append.o \
 	terra_data_read.o \
-	terra_pin.o \
 	terra_led_set.o \
 	terra_led_arg.o \
 	terra_led_set_from_cmd.o \
@@ -46,6 +44,7 @@ OBJ=pi_2_mmio.o \
 	terra_visual_legend.o \
 	terra_visual_points.o \
 	terra_heart_beat.o \
+	terra_runtime.o \
 	terra_init.o \
 	terrad_run_period.o \
 	terrad_run_clock.o \

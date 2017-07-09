@@ -3,6 +3,7 @@
 #define CONF_GLOBAL_BEGIN "GLOBAL BEGIN"
 #define CONF_GLOBAL_END "GLOBAL END"
 #define CONF_TICK "tick="
+#define CONF_LED_PIN_ALERT "led_pin_alert="
 #define CONF_LED_PIN_HEART "led_pin_heart="
 #define CONF_HEART_TICK "heart_tick="
 #define CONF_HEART_DUR "heart_dur="
@@ -50,6 +51,10 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		if (strncmp(line, CONF_TICK, sizeof(CONF_TICK) - 1) == 0)
 		{
 			conf->tick = atoi(line + sizeof(CONF_TICK) - 1);
+		}
+		else if (strncmp(line, CONF_LED_PIN_ALERT, sizeof(CONF_LED_PIN_ALERT) - 1) == 0)
+		{
+			conf->led_pin_alert = atoi(line + sizeof(CONF_LED_PIN_ALERT) - 1);
 		}
 		else if (strncmp(line, CONF_LED_PIN_HEART, sizeof(CONF_LED_PIN_HEART) - 1) == 0)
 		{

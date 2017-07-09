@@ -7,11 +7,11 @@ static int _terra_clock_mode[TERRA_CONF_MAX_SCHED_CLOCKS];
 #define SWITCH_SET_ON(i)(_terra_clock_mode[i] = SWITCH_ON)
 #define SWITCH_SET_OFF(i)(_terra_clock_mode[i] = SWITCH_OFF)
 
-void terrad_run_clock_init(terra_conf const * const conf)
+void terrad_run_clock_init()
 {
 	ssize_t i;
 
-	for (i = 0; i < conf->sched_clocks_len; i++)
+	for (i = 0; i < conf.sched_clocks_len; i++)
 	{
 		_terra_clock_mode[i] = SWITCH_OFF;
 	}

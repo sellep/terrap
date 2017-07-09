@@ -1,18 +1,18 @@
 #include "terra_led.h"
 
-BOOL terra_led_set_from_cmd(terra_conf const * const conf, terra_led_cmd const cmd)
+BOOL terra_led_set_from_cmd(terra_led_cmd const cmd)
 {
 	if (cmd == LED_NONE)
 		return TRUE;
 
 	if (cmd & LED_ERR)
 	{
-		terra_led_set(LED_PIN_ERR, cmd);
+		terra_led_set(conf.led_pin_alert, cmd);
 		return TRUE;
 	}
 	else if (cmd & LED_HEART)
 	{
-		terra_led_set(conf->led_pin_heart, cmd);
+		terra_led_set(conf.led_pin_heart, cmd);
 		return TRUE;
 	}
 

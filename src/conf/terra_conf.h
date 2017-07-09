@@ -76,6 +76,7 @@ typedef struct
 typedef struct
 {
 	ssize_t tick;
+	ssize_t led_pin_alert;
 	ssize_t led_pin_heart;
 	ssize_t heart_tick;
 	ssize_t heart_dur;

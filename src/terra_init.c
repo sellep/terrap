@@ -1,10 +1,14 @@
 #include "terra.h"
 
-#include "utils/terra_pin.h"
-#include "led/terra_led.h"
-
-BOOL terra_init()
+BOOL terra_init(char const * const conf_path)
 {
+	if (!terra_runtime_init(conf_path))
+	{
+		terra_log_error("[terra_init] failed to initialize runtime\n");
+		return FALSE;
+	}
+
+//TODO: DEBUG one lvl deeper
 #ifndef DEBUG
 	if (pi_2_mmio_init() != MMIO_SUCCESS)
 	{
@@ -19,6 +23,5 @@ BOOL terra_init()
 	}
 #endif
 
-	terra_pin_set_output(LED_PIN_ERR);
 	return TRUE;
 }

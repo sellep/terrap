@@ -1,11 +1,10 @@
 #include "terra.h"
 
 extern BOOL terra_init();
-extern BOOL terrad_run(terra_conf const * const);
+extern BOOL terrad_run();
 
 int main(int argc, char **argv)
 {
-	terra_conf conf;
 	BOOL run_result;
 
 	terra_log_info("terra daemon started\n");
@@ -40,7 +39,7 @@ int main(int argc, char **argv)
 	terra_led_set(conf.led_pin_heart, FALSE);
 
 //run
-	run_result = terrad_run(&conf);
+	run_result = terrad_run();
 	terra_log_info("terra daemon stopped\n");
 
 	terra_led_set(LED_PIN_ERR, TRUE);

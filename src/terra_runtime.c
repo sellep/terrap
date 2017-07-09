@@ -1,4 +1,4 @@
-#include "terra_lock.h"
+#include "terra_runtime.h"
 
 #include <unistd.h>
 #include <sys/mman.h>
@@ -10,27 +10,36 @@
 #define LOCK_FILE "terra_lock"
 
 static int _sm_mutex;
-volatile pthread_mutex_t *_mutex;
+static volatile pthread_mutex_t *_mutex;
 static pthread_mutexattr_t _mutex_attr;
 
-static BOOL map_mutex_to_address_space()
+extern BOOL terra_lock_init();
+extern BOOL map_mutex_to_address_space();
+
+
+BOOL terra_runtime_init(char const * const conf_path)
 {
-	_mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
-	if (_mutex == MAP_FAILED)
+	if (!terra_lock_init())
 	{
-		terra_log_error("failed to map memory\n");
+		terra_log_error("[terra_runtime_init] failed to initialize lock\n");
 		return FALSE;
 	}
+
+	if (!terra_conf_read(&runtime.conf, conf_path))
+	{
+		terra_log_error("[terra_runtime_init] failed to read config file\n");
+		return FALSE;
+	}
+
+	runtime.hygro_err = 0;
+
+	terra_pin_out(conf.switch_pin);
+	terra_pin_out(conf.led_pin_heart);
+	terra_pin_out(conf.led_pin_alert);
 
 	return TRUE;
 }
 
-static void init_mutex()
-{
-	pthread_mutexattr_init(&_mutex_attr);
-	pthread_mutexattr_setpshared(&_mutex_attr, PTHREAD_PROCESS_SHARED);
-	pthread_mutex_init(_mutex, &_mutex_attr);
-}
 
 BOOL terra_lock_init()
 {
@@ -64,6 +73,21 @@ BOOL terra_lock_init()
 	if (!map_mutex_to_address_space())
 		return FALSE;
 
-	init_mutex();
+	//init mutex
+	pthread_mutexattr_init(&_mutex_attr);
+	pthread_mutexattr_setpshared(&_mutex_attr, PTHREAD_PROCESS_SHARED);
+	pthread_mutex_init(_mutex, &_mutex_attr);
+	return TRUE;
+}
+
+BOOL map_mutex_to_address_space()
+{
+	_mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
+	if (_mutex == MAP_FAILED)
+	{
+		terra_log_error("failed to map memory\n");
+		return FALSE;
+	}
+
 	return TRUE;
 }
