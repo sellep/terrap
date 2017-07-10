@@ -48,7 +48,7 @@ BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 
 	config_init(&libconf);
 
-	if (!config_read_file(&libconf, dest))
+	if (!config_read_file(&libconf, path))
 	{
 		terra_log_error("[terra_conf_read] %s:%d - %s\n",
 			config_error_file(&libconf),
