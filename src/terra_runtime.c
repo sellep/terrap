@@ -25,7 +25,7 @@ BOOL terra_runtime_init(char const * const conf_path)
 		return FALSE;
 	}
 
-	if (!terra_conf_read(&runtime.conf, conf_path))
+	if (!terra_conf_read(&conf, conf_path))
 	{
 		terra_log_error("[terra_runtime_init] failed to read config file\n");
 		return FALSE;
