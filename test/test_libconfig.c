@@ -36,8 +36,8 @@ int main()
 	if (!terra_conf_read(&conf))
 		exit(1);
 
-	config_lookup_bool(&conf, "read_only", &global.read_only));
-	config_lookup_int(&conf, "delay", &global.delay));
+	config_lookup_bool(&conf, "read_only", &global.read_only);
+	config_lookup_int(&conf, "delay", &global.delay);
 
 	config_destroy(&conf);
 	terra_print_conf(&global);
