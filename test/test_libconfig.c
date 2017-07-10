@@ -12,7 +12,7 @@ typedef struct
 
 static inline BOOL terra_conf_read(config_t * const conf)
 {
-	if (config_read_file(conf, "../res/terra.lib.config"))
+	if (config_read_file(conf, "../res/terra.lib.conf"))
 		return 1;
 
 	fprintf(stderr, "%s:%d - %s\n", config_error_file(conf), config_error_line(conf), config_error_text(conf));
