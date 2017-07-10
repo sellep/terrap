@@ -18,7 +18,7 @@
 #define LIKELY(x)       __builtin_expect((x),1)
 #define UNLIKELY(x)     __builtin_expect((x),0)
 
-static inline terra_pin_set_out(ssize_t const pin)
+static inline terra_pin_set_out(int const pin)
 {
 	pi_2_mmio_set_output(pin);
 }
