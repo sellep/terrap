@@ -1,51 +1,61 @@
 #include "terra_conf.h"
 
-extern BOOL terra_conf_read_global(terra_conf * const, FILE * const);
-extern BOOL terra_conf_read_sched_clocks(terra_conf * const, FILE * const);
-extern BOOL terra_conf_read_sched_periods(terra_conf * const, FILE * const);
-extern BOOL terra_conf_read_sched_temps(terra_conf * const, FILE * const);
-
-BOOL terra_conf_read(terra_conf * const conf, char const * const path)
+static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
 {
-	FILE *f;
+	config_lookup_bool(src, "read_only", &dest->read_only);
+	config_lookup_int(src, "delay", &dest->delay);
+}
 
-	f = fopen(path, "r");
-	if (!f)
+static inline void terra_conf_switch_parse(terra_conf * const dest, config_t const * const src)
+{ 
+	config_lookup_int(src, "switch.pin", &dest->sw.pin);
+	config_lookup_int(src, "switch.repeats", &dest->sw.repeats);
+	config_lookup_int(src, "switch.channel", &dest->sw.channel);
+	config_lookup_int(src, "switch.code_aon", &dest->sw.code_aon);
+	config_lookup_int(src, "switch.code_aoff", &dest->sw.code_aoff);
+	config_lookup_int(src, "switch.code_bon", &dest->sw.code_bon);
+	config_lookup_int(src, "switch.code_boff", &dest->sw.code_boff);
+	config_lookup_int(src, "switch.code_con", &dest->sw.code_con);
+	config_lookup_int(src, "switch.code_coff", &dest->sw.code_coff);
+}
+
+static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t const * const src)
+{
+	cont terra_time time;
+	const char *str;
+
+	config_lookup_bool(src, "hygro.enabled", &dest->hygro.enabled);
+	config_lookup_int(src, "hygro.pin", &dest->hygro.pin);
+	config_lookup_int(src, "hygro.repeats", &dest->hygro.repeats);
+	config_lookup_string(src, "hygro.delay", &str);
+
+	terra_time_read(&time, str);
+	dest->hygro.delay = terra_time_to_int(&time);
+}
+
+BOOL terra_conf_read(terra_conf * const dest, char const * const path)
+{
+	BOOL status = FALSE;
+	config_t libconf;
+
+	config_init(&libconf);
+
+	if (!config_read_file(libconf, dest))
 	{
-		terra_log_error("[terra_conf_read] unable to read config file %s\n", path);
-		return FALSE;
+		terra_log_error("[terra_conf_read] %s:%d - %s\n",
+			config_error_file(libconf),
+			config_error_line(libconf),
+			config_error_text(libconf));
+		goto exit;
 	}
 
-	if (!terra_conf_read_global(conf, f))
-	{
-		fclose(f);
-		return FALSE;
-	}
+	terra_conf_global_parse(dest, &libconf);
+	terra_conf_switch_parse(dest, &libconf);
+	terra_conf_hygro_parse(dest, &libconf);
 
-	rewind(f);
+	status = TRUE;
 
-	if (!terra_conf_read_sched_periods(conf, f))
-	{
-		fclose(f);
-		return FALSE;
-	}
-
-	rewind(f);
-
-	if (!terra_conf_read_sched_temps(conf, f))
-	{
-		fclose(f);
-		return FALSE;
-	}
-
-	rewind(f);
-
-	if (!terra_conf_read_sched_clocks(conf, f))
-	{
-		fclose(f);
-		return FALSE;
-	}
-
-	fclose(f);
-	return TRUE;
+exit:
+	config_destroy(libconf);
+	return status;
 }

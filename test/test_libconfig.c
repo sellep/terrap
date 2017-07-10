@@ -19,9 +19,19 @@ typedef struct
 
 typedef struct
 {
-	ssize_t delay;
+	BOOL enabled;
+	int pin;
+	int repeats;
+	int delay;
+} terra_conf_hygro;
+
+typedef struct
+{
+	int delay;
 	BOOL read_only;
+
 	terra_conf_switch sw;
+	terra_conf_hygro hy;
 } terra_conf;
 
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
@@ -32,21 +42,34 @@ static inline void terra_conf_global_parse(terra_conf * const dest, config_t con
 
 static inline void terra_conf_switch_parse(terra_conf * const dest, config_t const * const src)
 { 
-	config_lookup_int(src, "switch.pin", &(dest->sw.pin));
-	config_lookup_int(src, "switch.repeats", &(dest->sw.repeats));
-	config_lookup_int(src, "switch.channel", &(dest->sw.channel));
-	config_lookup_int(src, "switch.code_aon", &(dest->sw.code_aon));
-	config_lookup_int(src, "switch.code_aoff", &(dest->sw.code_aoff));
-	config_lookup_int(src, "switch.code_bon", &(dest->sw.code_bon));
-	config_lookup_int(src, "switch.code_boff", &(dest->sw.code_boff));
-	config_lookup_int(src, "switch.code_con", &(dest->sw.code_con));
-	config_lookup_int(src, "switch.code_coff", &(dest->sw.code_coff));
+	config_lookup_int(src, "switch.pin", &dest->sw.pin);
+	config_lookup_int(src, "switch.repeats", &dest->sw.repeats);
+	config_lookup_int(src, "switch.channel", &dest->sw.channel);
+	config_lookup_int(src, "switch.code_aon", &dest->sw.code_aon);
+	config_lookup_int(src, "switch.code_aoff", &dest->sw.code_aoff);
+	config_lookup_int(src, "switch.code_bon", &dest->sw.code_bon);
+	config_lookup_int(src, "switch.code_boff", &dest->sw.code_boff);
+	config_lookup_int(src, "switch.code_con", &dest->sw.code_con);
+	config_lookup_int(src, "switch.code_coff", &dest->sw.code_coff);
+}
+
+static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t const * const src)
+{
+	const char *str;
+
+	config_lookup_bool(src, "hygro.enabled", &dest->hygro.enabled);
+	config_lookup_int(src, "hygro.pin", &dest->hygro.pin);
+	config_lookup_int(src, "hygro.repeats", &dest->hygro.repeats);
+	config_lookup_string(src, "hygro.delay", &str);
+
+	//terra_time_parse
 }
 
 static inline void terra_conf_parse(terra_conf * const dest, config_t const * const src)
 {
 	terra_conf_global_parse(dest, src);
 	terra_conf_switch_parse(dest, src);
+	terra_conf_hygro_parse(dest, src);
 }
 
 static inline BOOL terra_conf_read(config_t * const conf)
