@@ -6,10 +6,8 @@
 #define DO_HEART_BEAT() (runtime.tick % conf.heart_tick == 0)
 #define DO_HYGRO_READ() (conf.hygro_enabled && !hygro_wait())
 
-extern void terra_heart_beat();
-
-extern void terrad_run_period_init(terra_time const * const);
-extern BOOL terrad_run_period(terra_time const * const);
+extern void terrad_run_period_init();
+extern BOOL terrad_run_period();
 
 extern void terrad_run_temp_init();
 extern void terrad_run_temp(float const);
