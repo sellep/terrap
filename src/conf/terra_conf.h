@@ -3,6 +3,8 @@
 
 #include "../terra_defs.h"
 
+#include "../utils/terra_time.h"
+
 #include <libconfig.h>
 
 typedef struct

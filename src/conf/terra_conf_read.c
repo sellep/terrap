@@ -29,16 +29,16 @@ static inline void terra_conf_switch_parse(terra_conf * const dest, config_t con
 
 static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t const * const src)
 {
-	cont terra_time time;
+	const terra_time time;
 	const char *str;
 
-	config_lookup_bool(src, "hygro.enabled", &dest->hygro.enabled);
-	config_lookup_int(src, "hygro.pin", &dest->hygro.pin);
-	config_lookup_int(src, "hygro.repeats", &dest->hygro.repeats);
+	config_lookup_bool(src, "hygro.enabled", &dest->hy.enabled);
+	config_lookup_int(src, "hygro.pin", &dest->hy.pin);
+	config_lookup_int(src, "hygro.repeats", &dest->hy.repeats);
 	config_lookup_string(src, "hygro.delay", &str);
 
 	terra_time_read(&time, str);
-	dest->hygro.delay = terra_time_to_int(&time);
+	dest->hy.delay = terra_time_to_int(&time);
 }
 
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
@@ -48,12 +48,12 @@ BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 
 	config_init(&libconf);
 
-	if (!config_read_file(libconf, dest))
+	if (!config_read_file(&libconf, dest))
 	{
 		terra_log_error("[terra_conf_read] %s:%d - %s\n",
-			config_error_file(libconf),
-			config_error_line(libconf),
-			config_error_text(libconf));
+			config_error_file(&libconf),
+			config_error_line(&libconf),
+			config_error_text(&libconf));
 		goto exit;
 	}
 
@@ -65,6 +65,6 @@ BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 	status = TRUE;
 
 exit:
-	config_destroy(libconf);
+	config_destroy(&libconf);
 	return status;
 }

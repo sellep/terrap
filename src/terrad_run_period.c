@@ -1,16 +1,6 @@
 #include "terra.h"
 
-typedef struct
-{
-	terra_time begin;
-	switch_mode mode;
-} scheduler_period_cache;
-
-static scheduler_period_cache _scheduler_period_caches[TERRA_CONF_MAX_SCHED_PERIODS];
-
-#define CACHE(i) _scheduler_period_caches[(i)]
-
-static inline void change_switch(
+/*static inline void change_switch(
 	terra_scheduler_period const * const period,
 	scheduler_period_cache * const cache,
 	switch_mode const mode)
@@ -23,10 +13,11 @@ static inline void change_switch(
 	req.sock = period->sched.sock;
 	req.set_on = mode == SWITCH_ON ? TRUE : FALSE;
 	terra_switch_set(&req);
-}
+}*/
 
 void terrad_run_period_init()
 {
+	/*
 	terra_scheduler_period *period;
 	scheduler_period_cache *cache;
 	ssize_t i;
@@ -48,11 +39,11 @@ void terrad_run_period_init()
 		{
 			change_switch(period, cache, SWITCH_OFF);
 		}
-	}
+	}*/
 }
 
 BOOL terrad_run_period()
-{
+{/*
 	terra_scheduler_period *period;
 	scheduler_period_cache *cache;
 	terra_time diff;
@@ -62,11 +53,11 @@ BOOL terrad_run_period()
 	{
 		period = &conf.sched_periods[i];
 
-		if (SCHED_DISABLED(period))
+		if (SCHEDULER_DISABLED(period))
 			continue;
 
 		cache = CACHE(i);
-/*
+
 		if (!terra_time_between(&runtime.now, &period->active, &period->deactive))
 		{
 			if (cache->mode == SWITCH_ON)

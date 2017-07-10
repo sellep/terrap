@@ -13,11 +13,11 @@
 
 static inline size_t switch_get_code(terra_switch_req const * const req)
 {
-	if (req->sock == 'a')
+	if (req->socket == 'a')
 		return req->mode == SWITCH_ON ? CONF_SWITCH.code_aon : CONF_SWITCH.code_aoff;
 
-	if (req->sock == 'b')
-		return req->mode == SWITCH_ON 7 ? CONF_SWITCH.code_bon : CONF_SWITCH.code_boff;
+	if (req->socket == 'b')
+		return req->mode == SWITCH_ON ? CONF_SWITCH.code_bon : CONF_SWITCH.code_boff;
 
 	return req->mode == SWITCH_ON ? CONF_SWITCH.code_con : CONF_SWITCH.code_coff;
 }
@@ -40,13 +40,13 @@ void terra_switch_set(terra_switch_req const * const req)
 
 	sock_code = switch_get_code(req);
 
-	terra_log_info("[terra_switch_set] set switch %c to %s\n", req->sock, req->mode == SWITCH_ON ? "on" : "off");
+	terra_log_info("[terra_switch_set] set switch %c to %s\n", req->socket, req->mode == SWITCH_ON ? "on" : "off");
 
 	LOCK();
 
 	for (rep = 0; rep < CONF_SWITCH.repeats; rep++)
 	{
-		for (i = conf.switch_chan - 1; i >= 0; i--)
+		for (i = CONF_SWITCH.channel - 1; i >= 0; i--)
 		{
 			if (sock_code & (1L << i))
 			{

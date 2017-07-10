@@ -7,10 +7,10 @@
 
 enum terra_switch_modes
 {
-	SWITCH_UNKNOWN - 1,
-	SWITCH_OFF 0,
-	SWITCH_ON 1
-}
+	SWITCH_UNKNOWN = -1,
+	SWITCH_OFF  = 0,
+	SWITCH_ON = 1
+};
 
 typedef int terra_switch_mode;
 

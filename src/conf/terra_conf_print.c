@@ -1,6 +1,6 @@
 #include "terra_conf.h"
 
-void terra_conf_print(terra_conf const * const conf)
+void terra_conf_print(terra_conf const * const c)
 {
 	printf("delay = %i\n", c->delay);
 	printf("read_only = %i\n", c->read_only);

@@ -64,7 +64,7 @@ static inline terra_scheduler* find_scheduler_by_name(char const * const name)
 	//TODO: terra_exit(1);
 }
 
-static inline bool terra_scheduler_deps(void * target)
+static inline BOOL terra_scheduler_deps(void * target)
 {
 	terra_scheduler *sched = (terra_scheduler*) target;
 

@@ -59,7 +59,7 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_CONFIG) == 0)
 	{
-		terra_conf_print(&conf);
+		terra_conf_print(&CONF_GLOBAL);
 	}
 	else
 	{

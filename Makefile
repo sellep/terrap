@@ -3,7 +3,7 @@ NCURSESW5 := $(shell which ncursesw5-config 2> /dev/null)
 
 CC=@gcc
 CFLAGS=-v -fomit-frame-pointer -pipe -O3
-LIBS=-lrt -pthread
+LIBS=-lrt -pthread `pkg-config --libs libconfig`
 SYSLOG=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
