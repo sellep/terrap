@@ -21,38 +21,7 @@ typedef int terra_switch_mode;
 
 #include "pi_2_mmio.h"
 
-#define LOCK()(terra_lock())
-#define UNLOCK()(terra_unlock())
-
 #define LIKELY(x)       __builtin_expect((x),1)
 #define UNLIKELY(x)     __builtin_expect((x),0)
-
-static inline terra_pin_set_out(int const pin)
-{
-	pi_2_mmio_set_output(pin);
-}
-
-static inline void terra_lock()
-{
-#ifndef DEBUG
-	pthread_mutex_lock();
-#endif
-}
-
-static inline void terra_unlock()
-{
-#ifndef DEBUG
-	pthread_mutex_unlock();
-#endif
-}
-
-static inline void terra_pin_out()
-{
-	LOCK();
-#ifndef DEBUG
-	pi_2_mmio_set_output(p);
-#endif	
-	UNLOCK();
-}
 
 #endif

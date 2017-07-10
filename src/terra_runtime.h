@@ -13,6 +13,7 @@
 typedef struct
 {
 	terra_conf conf;
+	pthread_mutex_t *mutex;
 
 	uint64_t tick;
 	terra_time now;
@@ -30,7 +31,33 @@ static terra_runtime runtime;
 #define SCHEDULER_CLOCK(i) &CONF_GLOBAL.clocks[(i)]
 #define SCHEDULER_PERIOD(i) &CONF_GLOBAL.periods[(i)]
 
+#define LOCK() terra_lock()
+#define UNLOCK() terra_unlock()
+
 extern BOOL terra_runtime_init(char const * const);
+
+static inline void terra_lock()
+{
+#ifndef DEBUG
+	pthread_mutex_lock(runtime.mutex);
+#endif
+}
+
+static inline void terra_unlock()
+{
+#ifndef DEBUG
+	pthread_mutex_unlock(runtime.mutex);
+#endif
+}
+
+static inline terra_pin_set_out(int const pin)
+{
+	LOCK();
+#ifndef DEBUG
+	pi_2_mmio_set_output(pin);
+#endif	
+	UNLOCK();
+}
 
 static inline void terra_runtime_tick()
 {
