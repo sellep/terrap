@@ -13,7 +13,7 @@ extern void terrad_run_temp_init();
 extern void terrad_run_temp(float const);
 
 extern void terrad_run_clock_init();
-extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const, terra_time const * const);
+extern void terrad_run_clock(terra_sched_clock const * const, ssize_t const);
 
 static BOOL volatile _terminate = FALSE;
 
@@ -107,8 +107,6 @@ BOOL terrad_run()
 		}
 
 		sleep_milliseconds(conf.tick);
-
-		tick++;
 	}
 
 	return TRUE;
