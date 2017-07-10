@@ -12,4 +12,6 @@
 #include "hygro/terra_hygro.h"
 #include "led/terra_led.h"
 
+#define TERRA_CONF_PATH "/etc/conf.d/terra"
+
 #endif

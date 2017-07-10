@@ -67,7 +67,7 @@ BOOL terrad_run()
 	if (!register_signal_handler())
 		return FALSE;
 
-	terra_runtime_init();
+	terra_runtime_init(TERRA_CONF_PATH);
 
 	terrad_run_temp_init();
 	terrad_run_period_init();
@@ -92,13 +92,13 @@ BOOL terrad_run()
 			if(!terra_hygro_write(humi, temp))
 				return FALSE;
 
-			if (!conf->read_only)
+			if (!conf.read_only)
 			{
 				terrad_run_temp(temp);
 			}
 		}
 
-		if (!conf->read_only)
+		if (!conf.read_only)
 		{
 			terrad_run_period();
 
@@ -108,7 +108,7 @@ BOOL terrad_run()
 			}
 		}
 
-		sleep_milliseconds(conf->tick);
+		sleep_milliseconds(conf.tick);
 
 		tick++;
 	}
