@@ -35,7 +35,6 @@ OBJ=pi_2_mmio.o \
 	terra_visual_legend.o \
 	terra_visual_points.o \
 	terra_runtime.o \
-	terra_init.o \
 	terrad_run_period.o \
 	terrad_run_clock.o \
 	terrad_run_temp.o \

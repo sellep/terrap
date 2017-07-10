@@ -16,9 +16,14 @@ static pthread_mutexattr_t _mutex_attr;
 extern BOOL terra_lock_init();
 extern BOOL map_mutex_to_address_space();
 
-
 BOOL terra_runtime_init(char const * const conf_path, BOOL const daemon)
 {
+	if (pi_2_mmio_init() != MMIO_SUCCESS)
+	{
+		terra_log_error("[terra_runtime_init] failed to initialize mmio\n");
+		return FALSE;
+	}
+
 	if (!terra_lock_init())
 	{
 		terra_log_error("[terra_runtime_init] failed to initialize lock\n");

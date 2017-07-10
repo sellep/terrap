@@ -1,8 +1,8 @@
 #include "terra.h"
 
-BOOL terra_init(char const * const conf_path)
+BOOL terra_init(char const * const conf_path, BOOL const daemon)
 {
-	if (!terra_runtime_init(conf_path))
+	if (!terra_runtime_init(conf_path, daemon))
 	{
 		terra_log_error("[terra_init] failed to initialize runtime\n");
 		return FALSE;
