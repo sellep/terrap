@@ -24,7 +24,6 @@ OBJ=pi_2_mmio.o \
 	terra_conf_print.o \
 	terra_switch_arg.o \
 	terra_switch_set.o \
-	terra_hygro_arg.o \
 	terra_hygro_run.o \
 	terra_hygro_write.o \
 	terra_visual_show.o \

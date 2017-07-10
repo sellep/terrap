@@ -10,11 +10,11 @@ int main(int argc, char ** argv)
 {
 	terra_led_cmd led_cmd;
 	terra_switch_req switch_req;
-	terra_hygro_cmd hygro_cmd;
 	terra_visual_cmd visual_cmd;
+	float temp, humi;
 
 //initialization and setup
-	if (!terra_runtime_init(TERRA_CONF_PATH, FALSE))
+	if (!terra_runtime_init(TERRA_CONF_PATH))
 	{
 		terra_log_error("[terra] failed to initialize runtime\n");
 		exit(1);
@@ -44,11 +44,10 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
 	{
-		if (!terra_hygro_arg(&hygro_cmd, argc, argv))
+		if (!terra_hygro_run(&humi, &temp))
 			return 1;
 
-		if (!terra_hygro_run(&hygro_cmd))
-			return 1;
+		terra_log_info("temperature %.2f, humigity: %.2f\n", temp, humi);
 	}
 	else if (strcmp(argv[1], ARG_MODE_VISUAL) == 0)
 	{

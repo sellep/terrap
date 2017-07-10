@@ -12,7 +12,6 @@
 
 typedef struct
 {
-	BOOL daemon;
 	uint64_t tick;
 	terra_time now;
 	int hygro_err;
@@ -21,7 +20,7 @@ typedef struct
 static terra_conf conf;
 static terra_runtime runtime;
 
-extern BOOL terra_runtime_init(char const * const, BOOL const);
+extern BOOL terra_runtime_init(char const * const);
 
 inline static void terra_runtime_tick()
 {

@@ -15,6 +15,9 @@
 #define LOCK()(terra_lock())
 #define UNLOCK()(terra_unlock())
 
+#define LIKELY(x)       __builtin_expect((x),1)
+#define UNLIKELY(x)     __builtin_expect((x),0)
+
 inline static void terra_lock()
 {
 #ifndef DEBUG

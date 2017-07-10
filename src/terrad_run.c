@@ -82,8 +82,14 @@ BOOL terrad_run()
 
 		if (DO_HYGRO_READ())
 		{
-			if (!terra_hygro_read_rep(&humi, &temp))
-				return FALSE;
+			if (!terra_hygro_run(&humi, &temp))
+			{
+				runtime.hygro_err++;
+			}
+			else
+			{
+				runtime.hygro_err = 0;
+			}
 
 			if(!terra_hygro_write(humi, temp))
 				return FALSE;

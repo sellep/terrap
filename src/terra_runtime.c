@@ -16,7 +16,7 @@ static pthread_mutexattr_t _mutex_attr;
 extern BOOL terra_lock_init();
 extern BOOL map_mutex_to_address_space();
 
-BOOL terra_runtime_init(char const * const conf_path, BOOL const daemon)
+BOOL terra_runtime_init(char const * const conf_path)
 {
 	if (pi_2_mmio_init() != MMIO_SUCCESS)
 	{
@@ -36,7 +36,6 @@ BOOL terra_runtime_init(char const * const conf_path, BOOL const daemon)
 		return FALSE;
 	}
 
-	runtime.daemon = daemon;
 	runtime.hygro_err = 0;
 
 	terra_pin_out(conf.switch_pin);

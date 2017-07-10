@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	terra_log_info("terra daemon started\n");
 
 //initialization and setup
-	if (!terra_runtime_init(TERRA_CONF_PATH, TRUE))
+	if (!terra_runtime_init(TERRA_CONF_PATH))
 	{
 		terra_log_error("[terrad] failed to initialize runtime\n");
 		exit(1);
