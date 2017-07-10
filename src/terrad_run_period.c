@@ -15,12 +15,12 @@ static inline void change_switch(
 {
 	terra_switch_req req;
 
-	terra_time_cpy(&(cache->begin), &runtime.now);
+	terra_time_cpy(&cache->begin, &runtime.now);
 	cache->mode = mode;
 
 	req.sock = period->sched.sock;
 	req.set_on = mode == SWITCH_ON ? TRUE : FALSE;
-	terra_switch_set(&conf, &req);
+	terra_switch_set(&req);
 }
 
 void terrad_run_period_init()
@@ -40,7 +40,7 @@ void terrad_run_period_init()
 
 		if (terra_time_between(&runtime.now, &period->act, &period->deact))
 		{
-			change_switch(period, cache, &runtime.now, SWITCH_ON);
+			change_switch(period, cache, SWITCH_ON);
 		}
 		else
 		{
@@ -82,12 +82,12 @@ BOOL terrad_run_period()
 
 		if (cache->mode == SWITCH_ON)
 		{
-			if (terra_time_cmp(&diff, &(period->on_dur)) != TIME_BELOW)
+			if (terra_time_cmp(&diff, &period->on_dur) != TIME_BELOW)
 			{
 				change_switch(period, cache, SWITCH_OFF);
 			}
 		}
-		else if (terra_time_cmp(&diff, &(period->off_dur)) != TIME_BELOW)
+		else if (terra_time_cmp(&diff, &period->off_dur) != TIME_BELOW)
 		{
 			change_switch(period, cache, SWITCH_ON);
 		}

@@ -52,17 +52,15 @@ static inline void terra_date_now(terra_date * const date, short const doff)
 	date->year = ts.tm_year + 1900;
 }
 
-/*
-check for obsolete
 static inline void terra_time_difft(terra_time * const c, terra_time const * const a, terra_time const * const b)
 {
-	size_t secs;
-	secs = terra_time_diff(a, b);
+	size_t secs = terra_time_diff(a, b);
 
 	c->hour = secs / 60 / 60;
-	c->min = (secs - c->hour) / 60;
-	c->sec = secs - c->hour - c->min;
-}*/
+	secs -= c->hour * 60 * 60;
+	c->min = secs / 60;
+	c->sec -= secs - c->min * 60;
+}
 
 static inline void terra_time_cpy(terra_time * const dest, terra_time const * const src)
 {
