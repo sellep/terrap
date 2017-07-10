@@ -18,21 +18,26 @@
 #define LIKELY(x)       __builtin_expect((x),1)
 #define UNLIKELY(x)     __builtin_expect((x),0)
 
-inline static void terra_lock()
+static inline terra_pin_set_out(ssize_t const pin)
+{
+	pi_2_mmio_set_output(pin);
+}
+
+static inline void terra_lock()
 {
 #ifndef DEBUG
 	pthread_mutex_lock();
 #endif
 }
 
-inline static void terra_unlock()
+static inline void terra_unlock()
 {
 #ifndef DEBUG
 	pthread_mutex_unlock();
 #endif
 }
 
-inline static void terra_pin_out()
+static inline void terra_pin_out()
 {
 	LOCK();
 #ifndef DEBUG

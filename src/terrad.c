@@ -15,9 +15,9 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
-	terra_pin_set_output(conf.led_pin_alert);
-	terra_pin_set_output(conf.led_pin_heart);
-	terra_pin_set_output(conf.switch_pin);
+	terra_pin_set_out(conf.led_pin_alert);
+	terra_pin_set_out(conf.led_pin_heart);
+	terra_pin_set_out(conf.switch_pin);
 
 	terra_led_set(conf.led_pin_alert, FALSE);
 	terra_led_set(conf.led_pin_heart, FALSE);
