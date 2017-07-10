@@ -37,6 +37,9 @@ BOOL terra_runtime_init(char const * const conf_path)
 	terra_pin_out(conf.led_pin_heart);
 	terra_pin_out(conf.led_pin_alert);
 
+	runtime.tick = 0;
+	terra_time_now(&runtime.now);
+
 	return TRUE;
 }
 

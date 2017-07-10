@@ -22,12 +22,6 @@ static terra_runtime runtime;
 
 extern BOOL terra_runtime_init(char const * const);
 
-inline static void terra_runtime_init()
-{
-	runtime.tick = 0;
-	terra_time_now(&runtime.now);
-}
-
 inline static void terra_runtime_tick()
 {
 	runtime.tick++;
