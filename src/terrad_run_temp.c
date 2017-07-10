@@ -13,7 +13,7 @@ static inline void change_switch(terra_sched_temp const * const temp, ssize_t co
 
 	req.sock = temp->sched.sock;
 	req.set_on = mode == SWITCH_ON ? TRUE : FALSE;
-	terra_switch_set(&conf, &req);
+	terra_switch_set(&req);
 }
 
 void terrad_run_temp_init()
@@ -21,7 +21,7 @@ void terrad_run_temp_init()
 	terra_sched_temp *temp;
 	ssize_t i;
 
-	for (i = 0 ; i < conf->sched_temps_len; i++)
+	for (i = 0 ; i < conf.sched_temps_len; i++)
 	{
 		_switch_modes[i] = SWITCH_OFF;
 	}
@@ -34,7 +34,7 @@ void terrad_run_temp(float const t)
 
 	for (i = 0 ; i < conf.sched_temps_len; i++)
 	{
-		temp = conf.sched_temps[i];
+		temp = &conf.sched_temps[i];
 
 		if (SCHED_DISABLED(temp))
 			continue;

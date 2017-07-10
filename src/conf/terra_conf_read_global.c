@@ -19,7 +19,7 @@
 #define CONF_SWITCH_CODE_COFF "switch_code_coff="
 #define CONF_HYGRO_ENABLED "hygro_enabled="
 #define CONF_HYGRO_PIN_IO "hygro_pin_io="
-#define CONF_HYGRO_TICK "hygro_tick="
+#define CONF_HYGRO_DELAY "hygro_delay="
 #define CONF_HYGRO_REP "hygro_rep="
 #define CONF_HYGRO_WRITE_DELAY "hygro_write_delay="
 
@@ -116,17 +116,15 @@ BOOL terra_conf_read_global(terra_conf * const conf, FILE * const f)
 		{
 			conf->hygro_pin_io = atoi(line + sizeof(CONF_HYGRO_PIN_IO) - 1);
 		}
-		else if (strncmp(line, CONF_HYGRO_TICK, sizeof(CONF_HYGRO_TICK) - 1) == 0)
-		{
-			conf->hygro_tick = atoi(line + sizeof(CONF_HYGRO_TICK) - 1);
-		}
 		else if (strncmp(line, CONF_HYGRO_REP, sizeof(CONF_HYGRO_REP) - 1) == 0)
 		{
 			conf->hygro_rep = atoi(line + sizeof(CONF_HYGRO_REP) - 1);
 		}
-		else if (strncmp(line, CONF_HYGRO_WRITE_DELAY, sizeof(CONF_HYGRO_WRITE_DELAY) - 1) == 0)
+		else if (strncmp(line, CONF_HYGRO_DELAY, sizeof(CONF_HYGRO_DELAY) - 1) == 0)
 		{
-			if(!terra_time_read(&conf->hygro_write_delay, line + sizeof(CONF_HYGRO_WRITE_DELAY) - 1)) HANDLE_ERROR("[terra_conf_read_global] invalid hygro_write_delay\n");
+			terra_time tmp;
+			if(!terra_time_read(&tmp, line + sizeof(CONF_HYGRO_DELAY) - 1)) HANDLE_ERROR("[terra_conf_read_global] invalid hygro_write_delay\n");
+			conf->hygro_delay_tick = terra_time_to_int(&tmp);
 		}
 		else if (strncmp(line, CONF_GLOBAL_END, sizeof(CONF_GLOBAL_END) - 1) == 0)
 		{

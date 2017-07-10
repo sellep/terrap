@@ -34,37 +34,98 @@ typedef struct
 	terra_time stop;
 } terra_start_stop;
 
-void terra_date_now(terra_date * const, short const);
+static terra_time day_begin = { 0, 0, 0 };
+static terra_time day_end = { 23, 59, 59 };
 
-time_cmp terra_time_cmp(terra_time const * const, terra_time const * const);
-void terra_time_print(terra_time const * const);
-BOOL terra_time_read(terra_time * const, char const * const);
-size_t terra_time_diff(terra_time const * const a, terra_time const * const b);
+extern void terra_time_print(terra_time const * const);
+extern BOOL terra_time_read(terra_time * const, char const * const);
 
-void sleep_microseconds(size_t const);
+static inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const * const b)
+{
+	size_t secs_a;
+	size_t secs_b;
+
+	secs_a = a->hour * 60 * 60;
+	secs_a += a->min * 60;
+	secs_a += a->sec;
+
+	secs_b = b->hour * 60 * 60;
+	secs_b += b->min * 60;
+	secs_b += b->sec;
+
+	return secs_a - secs_b;
+}
+
+static inline size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
+{
+	if (terra_time_cmp(a, b) == TIME_BELOW)
+		return terra_time_diff_raw(&day_end, b) + terra_time_diff_raw(a, &day_begin);
+
+	return terra_time_diff_raw(a, b);
+}
+
+static inline void terra_date_now(terra_date * const date, short const doff)
+{
+	time_t t = time(NULL);
+	struct tm ts = *localtime(&t);
+	ts.tm_mday += doff;
+	mktime(&ts);
+
+	date->day = ts.tm_mday;
+	date->mon = ts.tm_mon + 1;
+	date->year = ts.tm_year + 1900;
+}
 
 /*
-void sleep_milliseconds(size_t const);
-void busy_wait_milliseconds(size_t const);
-*/
+check for obsolete
+static inline void terra_time_difft(terra_time * const c, terra_time const * const a, terra_time const * const b)
+{
+	size_t secs;
+	secs = terra_time_diff(a, b);
 
-void terra_time_cpy(terra_time * const, terra_time const * const);
-void terra_time_difft(terra_time * const, terra_time const * const, terra_time const * const);
+	c->hour = secs / 60 / 60;
+	c->min = (secs - c->hour) / 60;
+	c->sec = secs - c->hour - c->min;
+}*/
 
-#define DAY_BEGIN ((terra_time) { 0, 0, 0 })
-#define DAY_END ((terra_time) { 23, 59, 59 })
+static inline void terra_time_cpy(terra_time * const dest, terra_time const * const src)
+{
+	dest->hour = src->hour;
+	dest->min = src->min;
+	dest->sec = src->sec;
+}
 
-inline static size_t terra_time_to_int(terra_time const * const tt)
+static inline time_cmp terra_time_cmp(terra_time const * const a, terra_time const * const b)
+{
+	if (a->hour > b->hour)
+		return TIME_ABOVE;
+	if (a->hour < b->hour)
+		return TIME_BELOW;
+
+	if (a->min > b->min)
+		return TIME_ABOVE;
+	if (a->min < b->min)
+		return TIME_BELOW;
+
+	if (a->sec > b->sec)
+		return TIME_ABOVE;
+	if (a->sec < b->sec)
+		return TIME_BELOW;
+
+	return TIME_EQUAL;
+}
+
+static inline size_t terra_time_to_int(terra_time const * const tt)
 {
 	return tt->hour * 60 * 60 + tt->min * 60 + tt->sec;
 }
 
-inline static ssize_t terra_time_to_arr(char * const buf, terra_time const * const tt)
+static inline ssize_t terra_time_to_arr(char * const buf, terra_time const * const tt)
 {
 	return sprintf(buf, "%zu:%02zu:%02zu", tt->hour, tt->min, tt->sec);
 }
 
-inline static void terra_time_from_int(terra_time * const tt, size_t const val)
+static inline void terra_time_from_int(terra_time * const tt, size_t const val)
 {
 	size_t copy = val;
 
@@ -75,7 +136,7 @@ inline static void terra_time_from_int(terra_time * const tt, size_t const val)
 	tt->sec = copy;
 }
 
-inline static BOOL terra_time_between(terra_time const * const tim, terra_time const * const begin, terra_time const * const end)
+static inline BOOL terra_time_between(terra_time const * const tim, terra_time const * const begin, terra_time const * const end)
 {
 	if (terra_time_cmp(begin, end) == TIME_BELOW)
 	{
@@ -97,7 +158,7 @@ inline static BOOL terra_time_between(terra_time const * const tim, terra_time c
 	return FALSE;
 }
 
-inline static void terra_time_now(terra_time * const tim)
+static inline void terra_time_now(terra_time * const tim)
 {
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);

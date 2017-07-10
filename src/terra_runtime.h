@@ -3,14 +3,17 @@
 
 #include "pi_2_mmio.h"
 #include "common_dht_read.h"
+#include "pi_2_dht_read.h"
 
 #include "terra_defs.h"
 #include "utils/terra_log.h"
+#include "utils/terra_time.h"
 #include "conf/terra_conf.h"
 
 typedef struct
 {
-	terra_conf conf;
+	uint64_t tick;
+	terra_time now;
 	int hygro_err;
 } terra_runtime;
 
@@ -19,5 +22,16 @@ static terra_runtime runtime;
 
 extern BOOL terra_runtime_init(char const * const);
 
+inline static void terra_runtime_init()
+{
+	runtime.tick = 0;
+	terra_time_now(&runtime.now);
+}
+
+inline static void terra_runtime_tick()
+{
+	runtime.tick++;
+	terra_time_now(&runtime.now);
+}
 
 #endif

@@ -93,9 +93,8 @@ typedef struct
 
 	ssize_t hygro_enabled;
 	ssize_t hygro_pin_io;
-	ssize_t hygro_tick;
+	ssize_t hygro_delay_tick;
 	ssize_t hygro_rep;
-	terra_time hygro_write_delay;
 
 	terra_sched_clock sched_clocks[TERRA_CONF_MAX_SCHED_CLOCKS];
 	ssize_t sched_clocks_len;

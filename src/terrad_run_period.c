@@ -11,12 +11,11 @@ static sched_period_cache _sched_period_caches[TERRA_CONF_MAX_SCHED_PERIODS];
 static inline void change_switch(
 	terra_sched_period const * const period,
 	sched_period_cache * const cache,
-	terra_time const * const sys_time,
 	switch_mode const mode)
 {
 	terra_switch_req req;
 
-	terra_time_cpy(&(cache->begin), sys_time);
+	terra_time_cpy(&(cache->begin), &runtime.now);
 	cache->mode = mode;
 
 	req.sock = period->sched.sock;
@@ -24,7 +23,7 @@ static inline void change_switch(
 	terra_switch_set(&conf, &req);
 }
 
-void terrad_run_period_init(terra_time const * const sys_time)
+void terrad_run_period_init()
 {
 	terra_sched_period *period;
 	sched_period_cache *cache;
@@ -39,19 +38,19 @@ void terrad_run_period_init(terra_time const * const sys_time)
 
 		cache = &_sched_period_caches[i];
 
-		if (terra_time_between(sys_time, &period->act, &period->deact))
+		if (terra_time_between(&runtime.now, &period->act, &period->deact))
 		{
-			change_switch(period, cache, sys_time, SWITCH_ON);
+			change_switch(period, cache, &runtime.now, SWITCH_ON);
 		}
 		else
 		{
 			cache->mode = SWITCH_OFF;
-			terra_time_cpy(&cache->begin, sys_time);
+			terra_time_cpy(&cache->begin, &runtime.now);
 		}
 	}
 }
 
-BOOL terrad_run_period(terra_time const * const sys_time)
+BOOL terrad_run_period()
 {
 	terra_sched_period *period;
 	sched_period_cache *cache;
@@ -69,28 +68,28 @@ BOOL terrad_run_period(terra_time const * const sys_time)
 		cache = &_sched_period_caches[i];
 
 		//check scheduler deactive
-		if (!terra_time_between(sys_time, &period->act, &period->deact))
+		if (!terra_time_between(&runtime.now, &period->act, &period->deact))
 		{
 			if (cache->mode == SWITCH_ON)
 			{
-				change_switch(period, cache, sys_time, SWITCH_OFF);
+				change_switch(period, cache, SWITCH_OFF);
 			}
 
 			continue;
 		}
 
-		terra_time_difft(&diff, sys_time, &(cache->begin));
+		terra_time_difft(&diff, &runtime.now, &(cache->begin));
 
 		if (cache->mode == SWITCH_ON)
 		{
 			if (terra_time_cmp(&diff, &(period->on_dur)) != TIME_BELOW)
 			{
-				change_switch(period, cache, sys_time, SWITCH_OFF);
+				change_switch(period, cache, SWITCH_OFF);
 			}
 		}
 		else if (terra_time_cmp(&diff, &(period->off_dur)) != TIME_BELOW)
 		{
-			change_switch(period, cache, sys_time, SWITCH_ON);
+			change_switch(period, cache, SWITCH_ON);
 		}
 	}
 

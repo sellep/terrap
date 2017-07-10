@@ -2,7 +2,6 @@
 #define __P_TERRA_SWITCH_H
 
 #include "../terra_runtime.h"
-#include "../utils/terra_time.h"
 
 typedef struct
 {
@@ -11,6 +10,6 @@ typedef struct
 } terra_switch_req;
 
 BOOL terra_switch_arg(terra_switch_req * const, int const, char const * const * const);
-void terra_switch_set(terra_conf const * const, terra_switch_req const * const);
+void terra_switch_set(terra_switch_req const * const);
 
 #endif

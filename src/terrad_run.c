@@ -3,7 +3,8 @@
 #include <stdint.h>
 #include <signal.h>
 
-#define DO_HYGRO_READ(conf, tick) (conf->hygro_enabled && tick % conf->hygro_tick == 0)
+#define DO_HEART_BEAT() (runtime.tick % conf.heart_tick == 0)
+#define DO_HYGRO_READ() (conf.hygro_enabled && !hygro_wait())
 
 extern void terra_heart_beat();
 
@@ -44,11 +45,19 @@ BOOL register_signal_handler()
 	return TRUE;
 }
 
+static inline void terra_heart_beat()
+{
+	const terra_led_cmd heart_on = LED_ON | LED_HEART;
+	const terra_led_cmd heart_off = LED_OFF | LED_HEART;
+
+	terra_led_set(conf.led_pin_heart, heart_on);
+	sleep_milliseconds(conf.heart_dur);
+	terra_led_set(conf.led_pin_heart, heart_off);
+}
+
 BOOL terrad_run()
 {
-	terra_time now;
 	ssize_t i;
-	uint64_t tick = 0;
 
 	float temp;
 	float humi;
@@ -58,44 +67,44 @@ BOOL terrad_run()
 	if (!register_signal_handler())
 		return FALSE;
 
-	terra_time_now(&now);
+	terra_runtime_init();
 
 	terrad_run_temp_init();
-	terrad_run_period_init(&now);
+	terrad_run_period_init();
 	terrad_run_clock_init();
 
 	//scheduling
 
 	while (!_terminate)
 	{
-		terra_time_now(&now);
+		terra_runtime_tick();
 
-		if (tick % conf->heart_tick == 0)
+		if (DO_HEART_BEAT())
 		{
-			terra_heart_beat(conf);
+			terra_heart_beat();
 		}
 
-		if (DO_HYGRO_READ(conf, tick))
+		if (DO_HYGRO_READ())
 		{
-			if (!terra_hygro_read_rep(conf, &humi, &temp))
+			if (!terra_hygro_read_rep(&humi, &temp))
 				return FALSE;
 
-			if(!terra_hygro_write(conf, &now, humi, temp))
+			if(!terra_hygro_write(humi, temp))
 				return FALSE;
 
 			if (!conf->read_only)
 			{
-				terrad_run_temp(conf, temp);
+				terrad_run_temp(temp);
 			}
 		}
 
 		if (!conf->read_only)
 		{
-			terrad_run_period(conf, &now);
+			terrad_run_period();
 
-			for (i = 0 ; i < conf->sched_clocks_len; i++)
+			for (i = 0 ; i < conf.sched_clocks_len; i++)
 			{
-				terrad_run_clock(&(conf->sched_clocks[i]), i, &now);
+				terrad_run_clock(&conf.sched_clocks[i], i);
 			}
 		}
 
