@@ -6,15 +6,15 @@
 
 typedef struct
 {
-	ssize_t pin;
-	ssize_t repeats;
-	ssize_t channel;
-	size_t code_aon;
-	size_t code_aoff;
-	size_t code_bon;
-	size_t code_boff;
-	size_t code_con;
-	size_t code_coff;
+	int pin;
+	int repeats;
+	int channel;
+	int code_aon;
+	int code_aoff;
+	int code_bon;
+	int code_boff;
+	int code_con;
+	int code_coff;
 } terra_conf_switch;
 
 typedef struct
