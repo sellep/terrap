@@ -26,8 +26,8 @@ typedef struct
 
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
 {
-	config_lookup_bool(src, "read_only", &dest.read_only);
-	config_lookup_int(src, "delay", &dest.delay);
+	config_lookup_bool(src, "read_only", &dest->read_only);
+	config_lookup_int(src, "delay", &dest->delay);
 }
 
 static inline void terra_conf_switch_parse(terra_conf * const dest, config_t const * const src)
