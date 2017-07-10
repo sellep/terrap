@@ -30,7 +30,7 @@ BOOL terra_runtime_init(char const * const conf_path)
 		return FALSE;
 	}
 
-	if (!terra_conf_read(&conf, conf_path))
+	if (!terra_conf_read(&CONF_GLOBAL, conf_path))
 	{
 		terra_log_error("[terra_runtime_init] failed to read config file\n");
 		return FALSE;
@@ -38,9 +38,9 @@ BOOL terra_runtime_init(char const * const conf_path)
 
 	runtime.hygro_err = 0;
 
-	terra_pin_out(conf.switch_pin);
-	terra_pin_out(conf.led_pin_heart);
-	terra_pin_out(conf.led_pin_alert);
+	terra_pin_out(CONF_SWITCH.pin);
+	terra_pin_out(CONF_HEART.pin);
+	terra_pin_out(CONF_GLOBAL.pin_alert);
 
 	runtime.tick = 0;
 	terra_time_now(&runtime.now);

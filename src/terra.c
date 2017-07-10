@@ -14,7 +14,7 @@ int main(int argc, char ** argv)
 	float temp, humi;
 
 //initialization and setup
-	if (!terra_runtime_init(TERRA_CONF_PATH))
+	if (!terra_runtime_init(CONF_PATH))
 	{
 		terra_log_error("[terra] failed to initialize runtime\n");
 		exit(1);

@@ -3,8 +3,8 @@
 #include <stdint.h>
 #include <signal.h>
 
-#define DO_HEART_BEAT() (runtime.tick % conf.heart_tick == 0)
-#define DO_HYGRO_READ() (conf.hygro_enabled && !hygro_wait())
+#define DO_HEART_BEAT() (runtime.tick % CONF_HEART.tick == 0)
+#define DO_HYGRO_READ() (CONF_HYGRO.enabled && !hygro_wait())
 
 extern void terrad_run_period_init();
 extern BOOL terrad_run_period();
@@ -48,9 +48,9 @@ static inline void terra_heart_beat()
 	const terra_led_cmd heart_on = LED_ON | LED_HEART;
 	const terra_led_cmd heart_off = LED_OFF | LED_HEART;
 
-	terra_led_set(conf.led_pin_heart, heart_on);
-	sleep_milliseconds(conf.heart_dur);
-	terra_led_set(conf.led_pin_heart, heart_off);
+	terra_led_set(CONF_HEART.pin, heart_on);
+	sleep_milliseconds(CONF_HEART.duration);
+	terra_led_set(CONF_HEART.pin, heart_off);
 }
 
 BOOL terrad_run()
@@ -73,6 +73,8 @@ BOOL terrad_run()
 
 	while (!_terminate)
 	{
+		//TODO: start heart
+
 		terra_runtime_tick();
 
 		if (DO_HEART_BEAT())
@@ -110,7 +112,9 @@ BOOL terrad_run()
 			}
 		}
 
-		sleep_milliseconds(conf.tick);
+		//TODO: stop heart
+
+		sleep_milliseconds(CONF_GLOBAL.delay);
 	}
 
 	return TRUE;

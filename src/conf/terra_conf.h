@@ -8,6 +8,13 @@
 typedef struct
 {
 	int pin;
+	int tick;
+	int duration;
+} terra_conf_heart;
+
+typedef struct
+{
+	int pin;
 	int repeats;
 	int channel;
 	int code_aon;
@@ -28,13 +35,51 @@ typedef struct
 
 typedef struct
 {
+	char *name;
+	char socket;
+	BOOL enabled;
+
+	char *depends;
+	terra_switch_mode state;
+} terra_scheduler;
+
+typedef struct
+{
+	terra_scheduler scheduler;
+
+	int time_len;
+	terra_start_stop *times;
+} terra_scheduler_clock;
+
+typedef struct
+{
+	terra_scheduler scheduler;
+	terra_time active;
+	terra_time deactive;
+	BOOL active_first;
+} terra_scheduler_period;
+
+typedef struct
+{
 	int delay;
 	BOOL read_only;
+	int pin_alert;
 
+	terra_conf_heart he;
 	terra_conf_switch sw;
 	terra_conf_hygro hy;
+
+	int clock_len;
+	terra_scheduler_clock *clocks;
+
+	int period_len;
+	terra_scheduler_period *periods;
 } terra_conf;
 
+#define SCHEDULER_DISABLED(s) !(((terra_scheduler*)(s))->enabled)
+#define SCHEDULER_SET_MODE(s, m) ((terra_scheduler*)(s))->state = m
+
 extern BOOL terra_conf_read(terra_conf * const, char const * const);
+extern void terra_conf_print(terra_conf const * const);
 
 #endif

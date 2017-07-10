@@ -41,12 +41,12 @@ inline static BOOL terra_led_set_from_cmd(terra_led_cmd const cmd)
 
 	if (cmd & LED_ERR)
 	{
-		terra_led_set(conf.led_pin_alert, cmd);
+		terra_led_set(CONF_GLOBAL.pin_alert, cmd);
 		return TRUE;
 	}
 	else if (cmd & LED_HEART)
 	{
-		terra_led_set(conf.led_pin_heart, cmd);
+		terra_led_set(CONF_HEART.pin, cmd);
 		return TRUE;
 	}
 

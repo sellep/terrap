@@ -9,24 +9,24 @@ int main(int argc, char **argv)
 	terra_log_info("terra daemon started\n");
 
 //initialization and setup
-	if (!terra_runtime_init(TERRA_CONF_PATH))
+	if (!terra_runtime_init(CONF_PATH))
 	{
 		terra_log_error("[terrad] failed to initialize runtime\n");
 		exit(1);
 	}
 
-	terra_pin_set_out(conf.led_pin_alert);
-	terra_pin_set_out(conf.led_pin_heart);
-	terra_pin_set_out(conf.switch_pin);
+	terra_pin_set_out(CONF_GLOBAL.pin_alert);
+	terra_pin_set_out(CONF_HEART.pin);
+	terra_pin_set_out(CONF_SWITCH.pin);
 
-	terra_led_set(conf.led_pin_alert, FALSE);
-	terra_led_set(conf.led_pin_heart, FALSE);
+	terra_led_set(CONF_GLOBAL.pin_alert, FALSE);
+	terra_led_set(CONF_HEART.pin, FALSE);
 
 //run
 	run_result = terrad_run();
 
 	terra_log_info("terra daemon stopped\n");
-	terra_led_set(conf.led_pin_alert, TRUE);
+	terra_led_set(CONF_GLOBAL.pin_alert, TRUE);
 
 	if (!run_result)
 		return 1;

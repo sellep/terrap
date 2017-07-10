@@ -18,7 +18,7 @@ BOOL terra_hygro_write(float const h, float const t)
 	}
 	else
 	{
-		terra_time_cpy(&hygro_last, &runtime.now);
+		terra_time_cpy(&runtime.hygro_last, &runtime.now);
 	}
 
 	return res;

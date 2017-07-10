@@ -25,36 +25,36 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 		&& argv[2][0] != 'C'
 		)
 	{
-		terra_log_error("not a valid socket\n");
+		terra_log_error("invalid socket\n");
 		return FALSE;
 	}
 
 	if (argv[2][0] == 'A')
 	{
-		switch_req->sock = 'a';
+		switch_req->socket = 'a';
 	}
 	else if (argv[2][0] == 'B')
 	{
-		switch_req->sock = 'b';
+		switch_req->socket = 'b';
 	}
 	else if (argv[2][0] == 'C')
 	{
-		switch_req->sock = 'c';
+		switch_req->socket = 'c';
 	}
 	else
 	{
-		switch_req->sock = argv[2][0];
+		switch_req->socket = argv[2][0];
 	}
 
 	if (strcmp(argv[3], ARG_MODE_SWITCH_ON) == 0)
 	{
-		switch_req->set_on = TRUE;
+		switch_req->mode = SWITCH_ON;
 		return TRUE;
 	}
 
 	if (strcmp(argv[3], ARG_MODE_SWITCH_OFF) == 0)
 	{
-		switch_req->set_on = FALSE;
+		switch_req->mode = SWITCH_OFF;
 		return TRUE;
 	}
 

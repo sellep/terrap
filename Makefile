@@ -14,13 +14,7 @@ OBJ=pi_2_mmio.o \
 	terra_data_append.o \
 	terra_data_read.o \
 	terra_led_arg.o \
-	terra_conf_read_global.o \
-	terra_conf_read_sched.o \
-	terra_conf_read_sched_periods.o \
-	terra_conf_read_sched_clocks.o \
-	terra_conf_read_sched_temps.o \
 	terra_conf_read.o \
-	terra_conf_valid.o \
 	terra_conf_print.o \
 	terra_switch_arg.o \
 	terra_switch_set.o \
