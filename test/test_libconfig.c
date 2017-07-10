@@ -32,15 +32,15 @@ static inline void terra_conf_global_parse(terra_conf * const dest, config_t con
 
 static inline void terra_conf_switch_parse(terra_conf * const dest, config_t const * const src)
 { 
-	config_lookup_int(src, "switch.pin", &dest->sw.pin);
-	config_lookup_int(src, "switch.repeats", &dest->sw.repeats);
-	config_lookup_int(src, "switch.channel", &dest->sw.channel);
-	config_lookup_int(src, "switch.code_aon", &dest->sw.code_aon);
-	config_lookup_int(src, "switch.code_aoff", &dest->sw.code_aoff);
-	config_lookup_int(src, "switch.code_bon", &dest->sw.code_bon);
-	config_lookup_int(src, "switch.code_boff", &dest->sw.code_boff);
-	config_lookup_int(src, "switch.code_con", &dest->sw.code_con);
-	config_lookup_int(src, "switch.code_coff", &dest->sw.code_coff);
+	config_lookup_int(src, "switch.pin", &(dest->sw.pin));
+	config_lookup_int(src, "switch.repeats", &(dest->sw.repeats));
+	config_lookup_int(src, "switch.channel", &(dest->sw.channel));
+	config_lookup_int(src, "switch.code_aon", &(dest->sw.code_aon));
+	config_lookup_int(src, "switch.code_aoff", &(dest->sw.code_aoff));
+	config_lookup_int(src, "switch.code_bon", &(dest->sw.code_bon));
+	config_lookup_int(src, "switch.code_boff", &(dest->sw.code_boff));
+	config_lookup_int(src, "switch.code_con", &(dest->sw.code_con));
+	config_lookup_int(src, "switch.code_coff", &(dest->sw.code_coff));
 }
 
 static inline void terra_conf_parse(terra_conf * const dest, config_t const * const src)
