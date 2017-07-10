@@ -30,8 +30,10 @@ BOOL terra_hygro_run(terra_hygro_cmd const * const cmd)
 		return FALSE;
 	}
 
-	//TODO: move out
-	terra_log_info("[terra_hygro_run] temperature: %.2f, humidity: %.2f\n", t, h);
+	if (!runtime.daemon)
+	{
+		terra_log_info("[terra_hygro_run] temperature: %.2f, humidity: %.2f\n", t, h);
+	}
 
 	if (cmd->read)
 		return TRUE;

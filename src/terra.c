@@ -6,8 +6,6 @@
 #define ARG_MODE_VISUAL "show"
 #define ARG_MODE_CONFIG "conf"
 
-extern BOOL terra_init();
-
 int main(int argc, char ** argv)
 {
 	terra_led_cmd led_cmd;
@@ -16,10 +14,10 @@ int main(int argc, char ** argv)
 	terra_visual_cmd visual_cmd;
 
 //initialization and setup
-	if (!terra_init())
+	if (!terra_runtime_init(TERRA_CONF_PATH, FALSE))
 	{
-		terra_log_error("[terra] failed to initialize terra\n");
-		return 1;
+		terra_log_error("[terra] failed to initialize runtime\n");
+		exit(1);
 	}
 
 //execution handling
@@ -34,14 +32,14 @@ int main(int argc, char ** argv)
 		if (!terra_switch_arg(&switch_req, argc, argv))
 			return 1;
 
-		terra_switch_set(&conf, &switch_req);
+		terra_switch_set(&switch_req);
 	}
 	else if (strcmp(argv[1], ARG_MODE_LED) == 0)
 	{
 		if (!(led_cmd = terra_led_arg(argc, argv)))
 			return 1;
 
-		if (!terra_led_set_from_cmd(&conf, led_cmd))
+		if (!terra_led_set_from_cmd(led_cmd))
 			return 1;
 	}
 	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
@@ -49,7 +47,7 @@ int main(int argc, char ** argv)
 		if (!terra_hygro_arg(&hygro_cmd, argc, argv))
 			return 1;
 
-		if (!terra_hygro_run(&conf, &hygro_cmd))
+		if (!terra_hygro_run(&hygro_cmd))
 			return 1;
 	}
 	else if (strcmp(argv[1], ARG_MODE_VISUAL) == 0)

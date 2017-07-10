@@ -65,8 +65,6 @@ BOOL terrad_run()
 	if (!register_signal_handler())
 		return FALSE;
 
-	terra_runtime_init(TERRA_CONF_PATH);
-
 	terrad_run_temp_init();
 	terrad_run_period_init();
 	terrad_run_clock_init();

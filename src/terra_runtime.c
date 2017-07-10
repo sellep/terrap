@@ -17,7 +17,7 @@ extern BOOL terra_lock_init();
 extern BOOL map_mutex_to_address_space();
 
 
-BOOL terra_runtime_init(char const * const conf_path)
+BOOL terra_runtime_init(char const * const conf_path, BOOL const daemon)
 {
 	if (!terra_lock_init())
 	{
@@ -31,6 +31,7 @@ BOOL terra_runtime_init(char const * const conf_path)
 		return FALSE;
 	}
 
+	runtime.daemon = daemon;
 	runtime.hygro_err = 0;
 
 	terra_pin_out(conf.switch_pin);
