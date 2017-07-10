@@ -121,12 +121,6 @@ BOOL terra_conf_valid(terra_conf * const conf)
 			terra_log_error("[terra_conf_valid] hygro_pin_io not available\n");
 			return FALSE;
 		}
-
-		if (conf->hygro_tick == 0)
-		{
-			terra_log_error("[terra_conf_valid] hygro_tick cannot be zero\n");
-			return FALSE;
-		}
 	}
 
 	for (i = 0; i < conf->sched_clocks_len; i++)
