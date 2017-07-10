@@ -40,30 +40,6 @@ static terra_time day_end = { 23, 59, 59 };
 extern void terra_time_print(terra_time const * const);
 extern BOOL terra_time_read(terra_time * const, char const * const);
 
-static inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const * const b)
-{
-	size_t secs_a;
-	size_t secs_b;
-
-	secs_a = a->hour * 60 * 60;
-	secs_a += a->min * 60;
-	secs_a += a->sec;
-
-	secs_b = b->hour * 60 * 60;
-	secs_b += b->min * 60;
-	secs_b += b->sec;
-
-	return secs_a - secs_b;
-}
-
-static inline size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
-{
-	if (terra_time_cmp(a, b) == TIME_BELOW)
-		return terra_time_diff_raw(&day_end, b) + terra_time_diff_raw(a, &day_begin);
-
-	return terra_time_diff_raw(a, b);
-}
-
 static inline void terra_date_now(terra_date * const date, short const doff)
 {
 	time_t t = time(NULL);
@@ -166,6 +142,30 @@ static inline void terra_time_now(terra_time * const tim)
 	tim->hour = tm.tm_hour;
 	tim->min = tm.tm_min;
 	tim->sec = tm.tm_sec;
+}
+
+static inline size_t terra_time_diff_raw(terra_time const * const a, terra_time const * const b)
+{
+	size_t secs_a;
+	size_t secs_b;
+
+	secs_a = a->hour * 60 * 60;
+	secs_a += a->min * 60;
+	secs_a += a->sec;
+
+	secs_b = b->hour * 60 * 60;
+	secs_b += b->min * 60;
+	secs_b += b->sec;
+
+	return secs_a - secs_b;
+}
+
+static inline size_t terra_time_diff(terra_time const * const a, terra_time const * const b)
+{
+	if (terra_time_cmp(a, b) == TIME_BELOW)
+		return terra_time_diff_raw(&day_end, b) + terra_time_diff_raw(a, &day_begin);
+
+	return terra_time_diff_raw(a, b);
 }
 
 #endif
