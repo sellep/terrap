@@ -5,7 +5,6 @@
 #include "terra_runtime.h"
 #include "pi_2_mmio.h"
 #include "utils/terra_log.h"
-#include "utils/terra_proc.h"
 #include "utils/terra_time.h"
 #include "visual/terra_visual.h"
 #include "conf/terra_conf.h"
