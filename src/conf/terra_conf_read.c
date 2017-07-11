@@ -52,7 +52,7 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 	config_setting_t *src_clocks;
 	config_setting_t *src_clock;
 	char *str;
-	size_t i;
+	size_t i, t;
 
 	src_clocks = config_lookup(src, "clocks");
 
@@ -68,6 +68,8 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 
 		config_setting_lookup_string(src_clock, "socket", &str);
 		dest->clocks[i].scheduler.socket = str[0];
+
+		config_setting_lookup_bool(src_clock, "enabled", &dest->clocks[i].scheduler.enabled);
 	}
 }
 
