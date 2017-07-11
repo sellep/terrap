@@ -6,6 +6,18 @@ static inline string_copy(char * * const dest, char const * const src)
 	strcpy(dest[0], src);
 }
 
+static inline float parse_float(config_setting_t const * const src, char const * const name)
+{
+	int i;
+	double d;
+
+	if (config_setting_lookup_float(src, name, &d) == CONFIG_TRUE)
+		return (float) d;
+
+	config_setting_lookup_float(src, name, &i);
+	return (float) i;
+}
+
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
 {
 	config_lookup_bool(src, "read_only", &dest->read_only);
@@ -115,11 +127,8 @@ static void terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 
 		terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp);
 
-		config_setting_lookup_float(src_temp, "activation", &val);
-		dest->temps[i].act = (float) val;
-
-		config_setting_lookup_float(src_temp, "deactivation", &val);
-		dest->temps[i].deact = (float) val;
+		dest->temps[i].act = parse_float(src_temp, "activation");
+		dest->temps[i].deact = parse_float(src_temp, "deactivation");
 	}
 }
 
