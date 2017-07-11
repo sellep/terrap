@@ -32,9 +32,9 @@ terra_runtime runtime;
 #define SCHEDULE_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
 
 #define SCHEDULE(s) &(s)->schedule
-#define SCHEDULE_DISABLED(s) !(SCHEDULE(s)->enabled)
-#define SCHEDULE_SWITCH_ON(s) SCHEDULE(s)->state == SWITCH_ON
-#define SCHEDULE_SWITCH_NOT_ON(s) SCHEDULE(s)->state != SWITCH_ON
+#define SCHEDULE_DISABLED(s) !(SCHEDULE((s))->enabled)
+#define SCHEDULE_SWITCH_ON(s) SCHEDULE((s))->state == SWITCH_ON
+#define SCHEDULE_SWITCH_NOT_ON(s) SCHEDULE((s))->state != SWITCH_ON
 
 #define LOCK() terra_lock()
 #define UNLOCK() terra_unlock()
@@ -74,7 +74,7 @@ static inline void terra_runtime_tick()
 
 static inline void schedule_set_switch_on(terra_schedule * const sched)
 {
-	terra_switch_set(sched->socket, SWITCH_ON);
+	terra_switch_on(sched->socket);
 	SCHEDULE_SWITCH_ON(sched);
 }
 
