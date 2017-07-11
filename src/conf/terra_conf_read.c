@@ -61,6 +61,8 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 
 		dest->clocks[i].scheduler.name = str;
 	}
+
+	dest->clocks[0].scheduler.name = "huhu";
 }
 
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
