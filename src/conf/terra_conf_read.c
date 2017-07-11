@@ -25,8 +25,6 @@ static inline void terra_conf_switch_parse(terra_conf * const dest, config_t con
 	config_lookup_int(src, "switch.code_boff", &dest->sw.code_boff);
 	config_lookup_int(src, "switch.code_con", &dest->sw.code_con);
 	config_lookup_int(src, "switch.code_coff", &dest->sw.code_coff);
-
-	printf("code coff %i\n", dest->sw.code_coff);
 }
 
 static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t const * const src)
