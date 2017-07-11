@@ -44,7 +44,7 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 #define COPY_STRING(target, src) (									\
 	target = (char*) malloc(sizeof(char) * (strlen(src) + 1));		\
 	strcpy(target, src);											\
-	target[strlen(src)] = '\n';)
+	target[strlen(src)] = '\n')
 
 static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
 {
