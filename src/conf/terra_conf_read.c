@@ -67,7 +67,7 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 		string_copy(&dest->clocks[i].scheduler.name, str);
 
 		config_setting_lookup_string(src_clock, "socket", &str);
-		dest->clocks[i].schedule.socket = str[0];
+		dest->clocks[i].scheduler.socket = str[0];
 	}
 }
 
