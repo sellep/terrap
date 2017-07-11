@@ -2,7 +2,7 @@
 
 static inline string_copy(char * * const dest, char const * const src)
 {
-	dest[0] = (char*) malloc(sizeof(char) * (strlen(src) + 1));
+	dest[0] = (char*) malloc(sizeof(char) * (strlen(src)));
 	strcpy(dest[0], src);
 	//dest[0][strlen(src)] = '\0';
 }
