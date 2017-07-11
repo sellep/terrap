@@ -36,9 +36,6 @@ void terra_conf_print(terra_conf const * const c)
 	for (i = 0; i < c->clock_len; i++)
 	{
 		printf("\n###### clock %zu ######\n", i);
-		printf("name = %s\n", c->clocks[i].scheduler.name);
+		printf("name = %s\n", (c->clocks[i].scheduler.name));
 	}
-
-	printf("clock addr2: %p\n", c->clocks);
-	printf("name addr2: %p\n", c->clocks[0].scheduler.name);
 }
