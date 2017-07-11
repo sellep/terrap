@@ -85,7 +85,7 @@ BOOL terra_runtime_init(char const * const conf_path)
 		return FALSE;
 	}
 
-	terra_conf_print(&CONF_GLOBAL);
+	printf("REF %p\n", &CONF_GLOBAL);
 
 	runtime.hygro_err = 0;
 

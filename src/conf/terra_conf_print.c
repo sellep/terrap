@@ -2,6 +2,7 @@
 
 void terra_conf_print(terra_conf const * const c)
 {
+	printf("REF PRINT %p\n", c);
 	printf("delay = %i\n", c->delay);
 	printf("read_only = %i\n", c->read_only);
 	printf("pin_alert = %i\n", c->pin_alert);

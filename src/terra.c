@@ -13,18 +13,16 @@ int main(int argc, char ** argv)
 	terra_visual_cmd visual_cmd;
 	float temp, humi;
 
-//initialization and setup
-	if (!terra_runtime_init(CONF_PATH))
-	{
-		terra_log_error("[terra] failed to initialize runtime\n");
-		exit(1);
-	}
-
-//execution handling
 	if (argc < 2)
 	{
 		terra_log_error("[terra] insufficient argument count\n");
 		return 1;
+	}
+
+	if (!terra_runtime_init(CONF_PATH))
+	{
+		terra_log_error("[terra] failed to initialize runtime\n");
+		exit(1);
 	}
 
 	if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
