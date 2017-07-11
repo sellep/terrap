@@ -60,8 +60,10 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 		config_setting_lookup_string(src_clock, "name", &str);
 
 		dest->clocks[i].scheduler.name = str;
-		printf("str: %s\n", dest->clocks[i].scheduler.name);
 	}
+
+	printf("clock addr1: %p\n", dest->clocks);
+	printf("name addr1: %p\n", dest->clocks[0].scheduler.name);
 }
 
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
