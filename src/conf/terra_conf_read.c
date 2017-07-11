@@ -43,12 +43,19 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 
 static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
 {
-	config_setting_t *clocks;
+	config_setting_t *src_clocks;
+	terra_scheduler_clock *clocks;
+	size_t i;
 
-	clocks = config_lookup(src, "clocks");
-	dest->clock_len = config_setting_length(clocks);
+	src_clocks = config_lookup(src, "clocks");
+	dest->clock_len = config_setting_length(src_clocks);
 
-	printf("clock len: %i\n", dest->clock_len);
+	clocks = (terra_scheduler_clock*) malloc(sizeof(terra_scheduler_clock) * dest->clock_len);
+
+	for (i = 0; i < dest->clock_len; i++)
+	{
+		config_lookup_string(src_clocks + i, "name", &clocks[i].scheduler.name);
+	}
 }
 
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
