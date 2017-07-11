@@ -42,7 +42,8 @@ static void run_clock(terra_schedule_clock * const clock)
 		{
 			if (SCHEDULE_SWITCH_NOT_ON(clock))
 			{
-				schedule_set_switch_on(clock);
+				terra_switch_on(SCHEDULE(s)->socket);
+				SCHEDULE_SWITCH_ON(SCHEDULE(s));
 				return;
 			}
 		}
@@ -50,7 +51,7 @@ static void run_clock(terra_schedule_clock * const clock)
 
 	if (SCHEDULE_SWITCH_ON(clock))
 	{
-		schedule_set_switch_off(clock);
+		//schedule_set_switch_off(clock);
 	}
 }
 
