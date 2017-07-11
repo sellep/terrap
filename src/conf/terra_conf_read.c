@@ -4,7 +4,6 @@ static inline string_copy(char * * const dest, char const * const src)
 {
 	dest[0] = (char*) malloc(sizeof(char) * (strlen(src)));
 	strcpy(dest[0], src);
-	//dest[0][strlen(src)] = '\0';
 }
 
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
@@ -66,6 +65,9 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 
 		config_setting_lookup_string(src_clock, "name", &str);
 		string_copy(&dest->clocks[i].scheduler.name, str);
+
+		config_setting_lookup_string(src_clock, "socket", &str);
+		dest->clocks[i].schedule.socket = str[0];
 	}
 }
 
