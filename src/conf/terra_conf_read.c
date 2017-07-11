@@ -64,7 +64,7 @@ static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 	config_setting_t *src_clocks;
 	config_setting_t *src_clock;
 	char *str;
-	size_t i, t;
+	size_t i;
 
 	src_clocks = config_lookup(src, "clocks");
 
@@ -90,6 +90,29 @@ static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 	}
 }
 
+static void terra_conf_temps_parse(terra_conf * const dest, config_t const * const src)
+{
+	config_setting_t *src_temps;
+	config_setting_t *src_temp;
+	char *str;
+	size_t i;
+
+	src_temps = config_lookup(src, "temps");
+
+	dest->temp_len = config_setting_length(src_temps);
+	dest->temps = (terra_schedule_temp*) malloc(sizeof(terra_schedule_temp) * dest->temp_len);
+
+	for (i = 0; i < dest->temp_len; i++)
+	{
+		src_temp = config_setting_get_elem(src_temps, i);
+
+		terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp);
+
+		config_setting_lookup_float(src_temp, "activation", &dest->temps[i].act);
+		config_setting_lookup_float(src_temp, "deactivation", &dest->temps[i].deact);
+	}
+}
+
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 {
 	BOOL status = FALSE;
@@ -111,6 +134,7 @@ BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 	terra_conf_switch_parse(dest, &libconf);
 	terra_conf_hygro_parse(dest, &libconf);
 	terra_conf_clocks_parse(dest, &libconf);
+	terra_conf_temps_parse(dest, &libconf);
 
 	status = TRUE;
 

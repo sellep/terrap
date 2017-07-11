@@ -40,8 +40,8 @@ typedef struct
 	char *name;
 	char socket;
 	BOOL enabled;
-
 	char *depends;
+
 	terra_switch_mode state;
 } terra_schedule;
 
@@ -52,6 +52,16 @@ typedef struct
 	int time_len;
 	terra_start_stop *times;
 } terra_schedule_clock;
+
+typedef struct
+{
+	terra_schedule schedule;
+
+	float act;
+	float deact;
+
+	BOOL invers;
+} terra_schedule_temp;
 
 typedef struct
 {
@@ -76,8 +86,8 @@ typedef struct
 	int clock_len;
 	terra_schedule_clock *clocks;
 
-	int period_len;
-	terra_schedule_period *periods;
+	int temp_len;
+	terra_schedule_temp *temps;
 } terra_conf;
 
 extern BOOL terra_conf_read(terra_conf * const, char const * const);

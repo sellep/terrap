@@ -1,5 +1,13 @@
 #include "terra_conf.h"
 
+static inline void print_schedule(terra_schedule const * const sched)
+{
+	printf("name = %s\n", sched->name);
+	printf("socket = %c\n", sched->socket);
+	printf("enabled = %i\n", sched->enabled);
+	printf("depends = %s\n", sched->depends);
+}
+
 void terra_conf_print(terra_conf const * const c)
 {
 	ssize_t i, j;
@@ -36,9 +44,7 @@ void terra_conf_print(terra_conf const * const c)
 	for (i = 0; i < c->clock_len; i++)
 	{
 		printf("\n###### clock %zu ######\n", i);
-		printf("name = %s\n", c->clocks[i].schedule.name);
-		printf("socket = %c\n", c->clocks[i].schedule.socket);
-		printf("enabled = %i\n", c->clocks[i].schedule.enabled);
+		print_schedule(&c->clocks[i].schedule);
 
 		for (j = 0; j < c->clocks[i].time_len; j++)
 		{
@@ -48,5 +54,14 @@ void terra_conf_print(terra_conf const * const c)
 			terra_time_printnl(&c->clocks[i].times[j].stop);
 			printf("\n");
 		}
+	}
+
+	for (i = 0; i < c->temp_len; i++)
+	{
+		printf("\n###### temp %zu ######\n", i);
+		print_schedule(&c->temps[i].schedule);
+
+		printf("activation = %.2f\n", c->temps[i].act);
+		printf("deactivation = %.2f\n", c->temps[i].deact);
 	}
 }
