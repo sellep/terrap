@@ -60,6 +60,7 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 		config_setting_lookup_string(src_clock, "name", &str);
 
 		dest->clocks[0].scheduler.name = str;
+		printf("test: %s\n", dest->clocks[0].scheduler.name);
 	}
 }
 
