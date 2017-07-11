@@ -41,10 +41,12 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
-#define COPY_STRING(target, src) (									\
-	target = (char*) malloc(sizeof(char) * (strlen(src) + 1));		\
-	strcpy(target, src);											\
-	target[strlen(src)] = '\n')
+static inline string_copy(char * const dest, char const * const src)
+{
+	dest = (char*) malloc(sizeof(char) * (strlen(src) + 1));
+	strcpy(target, src);
+	target[strlen(src)] = '\n';
+}
 
 static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
 {
@@ -63,7 +65,7 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 		src_clock = config_setting_get_elem(src_clocks, i);
 
 		config_setting_lookup_string(src_clock, "name", &str);
-		COPY_STRING(dest->clocks[i].scheduler.name, str);
+		string_copy(dest->clocks[i].scheduler.name, str);
 	}
 }
 
