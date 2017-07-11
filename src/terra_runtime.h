@@ -72,10 +72,10 @@ static inline void terra_runtime_tick()
 	terra_time_now(&runtime.now);
 }
 
-static inline void schedule_set_switch_on(terra_schedule * const sched)
+static inline void schedule_set_switch_on(void * const s)
 {
-	terra_switch_on(sched->socket);
-	SCHEDULE_SWITCH_ON(sched);
+	terra_switch_on(SCHEDULE(s)->socket);
+	SCHEDULE_SWITCH_ON(SCHEDULE(s));
 }
 
 /*static inline terra_scheduler* find_scheduler_by_name(char const * const name)
