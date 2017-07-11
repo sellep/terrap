@@ -12,7 +12,7 @@ typedef struct
 extern BOOL terra_switch_arg(terra_switch_req * const, int const, char const * const * const);
 extern void terra_switch_transmit(int const);
 
-inline void terra_switch_on(char const socket)
+static inline void terra_switch_on(char const socket)
 {
 	if (socket == 'a')
 	{
@@ -30,7 +30,7 @@ inline void terra_switch_on(char const socket)
 	terra_log_info("[terra_switch] set switch %c to on\n", socket);
 }
 
-inline void terra_switch_off(char const socket)
+static inline void terra_switch_off(char const socket)
 {
 	if (socket == 'a')
 	{
@@ -48,7 +48,7 @@ inline void terra_switch_off(char const socket)
 	terra_log_info("[terra_switch] set switch %c to off\n", socket);
 }
 
-inline void terra_switch_set(char const socket, terra_switch_mode const mode)
+static inline void terra_switch_set(char const socket, terra_switch_mode const mode)
 {
 	if (mode == SWITCH_ON)
 	{
