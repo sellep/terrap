@@ -70,6 +70,8 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 		dest->clocks[i].scheduler.socket = str[0];
 
 		config_setting_lookup_bool(src_clock, "enabled", &dest->clocks[i].scheduler.enabled);
+
+		dest->clocks[i].time_len = 0;
 	}
 }
 

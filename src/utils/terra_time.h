@@ -37,8 +37,14 @@ typedef struct
 static terra_time day_begin = { 0, 0, 0 };
 static terra_time day_end = { 23, 59, 59 };
 
-extern void terra_time_print(terra_time const * const);
+extern void terra_time_printnl(terra_time const * const);
 extern BOOL terra_time_read(terra_time * const, char const * const);
+
+static inline void terra_time_print(terra_time const * const t)
+{
+	terra_time_printnl(t);
+	printf("\n");
+}
 
 static inline void terra_date_now(terra_date * const date, short const doff)
 {

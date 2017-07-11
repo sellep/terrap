@@ -2,7 +2,7 @@
 
 void terra_conf_print(terra_conf const * const c)
 {
-	ssize_t i;
+	ssize_t i, j;
 
 	printf("###### global ######\n");
 	printf("delay = %i\n", c->delay);
@@ -39,5 +39,13 @@ void terra_conf_print(terra_conf const * const c)
 		printf("name = %s\n", c->clocks[i].scheduler.name);
 		printf("socket = %c\n", c->clocks[i].scheduler.socket);
 		printf("enabled = %i\n", c->clocks[i].scheduler.enabled);
+
+		for (j = 0; j < c->clocks[i].time_len; j++)
+		{
+			printf("time %i = ", j);
+			terra_time_printnl(&c->clocks[i].times[j].start);
+			printf(" - ");
+			terra_time_printnl(&c->clocks[i].times[j].stop);
+		}
 	}
 }
