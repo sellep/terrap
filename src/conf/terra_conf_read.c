@@ -71,6 +71,7 @@ BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 	terra_conf_heart_parse(dest, &libconf);
 	terra_conf_switch_parse(dest, &libconf);
 	terra_conf_hygro_parse(dest, &libconf);
+	terra_conf_clocks_parse(dest, &libconf);
 
 	status = TRUE;
 
