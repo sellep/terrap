@@ -21,7 +21,7 @@ typedef struct
 	int hygro_err;
 } terra_runtime;
 
-static terra_runtime runtime;
+terra_runtime runtime;
 
 #define CONF_GLOBAL runtime.conf
 #define CONF_HEART runtime.conf.he

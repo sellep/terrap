@@ -85,8 +85,6 @@ BOOL terra_runtime_init(char const * const conf_path)
 		return FALSE;
 	}
 
-	printf("REF %p\n", &CONF_GLOBAL);
-
 	runtime.hygro_err = 0;
 
 	terra_pin_set_out(CONF_SWITCH.pin);
