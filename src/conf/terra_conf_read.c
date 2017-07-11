@@ -22,7 +22,7 @@ static inline BOOL parse_float(float * const f, config_setting_t const * const s
 		f[0] = (float) i;
 		return TRUE;
 	}
-
+printf("nooooo\n");
 	return FALSE;
 }
 
