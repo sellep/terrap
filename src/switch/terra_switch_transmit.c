@@ -13,26 +13,6 @@
 #define SIGNAL_ONE_HIGH 3
 #define SIGNAL_ONE_LOW 1
 
-static inline void busy_sleep_microseconds(size_t const sec, size_t const usec)
-{
-	struct timeval now, end, tmp;
-
-	gettimeofday(&now, NULL);
-	tmp.tv_sec  = sec;
-	tmp.tv_usec = usec;
-	timeradd(&now, &tmp, &end);
-
-	while (1)
-	{
-		timersub(&now, &end, &tmp);
-
-		if (tmp.tv_sec >= 0)
-			break;
-
-		gettimeofday(&now, NULL);		
-	}
-}
-
 static inline sleep_microseconds(size_t const us)
 {
 	struct timespec sleeper;
@@ -45,16 +25,9 @@ static inline sleep_microseconds(size_t const us)
 	usec = us % 1000000;
 	sec = us / 1000000;
 
-	if (us < 100)
-	{
-		busy_sleep_microseconds(sec, usec);
-	}
-	else
-	{
-		sleeper.tv_sec = sec;
-    		sleeper.tv_nsec = usec * 1000L;
-    		nanosleep(&sleeper, NULL);
-	}
+	sleeper.tv_sec = sec;
+	sleeper.tv_nsec = usec * 1000L;
+	nanosleep(&sleeper, NULL);
 }
 
 static inline void switch_transmit(ssize_t const pin, ssize_t const high, ssize_t const low)
