@@ -14,18 +14,33 @@
 	SCHEDULER_SET_MODE(clock, mode);
 }*/
 
-void terrad_run_clock_init()
+void terrad_run_clocks_init()
 {
 	ssize_t i;
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
-		CONF_GLOBAL.clocks[i].scheduler.state = SWITCH_UNKNOWN;
+		SCHEDULER_CLOCK(i)->scheduler.state = SWITCH_UNKNOWN;
 	}
 }
 
-void terrad_run_clock(terra_scheduler_clock const * const clock)
+static void run_clock(terra_scheduler_clock * const clock)
 {
+	if (SCHEDULER_DISABLED(clock))
+		return;
+
+	/* dep check */
+}
+
+void terrad_run_clocks()
+{
+	ssize_t i;
+
+	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
+	{
+		run_clock(SCHEDULER_CLOCK(i));
+	}
+
 /*
 	terra_time *start;
 	terra_time *stop;

@@ -78,9 +78,6 @@ typedef struct
 	terra_scheduler_period *periods;
 } terra_conf;
 
-#define SCHEDULER_DISABLED(s) !(((terra_scheduler*)(s))->enabled)
-#define SCHEDULER_SET_MODE(s, m) ((terra_scheduler*)(s))->state = m
-
 extern BOOL terra_conf_read(terra_conf * const, char const * const);
 extern void terra_conf_print(terra_conf const * const);
 
