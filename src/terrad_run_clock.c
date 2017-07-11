@@ -15,13 +15,13 @@
 }*/
 
 void terrad_run_clock_init()
-{/*
+{
 	ssize_t i;
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
-		_terra_clock_on[i] = -1;
-	}*/
+		CONF_GLOBAL.clocks[i].scheduler.state = SWITCH_UNKNOWN;
+	}
 }
 
 void terrad_run_clock(terra_scheduler_clock const * const clock)
