@@ -59,8 +59,10 @@ static void terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 
 	config_setting_lookup_bool(src, "enabled", &sched->enabled);
 
-	config_setting_lookup_string(src, "depends", &str);
-	string_copy(&sched->depends, str);
+	if (config_setting_lookup_string(src, "depends", &str) == CONFIG_SUCCESS)
+	{
+		string_copy(&sched->depends, str);
+	}
 }
 
 static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
