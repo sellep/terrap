@@ -108,7 +108,7 @@ BOOL terrad_run()
 
 	terrad_run_temp_init();
 	terrad_run_period_init();
-	terrad_run_clocks_init();
+	terrad_run_clock_init();
 
 	if (CONF_GLOBAL.read_only)
 	{
