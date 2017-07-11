@@ -59,7 +59,6 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_CONFIG) == 0)
 	{
-		printf("quark: %i\n", CONF_GLOBAL.delay);
 		terra_conf_print(&CONF_GLOBAL);
 	}
 	else
