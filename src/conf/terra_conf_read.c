@@ -52,11 +52,13 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 	dest->clock_len = config_setting_length(src_clocks);
 	dest->clocks = (terra_scheduler_clock*) malloc(sizeof(terra_scheduler_clock) * dest->clock_len);
 
+	char *str;
 	for (i = 0; i < dest->clock_len; i++)
 	{
 		src_clock = config_setting_get_elem(src_clocks, i);
-
-		config_setting_lookup_string(src_clock, "name", &(dest->clocks[i].scheduler.name));
+//&(dest->clocks[i].scheduler.name)
+		config_setting_lookup_string(src_clock, "name", &str);
+		printf("clock name: %s\n", str);
 	}
 }
 
