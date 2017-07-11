@@ -75,7 +75,7 @@ static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 	{
 		src_clock = config_setting_get_elem(src_clocks, i);
 
-		terra_conf_schedule_parse(&dest->clocks[i].scheduler, src_clock);
+		terra_conf_schedule_parse(&dest->clocks[i].schedule, src_clock);
 
 		//TODO: multi times parsing
 
