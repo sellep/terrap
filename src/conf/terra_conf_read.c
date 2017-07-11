@@ -1,5 +1,12 @@
 #include "terra_conf.h"
 
+static inline string_copy(char * * const dest, char const * const src)
+{
+	dest[0] = (char*) malloc(sizeof(char) * (strlen(src) + 1));
+	strcpy(dest[0], src);
+	dest[0][strlen(src)] = '\n';
+}
+
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
 {
 	config_lookup_bool(src, "read_only", &dest->read_only);
@@ -39,13 +46,6 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 
 	terra_time_read(&time, str);
 	dest->hy.delay = terra_time_to_int(&time);
-}
-
-static inline string_copy(char * * const dest, char const * const src)
-{
-	dest[0] = (char*) malloc(sizeof(char) * (strlen(src) + 1));
-	strcpy(dest[0], src);
-	dest[0][strlen(src)] = '\n';
 }
 
 static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
