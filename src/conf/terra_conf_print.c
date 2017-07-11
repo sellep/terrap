@@ -48,7 +48,7 @@ void terra_conf_print(terra_conf const * const c)
 
 		for (j = 0; j < c->clocks[i].time_len; j++)
 		{
-			printf("time %i = ", j);
+			printf("time(%i) = ", j);
 			terra_time_printnl(&c->clocks[i].times[j].start);
 			printf(" - ");
 			terra_time_printnl(&c->clocks[i].times[j].stop);
