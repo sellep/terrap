@@ -65,11 +65,13 @@ static BOOL terra_lock_init()
 
 BOOL terra_runtime_init(char const * const conf_path)
 {
+#ifndef DEBUG
 	if (pi_2_mmio_init() != MMIO_SUCCESS)
 	{
 		terra_log_error("[terra_runtime_init] failed to initialize mmio\n");
 		return FALSE;
 	}
+#endif
 
 	if (!terra_lock_init())
 	{
