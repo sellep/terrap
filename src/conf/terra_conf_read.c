@@ -6,16 +6,24 @@ static inline string_copy(char * * const dest, char const * const src)
 	strcpy(dest[0], src);
 }
 
-static inline float parse_float(config_setting_t const * const src, char const * const name)
+static inline BOOL parse_float(float * const f, config_setting_t const * const src, char const * const name)
 {
 	int i;
 	double d;
 
 	if (config_setting_lookup_float(src, name, &d) == CONFIG_TRUE)
-		return (float) d;
+	{
+		f[0] = (float) d;
+		return TRUE;
+	}
 
-	config_setting_lookup_float(src, name, &i);
-	return (float) i;
+	if (config_setting_lookup_int(src, name, &i) == CONFIG_TRUE)
+	{
+		f[0] = (float) i;
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
@@ -108,7 +116,7 @@ static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 	}
 }
 
-static void terra_conf_temps_parse(terra_conf * const dest, config_t const * const src)
+static BOOL terra_conf_temps_parse(terra_conf * const dest, config_t const * const src)
 {
 	config_setting_t *src_temps;
 	config_setting_t *src_temp;
@@ -127,9 +135,19 @@ static void terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 
 		terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp);
 
-		dest->temps[i].act = parse_float(src_temp, "activation");
-		dest->temps[i].deact = parse_float(src_temp, "deactivation");
+		if (!dest->temps[i].act = parse_float(src_temp, "activation"))
+		{
+			terra_log_error("[terra_conf_temps_parse] unable to parse activation for temp schedule %zu\n", i);
+			return FALSE;
+		}
+		if (!dest->temps[i].deact = parse_float(src_temp, "deactivation"))
+		{
+			terra_log_error("[terra_conf_temps_parse] unable to parse deactivation for temp schedule %zu\n", i);
+			return FALSE;
+		}
 	}
+
+	return TRUE;
 }
 
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
@@ -153,7 +171,11 @@ BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 	terra_conf_switch_parse(dest, &libconf);
 	terra_conf_hygro_parse(dest, &libconf);
 	terra_conf_clocks_parse(dest, &libconf);
-	terra_conf_temps_parse(dest, &libconf);
+	if (!terra_conf_temps_parse(dest, &libconf))
+	{
+		terra_log_error("[terra_conf_read] failed to parse temps\n");
+		goto exit;
+	}
 
 	status = TRUE;
 
