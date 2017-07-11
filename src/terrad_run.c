@@ -12,8 +12,8 @@ extern BOOL terrad_run_period();
 extern void terrad_run_temp_init();
 extern void terrad_run_temp(float const);
 
-extern void terrad_run_clock_init();
-extern void terrad_run_clock();
+extern void terrad_run_clocks_init();
+extern void terrad_run_clocks();
 
 static BOOL volatile _terminate = FALSE;
 
@@ -67,7 +67,7 @@ BOOL terrad_run()
 
 	terrad_run_temp_init();
 	terrad_run_period_init();
-	terrad_run_clock_init();
+	terrad_run_clocks_init();
 
 	//scheduling
 
@@ -105,7 +105,7 @@ BOOL terrad_run()
 		if (!CONF_GLOBAL.read_only)
 		{
 			terrad_run_period();
-			terrad_run_clock();
+			terrad_run_clocks();
 		}
 
 		//TODO: stop heart
