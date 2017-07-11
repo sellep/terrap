@@ -3,8 +3,10 @@
 #include <stdint.h>
 #include <signal.h>
 
-#define DO_HEART_BEAT() (runtime.tick % CONF_HEART.tick == 0)
+#define DO_HEART_BEAT() if (runtime.tick % CONF_HEART.tick == 0) terra_heart_beat()
 #define DO_HYGRO_READ() (CONF_HYGRO.enabled && !hygro_wait())
+
+#define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
 
 extern void terrad_run_period_init();
 extern BOOL terrad_run_period();
@@ -12,7 +14,7 @@ extern BOOL terrad_run_period();
 extern void terrad_run_temp_init();
 extern void terrad_run_temp(float const);
 
-extern void terrad_run_clocks_init();
+extern void terrad_run_clock_init();
 
 static BOOL volatile _terminate = FALSE;
 
@@ -52,15 +54,55 @@ static inline void terra_heart_beat()
 	terra_led_set(CONF_HEART.pin, heart_off);
 }
 
+static float _humi;
+static float _temp;
+
+static inline void terrad_run_hygro()
+{
+	if (DO_HYGRO_READ())
+	{
+		if (!terra_hygro_run(&_humi, &_temp))
+		{
+			runtime.hygro_err++;
+		}
+		else
+		{
+			runtime.hygro_err = 0;
+		}
+
+		terra_hygro_write(_humi, _temp);
+	}
+}
+
+static inline void terrad_run_read_only()
+{
+	while (!_terminate)
+	{
+		terra_runtime_tick();
+		DO_HEART_BEAT();
+
+		terrad_run_hygro();
+		SLEEP();
+	}
+}
+
+static inline void terrad_run_schedules()
+{
+	while (!_terminate)
+	{
+		terra_runtime_tick();
+		DO_HEART_BEAT();
+
+		terrad_run_hygro();
+
+		//schedule...
+
+		SLEEP();
+	}
+}
+
 BOOL terrad_run()
 {
-	ssize_t i;
-
-	float temp;
-	float humi;
-
-	//initialization
-
 	if (!register_signal_handler())
 		return FALSE;
 
@@ -68,47 +110,13 @@ BOOL terrad_run()
 	terrad_run_period_init();
 	terrad_run_clocks_init();
 
-	//scheduling
-
-	while (!_terminate)
+	if (CONF_GLOBAL.read_only)
 	{
-		//TODO: start heart
-
-		terra_runtime_tick();
-
-		if (DO_HEART_BEAT())
-		{
-			terra_heart_beat();
-		}
-
-		if (DO_HYGRO_READ())
-		{
-			if (!terra_hygro_run(&humi, &temp))
-			{
-				runtime.hygro_err++;
-			}
-			else
-			{
-				runtime.hygro_err = 0;
-			}
-
-			if(!terra_hygro_write(humi, temp))
-				return FALSE;
-
-			if (!CONF_GLOBAL.read_only)
-			{
-				terrad_run_temp(temp);
-			}
-		}
-
-		if (!CONF_GLOBAL.read_only)
-		{
-			terrad_run_period();
-		}
-
-		//TODO: stop heart
-
-		sleep_milliseconds(CONF_GLOBAL.delay);
+		terrad_run_read_only();
+	}
+	else
+	{
+		terrad_run_schedules();
 	}
 
 	return TRUE;

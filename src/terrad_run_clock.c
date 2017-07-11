@@ -1,20 +1,6 @@
 #include "terra.h"
 
-/*static inline change_switch(
-	terra_scheduler_clock const * const clock,
-	terra_switch_mode const mode)
-{
-	terra_switch_req req;
-
-	req.sock = clock->scheduler.socket;
-	req.mode = mode;
-
-	terra_switch_set(&req);
-
-	SCHEDULER_SET_MODE(clock, mode);
-}*/
-
-void terrad_run_clocks_init()
+void terrad_run_clock_init()
 {
 	ssize_t i;
 
@@ -24,7 +10,7 @@ void terrad_run_clocks_init()
 	}
 }
 
-static void run_clock(terra_schedule_clock * const clock)
+void run_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
 	ssize_t t;
@@ -52,6 +38,7 @@ static void run_clock(terra_schedule_clock * const clock)
 
 	if (SCHEDULE_SWITCH_ON(sched))
 	{
-		//schedule_set_switch_off(clock);
+		terra_switch_off(sched->socket);
+		SCHEDULE_SWITCH_OFF(sched);
 	}
 }
