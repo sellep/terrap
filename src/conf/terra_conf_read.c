@@ -71,7 +71,16 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 
 		config_setting_lookup_bool(src_clock, "enabled", &dest->clocks[i].scheduler.enabled);
 
-		dest->clocks[i].time_len = 0;
+		//TODO: multi times parsing
+
+		dest->clocks[i].time_len = 1;
+		dest->clocks[i].times = (terra_start_stop*) malloc(sizeof(terra_start_stop) * dest->clocks[i].time_len);
+
+		config_setting_lookup_string(src_clock, "start", &str);
+		terra_time_read(&dest->clocks[i].times[0].start, str);
+
+		config_setting_lookup_string(src_clock, "stop", &str);
+		terra_time_read(&dest->clocks[i].times[0].stop, str);
 	}
 }
 
