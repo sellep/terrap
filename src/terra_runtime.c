@@ -84,6 +84,8 @@ BOOL terra_runtime_init(char const * const conf_path)
 		terra_log_error("[terra_runtime_init] failed to read config file\n");
 		return FALSE;
 	}
+	
+	printf("CONFIG GLOBAL delay %i\n", CONF_GLOBAL.delay);
 
 	runtime.hygro_err = 0;
 
