@@ -31,7 +31,7 @@ terra_runtime runtime;
 #define SCHEDULE_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
 #define SCHEDULE_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
 
-#define SCHEDULE(s) &(s)->schedule
+#define SCHEDULE(s) (&((s)->schedule))
 #define SCHEDULE_DISABLED(s) !(SCHEDULE((s))->enabled)
 #define SCHEDULE_SWITCH_ON(s) SCHEDULE((s))->state == SWITCH_ON
 #define SCHEDULE_SWITCH_NOT_ON(s) SCHEDULE((s))->state != SWITCH_ON
