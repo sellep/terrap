@@ -51,7 +51,7 @@ static inline sleep_microseconds(size_t const us)
 	}
 	else
 	{
-		sleeper.tv_sec = usec;
+		sleeper.tv_sec = sec;
     		sleeper.tv_nsec = usec * 1000L;
     		nanosleep(&sleeper, NULL);
 	}
