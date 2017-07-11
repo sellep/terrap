@@ -47,7 +47,19 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
-static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
+static void terra_conf_scheduler_parse(terra_scheduler * const scheduler, config_setting_t const * const src)
+{
+	char *str;
+	config_setting_lookup_string(src, "name", &str);
+	string_copy(&scheduler->name, str);
+
+	config_setting_lookup_string(src, "socket", &str);
+	scheduler->socket = str[0];
+
+	config_setting_lookup_bool(src, "enabled", &scheduler->enabled);
+}
+
+static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
 {
 	config_setting_t *src_clocks;
 	config_setting_t *src_clock;
@@ -63,13 +75,7 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 	{
 		src_clock = config_setting_get_elem(src_clocks, i);
 
-		config_setting_lookup_string(src_clock, "name", &str);
-		string_copy(&dest->clocks[i].scheduler.name, str);
-
-		config_setting_lookup_string(src_clock, "socket", &str);
-		dest->clocks[i].scheduler.socket = str[0];
-
-		config_setting_lookup_bool(src_clock, "enabled", &dest->clocks[i].scheduler.enabled);
+		terra_conf_scheduler_parse(&clocks[i].scheduler, src_clock);
 
 		//TODO: multi times parsing
 
