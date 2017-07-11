@@ -50,6 +50,7 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 static void terra_conf_schedule_parse(terra_schedule * const sched, config_setting_t const * const src)
 {
 	char *str;
+
 	config_setting_lookup_string(src, "name", &str);
 	string_copy(&sched->name, str);
 
@@ -57,6 +58,9 @@ static void terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 	sched->socket = str[0];
 
 	config_setting_lookup_bool(src, "enabled", &sched->enabled);
+
+	config_setting_lookup_string(src, "depends", &str);
+	string_copy(&sched->depends, str);
 }
 
 static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
@@ -96,6 +100,7 @@ static void terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 	config_setting_t *src_temp;
 	char *str;
 	size_t i;
+	double val;
 
 	src_temps = config_lookup(src, "temps");
 
@@ -108,8 +113,11 @@ static void terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 
 		terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp);
 
-		config_setting_lookup_float(src_temp, "activation", &dest->temps[i].act);
-		config_setting_lookup_float(src_temp, "deactivation", &dest->temps[i].deact);
+		config_setting_lookup_float(src_temp, "activation", &val);
+		dest->temps[i].act = (float) val;
+
+		config_setting_lookup_float(src_temp, "deactivation", &val);
+		dest->temps[i].deact = (float) val;
 	}
 }
 
