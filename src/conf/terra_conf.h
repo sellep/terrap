@@ -55,9 +55,11 @@ typedef struct
 
 typedef struct
 {
-	terra_scheduler schedule;
-	terra_time active;
-	terra_time deactive;
+	terra_schedule schedule;
+
+	terra_time act;
+	terra_time deact;
+
 	BOOL active_first;
 } terra_schedule_period;
 
