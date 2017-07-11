@@ -44,6 +44,7 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
 {
 	config_setting_t *src_clocks;
+	config_setting_t *src_clock;
 	size_t i;
 
 	src_clocks = config_lookup(src, "clocks");
@@ -53,7 +54,9 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 
 	for (i = 0; i < dest->clock_len; i++)
 	{
-		config_lookup_string(src_clocks + i, "name", &(dest->clocks[i].scheduler.name));
+		src_clock = config_setting_get_elem(src_clocks, i);
+
+		config_setting_lookup_string(src_clock, "name", &(dest->clocks[i].scheduler.name));
 	}
 }
 
