@@ -11,17 +11,6 @@
 #define SIGNAL_ONE_HIGH 3
 #define SIGNAL_ONE_LOW 1
 
-static inline size_t switch_get_code(terra_switch_req const * const req)
-{
-	if (req->socket == 'a')
-		return req->mode == SWITCH_ON ? CONF_SWITCH.code_aon : CONF_SWITCH.code_aoff;
-
-	if (req->socket == 'b')
-		return req->mode == SWITCH_ON ? CONF_SWITCH.code_bon : CONF_SWITCH.code_boff;
-
-	return req->mode == SWITCH_ON ? CONF_SWITCH.code_con : CONF_SWITCH.code_coff;
-}
-
 static inline void switch_transmit(ssize_t const pin, ssize_t const high, ssize_t const low)
 {
 #ifndef DEBUG
@@ -32,15 +21,10 @@ static inline void switch_transmit(ssize_t const pin, ssize_t const high, ssize_
 #endif
 }
 
-void terra_switch_set(terra_switch_req const * const req)
+void terra_switch_transmit(int const code)
 {
 	ssize_t rep;
-	ssize_t sock_code;
 	int i;
-
-	sock_code = switch_get_code(req);
-
-	terra_log_info("[terra_switch_set] set switch %c to %s\n", req->socket, req->mode == SWITCH_ON ? "on" : "off");
 
 	LOCK();
 
@@ -48,7 +32,7 @@ void terra_switch_set(terra_switch_req const * const req)
 	{
 		for (i = CONF_SWITCH.channel - 1; i >= 0; i--)
 		{
-			if (sock_code & (1L << i))
+			if (code & (1L << i))
 			{
 				switch_transmit(CONF_SWITCH.pin, SIGNAL_ONE_HIGH, SIGNAL_ONE_LOW);
 			}

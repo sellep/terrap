@@ -43,23 +43,23 @@ typedef struct
 
 	char *depends;
 	terra_switch_mode state;
-} terra_scheduler;
+} terra_schedule;
 
 typedef struct
 {
-	terra_scheduler scheduler;
+	terra_schedule schedule;
 
 	int time_len;
 	terra_start_stop *times;
-} terra_scheduler_clock;
+} terra_schedule_clock;
 
 typedef struct
 {
-	terra_scheduler scheduler;
+	terra_scheduler schedule;
 	terra_time active;
 	terra_time deactive;
 	BOOL active_first;
-} terra_scheduler_period;
+} terra_schedule_period;
 
 typedef struct
 {
@@ -72,10 +72,10 @@ typedef struct
 	terra_conf_hygro hy;
 
 	int clock_len;
-	terra_scheduler_clock *clocks;
+	terra_schedule_clock *clocks;
 
 	int period_len;
-	terra_scheduler_period *periods;
+	terra_schedule_period *periods;
 } terra_conf;
 
 extern BOOL terra_conf_read(terra_conf * const, char const * const);

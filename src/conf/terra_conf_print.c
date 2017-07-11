@@ -31,14 +31,14 @@ void terra_conf_print(terra_conf const * const c)
 	printf("repeats = %i\n", c->hy.repeats);
 	printf("delay = %i\n", c->hy.delay);
 
-	printf("\n###### scheduler ######\n");
+	printf("\n###### schedules ######\n");
 
 	for (i = 0; i < c->clock_len; i++)
 	{
 		printf("\n###### clock %zu ######\n", i);
-		printf("name = %s\n", c->clocks[i].scheduler.name);
-		printf("socket = %c\n", c->clocks[i].scheduler.socket);
-		printf("enabled = %i\n", c->clocks[i].scheduler.enabled);
+		printf("name = %s\n", c->clocks[i].schedule.name);
+		printf("socket = %c\n", c->clocks[i].schedule.socket);
+		printf("enabled = %i\n", c->clocks[i].schedule.enabled);
 
 		for (j = 0; j < c->clocks[i].time_len; j++)
 		{

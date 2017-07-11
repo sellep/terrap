@@ -28,13 +28,18 @@ terra_runtime runtime;
 #define CONF_SWITCH runtime.conf.sw
 #define CONF_HYGRO runtime.conf.hy
 
-#define SCHEDULER_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
-#define SCHEDULER_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
+#define SCHEDULE_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
+#define SCHEDULE_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
 
-#define SCHEDULER_DISABLED(s) !(s->scheduler.enabled)
+#define SCHEDULE(s) &(s)->schedule
+#define SCHEDULE_DISABLED(s) !(SCHEDULE(s)->enabled)
+#define SCHEDULE_SWITCH_ON(s) SCHEDULE(s)->state == SWITCH_ON
+#define SCHEDULE_SWITCH_NOT_ON(s) SCHEDULE(s)->state != SWITCH_ON
 
 #define LOCK() terra_lock()
 #define UNLOCK() terra_unlock()
+
+#define NOW runtime.now
 
 extern BOOL terra_runtime_init(char const * const);
 
@@ -67,7 +72,13 @@ static inline void terra_runtime_tick()
 	terra_time_now(&runtime.now);
 }
 
-static inline terra_scheduler* find_scheduler_by_name(char const * const name)
+static inline void schedule_set_switch_on(terra_schedule * const sched)
+{
+	terra_switch_set(sched->socket, SWITCH_ON);
+	SCHEDULE_SWITCH_ON(sched);
+}
+
+/*static inline terra_scheduler* find_scheduler_by_name(char const * const name)
 {
 	terra_scheduler_clock *clock;
 	terra_scheduler_period *period;
@@ -101,6 +112,6 @@ static inline BOOL terra_scheduler_deps(void * target)
 		return TRUE;
 
 	return find_scheduler_by_name(sched->name)->state == SWITCH_ON;
-}
+}*/
 
 #endif

@@ -20,16 +20,38 @@ void terrad_run_clocks_init()
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
-		SCHEDULER_CLOCK(i)->scheduler.state = SWITCH_UNKNOWN;
+		SCHEDULE_CLOCK(i)->schedule.state = SWITCH_UNKNOWN;
 	}
 }
 
-static void run_clock(terra_scheduler_clock * const clock)
+static void run_clock(terra_schedule_clock * const clock)
 {
-	if (SCHEDULER_DISABLED(clock))
+	ssize_t t;
+
+	if (SCHEDULE_DISABLED(clock))
 		return;
 
 	/* dep check */
+
+	for (t = 0; t < clock->time_len; t++)
+	{
+		if (
+				terra_time_diff(&NOW, &clock->times[t].start) == 0
+			||	terra_time_between(&NOW, &clock->times[t].start, &clock->times[t].stop)
+		)
+		{
+			if (SCHEDULE_SWITCH_NOT_ON(clock))
+			{
+				schedule_set_switch_on(clock);
+				return;
+			}
+		}
+	}
+
+	if (SCHEDULE_SWITCH_ON(clock))
+	{
+		schedule_set_switch_off(clock);
+	}
 }
 
 void terrad_run_clocks()
@@ -38,45 +60,6 @@ void terrad_run_clocks()
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
-		run_clock(SCHEDULER_CLOCK(i));
+		run_clock(SCHEDULE_CLOCK(i));
 	}
-
-/*
-	terra_time *start;
-	terra_time *stop;
-	size_t diff;
-	size_t j;
-
-	if (SCHEDULER_DISABLED(clock))
-		return;
-
-	//TODO: check dependency
-	if (!terra_scheduler_deps(clock))
-		return;
-
-	for (j = 0; j < clock->time_len; j++)
-	{
-		start = &(clock->times[j].start);
-		stop = &(clock->times[j].stop);
-
-		diff = terra_time_diff(sys_time, start);
-
-		if (diff == 0 || terra_time_between(&runtime.now, start, stop))
-		{
-			if (SWITCH_NOT_ON(clock))
-			{
-				change_switch(clock, SWITCH_ON);
-				terra_log_info("switch clock %s to on (diff: %us)\n", clock->scheduler.name, diff);
-			}
-
-			return;
-		}
-	}
-
-	//here, switch should be off
-	if (SWITCH_NOT_OFF(i))
-	{
-		SWITCH_SET_OFF(i);
-		terra_log_info("switch clock %s to off\n", clock->scheduler.name);
-	}*/
 }
