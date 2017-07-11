@@ -41,6 +41,16 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
+static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
+{
+	config_setting_t *clocks;
+
+	clocks = config_lookup(src, "clocks");
+	dest->clock_len = config_setting_length(clocks);
+
+	printf("clock len: %i\n", dest->clock_len);
+}
+
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 {
 	BOOL status = FALSE;
