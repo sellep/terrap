@@ -135,12 +135,12 @@ static BOOL terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 
 		terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp);
 
-		if (!dest->temps[i].act = parse_float(src_temp, "activation"))
+		if (!parse_float(src_temp, "activation", dest->temps[i].act))
 		{
 			terra_log_error("[terra_conf_temps_parse] unable to parse activation for temp schedule %zu\n", i);
 			return FALSE;
 		}
-		if (!dest->temps[i].deact = parse_float(src_temp, "deactivation"))
+		if (!parse_float(src_temp, "deactivation", &dest->temps[i].deact))
 		{
 			terra_log_error("[terra_conf_temps_parse] unable to parse deactivation for temp schedule %zu\n", i);
 			return FALSE;
