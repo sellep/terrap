@@ -1,5 +1,7 @@
 #include "terra_switch.h"
 
+#include "../common_dht_read.h"
+
 #define SIGNAL_PULSE_LEN 350
 
 #define SIGNAL_SYNC_HIGH 1
@@ -10,6 +12,50 @@
 
 #define SIGNAL_ONE_HIGH 3
 #define SIGNAL_ONE_LOW 1
+
+static inline void busy_sleep_microseconds(size_t const sec, size_t const usec)
+{
+	struct timeval now, end, tmp;
+
+	gettimeofday(&now, NULL);
+	tmp.tv_sec  = sec;
+	tmp.tv_usec = usec;
+	timeradd(&now, &tmp, &end);
+
+	while (1)
+	{
+		timersub(&end, &now, &tmp);
+
+		if (tmp.tv_usec < 0)
+			break;
+
+		gettimeofday(&now, NULL);		
+	}
+}
+
+static inline sleep_microseconds(size_t const us)
+{
+	struct timespec sleeper;
+	size_t sec;
+	size_t usec;
+
+	if (us == 0)
+		return;
+
+	usec = us % 1000000;
+	sec = us / 1000000;
+
+	if (us < 100)
+	{
+		busy_sleep_microseconds(sec, usec);
+	}
+	else
+	{
+		sleeper.tv_sec = usec;
+    		sleeper.tv_nsec = usec * 1000L;
+    		nanosleep(&sleeper, NULL);
+	}
+}
 
 static inline void switch_transmit(ssize_t const pin, ssize_t const high, ssize_t const low)
 {
