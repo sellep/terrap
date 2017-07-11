@@ -45,6 +45,7 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 {
 	config_setting_t *src_clocks;
 	config_setting_t *src_clock;
+	char *str;
 	size_t i;
 
 	src_clocks = config_lookup(src, "clocks");
@@ -52,15 +53,15 @@ static inline void terra_conf_clocks_parse(terra_conf * const dest, config_t con
 	dest->clock_len = config_setting_length(src_clocks);
 	dest->clocks = (terra_scheduler_clock*) malloc(sizeof(terra_scheduler_clock) * dest->clock_len);
 
-	char *str;
 	for (i = 0; i < dest->clock_len; i++)
 	{
 		src_clock = config_setting_get_elem(src_clocks, i);
 
 		config_setting_lookup_string(src_clock, "name", &str);
 
-		dest->clocks[0].scheduler.name = str;
-		printf("test: %s\n", dest->clocks[0].scheduler.name);
+		dest->clocks[i].scheduler.name = (char*) malloc(sizeof(char) * (strlen(str) + 1));
+		strcpy(dest->clocks[i].scheduler.name, str);
+		dest->clocks[i].scheduler.name[strlen(str)] = '\n';
 	}
 }
 
