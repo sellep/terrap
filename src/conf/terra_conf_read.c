@@ -4,7 +4,7 @@ static inline string_copy(char * * const dest, char const * const src)
 {
 	dest[0] = (char*) malloc(sizeof(char) * (strlen(src) + 1));
 	strcpy(dest[0], src);
-	dest[0][strlen(src)] = '\n';
+	//dest[0][strlen(src)] = '\0';
 }
 
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
