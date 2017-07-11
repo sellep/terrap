@@ -24,9 +24,9 @@ static inline void busy_sleep_microseconds(size_t const sec, size_t const usec)
 
 	while (1)
 	{
-		timersub(&end, &now, &tmp);
+		timersub(&now, &end, &tmp);
 
-		if (tmp.tv_usec < 0)
+		if (tmp.tv_sec >= 0)
 			break;
 
 		gettimeofday(&now, NULL);		
