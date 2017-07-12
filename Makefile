@@ -88,7 +88,7 @@ install:
 	@cp bin/terra /usr/local/bin/
 	@cp bin/terrad /usr/local/bin/
 	@cp res/terra.conf /etc/conf.d/terra
-	@cp res/terrad.init.script /etc/init.d/terra
+	@cp res/terra.init.d /etc/init.d/terra
 	@chmod +x /etc/init.d/terra
 	@mkdir -p /var/opt/terra
 
