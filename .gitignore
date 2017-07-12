@@ -1,6 +1,3 @@
-# Prerequisites
-*.d
-
 # Directory files
 bin/
 obj/
