@@ -1,6 +1,6 @@
 #include "terra_schedule.h"
 
-#define DEP_NAME(s) (SCHEDULE_INVERS_DEP ? (s)->name + 1 : (s)->name)
+#define DEP_NAME(s) SCHEDULE_INVERS_DEP(s) ? (s)->name + 1 : (s)->name
 
 static inline terra_schedule* terra_schedule_get_dep(terra_schedule const * const sched)
 {
