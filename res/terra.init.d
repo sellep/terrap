@@ -12,10 +12,10 @@ start() {
 	eend $?
 }
 
-end() {
+stop() {
 	ebegin "Stopping terra service"
 
-	start-stop-daemon --stop --exec /usr/local/bin/terrad --pidfile /var/run/terra --remove-pidfile
+	start-stop-daemon --stop --signal TERM --retry 10 --exec /usr/local/bin/terrad --pidfile /var/run/terra
 
 	eend $?
 }
