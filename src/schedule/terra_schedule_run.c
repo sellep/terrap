@@ -8,13 +8,9 @@
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
 
-extern void terrad_run_period_init();
-extern BOOL terrad_run_period();
-
-extern void terrad_run_temp_init();
-extern void terrad_run_temp(float const);
-
-extern void terrad_run_clock_init();
+extern void terra_schedule_clock_init();
+extern void terra_schedule_period_init();
+extern void terra_schedule_temp_init();
 
 static BOOL volatile _terminate = FALSE;
 
@@ -57,7 +53,7 @@ static inline void terra_heart_beat()
 static float _humi;
 static float _temp;
 
-static inline void terrad_run_hygro()
+static inline void schedule_run_hygro()
 {
 	if (DO_HYGRO_READ())
 	{
@@ -74,26 +70,29 @@ static inline void terrad_run_hygro()
 	}
 }
 
-static inline void terrad_run_read_only()
+static inline void schedule_run_read_only()
 {
 	while (!_terminate)
 	{
 		terra_runtime_tick();
 		DO_HEART_BEAT();
 
-		terrad_run_hygro();
+		schedule_run_hygro();
+
 		SLEEP();
 	}
 }
 
-static inline void terrad_run_schedules()
+static inline void schedule_run()
 {
 	while (!_terminate)
 	{
+		schedule_reset();
+
 		terra_runtime_tick();
 		DO_HEART_BEAT();
 
-		terrad_run_hygro();
+		schedule_run_hygro();
 
 		//schedule...
 
@@ -101,22 +100,22 @@ static inline void terrad_run_schedules()
 	}
 }
 
-BOOL terrad_run()
+BOOL terra_schedule_run()
 {
 	if (!register_signal_handler())
 		return FALSE;
 
-	terrad_run_temp_init();
-	terrad_run_period_init();
-	terrad_run_clock_init();
+	terra_schedule_clock_init();
+	terra_schedule_period_init();
+	terra_schedule_temp_init();
 
 	if (CONF_GLOBAL.read_only)
 	{
-		terrad_run_read_only();
+		schedule_run_read_only();
 	}
 	else
 	{
-		terrad_run_schedules();
+		schedule_run();
 	}
 
 	return TRUE;

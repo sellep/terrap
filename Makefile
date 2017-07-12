@@ -28,9 +28,11 @@ OBJ=pi_2_mmio.o \
 	terra_visual_legend.o \
 	terra_visual_points.o \
 	terra_runtime.o \
-	terrad_run_period.o \
-	terrad_run_clock.o \
-	terrad_run_temp.o \
+	terra_schedule_run_period.o \
+	terra_schedule_run_clock.o \
+	terra_schedule_run_temp.o \
+	terra_schedule_depcheck.o \
+	terra_schedule_run.o \
 	terrad_run.o
 
 %.o : src/%.c
@@ -49,6 +51,9 @@ OBJ=pi_2_mmio.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 %.o : src/utils/%.c
+	$(CC) $(CFLAGS) -o obj/$@ -c $<
+
+%.o : src/schedule/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 %.o : src/visual/%.c

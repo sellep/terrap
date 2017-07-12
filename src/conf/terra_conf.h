@@ -35,14 +35,26 @@ typedef struct
 	int delay;
 } terra_conf_hygro;
 
+enum schedule_types
+{
+	SCHEDULE_CLOCK,
+	SCHEDULE_PERIOD,
+	SCHEDULE_TEMP,
+	SCHEDULE_HUMI
+}
+
+typedef int schedule_type;
+
 typedef struct
 {
 	char *name;
+	schedule_type type;
 	char socket;
 	BOOL enabled;
-	char *depends;
+	char *dep;
 
 	terra_switch_mode state;
+	BOOL run;
 } terra_schedule;
 
 typedef struct

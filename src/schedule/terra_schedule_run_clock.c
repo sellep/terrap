@@ -1,24 +1,32 @@
-#include "terra.h"
+#include "terra_schedule.h"
 
-void terrad_run_clock_init()
+void terra_schedule_clock_init()
 {
 	ssize_t i;
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
-		SCHEDULE_CLOCK(i)->schedule.state = SWITCH_UNKNOWN;
+		SCHEDULE_GET_CLOCK(i)->schedule.state = SWITCH_UNKNOWN;
 	}
 }
 
-void run_clock(terra_schedule_clock * const clock)
+void terra_schedule_run_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
 	ssize_t t;
 
 	if (SCHEDULE_DISABLED(sched))
-		return;
+		goto end;
 
-	/* dep check */
+	if (!terra_schedule_depcheck(sched))
+	{
+		if (SCHEDULE_SWITCH_NOT_OFF(sched))
+		{
+			SCHEDULE_SET_SWITCH_OFF(sched);
+		}
+
+		goto end;
+	}
 
 	for (t = 0; t < clock->time_len; t++)
 	{
@@ -29,16 +37,17 @@ void run_clock(terra_schedule_clock * const clock)
 		{
 			if (SCHEDULE_SWITCH_NOT_ON(sched))
 			{
-				terra_switch_on(sched->socket);
-				SCHEDULE_SWITCH_ON(sched);
-				return;
+				SCHEDULE_SET_SWITCH_ON(sched);
+				goto end;
 			}
 		}
 	}
 
 	if (SCHEDULE_SWITCH_ON(sched))
 	{
-		terra_switch_off(sched->socket);
-		SCHEDULE_SWITCH_OFF(sched);
+		SCHEDULE_SET_SWITCH_OFF(sched);
 	}
+
+end:
+	sched->run = TRUE;
 }

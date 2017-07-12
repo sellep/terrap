@@ -28,15 +28,6 @@ terra_runtime runtime;
 #define CONF_SWITCH runtime.conf.sw
 #define CONF_HYGRO runtime.conf.hy
 
-#define SCHEDULE_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
-#define SCHEDULE_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
-
-#define SCHEDULE(s) ((terra_schedule*)(s))
-#define SCHEDULE_DISABLED(s) !((s)->enabled)
-#define SCHEDULE_SWITCH_ON(s) (s)->state == SWITCH_ON
-#define SCHEDULE_SWITCH_OFF(s) (s)->state == SWITCH_OFF
-#define SCHEDULE_SWITCH_NOT_ON(s) (s)->state != SWITCH_ON
-
 #define LOCK() terra_lock()
 #define UNLOCK() terra_unlock()
 

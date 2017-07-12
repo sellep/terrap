@@ -5,7 +5,7 @@ static inline void print_schedule(terra_schedule const * const sched)
 	printf("name = %s\n", sched->name);
 	printf("socket = %c\n", sched->socket);
 	printf("enabled = %i\n", sched->enabled);
-	printf("depends = %s\n", sched->depends);
+	printf("depends = %s\n", sched->dep);
 }
 
 void terra_conf_print(terra_conf const * const c)
