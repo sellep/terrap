@@ -97,7 +97,7 @@ static inline void schedule_run()
 
 		schedule_run_hygro();
 
-		for (i = 0; i < CONFIG_GLOBAL.clock_len; i++)
+		for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 		{
 			sched = SCHEDULE(SCHEDULE_GET_CLOCK(i));
 
@@ -110,7 +110,7 @@ static inline void schedule_run()
 			}
 		}
 
-		for (i = 0; i < CONFIG_GLOBAL.temp_len; i++)
+		for (i = 0; i < CONF_GLOBAL.temp_len; i++)
 		{
 			sched = SCHEDULE(SCHEDULE_GET_TEMP(i));
 
