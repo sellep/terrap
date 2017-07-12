@@ -85,6 +85,9 @@ static inline void schedule_run_read_only()
 
 static inline void schedule_run()
 {
+	terra_schedule *sched;
+	size_t i;
+
 	while (!_terminate)
 	{
 		schedule_reset();
@@ -94,7 +97,31 @@ static inline void schedule_run()
 
 		schedule_run_hygro();
 
-		//schedule...
+		for (i = 0; i < CONFIG_GLOBAL.clock_len; i++)
+		{
+			sched = SCHEDULE(SCHEDULE_GET_CLOCK(i));
+
+			if (SCHEDULE_DISABLED(sched))
+				continue;
+
+			if (SCHEDULE_NOT_RUN(sched))
+			{
+				terra_schedule_run_clock((terra_schedule_clock*) sched);
+			}
+		}
+
+		for (i = 0; i < CONFIG_GLOBAL.temp_len; i++)
+		{
+			sched = SCHEDULE(SCHEDULE_GET_TEMP(i));
+
+			if (SCHEDULE_DISABLED(sched))
+				continue;
+
+			if (SCHEDULE_NOT_RUN(sched))
+			{
+				terra_schedule_run_temp((terra_schedule_temp*) sched);
+			}
+		}
 
 		SLEEP();
 	}

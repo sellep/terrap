@@ -15,9 +15,6 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 	terra_schedule *sched = SCHEDULE(clock);
 	ssize_t t;
 
-	if (SCHEDULE_DISABLED(sched))
-		goto end;
-
 	if (!terra_schedule_depcheck(sched))
 	{
 		if (SCHEDULE_SWITCH_NOT_OFF(sched))
