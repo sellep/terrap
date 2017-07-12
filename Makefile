@@ -33,7 +33,6 @@ OBJ=pi_2_mmio.o \
 	terra_schedule_run_temp.o \
 	terra_schedule_depcheck.o \
 	terra_schedule_run.o \
-	terrad_run.o
 
 %.o : src/%.c
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
