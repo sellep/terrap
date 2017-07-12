@@ -17,6 +17,7 @@ extern BOOL terra_schedule_depcheck(terra_schedule const * const);
 
 #define SCHEDULE_GET_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
 #define SCHEDULE_GET_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
+#define SCHEDULE_GET_TEMP(i) (&CONF_GLOBAL.temps[(i)])
 
 #define SCHEDULE(s) ((terra_schedule*)(s))
 #define SCHEDULE_DISABLED(s) !((s)->enabled)
