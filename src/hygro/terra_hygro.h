@@ -6,7 +6,7 @@
 extern BOOL terra_hygro_run(float * const, float * const);
 extern BOOL terra_hygro_write(float const, float const);
 
-inline static BOOL hygro_wait()
+static inline BOOL hygro_wait()
 {
 	return terra_time_diff(&runtime.now, &runtime.hygro_last) > CONF_HYGRO.delay ? FALSE : TRUE;
 }
