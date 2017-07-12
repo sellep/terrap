@@ -10,9 +10,9 @@ extern void terra_schedule_run_period(terra_schedule_period * const);
 extern void terra_schedule_run_temp(terra_schedule_temp * const);
 extern BOOL terra_schedule_depcheck(terra_schedule const * const);
 
-#define SCHEDULE_IS_CLOCK(s) (s)->type == SCHEUDLE_CLOCK
-#define SCHEDULE_IS_PERIOD(s) (s)->type == SCHEUDLE_PERIOD
-#define SCHEDULE_IS_TEMP(s) (s)->type == SCHEUDLE_TEMP
+#define SCHEDULE_IS_CLOCK(s) (s)->type == SCHEDULE_CLOCK
+#define SCHEDULE_IS_PERIOD(s) (s)->type == SCHEDULE_PERIOD
+#define SCHEDULE_IS_TEMP(s) (s)->type == SCHEDULE_TEMP
 
 #define SCHEDULE_GET_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
 #define SCHEDULE_GET_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
