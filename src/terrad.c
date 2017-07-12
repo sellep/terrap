@@ -1,4 +1,5 @@
 #include "terra.h"
+#include "schedule/terra_schedule.h"
 
 extern BOOL terrad_run();
 
@@ -23,7 +24,7 @@ int main(int argc, char **argv)
 	terra_led_set(CONF_HEART.pin, FALSE);
 
 //run
-	run_result = terrad_run();
+	run_result = terra_schedule_run();
 
 	terra_log_info("terra daemon stopped\n");
 	terra_led_set(CONF_GLOBAL.pin_alert, TRUE);
