@@ -41,7 +41,7 @@ enum schedule_types
 	SCHEDULE_PERIOD,
 	SCHEDULE_TEMP,
 	SCHEDULE_HUMI
-}
+};
 
 typedef int schedule_type;
 
