@@ -82,14 +82,14 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 			if (grid->vals_y[y] < entry->humi)
 				continue;
 
-			if ((grid->vals_y[y] - entry->humi) < (grid->vals_y[y - 1] - entry->humi))
-			{
+			//if ((grid->vals_y[y] - entry->humi) < (grid->vals_y[y - 1] - entry->humi))
+			//{
 				grid->vals_humi[x] = y;
-			}
-			else
-			{
-				grid->vals_humi[x] = y - 1;
-			}
+			//}
+			//else
+			//{
+				//grid->vals_humi[x] = y - 1;
+			//}
 
 			break;
 		}
