@@ -9,26 +9,26 @@ static inline void grid_bounding(terra_data_entry const * const entries, size_t 
 
 	for (i = 1; i < len; i++)
 	{
-		if (entries[0].humi > entries[0].temp)
+		if (entries[i].humi > entries[i].temp)
 		{
-			if (entries[0].humi > max_y[0])
+			if (entries[i].humi > max_y[0])
 			{
-				max_y[0] = entries[0].humi;
+				max_y[0] = entries[i].humi;
 			}
-			if (entries[0].temp < min_y[0])
+			if (entries[i].temp < min_y[0])
 			{
-				min_y[0] = entries[0].temp;
+				min_y[0] = entries[i].temp;
 			}
 		}
 		else
 		{
-			if (entries[0].temp > max_y[0])
+			if (entries[i].temp > max_y[0])
 			{
-				max_y[0] = entries[0].temp;
+				max_y[0] = entries[i].temp;
 			}
-			if (entries[0].humi < min_y[0])
+			if (entries[i].humi < min_y[0])
 			{
-				min_y[0] = entries[0].humi;
+				min_y[0] = entries[i].humi;
 			}
 		}
 	}
