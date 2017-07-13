@@ -65,6 +65,8 @@ static inline void draw_points(terra_visual_grid const * const grid, ssize_t con
 	{
 		mvaddnwstr(GRID_OFFSET_TOP + DRAW_HEIGHT - grid->vals_humi[x], GRID_OFFSET_LEFT + x, &chr, 1);
 	}
+
+	SET_COLOR_DEFAULT();
 }
 
 #endif
