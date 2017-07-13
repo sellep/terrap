@@ -15,18 +15,6 @@ extern void terra_visual_draw_labels(ssize_t const, ssize_t const, terra_visual_
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
 
-/*static inline void terra_visual_eval(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds, terra_visual_point * const pts, terra_data_entry const * const entries, size_t const count)
-{
-	ssize_t x;
-	float step = (float) count / (width - 1);
-
-	for (x = 0; x < width -1; x++)
-	{
-		pts[x].temp = (size_t)((entries[(size_t)(x * step)].temp - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
-		pts[x].humi = (size_t)((entries[(size_t)(x * step)].humi - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
-	}
-}*/
-
 void terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)
 {
 	terra_visual_grid grid;
@@ -54,7 +42,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	//terra_visual_eval(width, height, &bounds, pts, entries, count);
 
 	terra_visual_draw_title(title, width, count);
-	terra_visual_draw_grid(width, height);
+	terra_visual_draw_grid(&grid, width, height);
 	terra_visual_draw_labels(width, height, &grid);
 	//terra_visual_points(width, height, pts);
 	//terra_visual_legend(width, height);
