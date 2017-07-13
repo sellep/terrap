@@ -22,26 +22,13 @@ static inline void draw_labels_y(terra_visual_grid const * const grid)
 {
 	float step_y;
 	size_t i;
-	/*ssize_t labels = DRAW_HEIGHT / GRID_MARKER_Y;
-
-	if (labels * GRID_MARKER_Y < DRAW_HEIGHT)
-	{
-		labels++;
-	}
-
-
-	step_y = (grid->vals_y[grid->height - 1] - grid->vals_y[0]) / (lbls - 1);
-
-	y_val = bounds->ymin;
-
-	for (i = 0; i < lbls; i++, y_val += y_step)
-	{
-		mvprintw(height - GRID_OFFSET_BOTTOM - 1 - i * GRID_MARKER_Y, 1, "%.1f", y_val);
-	}*/
 
 	for (i = 0; i < grid->height; i++)
 	{
-		mvprintw(GRID_OFFSET_TOP + grid->height - (i + 1), 0, "%.1f", grid->vals_y[i]);
+		if (i % GRID_MARKER_Y == 0)
+		{
+			mvprintw(GRID_OFFSET_TOP + grid->height - (i + 1), 0, "%.1f", grid->vals_y[i]);
+		}
 	}
 }
 
