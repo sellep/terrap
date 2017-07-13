@@ -7,7 +7,7 @@
 
 extern void terra_visual_title(char const * const, ssize_t const, size_t const);
 extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, terra_data_entry const * const, size_t const);
-extern void terra_visual_grid(ssize_t const, ssize_t const);
+extern void terra_visual_grid_draw(ssize_t const, ssize_t const);
 //extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
 //extern void terra_visual_legend(ssize_t const, ssize_t const);
 //extern void terra_visual_points(ssize_t const, ssize_t const, terra_visual_point const * const);
