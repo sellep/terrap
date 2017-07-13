@@ -27,7 +27,7 @@ static inline void draw_labels_y(terra_visual_grid const * const grid, ssize_t c
 	{
 		if (y % GRID_MARKER_Y == 0)
 		{
-			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT() - (y + 1), 0, "%.1f", grid->vals_y[y]);
+			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT - (y + 1), 0, "%.1f", grid->vals_y[y]);
 		}
 	}
 #endif
@@ -49,7 +49,7 @@ static inline void draw_labels_x(terra_visual_grid const * const grid, ssize_t c
 			terra_time_to_arr(buf, &tm);
 			len = labels_remove_secs(buf);
 
-			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT(), GRID_OFFSET_LEFT + x - (len / 2), "%s", buf);
+			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT, GRID_OFFSET_LEFT + x - (len / 2), "%s", buf);
 		}
 	}
 #endif
