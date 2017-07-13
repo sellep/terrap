@@ -82,15 +82,7 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 			if (grid->vals_y[y] < entry->humi)
 				continue;
 
-			//if ((grid->vals_y[y] - entry->humi) < (grid->vals_y[y - 1] - entry->humi))
-			//{
-				grid->vals_humi[x] = y;
-			//}
-			//else
-			//{
-				//grid->vals_humi[x] = y - 1;
-			//}
-
+			grid->vals_humi[x] = y;
 			break;
 		}
 
@@ -99,20 +91,10 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 			if (grid->vals_y[y] < entry->temp)
 				continue;
 
-			//if (grid->vals_y[y] - entry->temp < grid->vals_y[y - 1] - entry->temp)
-			//{
-				grid->vals_temp[x] = y;
-			//}
-			//else
-			//{
-				//grid->vals_temp[x] = y - 1;
-			//}
-
+			grid->vals_temp[x] = y;
 			break;
 		}
 	}
-
-	mvprintw(1, 0, "humi 1 %zu", grid->vals_humi[1]);
 }
 
 void terra_visual_grid_init(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len)
