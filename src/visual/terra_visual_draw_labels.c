@@ -20,25 +20,28 @@ static inline ssize_t labels_remove_secs(char * const lbl)
 
 static inline void draw_labels_y(terra_visual_grid const * const grid)
 {
+#ifdef NCURSES
 	ssize_t y;
 
-	for (y = 0; y < DRAW_HEIGHT(); y++)
+	for (y = 0; y < DRAW_HEIGHT; y++)
 	{
 		if (y % GRID_MARKER_Y == 0)
 		{
 			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT() - (y + 1), 0, "%.1f", grid->vals_y[y]);
 		}
 	}
+#endif
 }
 
 static inline void draw_labels_x(terra_visual_grid const * const grid)
 {
+#ifdef NCURSES
 	char buf[10];
 	terra_time tm;
 	ssize_t len;
 	ssize_t x;
 
-	for (x = 0; x < DRAW_WIDTH(); x++)
+	for (x = 0; x < DRAW_WIDTH; x++)
 	{
 		if (x % GRID_MARKER_X == 0)
 		{
@@ -49,12 +52,14 @@ static inline void draw_labels_x(terra_visual_grid const * const grid)
 			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT(), GRID_OFFSET_LEFT + x - (len / 2), "%s", buf);
 		}
 	}
+#endif
 }
 
 void terra_visual_draw_labels(ssize_t const width, ssize_t const height, terra_visual_grid const * const grid)
 {
-#ifdef NCURSES
+
 	draw_labels_y(grid);
+	draw_labels_x(grid);
 	/*float y_val;
 	float y_step;
 
@@ -93,5 +98,4 @@ void terra_visual_draw_labels(ssize_t const width, ssize_t const height, terra_v
 	//	mlen = labels_remove_secs(buf);
 	//	mvprintw(height - GRID_OFFSET_BOTTOM, GRID_OFFSET_LEFT + i * GRID_MARKER_X - (mlen / 2), "%s", buf);
 	//}*/
-#endif
 }

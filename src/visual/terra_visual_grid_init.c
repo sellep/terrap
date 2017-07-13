@@ -44,10 +44,10 @@ static inline void compute_vals_y(terra_visual_grid * const grid, size_t const h
 
 	grid_bounding_y(entries, len, &min, &max);
 
-	step = ((double) max - min) / (DRAW_HEIGHT() - 2);
+	step = ((double) max - min) / (DRAW_HEIGHT - 2);
 	start = min - step;
 
-	for (y = 0; y < DRAW_HEIGHT(); y++)
+	for (y = 0; y < DRAW_HEIGHT; y++)
 	{
 		grid->vals_y[y] = (float)(start + y * step);
 	}
@@ -59,10 +59,10 @@ static inline void compute_vals_x(terra_visual_grid * const grid, size_t const w
 	size_t start;
 	size_t x;
 
-	step = (double)terra_time_diff(&entries[0].tm, &entries[len - 1].tm) / DRAW_WIDTH();
+	step = (double)terra_time_diff(&entries[0].tm, &entries[len - 1].tm) / DRAW_WIDTH;
 	start = terra_time_to_int(&entries[0].tm);
 
-	for (x = 0; x < DRAW_WIDTH(); x++)
+	for (x = 0; x < DRAW_WIDTH; x++)
 	{
 		grid->vals_x[x] = (size_t) (start + x * step);
 	}
@@ -70,8 +70,8 @@ static inline void compute_vals_x(terra_visual_grid * const grid, size_t const w
 
 void terra_visual_grid_init(terra_visual_grid * const grid, size_t const width, size_t const height, terra_data_entry const * const entries, size_t const len)
 {
-	grid->vals_y = (float*) malloc(sizeof(float) * DRAW_HEIGHT());
-	grid->vals_x = (size_t*) malloc(sizeof(size_t) * DRAW_WIDTH());
+	grid->vals_y = (float*) malloc(sizeof(float) * DRAW_HEIGHT);
+	grid->vals_x = (size_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
 
 	compute_vals_y(grid, height, entries, len);
 	compute_vals_x(grid, width, entries, len);
