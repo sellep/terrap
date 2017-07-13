@@ -34,6 +34,9 @@ typedef struct
 {
 	float *vals_y;
 	size_t *vals_x;
+
+	ssize_t *vals_humi;
+	ssize_t *vals_temp;
 } terra_visual_grid;
 
 typedef struct

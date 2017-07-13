@@ -34,7 +34,7 @@ static inline void grid_bounding_y(terra_data_entry const * const entries, size_
 	}
 }
 
-static inline void compute_vals_y(terra_visual_grid * const grid, size_t const height, terra_data_entry const * const entries, size_t const len)
+static inline void compute_vals_y(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entries, size_t const len)
 {
 	float min;
 	float max;
@@ -53,7 +53,7 @@ static inline void compute_vals_y(terra_visual_grid * const grid, size_t const h
 	}
 }
 
-static inline void compute_vals_x(terra_visual_grid * const grid, size_t const width, terra_data_entry const * const entries, size_t const len)
+static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const width, terra_data_entry const * const entries, size_t const len)
 {
 	double step;
 	size_t start;
@@ -66,18 +66,33 @@ static inline void compute_vals_x(terra_visual_grid * const grid, size_t const w
 	{
 		grid->vals_x[x] = (size_t) (start + x * step);
 	}
-
-	char buf[10];
-	terra_time_to_arr(buf, &entries[len - 1].tm);
-	
-	mvprintw(0, 0, "width %zu, step %f, start %zu, last tm %s", DRAW_WIDTH, step, start, buf);
 }
 
-void terra_visual_grid_init(terra_visual_grid * const grid, size_t const width, size_t const height, terra_data_entry const * const entries, size_t const len)
+static inline void eval_entries(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len)
+{
+	terra_data_entry *entry;
+	ssize_t x, y;
+
+	for (x = 0; x < DRAW_WIDTH; x++)
+	{
+		entry = &entries[x * len / (DRAW_WIDTH - 1)];
+
+		for (y = 0; y < DRAW_HEIGHT; y++)
+		{
+			
+		}
+	}
+}
+
+void terra_visual_grid_init(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len)
 {
 	grid->vals_y = (float*) malloc(sizeof(float) * DRAW_HEIGHT);
 	grid->vals_x = (size_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
+	grid->vals_humi = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
+	grid->vals_temp = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
 
 	compute_vals_y(grid, height, entries, len);
 	compute_vals_x(grid, width, entries, len);
+
+	eval_entries(grid, width, height, entries, len);
 }
