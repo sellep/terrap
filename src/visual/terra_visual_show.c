@@ -30,7 +30,6 @@ extern void terra_visual_draw_labels(ssize_t const, ssize_t const, terra_visual_
 void terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)
 {
 	terra_visual_grid grid;
-	terra_visual_point *pts;
 	int width;
 	int height;
 
