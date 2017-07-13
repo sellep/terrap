@@ -55,7 +55,7 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 }
 #endif
 
-void terra_visual_grid_draw(ssize_t const width, ssize_t const height)
+void terra_visual_draw_grid(ssize_t const width, ssize_t const height)
 {
 #ifdef NCURSES
 	const wchar_t origin = L'\x253c';

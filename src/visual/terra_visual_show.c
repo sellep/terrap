@@ -5,10 +5,10 @@
 #include <wchar.h>
 #include <stddef.h>
 
-extern void terra_visual_title(char const * const, ssize_t const, size_t const);
 extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, size_t const, terra_data_entry const * const, size_t const);
-extern void terra_visual_grid_draw(ssize_t const, ssize_t const);
-//extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
+extern void terra_visual_draw_title(char const * const, ssize_t const, size_t const);
+extern void terra_visual_draw_grid(ssize_t const, ssize_t const);
+extern void terra_visual_draw_labels(ssize_t const, ssize_t const, terra_visual_grid const * const);
 //extern void terra_visual_legend(ssize_t const, ssize_t const);
 //extern void terra_visual_points(ssize_t const, ssize_t const, terra_visual_point const * const);
 
@@ -56,7 +56,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 
 	terra_visual_title(title, width, count);
 	terra_visual_grid_draw(width, height);
-	//terra_visual_labels(width, height, &bounds);	
+	terra_visual_labels(width, height, &grid);
 	//terra_visual_points(width, height, pts);
 	//terra_visual_legend(width, height);
 

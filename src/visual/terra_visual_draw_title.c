@@ -2,7 +2,7 @@
 
 #define DETAILS_FORMAT "entries: %zu, temp: %.2f - %.2f, humi: %.2f - %.2f"
 
-void terra_visual_title(char const * const title, ssize_t const width, size_t const entries)
+void terra_visual_draw_title(char const * const title, ssize_t const width, size_t const entries)
 {
 #ifdef NCURSES
 	ssize_t tlen;

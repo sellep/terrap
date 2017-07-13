@@ -1,6 +1,6 @@
 #include "terra_visual.h"
 
-void terra_visual_points(ssize_t const width, ssize_t const height, terra_visual_point const * const pts)
+void terra_visual_draw_points(ssize_t const width, ssize_t const height, terra_visual_point const * const pts)
 {
 #ifdef NCURSES
 	wchar_t chr = L'\x2736';

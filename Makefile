@@ -23,8 +23,9 @@ OBJ=pi_2_mmio.o \
 	terra_hygro_write.o \
 	terra_visual_show.o \
 	terra_visual_grid_init.o \
-	terra_visual_title.o \
-	terra_visual_grid_draw.o \
+	terra_visual_draw_title.o \
+	terra_visual_draw_grid.o \
+	terra_visual_draw_labels.o \
 	terra_runtime.o \
 	terra_schedule_run_period.o \
 	terra_schedule_run_clock.o \

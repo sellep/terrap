@@ -35,6 +35,7 @@ typedef struct
 	ssize_t width;
 	ssize_t height;
 	float *vals_y;
+	terra_time *vals_x;
 } terra_visual_grid;
 
 typedef struct
