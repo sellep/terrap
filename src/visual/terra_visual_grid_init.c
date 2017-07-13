@@ -77,9 +77,21 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 	{
 		entry = &entries[x * len / (DRAW_WIDTH - 1)];
 
-		for (y = 0; y < DRAW_HEIGHT; y++)
+		for (y = 1; y < DRAW_HEIGHT; y++)
 		{
-			
+			if (grid->vals_y[y] < entry->humi)
+				continue;
+
+			if (grid->vals_y[y] - entry->humi < grid->vals_y[y - 1] - entry->humi)
+			{
+				grid->vals_humi[x] = y;
+			}
+			else
+			{
+				grid->vals_humi[x] = y - 1;
+			}
+
+			break;
 		}
 	}
 }
