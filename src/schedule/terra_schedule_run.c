@@ -83,10 +83,22 @@ static inline void schedule_run_read_only()
 	}
 }
 
+static inline void schedule_init()
+{
+	terra_pin_set_out(CONF_GLOBAL.pin_alert);
+	terra_pin_set_out(CONF_HEART.pin);
+	terra_pin_set_out(CONF_SWITCH.pin);
+
+	terra_led_set(CONF_GLOBAL.pin_alert, FALSE);
+	terra_led_set(CONF_HEART.pin, FALSE);
+}
+
 static inline void schedule_run()
 {
 	terra_schedule *sched;
 	size_t i;
+
+	schedule_init();
 
 	while (!_terminate)
 	{

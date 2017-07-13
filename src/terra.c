@@ -5,6 +5,7 @@
 #define ARG_MODE_HYGRO "hygro"
 #define ARG_MODE_VISUAL "show"
 #define ARG_MODE_CONFIG "conf"
+#define ARG_MODE_DAEMON "daemon"
 
 int main(int argc, char ** argv)
 {
@@ -58,6 +59,10 @@ int main(int argc, char ** argv)
 	else if (strcmp(argv[1], ARG_MODE_CONFIG) == 0)
 	{
 		terra_conf_print(&CONF_GLOBAL);
+	}
+	else if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
+	{
+		terra_schedule_run();
 	}
 	else
 	{

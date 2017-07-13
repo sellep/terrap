@@ -7,7 +7,7 @@ depend() {
 start() {
 	ebegin "Starting terra service"
 
-	start-stop-daemon --start --background --exec /usr/local/bin/terrad --pidfile /var/run/terra --make-pidfile
+	start-stop-daemon --start --background --exec /usr/local/bin/terra --pidfile /var/run/terra --make-pidfile -- daemon
 
 	eend $?
 }
@@ -15,7 +15,7 @@ start() {
 end() {
 	ebegin "Stopping terra service"
 
-	start-stop-daemon --stop --exec /usr/local/bin/terrad --pidfile /var/run/terra --remove-pidfile
+	start-stop-daemon --stop --exec /usr/local/bin/terra --pidfile /var/run/terra --remove-pidfile
 
 	eend $?
 }
