@@ -55,7 +55,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	//terra_visual_eval(width, height, &bounds, pts, entries, count);
 
 	terra_visual_draw_title(title, width, count);
-	terra_visual_draw_grid_draw(width, height);
+	terra_visual_draw_grid(width, height);
 	terra_visual_draw_labels(width, height, &grid);
 	//terra_visual_points(width, height, pts);
 	//terra_visual_legend(width, height);
