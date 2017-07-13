@@ -2,7 +2,7 @@
 
 #define DETAILS_FORMAT "entries: %zu, temp: %.2f - %.2f, humi: %.2f - %.2f"
 
-void terra_visual_title(char const * const title, ssize_t const width, size_t const entries, terra_visual_bounds const * const bounds)
+void terra_visual_title(char const * const title, ssize_t const width, size_t const entries)
 {
 #ifdef NCURSES
 	ssize_t tlen;
@@ -29,6 +29,6 @@ void terra_visual_title(char const * const title, ssize_t const width, size_t co
 		printw("-");
 	}
 
-	mvprintw(1, 1, DETAILS_FORMAT, entries, bounds->temp_min, bounds->temp_max, bounds->humi_min, bounds->humi_max);
+	//mvprintw(1, 1, DETAILS_FORMAT, entries, bounds->temp_min, bounds->temp_max, bounds->humi_min, bounds->humi_max);
 #endif
 }

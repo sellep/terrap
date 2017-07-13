@@ -5,9 +5,6 @@
 #include "../utils/terra_time.h"
 #include "../utils/terra_data.h"
 
-#define GRID_PADDING_TOP 2
-#define GRID_PADDING_BOTTOM 1
-
 #define GRID_OFFSET_TOP 2
 #define GRID_OFFSET_BOTTOM 1
 #define GRID_OFFSET_LEFT 5
@@ -35,15 +32,10 @@
 
 typedef struct
 {
-	float ymin;
-	float ymax;
-	float temp_min;
-	float temp_max;
-	float humi_min;
-	float humi_max;
-	terra_time xmin;
-	terra_time xmax;
-} terra_visual_bounds;
+	ssize_t width;
+	ssize_t height;
+	float *vals_y;
+} terra_visual_grid;
 
 typedef struct
 {
@@ -53,12 +45,12 @@ typedef struct
 
 typedef ssize_t terra_visual_cmd;
 
-inline static BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)
+static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)
 {
 	cmd[0] = argc == 2 ? 0 : atoi(argv[2]);
 	return TRUE;
 }
 
-BOOL terra_visual_show(terra_visual_cmd const);
+extern BOOL terra_visual_show(terra_visual_cmd const);
 
 #endif

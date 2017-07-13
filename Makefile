@@ -22,12 +22,9 @@ OBJ=pi_2_mmio.o \
 	terra_hygro_run.o \
 	terra_hygro_write.o \
 	terra_visual_show.o \
-	terra_visual_bounding.o \
+	terra_visual_grid_init.o \
 	terra_visual_title.o \
 	terra_visual_grid.o \
-	terra_visual_labels.o \
-	terra_visual_legend.o \
-	terra_visual_points.o \
 	terra_runtime.o \
 	terra_schedule_run_period.o \
 	terra_schedule_run_clock.o \

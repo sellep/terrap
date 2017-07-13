@@ -6,16 +6,16 @@
 #include <stddef.h>
 
 extern void terra_visual_title(char const * const, ssize_t const, size_t const, terra_visual_bounds const * const);
-extern void terra_visual_bounding(terra_visual_bounds * const, terra_data_entry const * const, size_t const);
+extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, terra_data_entry const * const, size_t const);
 extern void terra_visual_grid(ssize_t const, ssize_t const);
-extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
-extern void terra_visual_legend(ssize_t const, ssize_t const);
-extern void terra_visual_points(ssize_t const, ssize_t const, terra_visual_point const * const);
+//extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
+//extern void terra_visual_legend(ssize_t const, ssize_t const);
+//extern void terra_visual_points(ssize_t const, ssize_t const, terra_visual_point const * const);
 
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
 
-inline static void terra_visual_eval(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds, terra_visual_point * const pts, terra_data_entry const * const entries, size_t const count)
+/*static inline void terra_visual_eval(ssize_t const width, ssize_t const height, terra_visual_bounds const * const bounds, terra_visual_point * const pts, terra_data_entry const * const entries, size_t const count)
 {
 	ssize_t x;
 	float step = (float) count / (width - 1);
@@ -25,18 +25,16 @@ inline static void terra_visual_eval(ssize_t const width, ssize_t const height, 
 		pts[x].temp = (size_t)((entries[(size_t)(x * step)].temp - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
 		pts[x].humi = (size_t)((entries[(size_t)(x * step)].humi - bounds->ymin) / (bounds->ymax - bounds->ymin) * DRAW_HEIGHT);
 	}
-}
+}*/
 
 void terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)
 {
-	terra_visual_bounds bounds;
+	terra_visual_grid grid;
 	terra_visual_point *pts;
 	int width;
 	int height;
 
 	setlocale(LC_CTYPE, "en_US.UTF-8");
-
-	terra_visual_bounding(&bounds, entries, count);
 
 	initscr();
 	noecho();
@@ -51,15 +49,16 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	init_pair(6, COLOR_BOTH, COLOR_BLACK);
 
 	getmaxyx(stdscr, height, width);
+	terra_visual_grid_init(&grid, width, height, entries, count);
 
 	pts = (terra_visual_point*) malloc(sizeof(terra_visual_point) * (width - 1));
 	terra_visual_eval(width, height, &bounds, pts, entries, count);
 
-	terra_visual_title(title, width, count, &bounds);
+	terra_visual_title(title, width, count);
 	terra_visual_grid(width, height);
-	terra_visual_labels(width, height, &bounds);	
-	terra_visual_points(width, height, pts);
-	terra_visual_legend(width, height);
+	//terra_visual_labels(width, height, &bounds);	
+	//terra_visual_points(width, height, pts);
+	//terra_visual_legend(width, height);
 
 	getch();
 	endwin();
