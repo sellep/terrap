@@ -41,7 +41,7 @@ static inline void draw_labels_y(terra_visual_grid const * const grid)
 
 	for (i = 0; i < grid->height; i++)
 	{
-		mvprintw(GRID_OFFSET_TOP + grid->height - 1, 0, "%.1f", grid->vals_y[i]);
+		mvprintw(GRID_OFFSET_TOP + grid->height - i, 0, "%.1f", grid->vals_y[i]);
 	}
 }
 
