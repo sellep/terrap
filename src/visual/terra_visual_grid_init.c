@@ -48,7 +48,7 @@ void terra_visual_grid_init(terra_visual_grid * const grid, size_t const width, 
 	grid_bounding(entries, len, &min_y, &max_y);
 
 	step_y = (max_y - min_y) / (grid->height - 2);
-	start_y = grid->y_min - step_y;
+	start_y = min_y - step_y;
 
 	for (i = 0; i < grid->height; i++)
 	{
