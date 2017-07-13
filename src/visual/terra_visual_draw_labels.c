@@ -33,7 +33,7 @@ static inline void draw_labels_y(terra_visual_grid const * const grid, ssize_t c
 #endif
 }
 
-static inline void draw_labels_x(terra_visual_grid const * const grid, ssize_t const width)
+static inline void draw_labels_x(terra_visual_grid const * const grid, ssize_t const width, ssize_t const height)
 {
 #ifdef NCURSES
 	char buf[10];
@@ -59,7 +59,7 @@ void terra_visual_draw_labels(ssize_t const width, ssize_t const height, terra_v
 {
 
 	draw_labels_y(grid, height);
-	draw_labels_x(grid, width);
+	draw_labels_x(grid, width, height);
 	/*float y_val;
 	float y_step;
 
