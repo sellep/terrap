@@ -80,7 +80,6 @@ debug: debug_flags all
 
 install:
 	@cp bin/terra /usr/local/bin/
-	@cp bin/terrad /usr/local/bin/
 	@mkdir -p /etc/terra
 	@cp res/terra.conf /etc/terra/terra.conf
 	@cp res/terra.init.d /etc/init.d/terra
@@ -89,7 +88,6 @@ install:
 
 uninstall:
 	@rm -f /opt/terra
-	@rm -f /opt/terrad
 	@rm -rf /etc/terra
 	@rm -f /etc/init.d/terra
 	@rm -rf /var/opt/terra
