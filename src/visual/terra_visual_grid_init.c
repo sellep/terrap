@@ -1,6 +1,6 @@
 #include "terra_visual.h"
 
-static inline void grid_bounding(terra_data_entry const * const entries, size_t const len, float * const min_y, float * const max_y)
+static inline void grid_bounding_y(terra_data_entry const * const entries, size_t const len, float * const min_y, float * const max_y)
 {
 	size_t i;
 
@@ -32,26 +32,47 @@ static inline void grid_bounding(terra_data_entry const * const entries, size_t 
 			}
 		}
 	}
-} 
+}
+
+static inline void compute_vals_y(terra_visual_grid * const grid, size_t const height, terra_data_entry const * const entries, size_t const len)
+{
+	float min;
+	float max;
+	double step;
+	double start;
+	size_t y;
+
+	grid_bounding_y(entries, len, &min, &max);
+
+	step = ((double) max - min) / (DRAW_HEIGHT() - 2);
+	start = min - step;
+
+	for (y = 0; y < DRAW_HEIGHT(); y++)
+	{
+		grid->vals_y[y] = (float)(start + y * step);
+	}
+}
+
+static inline void compute_vals_x(terra_visual_grid * const grid, size_t const width, terra_data_entry const * const entries, size_t const len)
+{
+	double steps;
+	size_t start;
+	size_t x;
+
+	step = (double)terra_time_diff(&entries[0].tm, &entries[len - 1].tm) / DRAW_WIDTH();
+	start = terra_time_to_int(&entries[0].tm);
+
+	for (x = 0; x < DRAW_WIDTH(); x++)
+	{
+		grid->vals_x[x] = (size_t) (start + x * step);
+	}
+}
 
 void terra_visual_grid_init(terra_visual_grid * const grid, size_t const width, size_t const height, terra_data_entry const * const entries, size_t const len)
 {
-	float min_y;
-	float max_y;
-	float step_y;
-	float start_y;
-	size_t i;
+	grid->vals_y = (float*) malloc(sizeof(float) * DRAW_HEIGHT());
+	grid->vals_x = (size_t*) malloc(sizeof(size_t) * DRAW_WIDTH());
 
-	grid->height = height - GRID_OFFSET_TOP - GRID_OFFSET_BOTTOM;
-	grid->vals_y = (float*) malloc(sizeof(float) * grid->height);
-
-	grid_bounding(entries, len, &min_y, &max_y);
-
-	step_y = (max_y - min_y) / (grid->height - 2);
-	start_y = min_y - step_y;
-
-	for (i = 0; i < grid->height; i++)
-	{
-		grid->vals_y[i] = start_y + i * step_y;
-	}
+	compute_vals_y(grid, height, entries, len);
+	compute_vals_x(grid, width, entries, len);
 }

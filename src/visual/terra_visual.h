@@ -13,8 +13,8 @@
 #define GRID_MARKER_Y 3
 #define GRID_MARKER_X 10
 
-#define DRAW_HEIGHT (height - GRID_OFFSET_TOP - GRID_OFFSET_BOTTOM)
-#define DRAW_WIDTH (width - GRID_OFFSET_LEFT - GRID_OFFSET_RIGHT)
+#define DRAW_HEIGHT() (height - GRID_OFFSET_TOP - GRID_OFFSET_BOTTOM)
+#define DRAW_WIDTH() (width - GRID_OFFSET_LEFT - GRID_OFFSET_RIGHT)
 
 #define COLOR_DEFAULT COLOR_WHITE
 #define COLOR_GRID COLOR_YELLOW
@@ -32,10 +32,8 @@
 
 typedef struct
 {
-	ssize_t width;
-	ssize_t height;
 	float *vals_y;
-	terra_time *vals_x;
+	size_t *vals_x;
 } terra_visual_grid;
 
 typedef struct

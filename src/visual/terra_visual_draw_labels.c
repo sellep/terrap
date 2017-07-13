@@ -20,14 +20,33 @@ static inline ssize_t labels_remove_secs(char * const lbl)
 
 static inline void draw_labels_y(terra_visual_grid const * const grid)
 {
-	float step_y;
-	size_t i;
+	ssize_t y;
 
-	for (i = 0; i < grid->height; i++)
+	for (y = 0; y < DRAW_HEIGHT(); y++)
 	{
-		if (i % GRID_MARKER_Y == 0)
+		if (y % GRID_MARKER_Y == 0)
 		{
-			mvprintw(GRID_OFFSET_TOP + grid->height - (i + 1), 0, "%.1f", grid->vals_y[i]);
+			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT() - (y + 1), 0, "%.1f", grid->vals_y[y]);
+		}
+	}
+}
+
+static inline void draw_labels_x(terra_visual_grid const * const grid)
+{
+	char buf[10];
+	terra_time tm;
+	ssize_t len;
+	ssize_t x;
+
+	for (x = 0; x < DRAW_WIDTH(); x++)
+	{
+		if (x % GRID_MARKER_X == 0)
+		{
+			terra_time_from_int(&tm, grid->vals_x[x]);
+			terra_time_to_arr(buf, &tm);
+			len = labels_remove_secs(buf);
+
+			mvprintw(GRID_OFFSET_TOP + DRAW_HEIGHT(), GRID_OFFSET_LEFT + x - (len / 2), "%s", buf);
 		}
 	}
 }
