@@ -44,13 +44,15 @@ static inline void compute_vals_y(terra_visual_grid * const grid, ssize_t const 
 
 	grid_bounding_y(entries, len, &min, &max);
 
-	step = (double)(max - min) / (DRAW_HEIGHT - 4);
+	step = (double)(max - min) / (DRAW_HEIGHT - 3);
 	start = min - step;
 
 	for (y = 0; y < DRAW_HEIGHT; y++)
 	{
 		grid->vals_y[y] = (float)(start + y * step);
 	}
+
+	mvprintw(1, 0, "draw_height %zu, min %f, max %f, step %f, start %f", DRAW_HEIGHT, min, max, step, start);
 }
 
 static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const width, terra_data_entry const * const entries, size_t const len)
