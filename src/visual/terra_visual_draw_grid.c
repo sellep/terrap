@@ -17,7 +17,7 @@ inline static void visual_grid_y(ssize_t width, ssize_t height)
 
 	SET_COLOR_GRID();
 
-	for (x = GRID_MARKER_X; x < DRAW_WIDTH; x += GRID_MARKER_X)
+	for (x = GRID_MARKER_X; x < DRAW_WIDTH(); x += GRID_MARKER_X)
 	{
 		for (y = height - GRID_OFFSET_BOTTOM - 1; y > GRID_OFFSET_TOP; y--)
 		{
@@ -43,7 +43,7 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 
 	SET_COLOR_GRID();
 
-	for (y = GRID_MARKER_Y; y < DRAW_HEIGHT; y += GRID_MARKER_Y)
+	for (y = GRID_MARKER_Y; y < DRAW_HEIGHT(); y += GRID_MARKER_Y)
 	{
 		for (x = 1; x < DRAW_WIDTH; x++)
 		{
