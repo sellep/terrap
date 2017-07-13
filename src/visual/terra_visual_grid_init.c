@@ -66,6 +66,8 @@ static inline void compute_vals_x(terra_visual_grid * const grid, size_t const w
 	{
 		grid->vals_x[x] = (size_t) (start + x * step);
 	}
+
+	mvprintw(0, 0, "step %f, start %zu", step, start);
 }
 
 void terra_visual_grid_init(terra_visual_grid * const grid, size_t const width, size_t const height, terra_data_entry const * const entries, size_t const len)
