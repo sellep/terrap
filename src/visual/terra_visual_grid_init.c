@@ -55,7 +55,7 @@ static inline void compute_vals_y(terra_visual_grid * const grid, size_t const h
 
 static inline void compute_vals_x(terra_visual_grid * const grid, size_t const width, terra_data_entry const * const entries, size_t const len)
 {
-	double steps;
+	double step;
 	size_t start;
 	size_t x;
 
