@@ -60,42 +60,4 @@ void terra_visual_draw_labels(ssize_t const width, ssize_t const height, terra_v
 
 	draw_labels_y(grid, height);
 	draw_labels_x(grid, width, height);
-	/*float y_val;
-	float y_step;
-
-	terra_time tt;
-	size_t x_min;
-	size_t x_max;
-	size_t x_val;
-	size_t x_step;
-	ssize_t mlen;
-	char buf[10];
-
-	
-	ssize_t i;
-
-	
-
-	
-	
-
-	//x_min = terra_time_to_int(&bounds->xmin);
-	//x_max = terra_time_to_int(&bounds->xmax);
-    //
-	//lbls = DRAW_WIDTH / GRID_MARKER_X;
-	//if (lbls * GRID_MARKER_X < DRAW_WIDTH)
-	//{
-	//	lbls++;
-	//}
-    //
-	//x_step = (x_max - x_min) / (lbls - 1);
-	//x_val = x_min;
-    //
-	//for (i = 0; i < lbls; i++, x_val += x_step)
-	//{
-	//	terra_time_from_int(&tt, x_val);
-	//	terra_time_to_arr(buf, &tt);
-	//	mlen = labels_remove_secs(buf);
-	//	mvprintw(height - GRID_OFFSET_BOTTOM, GRID_OFFSET_LEFT + i * GRID_MARKER_X - (mlen / 2), "%s", buf);
-	//}*/
 }

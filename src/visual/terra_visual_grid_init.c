@@ -93,6 +93,23 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 
 			break;
 		}
+
+		for (y = 1; y < DRAW_HEIGHT; y++)
+		{
+			if (grid->vals_y[y] < entry->temp)
+				continue;
+
+			if (grid->vals_y[y] - entry->temp < grid->vals_y[y - 1] - entry->temp)
+			{
+				grid->vals_temp[x] = y;
+			}
+			else
+			{
+				grid->vals_temp[x] = y - 1;
+			}
+
+			break;
+		}
 	}
 }
 

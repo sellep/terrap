@@ -2,7 +2,7 @@
 
 #ifdef NCURSES
 
-inline static void visual_grid_y(ssize_t width, ssize_t height)
+static inline void visual_grid_y(ssize_t width, ssize_t height)
 {
 	const wchar_t line = L'\x2502';
 	const wchar_t marker = L'\x2524';
@@ -28,7 +28,7 @@ inline static void visual_grid_y(ssize_t width, ssize_t height)
 	SET_COLOR_DEFAULT();
 }
 
-inline static void visual_grid_x(ssize_t const width, ssize_t const height)
+static inline void visual_grid_x(ssize_t const width, ssize_t const height)
 {
 	const wchar_t line = L'\x2500';
 	const wchar_t marker = L'\x252C';
@@ -53,9 +53,23 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 
 	SET_COLOR_DEFAULT();
 }
+
+static inline void draw_points(terra_visual_grid const * const grid, ssize_t const width, ssize_t const height)
+{
+	wchar_t chr = L'\x2736';
+	ssize_t x;
+
+	SET_COLOR_HUMI();
+
+	for (x = 0; x < DRAW_WIDTH; x++)
+	{
+		mvaddnwstr(GRID_OFFSET_TOP + DRAW_HEIGHT - grid->vals_humi[x], GRID_OFFSET_LEFT + x, &chr, 1);
+	}
+}
+
 #endif
 
-void terra_visual_draw_grid(ssize_t const width, ssize_t const height)
+void terra_visual_draw_grid(terra_visual_grid const * const grid, ssize_t const width, ssize_t const height)
 {
 #ifdef NCURSES
 	const wchar_t origin = L'\x253c';
@@ -63,6 +77,7 @@ void terra_visual_draw_grid(ssize_t const width, ssize_t const height)
 	mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1, GRID_OFFSET_LEFT, &origin, 1);
 	visual_grid_y(width, height);
 	visual_grid_x(width, height);
+	draw_points(grid, width, height);
 #endif
 }
 
