@@ -18,7 +18,7 @@ static inline ssize_t labels_remove_secs(char * const lbl)
 	}
 }
 
-static inline void draw_labels_y(terra_visual_grid const * const grid)
+static inline void draw_labels_y(terra_visual_grid const * const grid, ssize_t const height)
 {
 #ifdef NCURSES
 	ssize_t y;
@@ -33,7 +33,7 @@ static inline void draw_labels_y(terra_visual_grid const * const grid)
 #endif
 }
 
-static inline void draw_labels_x(terra_visual_grid const * const grid)
+static inline void draw_labels_x(terra_visual_grid const * const grid, ssize_t const width)
 {
 #ifdef NCURSES
 	char buf[10];
@@ -58,8 +58,8 @@ static inline void draw_labels_x(terra_visual_grid const * const grid)
 void terra_visual_draw_labels(ssize_t const width, ssize_t const height, terra_visual_grid const * const grid)
 {
 
-	draw_labels_y(grid);
-	draw_labels_x(grid);
+	draw_labels_y(grid, height);
+	draw_labels_x(grid, width);
 	/*float y_val;
 	float y_step;
 
