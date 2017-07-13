@@ -52,7 +52,7 @@ static inline void compute_vals_y(terra_visual_grid * const grid, ssize_t const 
 		grid->vals_y[y] = (float)(start + y * step);
 	}
 
-	mvprintw(1, 0, "draw_height %zu, min %f, max %f, step %f, start %f", DRAW_HEIGHT, min, max, step, start);
+	mvprintw(1, 0, "draw_height %zu, min %f, max %f, step %f, start %f, start + 1 %f", DRAW_HEIGHT, min, max, step, start, start + step);
 }
 
 static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const width, terra_data_entry const * const entries, size_t const len)
