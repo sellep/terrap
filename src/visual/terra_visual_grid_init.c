@@ -51,8 +51,6 @@ static inline void compute_vals_y(terra_visual_grid * const grid, ssize_t const 
 	{
 		grid->vals_y[y] = (float)(start + y * step);
 	}
-
-	mvprintw(1, 0, "draw_height %zu, min %f, max %f, step %f, start %f, start + 1 %f", DRAW_HEIGHT, min, max, step, start, start + step);
 }
 
 static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const width, terra_data_entry const * const entries, size_t const len)
@@ -113,6 +111,8 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 			break;
 		}
 	}
+
+	mvprintw(1, 0, "humi 1 %zu", grid->vals_humi[1]);
 }
 
 void terra_visual_grid_init(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len)
