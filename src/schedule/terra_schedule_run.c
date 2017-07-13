@@ -83,7 +83,7 @@ static inline void schedule_run_read_only()
 	}
 }
 
-static inline void schedule_run()
+static inline void schedule_run_schedules()
 {
 	terra_schedule *sched;
 	size_t i;
@@ -154,7 +154,7 @@ void terra_schedule_run()
 	}
 	else
 	{
-		schedule_run();
+		schedule_run_schedules();
 	}
 
 exit:
