@@ -59,7 +59,7 @@ static inline void compute_vals_x(terra_visual_grid * const grid, size_t const w
 	size_t start;
 	size_t x;
 
-	step = (double)terra_time_diff(&entries[0].tm, &entries[len - 1].tm) / DRAW_WIDTH;
+	step = (double)terra_time_diff(&entries[len - 1].tm, &entries[0].tm) / DRAW_WIDTH;
 	start = terra_time_to_int(&entries[0].tm);
 
 	for (x = 0; x < DRAW_WIDTH; x++)
@@ -67,7 +67,10 @@ static inline void compute_vals_x(terra_visual_grid * const grid, size_t const w
 		grid->vals_x[x] = (size_t) (start + x * step);
 	}
 
-	mvprintw(0, 0, "step %f, start %zu", step, start);
+	char buf[10];
+	terra_time_to_arr(buf, &entries[len - 1].tm);
+	
+	mvprintw(0, 0, "width %zu, step %f, start %zu, last tm %s", DRAW_WIDTH, step, start, buf);
 }
 
 void terra_visual_grid_init(terra_visual_grid * const grid, size_t const width, size_t const height, terra_data_entry const * const entries, size_t const len)
