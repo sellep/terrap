@@ -45,7 +45,7 @@ inline static void visual_grid_x(ssize_t const width, ssize_t const height)
 
 	for (y = GRID_MARKER_Y; y < DRAW_HEIGHT(); y += GRID_MARKER_Y)
 	{
-		for (x = 1; x < DRAW_WIDTH; x++)
+		for (x = 1; x < DRAW_WIDTH(); x++)
 		{
 			mvaddnwstr(height - GRID_OFFSET_BOTTOM - y - 1, x + GRID_OFFSET_LEFT, x % GRID_MARKER_X == 0 ? &cross : &line, 1);
 		}
