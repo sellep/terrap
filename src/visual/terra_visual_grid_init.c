@@ -50,8 +50,6 @@ void terra_visual_grid_init(terra_visual_grid * const grid, size_t const width, 
 	step_y = (max_y - min_y) / (grid->height - 2);
 	start_y = min_y - step_y;
 
-	mvprintw(1, 0, "min_y %f, max_y %f, step_y %f, start_y %f", min_y, max_y, step_y, start_y);
-	
 	for (i = 0; i < grid->height; i++)
 	{
 		grid->vals_y[i] = start_y + i * step_y;
