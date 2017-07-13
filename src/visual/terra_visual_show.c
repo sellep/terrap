@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 extern void terra_visual_title(char const * const, ssize_t const, size_t const);
-extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, terra_data_entry const * const, size_t const);
+extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, size_t const, terra_data_entry const * const, size_t const);
 extern void terra_visual_grid_draw(ssize_t const, ssize_t const);
 //extern void terra_visual_labels(ssize_t const, ssize_t const, terra_visual_bounds const * const);
 //extern void terra_visual_legend(ssize_t const, ssize_t const);
@@ -51,8 +51,8 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	getmaxyx(stdscr, height, width);
 	terra_visual_grid_init(&grid, width, height, entries, count);
 
-	pts = (terra_visual_point*) malloc(sizeof(terra_visual_point) * (width - 1));
-	terra_visual_eval(width, height, &bounds, pts, entries, count);
+	//pts = (terra_visual_point*) malloc(sizeof(terra_visual_point) * (width - 1));
+	//terra_visual_eval(width, height, &bounds, pts, entries, count);
 
 	terra_visual_title(title, width, count);
 	terra_visual_grid(width, height);
