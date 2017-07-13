@@ -46,7 +46,7 @@ int main(int argc, char ** argv)
 		if (!terra_hygro_run(&humi, &temp))
 			return 1;
 
-		terra_log_info("temperature %.2f, humigity: %.2f\n", temp, humi);
+		terra_log_info("temperature %.2f, humidity: %.2f\n", temp, humi);
 	}
 	else if (strcmp(argv[1], ARG_MODE_VISUAL) == 0)
 	{

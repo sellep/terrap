@@ -9,6 +9,7 @@ SYSLOG=-DSYSLOG_ENABLED
 OBJ=pi_2_mmio.o \
 	common_dht_read.o \
 	pi_2_dht_read.o \
+	terra_log.o \
 	terra_time_print.o \
 	terra_time_read.o \
 	terra_data_append.o \
@@ -59,11 +60,7 @@ OBJ=pi_2_mmio.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 all: clean ncursesd_flags $(OBJ)
-	$(CC) $(CFLAGS) -o obj/terra_log.o -c src/utils/terra_log.c
-	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
-	rm -f obj/terra_log.o
-	$(CC) $(CFLAGS) $(SYSLOG) -o obj/terra_log.o -c src/utils/terra_log.c
-	$(CC) $(CFLAGS) $(SYSLOG) -o bin/terrad src/terrad.c $(addprefix obj/, $(OBJ)) obj/terra_log.o $(LIBS)
+	$(CC) $(CFLAGS) $(SYSLOG) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) $(LIBS)
 
 ncursesd_flags:
 ifneq (, $(NCURSESW6))
@@ -87,7 +84,8 @@ debug: debug_flags all
 install:
 	@cp bin/terra /usr/local/bin/
 	@cp bin/terrad /usr/local/bin/
-	@cp res/terra.conf /etc/conf.d/terra
+	@mkdir -p /etc/terra
+	@cp res/terra.conf /etc/terra/terra.conf
 	@cp res/terra.init.d /etc/init.d/terra
 	@chmod +x /etc/init.d/terra
 	@mkdir -p /var/opt/terra
@@ -95,7 +93,7 @@ install:
 uninstall:
 	@rm -f /opt/terra
 	@rm -f /opt/terrad
-	@rm -f /etc/conf.d/terra
+	@rm -rf /etc/terra
 	@rm -f /etc/init.d/terra
 	@rm -rf /var/opt/terra
 
