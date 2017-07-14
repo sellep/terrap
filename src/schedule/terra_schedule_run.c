@@ -53,7 +53,7 @@ static inline void schedule_run_hygro()
 {
 	if (DO_HYGRO_READ())
 	{
-		if (!terra_hygro_run(&_humi, &_temp))
+		if (!terra_hygro_run(&_humi, &_temp, &CONF_HYGRO))
 		{
 			runtime.hygro_err++;
 		}
@@ -62,7 +62,7 @@ static inline void schedule_run_hygro()
 			runtime.hygro_err = 0;
 		}
 
-		terra_hygro_write(_humi, _temp);
+		terra_hygro_write(_humi, _temp, &NOW);
 	}
 }
 
