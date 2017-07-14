@@ -39,6 +39,15 @@ typedef struct
 	ssize_t *vals_temp;
 } terra_visual_grid;
 
+enum terra_visual_modes
+{
+	VISUAL_BOTH,
+	VISUAL_TEMP,
+	VISUAL_HUMI
+};
+
+typedef int terra_visual_mode;
+
 typedef ssize_t terra_visual_cmd;
 
 static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)

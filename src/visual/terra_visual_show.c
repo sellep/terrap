@@ -9,17 +9,33 @@ extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, size
 extern void terra_visual_draw_title(char const * const, ssize_t const, size_t const);
 extern void terra_visual_draw_grid(terra_visual_grid const * const, ssize_t const, ssize_t const);
 extern void terra_visual_draw_labels(ssize_t const, ssize_t const, terra_visual_grid const * const);
-//extern void terra_visual_legend(ssize_t const, ssize_t const);
-//extern void terra_visual_points(ssize_t const, ssize_t const, terra_visual_point const * const);
+
+static inline void show_shift_mode(terra_visual_mode * const mode)
+{
+	if (mode == TERRA_BOTH)
+	{
+		mode = TERRA_TEMP;
+	}
+	else if (mode == TERRA_TEMP)
+	{
+		mode == TERRA_HUMI;
+	}
+	else
+	{
+		mode == TERRA_BOTH;
+	}
+}
 
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
 
 void terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)
 {
+	terra_visual_mode mode = TERRA_BOTH;
 	terra_visual_grid grid;
 	int width;
 	int height;
+	int key;
 
 	setlocale(LC_CTYPE, "en_US.UTF-8");
 
@@ -35,19 +51,22 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	init_pair(5, COLOR_HUMI, COLOR_BLACK);
 	init_pair(6, COLOR_BOTH, COLOR_BLACK);
 
-	getmaxyx(stdscr, height, width);
-	terra_visual_grid_init(&grid, width, height, entries, count);
+	while (1)
+	{
+		getmaxyx(stdscr, height, width);
+		terra_visual_grid_init(&grid, width, height, entries, count, mode);
 
-	//pts = (terra_visual_point*) malloc(sizeof(terra_visual_point) * (width - 1));
-	//terra_visual_eval(width, height, &bounds, pts, entries, count);
+		terra_visual_draw_title(title, width, count);
+		terra_visual_draw_grid(&grid, width, height);
+		terra_visual_draw_labels(width, height, &grid);
 
-	terra_visual_draw_title(title, width, count);
-	terra_visual_draw_grid(&grid, width, height);
-	terra_visual_draw_labels(width, height, &grid);
-	//terra_visual_points(width, height, pts);
-	//terra_visual_legend(width, height);
+		key == getch();
+		if (key == KEY_EXIT)
+			break;
 
-	getch();
+		show_shift_mode(&mode);
+	}
+
 	endwin();
 }
 
