@@ -154,7 +154,7 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 		{
 			entry = &entries[x * len / (DRAW_WIDTH - 1)];
 	
-			eval_entries_humi(grid, height, entries, x);
+			eval_entries_humi(grid, height, entry, x);
 		}
 	}
 	else
@@ -163,7 +163,7 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 		{
 			entry = &entries[x * len / (DRAW_WIDTH - 1)];
 	
-			eval_entries_temp(grid, height, entries, x);
+			eval_entries_temp(grid, height, entry, x);
 		}
 	}
 }

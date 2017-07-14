@@ -2,7 +2,7 @@
 
 #ifdef NCURSES
 
-static inline void visual_grid_y(ssize_t width, ssize_t height)
+static inline void visual_draw_axis_y(ssize_t width, ssize_t height)
 {
 	const wchar_t line = L'\x2502';
 	const wchar_t marker = L'\x2524';
@@ -28,7 +28,7 @@ static inline void visual_grid_y(ssize_t width, ssize_t height)
 	SET_COLOR_DEFAULT();
 }
 
-static inline void visual_grid_x(ssize_t const width, ssize_t const height)
+static inline void visual_draw_axis_x(ssize_t const width, ssize_t const height)
 {
 	const wchar_t line = L'\x2500';
 	const wchar_t marker = L'\x252C';
@@ -91,8 +91,8 @@ void terra_visual_draw_grid(terra_visual_grid const * const grid, ssize_t const 
 	const wchar_t origin = L'\x253c';
 
 	mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1, GRID_OFFSET_LEFT, &origin, 1);
-	visual_grid_y(width, height);
-	visual_grid_x(width, height);
+	visual_draw_axis_y(width, height);
+	visual_draw_axis_x(width, height);
 	draw_points(grid, width, height, mode);
 #endif
 }
