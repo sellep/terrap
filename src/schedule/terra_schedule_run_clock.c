@@ -30,7 +30,7 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 		}
 	}
 
-	if (SWITCH_ON(sched->socket))
+	if (SWITCH_NOT_OFF(sched->socket))
 	{
 		SWITCH_SET(sched->socket, SWITCH_OFF);
 	}
