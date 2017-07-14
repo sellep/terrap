@@ -44,10 +44,10 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
 	{
-		if (!terra_hygro_run(&humi, &temp))
+		if (!terra_hygro_run(&humi, &temp, &CONF_HYGRO))
 			return 1;
 
-		terra_log_info("temperature %.2f, humidity: %.2f\n", temp, humi);
+		terra_log_info("humidity %.1f, temperature: %.1f\n", humi, temp);
 	}
 	else if (strcmp(argv[1], ARG_MODE_VISUAL) == 0)
 	{
