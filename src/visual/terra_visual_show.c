@@ -12,17 +12,17 @@ extern void terra_visual_draw_labels(ssize_t const, ssize_t const, terra_visual_
 
 static inline void show_shift_mode(terra_visual_mode * const mode)
 {
-	if (mode == TERRA_BOTH)
+	if (mode[0] == TERRA_BOTH)
 	{
-		mode = TERRA_HUMI;
+		mode[0] = TERRA_HUMI;
 	}
-	else if (mode == TERRA_HUMI)
+	else if (mode[0] == TERRA_HUMI)
 	{
-		mode == TERRA_TEMP;
+		mode[0] == TERRA_TEMP;
 	}
 	else
 	{
-		mode == TERRA_BOTH;
+		mode[0] == TERRA_BOTH;
 	}
 }
 
