@@ -60,9 +60,8 @@ static inline void schedule_run_hygro()
 		else
 		{
 			runtime.hygro_err = 0;
+			terra_hygro_write(_humi, _temp, &NOW);
 		}
-
-		terra_hygro_write(_humi, _temp, &NOW);
 	}
 }
 
