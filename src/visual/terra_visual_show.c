@@ -72,7 +72,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 		terra_visual_draw_grid(&grid, width, height);
 		terra_visual_draw_labels(width, height, &grid);
 
-		key == getch();
+		key = getch();
 		mvprintw(1, 0, "key: %i", key);
 		terra_visual_grid_free(&grid);
 
