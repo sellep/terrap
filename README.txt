@@ -1,7 +1,7 @@
 terra README
 ===============
 
- terra is a service to control electrical (radio) outlets, based on clock, periodically and/or hygrometer (temperature / humidity) scheduling
+ terra is a service to control electrical (radio) outlets, based on clock, periodically and hygrometer data scheduling
 
 
 Prerequisites
