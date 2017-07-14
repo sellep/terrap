@@ -48,7 +48,7 @@ static inline void terra_switch_off(terra_conf_switch const * const conf, char c
 	terra_log_info("[terra_switch] set switch %c to off\n", socket);
 }
 
-static inline void terra_switch_set(char const socket, terra_switch_mode const mode)
+/*static inline void terra_switch_set(char const socket, terra_switch_mode const mode)
 {
 	if (mode == SWITCH_ON)
 	{
@@ -58,6 +58,6 @@ static inline void terra_switch_set(char const socket, terra_switch_mode const m
 	{
 		terra_switch_off(socket);
 	}
-}
+}*/
 
 #endif
