@@ -16,15 +16,15 @@ static inline void terra_switch_on(terra_conf_switch const * const conf, char co
 {
 	if (socket == 'a')
 	{
-		terra_switch_transmit(conf->code_aon);
+		terra_switch_transmit(conf, conf->code_aon);
 	}
 	else if (socket == 'b')
 	{
-		terra_switch_transmit(conf->code_bon);
+		terra_switch_transmit(conf, conf->code_bon);
 	}
 	else
 	{
-		terra_switch_transmit(conf->code_con);
+		terra_switch_transmit(conf, conf->code_con);
 	}
 
 	terra_log_info("[terra_switch] set switch %c to on\n", socket);

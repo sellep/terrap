@@ -53,7 +53,7 @@ void terra_switch_transmit(terra_conf_switch const * const conf, int const code)
 		{
 			if (code & (1L << i))
 			{
-				switch_transmit(conf->.pin, SIGNAL_ONE_HIGH, SIGNAL_ONE_LOW);
+				switch_transmit(conf->pin, SIGNAL_ONE_HIGH, SIGNAL_ONE_LOW);
 			}
 			else
 			{
