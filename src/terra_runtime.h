@@ -6,10 +6,10 @@
 #include "pi_2_dht_read.h"
 
 #include "terra_defs.h"
+#include "conf/terra_conf.h"
 #include "utils/terra_log.h"
 #include "utils/terra_lock.h"
 #include "utils/terra_time.h"
-#include "conf/terra_conf.h"
 #include "switch/terra_switch.h"
 
 typedef struct

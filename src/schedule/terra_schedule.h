@@ -1,7 +1,6 @@
 #ifndef __P_TERRA_SCHEDULE_H
 #define __P_TERRA_SCHEDULE_H
 
-#include "../terra.h"
 #include "../terra_runtime.h"
 
 extern void terra_schedule_run();
