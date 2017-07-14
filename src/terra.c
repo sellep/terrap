@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
 		if (!(led_cmd = terra_led_arg(argc, argv)))
 			return 1;
 
-		if (!terra_led_set_from_cmd(led_cmd))
+		if (!terra_led_set_from_cmd(&CONF_GLOBAL, led_cmd))
 			return 1;
 	}
 	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
