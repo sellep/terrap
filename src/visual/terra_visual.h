@@ -41,9 +41,9 @@ typedef struct
 
 enum terra_visual_modes
 {
-	VISUAL_BOTH,
-	VISUAL_TEMP,
-	VISUAL_HUMI
+	TERRA_BOTH,
+	TERRA_TEMP,
+	TERRA_HUMI
 };
 
 typedef int terra_visual_mode;
