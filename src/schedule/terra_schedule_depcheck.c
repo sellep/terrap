@@ -56,10 +56,10 @@ BOOL terra_schedule_depcheck(terra_schedule const * const sched)
 
 	if (SCHEDULE_INVERS_DEP(sched))
 	{
-		if (SCHEDULE_SWITCH_OFF(dep))
+		if (SWITCH_OFF(dep->socket))
 			return TRUE;
 	}
-	else if (SCHEDULE_SWITCH_ON(dep))
+	else if (SWITCH_ON(dep->socket))
 		return TRUE;
 
 	return FALSE;
