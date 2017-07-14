@@ -4,7 +4,7 @@
 #include <signal.h>
 
 #define DO_HEART_BEAT() if (runtime.tick % CONF_HEART.tick == 0) terra_heart_beat()
-#define DO_HYGRO_READ() (CONF_HYGRO.enabled && !hygro_wait())
+#define DO_HYGRO_READ() (CONF_HYGRO.enabled && !hygro_wait(&CONF_HYGRO, &NOW))
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
 
