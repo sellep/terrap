@@ -1,4 +1,5 @@
 #include "terra_runtime.h"
+#include "visual/terra_visual.h"
 
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
