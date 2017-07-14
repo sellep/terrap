@@ -4,7 +4,7 @@
 #include "terra_log.h"
 #include "terra_time.h"
 
-#define DATA_PATH "/var/opt/terra/data_%02zu.%02zu.%zu"
+#define DATA_PATH "/var/lib/terra/data_%02zu.%02zu.%zu"
 
 typedef struct
 {

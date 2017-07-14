@@ -85,13 +85,13 @@ install:
 	@cp res/terra.conf /etc/terra/terra.conf
 	@cp res/terra.init.d /etc/init.d/terra
 	@chmod +x /etc/init.d/terra
-	@mkdir -p /var/opt/terra
+	@mkdir -p /var/lib/terra
 
 uninstall:
 	@rm -f /opt/terra
 	@rm -rf /etc/terra
 	@rm -f /etc/init.d/terra
-	@rm -rf /var/opt/terra
+	@rm -rf /var/lib/terra
 
 clean:
 	@mkdir -p bin obj
