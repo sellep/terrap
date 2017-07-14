@@ -47,20 +47,21 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 
 	setlocale(LC_CTYPE, "en_US.UTF-8");
 
-	initscr();
-	noecho();
-	curs_set(FALSE);
-
-	start_color();
-	init_pair(1, COLOR_DEFAULT, COLOR_BLACK);
-	init_pair(2, COLOR_GRID, COLOR_BLACK);
-	init_pair(3, COLOR_LEGEND, COLOR_BLACK);
-	init_pair(4, COLOR_TEMP, COLOR_BLACK);
-	init_pair(5, COLOR_HUMI, COLOR_BLACK);
-	init_pair(6, COLOR_BOTH, COLOR_BLACK);
 
 	while (1)
 	{
+		initscr();
+		noecho();
+		curs_set(FALSE);
+
+		start_color();
+		init_pair(1, COLOR_DEFAULT, COLOR_BLACK);
+		init_pair(2, COLOR_GRID, COLOR_BLACK);
+		init_pair(3, COLOR_LEGEND, COLOR_BLACK);
+		init_pair(4, COLOR_TEMP, COLOR_BLACK);
+		init_pair(5, COLOR_HUMI, COLOR_BLACK);
+		init_pair(6, COLOR_BOTH, COLOR_BLACK);
+
 		getmaxyx(stdscr, height, width);
 		terra_visual_grid_init(&grid, width, height, entries, count, mode);
 
@@ -76,9 +77,8 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 			break;
 
 		show_shift_mode(&mode);
+		endwin();
 	}
-
-	endwin();
 }
 
 #endif
