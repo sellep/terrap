@@ -5,11 +5,10 @@ terra is a service to control electrical (radio) outlets, based on clock, period
 Prerequisites
 ===============
 terra is designed to run on Raspberry Pi 2/3 and Gentoo GNU/Linux.
-It is possible to bypass the Gentoo prerequisite.
 
 terra depends on
 	- OpenRC
-	- ncursesw 5+
+	- ncursesw 5+ (wide character support)
 	- syslog
 	- libconfig
 
