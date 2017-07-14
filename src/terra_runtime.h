@@ -12,6 +12,7 @@
 #include "utils/terra_time.h"
 #include "switch/terra_switch.h"
 #include "led/terra_led.h"
+#include "hygro/terra_hygro.h"
 
 typedef struct
 {
