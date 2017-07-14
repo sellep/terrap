@@ -9,7 +9,12 @@ BOOL terra_hygro_run(float * const h, float * const t)
 	{
 		status = pi_2_dht_read(DHT22, CONF_HYGRO.pin, h, t);
 		if (status == DHT_SUCCESS)
+		{
+			if (h > 100 || t > 100)
+				continue;
+
 			return TRUE;
+		}
 
 		if (UNLIKELY(status == DHT_ERROR_TIMEOUT))
 			continue;
