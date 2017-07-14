@@ -14,7 +14,7 @@ static pthread_mutexattr_t mutex_attr;
 
 static inline BOOL map_mutex_to_address_space()
 {
-	mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, _sm_mutex, 0);
+	mutex = (pthread_mutex_t*) mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, sm_mutex, 0);
 	if (mutex == MAP_FAILED)
 	{
 		terra_log_error("[map_mutex_to_address_space] failed to map memory\n");
