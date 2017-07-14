@@ -1,7 +1,5 @@
 #include "terra_switch.h"
 
-#include "../common_dht_read.h"
-
 #define SIGNAL_PULSE_LEN 350
 
 #define SIGNAL_SYNC_HIGH 1

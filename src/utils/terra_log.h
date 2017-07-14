@@ -6,7 +6,7 @@
 
 #ifdef SYSLOG_ENABLED
 	#include <syslog.h>
-	#define TERRA_LOG_ID "terrad"
+	#define TERRA_LOG_ID "terra"
 #endif
 
 extern void terra_log_info(char const * const, ...);

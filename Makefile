@@ -10,6 +10,7 @@ OBJ=pi_2_mmio.o \
 	common_dht_read.o \
 	pi_2_dht_read.o \
 	terra_log.o \
+	terra_lock.o \
 	terra_time_print.o \
 	terra_time_read.o \
 	terra_data_append.o \

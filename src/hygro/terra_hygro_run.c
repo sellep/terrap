@@ -1,13 +1,13 @@
 #include "terra_hygro.h"
 
-BOOL terra_hygro_run(float * const h, float * const t)
+BOOL terra_hygro_run(float * const h, float * const t, terra_conf_hygro const * const conf)
 {
 	ssize_t i;
 	int status;
 
-	for (i = 0; i <= CONF_HYGRO.repeats; i++)
+	for (i = 0; i <= conf->repeats; i++)
 	{
-		status = pi_2_dht_read(DHT22, CONF_HYGRO.pin, h, t);
+		status = pi_2_dht_read(DHT22, conf->pin, h, t);
 		if (status == DHT_SUCCESS)
 		{
 			if (h > 100 || t > 100)

@@ -2,6 +2,7 @@
 #define __P_TERRA_DATA_H
 
 #include "terra_log.h"
+#include "terra_lock.h"
 #include "terra_time.h"
 
 #define DATA_PATH "/var/lib/terra/data_%02zu.%02zu.%zu"

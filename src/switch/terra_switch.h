@@ -1,7 +1,10 @@
 #ifndef __P_TERRA_SWITCH_H
 #define __P_TERRA_SWITCH_H
 
+#include "../terra_defs.h"
 #include "../conf/terra_conf.h"
+#include "../utils/terra_log.h"
+#include "../utils/terra_log.h"
 
 enum terra_switch_modes
 {

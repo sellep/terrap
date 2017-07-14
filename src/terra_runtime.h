@@ -7,6 +7,7 @@
 
 #include "terra_defs.h"
 #include "utils/terra_log.h"
+#include "utils/terra_lock.h"
 #include "utils/terra_time.h"
 #include "conf/terra_conf.h"
 #include "switch/terra_switch.h"
@@ -14,7 +15,6 @@
 typedef struct
 {
 	terra_conf conf;
-	pthread_mutex_t *mutex;
 
 	uint64_t tick;
 	terra_time now;
@@ -32,9 +32,6 @@ extern BOOL terra_runtime_init(char const * const);
 #define CONF_HEART runtime.conf.he
 #define CONF_SWITCH runtime.conf.sw
 #define CONF_HYGRO runtime.conf.hy
-
-#define LOCK() terra_lock()
-#define UNLOCK() terra_unlock()
 
 #define NOW runtime.now
 
@@ -71,27 +68,13 @@ static inline void terra_runtime_switch_set_off(char const sock)
 	else runtime.switch_modes[2] = SWITCH_OFF;
 }
 
-static inline void terra_lock()
-{
-#ifndef DEBUG
-	pthread_mutex_lock(runtime.mutex);
-#endif
-}
-
-static inline void terra_unlock()
-{
-#ifndef DEBUG
-	pthread_mutex_unlock(runtime.mutex);
-#endif
-}
-
 static inline terra_pin_set_out(int const pin)
 {
-	LOCK();
+	RUNTIME_LOCK();
 #ifndef DEBUG
 	pi_2_mmio_set_output(pin);
 #endif	
-	UNLOCK();
+	RUNTIME_UNLOCK();
 }
 
 static inline void terra_runtime_tick()

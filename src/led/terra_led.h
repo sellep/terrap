@@ -1,7 +1,9 @@
 #ifndef __P_TERRA_LED_H
 #define __P_TERRA_LED_H
 
-#include "../terra_runtime.h"
+#include "../terra_defs.h"
+#include "../utils/terra_log.h"
+#include "../utils/terra_lock.h"
 
 enum led_cmds
 {
@@ -16,9 +18,10 @@ typedef int terra_led_cmd;
 
 extern terra_led_cmd terra_led_arg(int const argc, char const * const * const argv);
 
-inline static void terra_led_set(ssize_t const pin, terra_led_cmd const set)
+static inline void terra_led_set(ssize_t const pin, terra_led_cmd const set)
 {
-	LOCK();
+	LOCK():
+
 	if (set & LED_ON)
 	{
 #ifndef DEBUG
@@ -31,22 +34,23 @@ inline static void terra_led_set(ssize_t const pin, terra_led_cmd const set)
 		pi_2_mmio_set_low(pin);
 #endif
 	}
+
 	UNLOCK();
 }
 
-inline static BOOL terra_led_set_from_cmd(terra_led_cmd const cmd)
+static inline BOOL terra_led_set_from_cmd(terra_conf const * const conf, terra_led_cmd const cmd)
 {
 	if (cmd == LED_NONE)
 		return TRUE;
 
 	if (cmd & LED_ERR)
 	{
-		terra_led_set(CONF_GLOBAL.pin_alert, cmd);
+		terra_led_set(conf->pin_alert, cmd);
 		return TRUE;
 	}
 	else if (cmd & LED_HEART)
 	{
-		terra_led_set(CONF_HEART.pin, cmd);
+		terra_led_set(conf->pin, cmd);
 		return TRUE;
 	}
 

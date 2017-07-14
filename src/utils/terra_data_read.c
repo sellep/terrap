@@ -64,9 +64,12 @@ BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, c
 	terra_date_now(&date, -((short)back));
 	sprintf(path, DATA_PATH, date.day, date.mon, date.year);
 
+	LOCK();
+
 	f = fopen(path, "r");
 	if (!f)
 	{
+		UNLOCK();
 		terra_log_error("[terra_data_read] failed to open file %s\n", path);
 		return FALSE;
 	}
@@ -95,6 +98,7 @@ BOOL terra_data_read(terra_data_entry * * const entries, size_t * const lines, c
 
 error:
 	fclose(f);
+	UNLOCK();
 	free(line);
 	return result;
 }

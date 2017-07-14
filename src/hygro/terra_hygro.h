@@ -1,14 +1,18 @@
 #ifndef __P_TERRA_HYGRO_H
 #define __P_TERRA_HYGRO_H
 
-#include "../terra_runtime.h"
+#include "../conf/terra_conf.h"
+#include "../utils/terra_time.h"
+#include "../utils/terra_data.h"
 
-extern BOOL terra_hygro_run(float * const, float * const);
-extern BOOL terra_hygro_write(float const, float const);
+extern BOOL terra_hygro_run(float * const, float * const, terra_conf_hygro const * const);
+extern BOOL terra_hygro_write(float const, float const, terra_time const * const);
 
-static inline BOOL hygro_wait()
+static terra_time hygro_last = { 0, 0, 0 };
+
+static inline BOOL hygro_wait(terra_conf_hygro const * const conf, terra_time const * const now)
 {
-	return terra_time_diff(&runtime.now, &runtime.hygro_last) > CONF_HYGRO.delay ? FALSE : TRUE;
+	return terra_time_diff(now, &hygro_last) > conf->delay ? FALSE : TRUE;
 }
 
 #endif

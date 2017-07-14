@@ -10,7 +10,9 @@
 #include <string.h>
 #include <pthread.h>
 
+#include "common_dht_read.h"
 #include "pi_2_mmio.h"
+#include "pi_2_dht_read.h"
 
 #define LIKELY(x)       __builtin_expect((x),1)
 #define UNLIKELY(x)     __builtin_expect((x),0)
