@@ -2,6 +2,9 @@
 
 BOOL terra_hygro_run(float * const h, float * const t, terra_conf_hygro const * const conf)
 {
+#ifdef DEBUG
+	terra_log_info("[terra_hygro_run] debug compilation\n");
+#else
 	ssize_t i;
 	int status;
 
@@ -28,4 +31,5 @@ BOOL terra_hygro_run(float * const h, float * const t, terra_conf_hygro const * 
 
 	terra_log_error("[terra_hygro_run] failed to read dht repeated\n");
 	return FALSE;
+#endif
 }
