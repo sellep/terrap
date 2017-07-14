@@ -5,6 +5,8 @@
 #include <wchar.h>
 #include <stddef.h>
 
+#define KEY_ESC 27
+
 extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, size_t const, terra_data_entry const * const, size_t const, terra_visual_mode const);
 extern void terra_visual_draw_title(char const * const, ssize_t const, size_t const);
 extern void terra_visual_draw_grid(terra_visual_grid const * const, ssize_t const, ssize_t const);
@@ -73,7 +75,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 
 		terra_visual_grid_free(&grid);
 
-		if (key == KEY_EXIT)
+		if (key == KEY_EXIT || key == KEY_ESC)
 			break;
 
 		show_shift_mode(&mode);
