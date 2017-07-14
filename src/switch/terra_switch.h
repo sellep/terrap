@@ -1,7 +1,7 @@
 #ifndef __P_TERRA_SWITCH_H
 #define __P_TERRA_SWITCH_H
 
-#include "../terra_runtime.h"
+#include "../conf/terra_conf.h"
 
 typedef struct
 {
