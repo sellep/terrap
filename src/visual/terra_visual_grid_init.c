@@ -1,6 +1,6 @@
 #include "terra_visual.h"
 
-static void grid_bounding_y(float * const min_y, float * const max_y, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
+static void grid_bounding_y(float * const min_y, float * const max_y, terra_visual grid * const grid, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
 {
 	size_t i;
 
@@ -102,7 +102,7 @@ static inline void compute_vals_y(terra_visual_grid * const grid, ssize_t const 
 	double start;
 	size_t y;
 
-	grid_bounding_y(&min, &max, entries, len, mode);
+	grid_bounding_y(&min, &max, grid, entries, len, mode);
 
 	step = (double)(max - min) / (DRAW_HEIGHT - 3);
 	start = min - step;
