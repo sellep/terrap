@@ -80,6 +80,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 			break;
 
 		show_shift_mode(&mode);
+		clrscr();
 	}
 
 	endwin();
