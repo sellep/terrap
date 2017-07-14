@@ -73,11 +73,11 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 		terra_visual_draw_labels(width, height, &grid);
 
 		key = getch();
-		mvprintw(1, 0, "key: %i", key);
+
 		terra_visual_grid_free(&grid);
 
-		//if (key == KEY_EXIT || key == KEY_ESC)
-			//break;
+		if (key == KEY_EXIT || key == KEY_ESC)
+			break;
 
 		show_shift_mode(&mode);
 	}
