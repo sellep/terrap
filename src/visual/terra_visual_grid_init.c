@@ -105,7 +105,7 @@ static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const 
 	}
 }
 
-static inline eval_entries_humi(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entries, ssize_t const x)
+static inline eval_entries_humi(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entry, ssize_t const x)
 {
 	ssize_t y;
 
@@ -119,7 +119,7 @@ static inline eval_entries_humi(terra_visual_grid * const grid, ssize_t const he
 	}
 }
 
-static inline eval_entries_temp(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entries, ssize_t const x)
+static inline eval_entries_temp(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entry, ssize_t const x)
 {
 	ssize_t y;
 
@@ -143,9 +143,9 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 		for (x = 0; x < DRAW_WIDTH; x++)
 		{
 			entry = &entries[x * len / (DRAW_WIDTH - 1)];
-	
-			eval_entries_humi(grid, height, entries, x);
-			eval_entries_temp(grid, height, entries, x);
+
+			eval_entries_humi(grid, height, entry, x);
+			eval_entries_temp(grid, height, entry, x);
 		}
 	}
 	else if (mode == TERRA_HUMI)
