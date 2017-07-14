@@ -2,10 +2,11 @@
 #define __P_TERRA_CONF_H
 
 #include "../terra_defs.h"
-
 #include "../utils/terra_time.h"
 
 #include <libconfig.h>
+
+#define CONF_PATH "/etc/terra/terra.conf"
 
 typedef struct
 {
