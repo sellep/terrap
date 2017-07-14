@@ -37,6 +37,11 @@ typedef struct
 
 	ssize_t *vals_humi;
 	ssize_t *vals_temp;
+
+	float min_humi;
+	float max_humi;
+	float min_temp;
+	float max_temp;
 } terra_visual_grid;
 
 enum terra_visual_modes

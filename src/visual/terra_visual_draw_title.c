@@ -1,8 +1,24 @@
 #include "terra_visual.h"
 
-#define DETAILS_FORMAT "entries: %zu, temp: %.2f - %.2f, humi: %.2f - %.2f"
+#define DETAILS_FORMAT "mode: %s, entries: %zu, temp: %.2f - %.2f, humi: %.2f - %.2f"
 
-void terra_visual_draw_title(char const * const title, ssize_t const width, size_t const entries)
+static inline void visual_draw_metadata(terra_visual grid const * const grid, size_t const len, terra_visual_mode const mode)
+{
+	if (mode == TERRA_BOTH)
+	{
+		mvprintw(1, 0, "mode: BOTH, entries: %zu, humi: %.1f - %.1f, temp: %.1f - %.1f", len, grid->min_humi, grid->max_humi, grid->min_temp, grid->max_temp);
+	}
+	else if (mode == TERRA_HUMI)
+	{
+		mvprintw(1, 0, "mode: HUMI, entries: %zu, humi: %.1f - %.1f", len, grid->min_humi, grid->max_humi);
+	}
+	else
+	{
+		mvprintw(1, 0, "mode: TEMP, entries: %zu, temp: %.1f - %.1f", len, grid->min_temp, grid->max_temp);
+	}
+}
+
+void terra_visual_draw_title(terra_visual grid const * const grid, char const * const title, ssize_t const width, size_t const entries, terra_visual_mode const mode)
 {
 #ifdef NCURSES
 	ssize_t tlen;
@@ -29,6 +45,6 @@ void terra_visual_draw_title(char const * const title, ssize_t const width, size
 		printw("-");
 	}
 
-	//mvprintw(1, 1, DETAILS_FORMAT, entries, bounds->temp_min, bounds->temp_max, bounds->humi_min, bounds->humi_max);
+	visual_draw_metadata(grid, entries, mode);
 #endif
 }

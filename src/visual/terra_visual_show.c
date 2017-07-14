@@ -8,7 +8,7 @@
 #define KEY_ESC 27
 
 extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, size_t const, terra_data_entry const * const, size_t const, terra_visual_mode const);
-extern void terra_visual_draw_title(char const * const, ssize_t const, size_t const);
+extern void terra_visual_draw_title(terra_visual_grid const * const, char const * const, ssize_t const, size_t const, terra_visual_mode const);
 extern void terra_visual_draw_grid(terra_visual_grid const * const, ssize_t const, ssize_t const, terra_visual_mode const);
 extern void terra_visual_draw_labels(ssize_t const, ssize_t const, terra_visual_grid const * const);
 
@@ -63,14 +63,13 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	init_pair(6, COLOR_BOTH, COLOR_BLACK);
 
 	getmaxyx(stdscr, height, width);
-	terra_visual_draw_title(title, width, count);
 
 	while (1)
 	{
 
 		terra_visual_grid_init(&grid, width, height, entries, count, mode);
 
-		terra_visual_draw_title(title, width, count);
+		terra_visual_draw_title(&grid, title, width, count, mode);
 		terra_visual_draw_grid(&grid, width, height, mode);
 		terra_visual_draw_labels(width, height, &grid);
 
