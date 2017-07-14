@@ -4,6 +4,7 @@ BOOL terra_hygro_run(float * const h, float * const t, terra_conf_hygro const * 
 {
 #ifdef DEBUG
 	terra_log_info("[terra_hygro_run] debug compilation\n");
+	return TRUE;
 #else
 	ssize_t i;
 	int status;
