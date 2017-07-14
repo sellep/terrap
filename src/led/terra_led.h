@@ -2,6 +2,7 @@
 #define __P_TERRA_LED_H
 
 #include "../terra_defs.h"
+#include "../conf/terra_conf.h"
 #include "../utils/terra_log.h"
 #include "../utils/terra_lock.h"
 
@@ -20,7 +21,7 @@ extern terra_led_cmd terra_led_arg(int const argc, char const * const * const ar
 
 static inline void terra_led_set(ssize_t const pin, terra_led_cmd const set)
 {
-	LOCK():
+	LOCK();
 
 	if (set & LED_ON)
 	{
