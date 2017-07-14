@@ -39,10 +39,10 @@ extern BOOL terra_runtime_init(char const * const);
 #define RUNTIME_SWITCH_GET(s) terra_runtime_switch_get(s)
 #define RUNTIME_SWITCH_SET_ON(s) terra_runtime_switch_set_on(s)
 #define RUNTIME_SWITCH_SET_OFF(s) terra_runtime_switch_set_off(s)
-#define RUNTIME_SWITCH_NOT_ON(s) SWITCH_GET(s) != SWITCH_ON
-#define RUNTIME_SWITCH_NOT_OFF(s) SWITCH_GET(s) != SWITCH_OFF
-#define RUNTIME_SWITCH_ON(s) SWITCH_GET(s) == SWITCH_ON
-#define RUNTIME_SWITCH_OFF(s) SWITCH_GET(s) == SWITCH_OFF
+#define RUNTIME_SWITCH_NOT_ON(s) RUNTIME_SWITCH_GET(s) != SWITCH_ON
+#define RUNTIME_SWITCH_NOT_OFF(s) RUNTIME_SWITCH_GET(s) != SWITCH_OFF
+#define RUNTIME_SWITCH_ON(s) RUNTIME_SWITCH_GET(s) == SWITCH_ON
+#define RUNTIME_SWITCH_OFF(s) RUNTIME_SWITCH_GET(s) == SWITCH_OFF
 
 static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 {
