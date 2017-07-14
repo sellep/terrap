@@ -71,11 +71,11 @@ static inline void terra_runtime_switch_set_off(char const sock)
 
 static inline terra_pin_set_out(int const pin)
 {
-	RUNTIME_LOCK();
+	LOCK();
 #ifndef DEBUG
 	pi_2_mmio_set_output(pin);
 #endif	
-	RUNTIME_UNLOCK();
+	UNLOCK();
 }
 
 static inline void terra_runtime_tick()

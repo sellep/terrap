@@ -9,7 +9,7 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 	{
 		if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
 		{
-			RUNTIME_SWITCH_SET(sched->socket, SWITCH_OFF);
+			RUNTIME_SWITCH_SET_OFF(sched->socket);
 		}
 
 		goto end;
@@ -24,7 +24,7 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 		{
 			if (RUNTIME_SWITCH_NOT_ON(sched->socket))
 			{
-				RUNTIME_SWITCH_SET(sched->socket, SWITCH_ON);
+				RUNTIME_SWITCH_SET_ON(sched->socket);
 			}
 
 			goto end;
@@ -33,7 +33,7 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 
 	if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
 	{
-		RUNTIME_SWITCH_SET(sched->socket, SWITCH_OFF);
+		RUNTIME_SWITCH_SET_OFF(sched->socket);
 	}
 
 end:

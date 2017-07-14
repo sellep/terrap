@@ -4,7 +4,7 @@
 #include "../terra_defs.h"
 #include "../conf/terra_conf.h"
 #include "../utils/terra_log.h"
-#include "../utils/terra_log.h"
+#include "../utils/terra_lock.h"
 
 enum terra_switch_modes
 {
@@ -58,6 +58,18 @@ static inline void terra_switch_set_off(terra_conf_switch const * const conf, ch
 	}
 
 	terra_log_info("[terra_switch] set switch %c to off\n", socket);
+}
+
+static inline void terra_switch_set(terra_conf_switch const * const conf, char const socket, terra_switch_mode const mode)
+{
+	if (mode == SWITCH_ON)
+	{
+		terra_switch_set_on(conf, socket);
+	}
+	else if (mode == SWITCH_OFF)
+	{
+		terra_switch_set_off(conf, socket);
+	}
 }
 
 #endif
