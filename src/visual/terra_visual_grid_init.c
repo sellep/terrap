@@ -20,6 +20,9 @@ static void grid_bounding_y(float * const min_y, float * const max_y, terra_data
 				min_y[0] = entries[i].temp;
 			}
 		}
+
+		grid->max_temp = max_y[0];
+		grid->min_temp = min_y[0];
 	}
 	else if (mode == TERRA_HUMI)
 	{
@@ -37,12 +40,28 @@ static void grid_bounding_y(float * const min_y, float * const max_y, terra_data
 				min_y[0] = entries[i].humi;
 			}
 		}
+
+		grid->max_humi = max_y[0];
+		grid->min_humi = min_y[0];
 	}
 	else
 	{
-		max_y[0] = entries[0].humi > entries[0].temp ? entries[0].humi : entries[0].temp;
-		min_y[0] = entries[0].humi < entries[0].temp ? entries[0].humi : entries[0].temp;
-	
+		if (entries[0].humi > entries[0].temp)
+		{
+			max_y[0] = entries[0].humi;
+			min_y[0] = entries[0].temp;
+		}
+		else
+		{
+			min_y[0] = entries[0].humi;
+			max_y[0] = entries[0].temp;
+		}
+
+		grid->max_humi = entries[0].humi;
+		grid->min_humi = entries[0].humi;
+		grid->max_temp = entries[0].temp;
+		grid->max_temp = entries[0].temp;
+
 		for (i = 1; i < len; i++)
 		{
 			if (entries[i].humi > entries[i].temp)
@@ -50,10 +69,12 @@ static void grid_bounding_y(float * const min_y, float * const max_y, terra_data
 				if (entries[i].humi > max_y[0])
 				{
 					max_y[0] = entries[i].humi;
+					grid->max_humi = entries[i].humi;
 				}
 				if (entries[i].temp < min_y[0])
 				{
 					min_y[0] = entries[i].temp;
+					grid->min_temp = entries[i].temp;
 				}
 			}
 			else
@@ -61,10 +82,12 @@ static void grid_bounding_y(float * const min_y, float * const max_y, terra_data
 				if (entries[i].temp > max_y[0])
 				{
 					max_y[0] = entries[i].temp;
+					grid->max_temp = entries[i].temp;
 				}
 				if (entries[i].humi < min_y[0])
 				{
 					min_y[0] = entries[i].humi;
+					grid->min_humi = entries[i].humi;
 				}
 			}
 		}
