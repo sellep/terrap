@@ -9,6 +9,7 @@
 #include "utils/terra_log.h"
 #include "utils/terra_time.h"
 #include "conf/terra_conf.h"
+#include "switch/terra_switch.h"
 
 typedef struct
 {
@@ -35,12 +36,13 @@ terra_runtime runtime;
 
 #define NOW runtime.now
 
-#define SWITCH_GET(s) terra_runtime_switch_get(s)
-#define SWITCH_SET(s, m) terra_runtime_switch_set(s, m)
-#define SWITCH_NOT_ON(s) SWITCH_GET(s) != SWITCH_ON
-#define SWITCH_NOT_OFF(s) SWITCH_GET(s) != SWITCH_OFF
-#define SWITCH_ON(s) SWITCH_GET(s) == SWITCH_ON
-#define SWITCH_OFF(s) SWITCH_GET(s) == SWITCH_OFF
+#define RUNTIME_SWITCH_GET(s) terra_runtime_switch_get(s)
+#define RUNTIME_SWITCH_SET_ON(s) terra_runtime_switch_set_on(s)
+#define RUNTIME_SWITCH_SET_OFF(s) terra_runtime_switch_set_off(s)
+#define RUNTIME_SWITCH_NOT_ON(s) SWITCH_GET(s) != SWITCH_ON
+#define RUNTIME_SWITCH_NOT_OFF(s) SWITCH_GET(s) != SWITCH_OFF
+#define RUNTIME_SWITCH_ON(s) SWITCH_GET(s) == SWITCH_ON
+#define RUNTIME_SWITCH_OFF(s) SWITCH_GET(s) == SWITCH_OFF
 
 static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 {
@@ -54,8 +56,24 @@ static inline void terra_runtime_switch_set(char const sock, terra_switch_mode c
 	if (sock == 'a') runtime.switch_modes[0] = m;
 	else if (sock == 'b') runtime.switch_modes[1] = m;
 	else runtime.switch_modes[2] = m;
-	if (m == SWITCH_OFF) terra_log_info("set switch %c to off\n", sock);
-	else if (m == SWITCH_ON) terra_log_info("set switch %c to on\n", sock);
+}
+
+static inline void terra_runtime_switch_set_on(char const sock)
+{
+	terra_switch_on(&CONF_SWITCH, sock);
+
+	if (sock == 'a') runtime.switch_modes[0] = SWITCH_ON;
+	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_ON;
+	else runtime.switch_modes[2] = SWITCH_ON;
+}
+
+static inline void terra_runtime_switch_set_off(char const sock)
+{
+	terra_switch_off(&CONF_SWITCH, sock);
+
+	if (sock == 'a') runtime.switch_modes[0] = SWITCH_OFF;
+	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_OFF;
+	else runtime.switch_modes[2] = SWITCH_OFF;
 }
 
 extern BOOL terra_runtime_init(char const * const);

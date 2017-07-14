@@ -140,9 +140,9 @@ void terra_schedule_run()
 
 	schedule_init();
 
-	SWITCH_SET('a', SWITCH_UNKNOWN);
-	SWITCH_SET('b', SWITCH_UNKNOWN);
-	SWITCH_SET('c', SWITCH_UNKNOWN);
+	runtime.switch_modes[0] = SWITCH_UNKNOWN;
+	runtime.switch_modes[1] = SWITCH_UNKNOWN;
+	runtime.switch_modes[2] = SWITCH_UNKNOWN;
 
 	if (CONF_GLOBAL.read_only)
 	{

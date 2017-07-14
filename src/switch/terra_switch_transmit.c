@@ -40,28 +40,28 @@ static inline void switch_transmit(ssize_t const pin, ssize_t const high, ssize_
 #endif
 }
 
-void terra_switch_transmit(int const code)
+void terra_switch_transmit(terra_conf_switch const * const conf, int const code)
 {
 	ssize_t rep;
 	int i;
 
 	LOCK();
 
-	for (rep = 0; rep < CONF_SWITCH.repeats; rep++)
+	for (rep = 0; rep < conf->repeats; rep++)
 	{
-		for (i = CONF_SWITCH.channel - 1; i >= 0; i--)
+		for (i = conf->channel - 1; i >= 0; i--)
 		{
 			if (code & (1L << i))
 			{
-				switch_transmit(CONF_SWITCH.pin, SIGNAL_ONE_HIGH, SIGNAL_ONE_LOW);
+				switch_transmit(conf->.pin, SIGNAL_ONE_HIGH, SIGNAL_ONE_LOW);
 			}
 			else
 			{
-				switch_transmit(CONF_SWITCH.pin, SIGNAL_ZERO_HIGH, SIGNAL_ZERO_LOW);
+				switch_transmit(conf->pin, SIGNAL_ZERO_HIGH, SIGNAL_ZERO_LOW);
 			}
 		}
 
-		switch_transmit(CONF_SWITCH.pin, SIGNAL_SYNC_HIGH, SIGNAL_SYNC_LOW);
+		switch_transmit(conf->pin, SIGNAL_SYNC_HIGH, SIGNAL_SYNC_LOW);
 	}
 
 	UNLOCK();

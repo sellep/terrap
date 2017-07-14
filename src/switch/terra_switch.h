@@ -10,39 +10,39 @@ typedef struct
 } terra_switch_req;
 
 extern BOOL terra_switch_arg(terra_switch_req * const, int const, char const * const * const);
-extern void terra_switch_transmit(int const);
+extern void terra_switch_transmit(terra_conf_switch const * const, int const);
 
-static inline void terra_switch_on(char const socket)
+static inline void terra_switch_on(terra_conf_switch const * const conf, char const socket)
 {
 	if (socket == 'a')
 	{
-		terra_switch_transmit(CONF_SWITCH.code_aon);
+		terra_switch_transmit(conf->code_aon);
 	}
 	else if (socket == 'b')
 	{
-		terra_switch_transmit(CONF_SWITCH.code_bon);
+		terra_switch_transmit(conf->code_bon);
 	}
 	else
 	{
-		terra_switch_transmit(CONF_SWITCH.code_con);
+		terra_switch_transmit(conf->code_con);
 	}
 
 	terra_log_info("[terra_switch] set switch %c to on\n", socket);
 }
 
-static inline void terra_switch_off(char const socket)
+static inline void terra_switch_off(terra_conf_switch const * const conf, char const socket)
 {
 	if (socket == 'a')
 	{
-		terra_switch_transmit(CONF_SWITCH.code_aoff);
+		terra_switch_transmit(conf, conf->code_aoff);
 	}
 	else if (socket == 'b')
 	{
-		terra_switch_transmit(CONF_SWITCH.code_boff);
+		terra_switch_transmit(conf, conf->code_boff);
 	}
 	else
 	{
-		terra_switch_transmit(CONF_SWITCH.code_coff);
+		terra_switch_transmit(conf, conf->code_coff);
 	}
 
 	terra_log_info("[terra_switch] set switch %c to off\n", socket);
