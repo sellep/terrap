@@ -14,16 +14,24 @@ static inline void show_shift_mode(terra_visual_mode * const mode)
 {
 	if (mode == TERRA_BOTH)
 	{
-		mode = TERRA_TEMP;
+		mode = TERRA_HUMI;
 	}
-	else if (mode == TERRA_TEMP)
+	else if (mode == TERRA_HUMI)
 	{
-		mode == TERRA_HUMI;
+		mode == TERRA_TEMP;
 	}
 	else
 	{
 		mode == TERRA_BOTH;
 	}
+}
+
+static inline void terra_visual_grid_free(terra_visual_grid const * const grid)
+{
+	free(grid->vals_y);
+	free(grid->vals_x);
+	free(grid->vals_humi);
+	free(grid->vals_temp);
 }
 
 #ifdef NCURSES
@@ -61,6 +69,9 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 		terra_visual_draw_labels(width, height, &grid);
 
 		key == getch();
+
+		terra_visual_grid_free(&grid);
+
 		if (key == KEY_EXIT)
 			break;
 
