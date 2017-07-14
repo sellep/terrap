@@ -21,18 +21,6 @@ extern BOOL terra_schedule_depcheck(terra_schedule const * const);
 
 #define SCHEDULE(s) ((terra_schedule*)(s))
 #define SCHEDULE_DISABLED(s) !((s)->enabled)
-#define SCHEDULE_SWITCH_ON(s) (s)->state == SWITCH_ON
-#define SCHEDULE_SWITCH_OFF(s) (s)->state == SWITCH_OFF
-#define SCHEDULE_SWITCH_NOT_ON(s) (s)->state != SWITCH_ON
-#define SCHEDULE_SWITCH_NOT_OFF(s) (s)->state != SWITCH_OFF
-
-#define SCHEDULE_SET_SWITCH_ON(s) {		\
-	terra_switch_on((s)->socket);		\
-	(s)->state = SWITCH_ON; }
-
-#define SCHEDULE_SET_SWITCH_OFF(s) {	\
-	terra_switch_off((s)->socket);		\
-	(s)->state = SWITCH_OFF; }
 
 #define SCHEDULE_NO_DEP(s) (s)->dep == NULL
 #define SCHEDULE_INVERS_DEP(s) (s)->name[0] == "!"

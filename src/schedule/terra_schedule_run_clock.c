@@ -1,15 +1,5 @@
 #include "terra_schedule.h"
 
-void terra_schedule_clock_init()
-{
-	ssize_t i;
-
-	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
-	{
-		SCHEDULE_GET_CLOCK(i)->schedule.state = SWITCH_UNKNOWN;
-	}
-}
-
 void terra_schedule_run_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
@@ -17,9 +7,9 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 
 	if (!terra_schedule_depcheck(sched))
 	{
-		if (SCHEDULE_SWITCH_NOT_OFF(sched))
+		if (SWITCH_NOT_OFF(sched->socket))
 		{
-			SCHEDULE_SET_SWITCH_OFF(sched);
+			SWITCH_SET(sched->socket, SWITCH_OFF);
 		}
 
 		goto end;
@@ -32,17 +22,17 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 			||	terra_time_between(&NOW, &clock->times[t].start, &clock->times[t].stop)
 		)
 		{
-			if (SCHEDULE_SWITCH_NOT_ON(sched))
+			if (SWITCH_NOT_ON(sched->socket))
 			{
-				SCHEDULE_SET_SWITCH_ON(sched);
+				SWITCH_SET(sched->socket, SWITCH_ON);
 				goto end;
 			}
 		}
 	}
 
-	if (SCHEDULE_SWITCH_ON(sched))
+	if (SWITCH_ON(sched->socket))
 	{
-		SCHEDULE_SET_SWITCH_OFF(sched);
+		SWITCH_SET(sched->socket, SWITCH_OFF);
 	}
 
 end:

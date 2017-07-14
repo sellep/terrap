@@ -53,7 +53,6 @@ typedef struct
 	BOOL enabled;
 	char *dep;
 
-	terra_switch_mode state;
 	BOOL run;
 } terra_schedule;
 

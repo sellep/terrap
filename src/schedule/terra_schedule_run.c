@@ -8,10 +8,6 @@
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
 
-extern void terra_schedule_clock_init();
-extern void terra_schedule_period_init();
-extern void terra_schedule_temp_init();
-
 static BOOL volatile _terminate = FALSE;
 
 void signal_handler(int signum)
@@ -144,9 +140,9 @@ void terra_schedule_run()
 
 	schedule_init();
 
-	terra_schedule_clock_init();
-	terra_schedule_period_init();
-	terra_schedule_temp_init();
+	SWITCH_SET('a', SWITCH_UNKNOWN);
+	SWITCH_SET('b', SWITCH_UNKNOWN);
+	SWITCH_SET('c', SWITCH_UNKNOWN);
 
 	if (CONF_GLOBAL.read_only)
 	{

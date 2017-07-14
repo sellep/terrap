@@ -19,6 +19,8 @@ typedef struct
 	terra_time now;
 	terra_time hygro_last;
 	int hygro_err;
+
+	terra_switch_modes switch_modes[3];
 } terra_runtime;
 
 terra_runtime runtime;
@@ -32,6 +34,26 @@ terra_runtime runtime;
 #define UNLOCK() terra_unlock()
 
 #define NOW runtime.now
+
+#define SWITCH_GET(s) terra_runtime_switch_get(s)
+#define SWITCH_SET(s, m) terra_runtime_switch_set(s, m)
+#define SWITCH_NOT_ON(s) SWITCH_GET(s) != SWITCH_ON
+#define SWITCH_NOT_OFF(s) SWITCH_GET(s) != SWITCH_OFF
+#define SWITCH_ON(s) SWITCH_GET(s) == SWITCH_ON
+
+static inline terra_switch_mode terra_runtime_switch_get(char const sock)
+{
+	if (sock == 'a') return runtime.switch_modes[0];
+	if (sock == 'b') return runtime.switch_modes[1];
+	return runtime.switch_modes[2];
+}
+
+static inline void terra_runtime_switch_set(char const sock, terra_switch_mode const m)
+{
+	if (sock == 'a') runtime.switch_modes[0] = m;
+	else if (sock == 'b') runtime.switch_modes[1] = m;
+	else runtime.switch_modes[2] = m;
+}
 
 extern BOOL terra_runtime_init(char const * const);
 
