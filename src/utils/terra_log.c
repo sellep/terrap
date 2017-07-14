@@ -6,9 +6,9 @@
 #define MESSAGE_FORMAT "terra %02zu:%02zu %02zu.%02zu.%zu: %s"
 
 static char buf[MAX_BUF_LEN];
-struct tm ts;
+static struct tm ts;
 
-static inline struct tm log_time()
+static inline void log_time()
 {
 	time_t t = time(NULL);
 	ts = *localtime(&t);
