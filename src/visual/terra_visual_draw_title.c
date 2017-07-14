@@ -2,7 +2,7 @@
 
 #define DETAILS_FORMAT "mode: %s, entries: %zu, temp: %.2f - %.2f, humi: %.2f - %.2f"
 
-static inline void visual_draw_metadata(terra_visual grid const * const grid, size_t const len, terra_visual_mode const mode)
+static inline void visual_draw_metadata(terra_visual_grid const * const grid, size_t const len, terra_visual_mode const mode)
 {
 	if (mode == TERRA_BOTH)
 	{
@@ -18,7 +18,7 @@ static inline void visual_draw_metadata(terra_visual grid const * const grid, si
 	}
 }
 
-void terra_visual_draw_title(terra_visual grid const * const grid, char const * const title, ssize_t const width, size_t const entries, terra_visual_mode const mode)
+void terra_visual_draw_title(terra_visual_grid const * const grid, char const * const title, ssize_t const width, size_t const entries, terra_visual_mode const mode)
 {
 #ifdef NCURSES
 	ssize_t tlen;
