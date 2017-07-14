@@ -68,10 +68,17 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	{
 		terra_visual_grid_init(&grid, width, height, entries, count, mode);
 
-		terra_visual_draw_title(&grid, title, width, count, mode);
-		terra_visual_draw_grid(&grid, width, height, mode);
-		terra_visual_draw_labels(width, height, &grid);
+		//terra_visual_draw_title(&grid, title, width, count, mode);
+		//terra_visual_draw_grid(&grid, width, height, mode);
+		//terra_visual_draw_labels(width, height, &grid);
 
+		if (mode == TERRA_BOTH)
+		mvprintw(1, 1, "BOTH");
+		else if (mode == TERRA_HUMI)
+		mvprintw(1, 1, "HUMI");
+		else
+		mvprintw(1, 1, "TEMP");
+		
 		key = getch();
 
 		terra_visual_grid_free(&grid);
