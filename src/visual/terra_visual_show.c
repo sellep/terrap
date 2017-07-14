@@ -50,6 +50,7 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 	setlocale(LC_CTYPE, "en_US.UTF-8");
 
 	initscr();
+	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(FALSE);
 
