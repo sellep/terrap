@@ -54,24 +54,38 @@ static inline void visual_grid_x(ssize_t const width, ssize_t const height)
 	SET_COLOR_DEFAULT();
 }
 
-static inline void draw_points(terra_visual_grid const * const grid, ssize_t const width, ssize_t const height)
+static inline void draw_points(terra_visual_grid const * const grid, ssize_t const width, ssize_t const height, terra_visual_mode const mode)
 {
 	wchar_t chr = L'\x2736';
 	ssize_t x;
 
-	SET_COLOR_HUMI();
-
-	for (x = 1; x < DRAW_WIDTH; x++)
+	if (mode == TERRA_BOTH || mode == TERRA_HUMI)
 	{
-		mvaddnwstr(GRID_OFFSET_TOP + DRAW_HEIGHT - grid->vals_temp[x] - 1, GRID_OFFSET_LEFT + x, &chr, 1);
-	}
+		SET_COLOR_HUMI();
 
-	SET_COLOR_DEFAULT();
+		for (x = 1; x < DRAW_WIDTH; x++)
+		{
+			mvaddnwstr(GRID_OFFSET_TOP + DRAW_HEIGHT - grid->vals_humi[x] - 1, GRID_OFFSET_LEFT + x, &chr, 1);
+		}
+
+		SET_COLOR_DEFAULT();
+	}
+	if (mode == TERRA_BOTH || mode == TERRA_TEMP)
+	{
+		SET_COLOR_TEMP();
+
+		for (x = 1; x < DRAW_WIDTH; x++)
+		{
+			mvaddnwstr(GRID_OFFSET_TOP + DRAW_HEIGHT - grid->vals_temp[x] - 1, GRID_OFFSET_LEFT + x, &chr, 1);
+		}
+
+		SET_COLOR_DEFAULT();
+	}
 }
 
 #endif
 
-void terra_visual_draw_grid(terra_visual_grid const * const grid, ssize_t const width, ssize_t const height)
+void terra_visual_draw_grid(terra_visual_grid const * const grid, ssize_t const width, ssize_t const height, terra_visual_mode const mode)
 {
 #ifdef NCURSES
 	const wchar_t origin = L'\x253c';
@@ -79,7 +93,7 @@ void terra_visual_draw_grid(terra_visual_grid const * const grid, ssize_t const 
 	mvaddnwstr(height - GRID_OFFSET_BOTTOM - 1, GRID_OFFSET_LEFT, &origin, 1);
 	visual_grid_y(width, height);
 	visual_grid_x(width, height);
-	draw_points(grid, width, height);
+	draw_points(grid, width, height, mode);
 #endif
 }
 

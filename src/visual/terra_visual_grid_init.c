@@ -105,31 +105,65 @@ static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const 
 	}
 }
 
-static inline void eval_entries(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len)
+static inline eval_entries_humi(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entries, ssize_t const x)
+{
+	ssize_t y;
+
+	for (y = 1; y < DRAW_HEIGHT; y++)
+	{
+		if (grid->vals_y[y] < entry->humi)
+			continue;
+	
+		grid->vals_humi[x] = y;
+		break;
+	}
+}
+
+static inline eval_entries_temp(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entries, ssize_t const x)
+{
+	ssize_t y;
+
+	for (y = 1; y < DRAW_HEIGHT; y++)
+	{
+		if (grid->vals_y[y] < entry->temp)
+			continue;
+	
+		grid->vals_temp[x] = y;
+		break;
+	}
+}
+
+static inline void eval_entries(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
 {
 	terra_data_entry *entry;
-	ssize_t x, y;
+	ssize_t x;
 
-	for (x = 0; x < DRAW_WIDTH; x++)
+	if (mode == TERRA_BOTH)
 	{
-		entry = &entries[x * len / (DRAW_WIDTH - 1)];
-
-		for (y = 1; y < DRAW_HEIGHT; y++)
+		for (x = 0; x < DRAW_WIDTH; x++)
 		{
-			if (grid->vals_y[y] < entry->humi)
-				continue;
-
-			grid->vals_humi[x] = y;
-			break;
+			entry = &entries[x * len / (DRAW_WIDTH - 1)];
+	
+			eval_entries_humi(grid, height, entries, x);
+			eval_entries_temp(grid, height, entries, x);
 		}
-
-		for (y = 1; y < DRAW_HEIGHT; y++)
+	}
+	else if (mode == TERRA_HUMI)
+	{
+		for (x = 0; x < DRAW_WIDTH; x++)
 		{
-			if (grid->vals_y[y] < entry->temp)
-				continue;
-
-			grid->vals_temp[x] = y;
-			break;
+			entry = &entries[x * len / (DRAW_WIDTH - 1)];
+	
+			eval_entries_humi(grid, height, entries, x);
+		}
+	}
+	else
+	{
+		for (x = 0; x < DRAW_WIDTH; x++)
+		{
+			entry = &entries[x * len / (DRAW_WIDTH - 1)];
+	
+			eval_entries_temp(grid, height, entries, x);
 		}
 	}
 }
@@ -144,5 +178,5 @@ void terra_visual_grid_init(terra_visual_grid * const grid, ssize_t const width,
 	compute_vals_y(grid, height, entries, len, mode);
 	compute_vals_x(grid, width, entries, len);
 
-	eval_entries(grid, width, height, entries, len);
+	eval_entries(grid, width, height, entries, len, mode);
 }
