@@ -53,7 +53,7 @@ static inline void schedule_run_hygro()
 {
 	if (DO_HYGRO_READ())
 	{
-		if (!terra_hygro_run(&_humi, &_temp, &CONF_HYGRO))
+		if (!terra_hygro_run(&_humi, &_temp, &CONF_HYGRO, &NOW))
 		{
 			runtime.hygro_err++;
 		}

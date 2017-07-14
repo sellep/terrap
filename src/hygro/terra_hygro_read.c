@@ -1,6 +1,6 @@
 #include "terra_hygro.h"
 
-BOOL terra_hygro_run(float * const h, float * const t, terra_conf_hygro const * const conf)
+BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const * const conf)
 {
 #ifdef DEBUG
 	terra_log_info("[terra_hygro_run] debug compilation\n");
