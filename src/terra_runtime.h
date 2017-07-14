@@ -26,6 +26,8 @@ typedef struct
 
 terra_runtime runtime;
 
+extern BOOL terra_runtime_init(char const * const);
+
 #define CONF_GLOBAL runtime.conf
 #define CONF_HEART runtime.conf.he
 #define CONF_SWITCH runtime.conf.sw
@@ -51,13 +53,6 @@ static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 	return runtime.switch_modes[2];
 }
 
-static inline void terra_runtime_switch_set(char const sock, terra_switch_mode const m)
-{
-	if (sock == 'a') runtime.switch_modes[0] = m;
-	else if (sock == 'b') runtime.switch_modes[1] = m;
-	else runtime.switch_modes[2] = m;
-}
-
 static inline void terra_runtime_switch_set_on(char const sock)
 {
 	terra_switch_on(&CONF_SWITCH, sock);
@@ -75,8 +70,6 @@ static inline void terra_runtime_switch_set_off(char const sock)
 	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_OFF;
 	else runtime.switch_modes[2] = SWITCH_OFF;
 }
-
-extern BOOL terra_runtime_init(char const * const);
 
 static inline void terra_lock()
 {
