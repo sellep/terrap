@@ -55,7 +55,7 @@ static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 
 static inline void terra_runtime_switch_set_on(char const sock)
 {
-	terra_switch_on(&CONF_SWITCH, sock);
+	terra_switch_set_on(&CONF_SWITCH, sock);
 
 	if (sock == 'a') runtime.switch_modes[0] = SWITCH_ON;
 	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_ON;
@@ -64,7 +64,7 @@ static inline void terra_runtime_switch_set_on(char const sock)
 
 static inline void terra_runtime_switch_set_off(char const sock)
 {
-	terra_switch_off(&CONF_SWITCH, sock);
+	terra_switch_set_off(&CONF_SWITCH, sock);
 
 	if (sock == 'a') runtime.switch_modes[0] = SWITCH_OFF;
 	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_OFF;
