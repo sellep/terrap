@@ -20,7 +20,7 @@ typedef struct
 	terra_time hygro_last;
 	int hygro_err;
 
-	terra_switch_modes switch_modes[3];
+	terra_switch_mode switch_modes[3];
 } terra_runtime;
 
 terra_runtime runtime;
