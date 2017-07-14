@@ -40,6 +40,7 @@ terra_runtime runtime;
 #define SWITCH_NOT_ON(s) SWITCH_GET(s) != SWITCH_ON
 #define SWITCH_NOT_OFF(s) SWITCH_GET(s) != SWITCH_OFF
 #define SWITCH_ON(s) SWITCH_GET(s) == SWITCH_ON
+#define SWITCH_OFF(s) SWITCH_GET(s) == SWITCH_OFF
 
 static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 {
