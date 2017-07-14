@@ -1,6 +1,6 @@
 #include "terra_visual.h"
 
-static void grid_bounding_y(float * const min_y, float * const max_y, terra_visual grid * const grid, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
+static void grid_bounding_y(float * const min_y, float * const max_y, terra_visual_grid * const grid, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
 {
 	size_t i;
 
