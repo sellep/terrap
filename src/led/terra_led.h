@@ -51,7 +51,7 @@ static inline BOOL terra_led_set_from_cmd(terra_conf const * const conf, terra_l
 	}
 	else if (cmd & LED_HEART)
 	{
-		terra_led_set(conf->heart.pin, cmd);
+		terra_led_set(conf->he.pin, cmd);
 		return TRUE;
 	}
 
