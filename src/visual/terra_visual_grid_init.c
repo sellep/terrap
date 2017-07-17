@@ -196,22 +196,22 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 	{
 		for (x = 1; x < DRAW_WIDTH ; x++)
 		{
-			grid->vals_humi[x - 1] = eval_entries_humi(grid, height, entries, len, x);
-			grid->vals_temp[x - 1] = eval_entries_temp(grid, height, entries, len, x);
+			grid->vals_humi[x - 1] = eval_entry_humi(grid, height, entries, len, x);
+			grid->vals_temp[x - 1] = eval_entry_temp(grid, height, entries, len, x);
 		}
 	}
 	else if (mode == TERRA_HUMI)
 	{
 		for (x = 1; x < DRAW_WIDTH; x++)
 		{
-			grid->vals_humi[x - 1] = eval_entries_humi(grid, height, entries, len, x);
+			grid->vals_humi[x - 1] = eval_entry_humi(grid, height, entries, len, x);
 		}
 	}
 	else
 	{
 		for (x = 1; x < DRAW_WIDTH; x++)
 		{
-			grid->vals_temp[x - 1] = eval_entries_temp(grid, height, entries, len, x);
+			grid->vals_temp[x - 1] = eval_entry_temp(grid, height, entries, len, x);
 		}
 	}
 }
