@@ -39,10 +39,10 @@ error:
 
 static inline BOOL terra_time_parse_secs(terra_time * const time, char const * const line)
 {
-	if (line[i] != ':')
+	if (line[0] != ':')
 		goto error;
 
-	if (!isdigit(line[i + 1]) && !isdigit(line[i + 2]))
+	if (!isdigit(line[1]) && !isdigit(line[2]))
 		goto error;
 
 	time->sec = atoi(line + 1);
