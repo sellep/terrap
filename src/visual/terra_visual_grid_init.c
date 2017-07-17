@@ -130,7 +130,7 @@ static inline void compute_vals_x(terra_visual_grid * const grid, terra_visual_c
 	}
 	else if (EXPLICIT_BEGIN_END())
 	{
-		step = (double)terra_time_diff(&cmd->start, &cmd->start) / DRAW_WIDTH;
+		step = (double)terra_time_diff(&cmd->end, &cmd->start) / DRAW_WIDTH;
 		start = terra_time_to_int(&cmd->start);
 	}
 	else
