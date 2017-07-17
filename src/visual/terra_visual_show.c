@@ -97,7 +97,7 @@ BOOL terra_show(char const * const title, terra_data_entry const * const entries
 
 #endif
 
-BOOL terra_visual_show(terra_visual_cmd const cmd)
+BOOL terra_visual_show(terra_visual_cmd const * const cmd)
 {
 	terra_data_entry *entries;
 	size_t count;
@@ -106,7 +106,7 @@ BOOL terra_visual_show(terra_visual_cmd const cmd)
 
 	while (1)
 	{
-		if (!terra_data_read(&entries, &count, path, cmd))
+		if (!terra_data_read(&entries, &count, path, cmd->days_past))
 		{
 			terra_log_error("[terra_visual_show] failed to read entries\n");
 			return FALSE;
