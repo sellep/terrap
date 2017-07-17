@@ -14,7 +14,7 @@ BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const *
 		status = pi_2_dht_read(DHT22, conf->pin, h, t);
 		if (status == DHT_SUCCESS)
 		{
-			if (h > 100 || t > 100 || h == 0 || t == 0)
+			if (h[0] > 100 || t[0] > 100 || h[0] == 0 || t[0] == 0)
 				continue;
 
 			return TRUE;
