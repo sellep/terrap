@@ -79,12 +79,14 @@ BOOL terra_show(char const * const title, terra_data_entry const * const entries
 
 		if (key == KEY_EXIT || key == KEY_ESC)
 			break;
-		if (key == KEY_F5)
+		/*if (key == KEY_F5)
 		{
 			reload = TRUE;
 			break;
-		}
+		}*/
 
+		mvprintw(10, 10, "-- %i --", key);
+key = getch();
 		show_shift_mode(&mode);
 		clear();
 	}
