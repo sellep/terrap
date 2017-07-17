@@ -6,6 +6,7 @@
 #include <stddef.h>
 
 #define KEY_ESC 27
+#define KEY_F5 269
 
 extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, size_t const, terra_data_entry const * const, size_t const, terra_visual_mode const);
 extern void terra_visual_draw_title(terra_visual_grid const * const, char const * const, ssize_t const, size_t const, terra_visual_mode const);
@@ -79,14 +80,13 @@ BOOL terra_show(char const * const title, terra_data_entry const * const entries
 
 		if (key == KEY_EXIT || key == KEY_ESC)
 			break;
-		/*if (key == KEY_F5)
+
+		if (key == KEY_F5)
 		{
 			reload = TRUE;
 			break;
-		}*/
+		}
 
-		mvprintw(10, 10, "-- %i --", key);
-key = getch();
 		show_shift_mode(&mode);
 		clear();
 	}
