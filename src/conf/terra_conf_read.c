@@ -63,7 +63,7 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 	config_lookup_int(src, "hygro.repeats", &dest->hy.repeats);
 	config_lookup_string(src, "hygro.delay", &str);
 
-	terra_time_read(&time, str);
+	terra_time_parse(&time, str, HOUR_MIN_SEC);
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
@@ -109,10 +109,10 @@ static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 		dest->clocks[i].times = (terra_start_stop*) malloc(sizeof(terra_start_stop) * dest->clocks[i].time_len);
 
 		config_setting_lookup_string(src_clock, "start", &str);
-		terra_time_read(&dest->clocks[i].times[0].start, str);
+		terra_time_parse(&dest->clocks[i].times[0].start, str, HOUR_MIN_SEC);
 
 		config_setting_lookup_string(src_clock, "stop", &str);
-		terra_time_read(&dest->clocks[i].times[0].stop, str);
+		terra_time_parse(&dest->clocks[i].times[0].stop, str, HOUR_MIN_SEC);
 	}
 }
 

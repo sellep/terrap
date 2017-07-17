@@ -12,7 +12,13 @@ enum time_compares {
 	TIME_ABOVE = 1
 };
 
+enum time_formats {
+	HOUR_MIN,
+	HOUR_MIN_SEC
+};
+
 typedef int time_cmp;
+typedef int time_format;
 
 typedef struct
 {
@@ -38,7 +44,7 @@ static terra_time day_begin = { 0, 0, 0 };
 static terra_time day_end = { 23, 59, 59 };
 
 extern void terra_time_printnl(terra_time const * const);
-extern BOOL terra_time_read(terra_time * const, char const * const);
+extern BOOL terra_time_parse(terra_time * const, char const * const, time_format const);
 
 static inline void terra_time_print(terra_time const * const t)
 {

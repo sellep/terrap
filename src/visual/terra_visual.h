@@ -35,8 +35,8 @@ typedef struct
 	float *vals_y;
 	size_t *vals_x;
 
-	ssize_t *vals_humi;
-	ssize_t *vals_temp;
+	int *vals_humi;
+	int *vals_temp;
 
 	float min_humi;
 	float max_humi;
@@ -53,14 +53,46 @@ enum terra_visual_modes
 
 typedef int terra_visual_mode;
 
-typedef ssize_t terra_visual_cmd;
+typedef struct
+{
+	ssize_t visual_argc;
+	terra_time start;
+	terra_time end;
+
+	ssize_t days_past;
+} terra_visual_cmd;
 
 static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)
 {
-	cmd[0] = argc == 2 ? 0 : atoi(argv[2]);
+	cmd->visual_argc = argc - 2;
+	cmd->days_past = 0;
+
+	if (argc == 2)
+		return TRUE;
+
+	cmd->days_past = atoi(argv[2]);
+
+	if (argc == 3)
+		return TRUE;
+
+	if (!terra_time_parse(&cmd->start, argv[3], HOUR_MIN))
+	{
+		terra_log_error("[terra_visual_arg] failed to parse start time (%s)\n", argv[3]);
+		return FALSE;
+	}
+
+	if (argc == 4)
+		return TRUE;
+
+	if (!terra_time_parse(&cmd->end, argv[4], HOUR_MIN))
+	{
+		terra_log_error("[terra_visual_arg] failed to parse end time (%s)\n", argv[4]);
+		return FALSE;
+	}
+
 	return TRUE;
 }
 
-extern BOOL terra_visual_show(terra_visual_cmd const);
+extern BOOL terra_visual_show(terra_visual_cmd const * const);
 
 #endif

@@ -6,12 +6,11 @@
 #define MESSAGE_FORMAT "terra %02zu:%02zu %02zu.%02zu.%zu: %s"
 
 static char buf[MAX_BUF_LEN];
-static struct tm ts;
 
-static inline void log_time()
+static inline struct tm log_time()
 {
 	time_t t = time(NULL);
-	ts = *localtime(&t);
+	return *localtime(&t);
 }
 
 void terra_log_info(char const * const msg, ...)
@@ -20,7 +19,7 @@ void terra_log_info(char const * const msg, ...)
 	va_start(args, msg);
 	vsnprintf(buf, MAX_BUF_LEN - 1, msg, args);
 
-	log_time();
+	struct tm ts = log_time();
 
 #ifdef SYSLOG_ENABLED
 	openlog(TERRA_LOG_ID, LOG_PID, LOG_DAEMON);
@@ -38,6 +37,8 @@ void terra_log_error(char const * const msg, ...)
 	va_list args;
 	va_start(args, msg);
 	vsnprintf(buf, MAX_BUF_LEN - 1, msg, args);
+
+	struct tm ts = log_time();
 
 #ifdef SYSLOG_ENABLED
 	openlog(TERRA_LOG_ID, LOG_PID, LOG_DAEMON);

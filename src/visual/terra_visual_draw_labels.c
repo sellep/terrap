@@ -59,5 +59,5 @@ void terra_visual_draw_labels(ssize_t const width, ssize_t const height, terra_v
 {
 
 	draw_labels_y(grid, height);
-	//draw_labels_x(grid, width, height);
+	draw_labels_x(grid, width, height);
 }

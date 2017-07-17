@@ -12,7 +12,7 @@ OBJ=pi_2_mmio.o \
 	terra_log.o \
 	terra_lock_init.o \
 	terra_time_print.o \
-	terra_time_read.o \
+	terra_time_parse.o \
 	terra_data_append.o \
 	terra_data_read.o \
 	terra_led_arg.o \
