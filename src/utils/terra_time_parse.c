@@ -69,7 +69,7 @@ BOOL terra_time_parse(terra_time * const time, char const * const line, time_for
 	}
 	else
 	{
-		time->secs = 0;
+		time->sec = 0;
 	}
 
 	return TRUE;
