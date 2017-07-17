@@ -1,6 +1,8 @@
 #include "terra_visual.h"
 
 #define VISUAL_X_THRESHOLD (5 * 60) / 2
+#define EXPLICIT_BEGIN() cmd->visual_argc == 2
+#define EXPLICIT_BEGIN_END() cmd->visual_argc == 3
 
 static void grid_bounding_y(float * const min_y, float * const max_y, terra_visual_grid * const grid, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
 {
@@ -121,12 +123,12 @@ static inline void compute_vals_x(terra_visual_grid * const grid, terra_visual_c
 	size_t start;
 	size_t x;
 
-	if (cmd->visual_argc == 2)
+	if (EXPLICIT_BEGIN())
 	{
 		step = (double)terra_time_diff(&entries[len - 1].tm, &cmd->start) / DRAW_WIDTH;
 		start = terra_time_to_int(&cmd->start);
 	}
-	else if (cmd->visual_argc == 3)
+	else if (EXPLICIT_BEGIN_END())
 	{
 		step = (double)terra_time_diff(&cmd->start, &cmd->start) / DRAW_WIDTH;
 		start = terra_time_to_int(&cmd->start);
