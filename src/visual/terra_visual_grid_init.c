@@ -130,7 +130,7 @@ static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const 
 	}
 }
 
-static inline int eval_get_idx_x(terra_data_entry const * const entries, size_t const len, ssize_t const x)
+static inline int eval_get_idx_x(terra_visual_grid const * const grid, terra_data_entry const * const entries, size_t const len, ssize_t const x)
 {
 	ssize_t i;
 	size_t time_x, time_i, diff = 0;
@@ -162,7 +162,7 @@ static inline int eval_entry_humi(terra_visual_grid * const grid, ssize_t const 
 {
 	ssize_t i, y;
 
-	i = eval_get_idx_x(entries, len, x);
+	i = eval_get_idx_x(grid, entries, len, x);
 	if (i == -1)
 		return -1;
 
@@ -177,7 +177,7 @@ static inline int eval_entry_temp(terra_visual_grid * const grid, ssize_t const 
 {
 	ssize_t i, y;
 
-	i = eval_get_idx_x(entries, len, x);
+	i = eval_get_idx_x(grid, entries, len, x);
 	if (i == -1)
 		return -1;
 
