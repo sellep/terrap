@@ -29,10 +29,14 @@ static inline void visual_draw_metadata(terra_visual_grid const * const grid, si
 void terra_visual_draw_title(terra_visual_grid const * const grid, char const * const title, ssize_t const width, size_t const entries, terra_visual_mode const mode)
 {
 #ifdef NCURSES
-	ssize_t len = (width - strlen(title)) / 2;
+	ssize_t title_len;
+	ssize_t len;
+
+	title_len = strlen(title);
+	len = (width - title_len) / 2;
 
 	memset(buf, '-', sizeof buf);
-	strcpy(buf + len, title);
+	strncpy(buf + len, title, title_len);
 	mvprintw(0, 0, buf, width);
 
 	visual_draw_metadata(grid, entries, mode);
