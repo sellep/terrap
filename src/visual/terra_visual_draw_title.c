@@ -6,7 +6,7 @@
 #define METADATA_FORMAT_HUMI "mode: HUMI, entries: %zu, humi: %.1f - %.1f"
 #define METADATA_FORMAT_TEMP "mode: TEMP, entries: %zu, temp: %.1f - %.1f"
 
-static char buf[256];
+static char *buf;
 
 static inline void visual_draw_metadata(terra_visual_grid const * const grid, size_t const len, terra_visual_mode const mode)
 {
@@ -32,6 +32,8 @@ void terra_visual_draw_title(terra_visual_grid const * const grid, char const * 
 	ssize_t title_len;
 	ssize_t len;
 
+	buf = (char*) malloc(sizeof(char) * width);
+
 	title_len = strlen(title);
 	len = (width - title_len) / 2;
 
@@ -40,5 +42,7 @@ void terra_visual_draw_title(terra_visual_grid const * const grid, char const * 
 	mvprintw(0, 0, buf, width);
 
 	visual_draw_metadata(grid, entries, mode);
+
+	free(buf);
 #endif
 }
