@@ -33,7 +33,7 @@ void terra_visual_draw_title(terra_visual_grid const * const grid, char const * 
 
 	memset(buf, '-', sizeof buf);
 	strcpy(buf + len, title);
-	mvprintw(0, 0, buf, w);
+	mvprintw(0, 0, buf, width);
 
 	visual_draw_metadata(grid, entries, mode);
 #endif
