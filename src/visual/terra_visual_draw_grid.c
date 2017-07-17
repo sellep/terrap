@@ -65,7 +65,7 @@ static inline void draw_points(terra_visual_grid const * const grid, ssize_t con
 
 		for (x = 1; x < DRAW_WIDTH; x++)
 		{
-			if (rid->vals_humi[x - 1] == -1)
+			if (grid->vals_humi[x - 1] == -1)
 				continue;
 
 			mvaddnwstr(GRID_OFFSET_TOP + DRAW_HEIGHT - grid->vals_humi[x - 1] - 1, GRID_OFFSET_LEFT + x, &chr, 1);
@@ -79,7 +79,7 @@ static inline void draw_points(terra_visual_grid const * const grid, ssize_t con
 
 		for (x = 1; x < DRAW_WIDTH; x++)
 		{
-			if (rid->vals_humi[x - 1] == -1)
+			if (grid->vals_humi[x - 1] == -1)
 				continue;
 
 			mvaddnwstr(GRID_OFFSET_TOP + DRAW_HEIGHT - grid->vals_temp[x - 1] - 1, GRID_OFFSET_LEFT + x, &chr, 1);
