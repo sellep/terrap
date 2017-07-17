@@ -23,7 +23,7 @@ static inline void visual_draw_metadata(terra_visual_grid const * const grid, si
 		sprintf(buf, METADATA_FORMAT_TEMP, len, grid->min_temp, grid->max_temp);
 	}
 
-	mvprintw(1, 0, buf, strlen(buf));
+	mvaddnstr(1, 0, buf, strlen(buf));
 }
 
 void terra_visual_draw_title(terra_visual_grid const * const grid, char const * const title, ssize_t const width, size_t const entries, terra_visual_mode const mode)
@@ -39,7 +39,7 @@ void terra_visual_draw_title(terra_visual_grid const * const grid, char const * 
 
 	memset(buf, '-', sizeof buf);
 	strncpy(buf + len, title, title_len);
-	mvprintw(0, 0, buf, width);
+	mvaddnstr(0, 0, buf, width);
 
 	visual_draw_metadata(grid, entries, mode);
 
