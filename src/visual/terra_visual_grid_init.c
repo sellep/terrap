@@ -137,9 +137,6 @@ static inline void compute_vals_x(terra_visual_grid * const grid, terra_visual_c
 		start = terra_time_to_int(&entries[0].tm);
 	}
 
-	step = (double)terra_time_diff(&entries[len - 1].tm, &entries[0].tm) / DRAW_WIDTH;
-	start = terra_time_to_int(&entries[0].tm);
-
 	for (x = 0; x < DRAW_WIDTH; x++)
 	{
 		grid->vals_x[x] = (size_t) (start + x * step);
