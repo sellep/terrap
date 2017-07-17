@@ -232,7 +232,7 @@ static inline void eval_entries(terra_visual_grid * const grid, ssize_t const wi
 	}
 }
 
-void terra_visual_grid_init(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
+void terra_visual_grid_init(terra_visual_grid * const grid, terra_visual_cmd const * const cmd, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
 {
 	grid->vals_y = (float*) malloc(sizeof(float) * DRAW_HEIGHT);
 	grid->vals_x = (size_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
@@ -240,7 +240,7 @@ void terra_visual_grid_init(terra_visual_grid * const grid, ssize_t const width,
 	grid->vals_temp = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH - 1);
 
 	compute_vals_y(grid, height, entries, len, mode);
-	compute_vals_x(grid, width, entries, len);
+	compute_vals_x(grid, cmd, width, entries, len);
 
 	eval_entries(grid, width, height, entries, len, mode);
 }
