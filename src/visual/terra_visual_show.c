@@ -39,13 +39,14 @@ static inline void terra_visual_grid_free(terra_visual_grid const * const grid)
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
 
-void terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)
+BOOL terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)
 {
 	terra_visual_mode mode = TERRA_BOTH;
 	terra_visual_grid grid;
 	int width;
 	int height;
 	int key;
+	BOOL reload = FALSE;
 
 	setlocale(LC_CTYPE, "en_US.UTF-8");
 
@@ -78,12 +79,18 @@ void terra_show(char const * const title, terra_data_entry const * const entries
 
 		if (key == KEY_EXIT || key == KEY_ESC)
 			break;
+		if (key == KEY_F5)
+		{
+			reload = TRUE;
+			break;
+		}
 
 		show_shift_mode(&mode);
 		clear();
 	}
 
 	endwin();
+	return reload;
 }
 
 #endif
@@ -93,19 +100,27 @@ BOOL terra_visual_show(terra_visual_cmd const cmd)
 	terra_data_entry *entries;
 	size_t count;
 	char path[50];
+	BOOL reload;
 
-	if (!terra_data_read(&entries, &count, path, cmd))
+	while (1)
 	{
-		terra_log_error("[terra_visual_show] failed to read entries\n");
-		return FALSE;
-	}
+		if (!terra_data_read(&entries, &count, path, cmd))
+		{
+			terra_log_error("[terra_visual_show] failed to read entries\n");
+			return FALSE;
+		}
 
 #ifdef NCURSES
-	terra_show(path, entries, count);
+		reload = terra_show(path, entries, count);
 #else
-	terra_log_info("[terra_visual_show] ncurses disabled\n");
+		terra_log_info("[terra_visual_show] ncurses disabled\n");
 #endif
 
-	free(entries);
+		free(entries);
+
+		if (!reload)
+			break;
+	}
+
 	return TRUE;
 }
