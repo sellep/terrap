@@ -62,7 +62,7 @@ static void grid_bounding_y(float * const min_y, float * const max_y, terra_visu
 		grid->max_humi = entries[0].humi;
 		grid->min_humi = entries[0].humi;
 		grid->max_temp = entries[0].temp;
-		grid->max_temp = entries[0].temp;
+		grid->min_temp = entries[0].temp;
 
 		for (i = 1; i < len; i++)
 		{
