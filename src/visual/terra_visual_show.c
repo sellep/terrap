@@ -8,7 +8,7 @@
 #define KEY_ESC 27
 #define KEY_F5 269
 
-extern void terra_visual_grid_init(terra_visual_grid * const, size_t const, size_t const, terra_data_entry const * const, size_t const, terra_visual_mode const);
+extern void terra_visual_grid_init(terra_visual_grid * const, terra_visual_cmd const * const, size_t const, size_t const, terra_data_entry const * const, size_t const, terra_visual_mode const);
 extern void terra_visual_draw_title(terra_visual_grid const * const, char const * const, ssize_t const, size_t const, terra_visual_mode const);
 extern void terra_visual_draw_grid(terra_visual_grid const * const, ssize_t const, ssize_t const, terra_visual_mode const);
 extern void terra_visual_draw_labels(ssize_t const, ssize_t const, terra_visual_grid const * const);
@@ -40,7 +40,7 @@ static inline void terra_visual_grid_free(terra_visual_grid const * const grid)
 #ifdef NCURSES
 #include <ncursesw/ncurses.h>
 
-BOOL terra_show(char const * const title, terra_data_entry const * const entries, size_t const count)
+BOOL terra_show(terra_visual_cmd const * const cmd, char const * const title, terra_data_entry const * const entries, size_t const count)
 {
 	terra_visual_mode mode = TERRA_BOTH;
 	terra_visual_grid grid;
@@ -68,7 +68,7 @@ BOOL terra_show(char const * const title, terra_data_entry const * const entries
 
 	while (1)
 	{
-		terra_visual_grid_init(&grid, width, height, entries, count, mode);
+		terra_visual_grid_init(&grid, cmd, width, height, entries, count, mode);
 
 		terra_visual_draw_title(&grid, title, width, count, mode);
 		terra_visual_draw_grid(&grid, width, height, mode);
@@ -113,7 +113,7 @@ BOOL terra_visual_show(terra_visual_cmd const * const cmd)
 		}
 
 #ifdef NCURSES
-		reload = terra_show(path, entries, count);
+		reload = terra_show(cmd, path, entries, count);
 #else
 		terra_log_info("[terra_visual_show] ncurses disabled\n");
 #endif

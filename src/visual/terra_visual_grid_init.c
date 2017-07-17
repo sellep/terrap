@@ -115,11 +115,27 @@ static inline void compute_vals_y(terra_visual_grid * const grid, ssize_t const 
 	}
 }
 
-static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const width, terra_data_entry const * const entries, size_t const len)
+static inline void compute_vals_x(terra_visual_grid * const grid, terra_visual_cmd const * const cmd, ssize_t const width, terra_data_entry const * const entries, size_t const len)
 {
 	double step;
 	size_t start;
 	size_t x;
+
+	if (cmd->visual_argc == 2)
+	{
+		step = (double)terra_time_diff(&entries[len - 1].tm, &cmd->start) / DRAW_WIDTH;
+		start = terra_time_to_int(&cmd->start);
+	}
+	else if (cmd->visual_argc == 3)
+	{
+		step = (double)terra_time_diff(&cmd->start, &cmd->start) / DRAW_WIDTH;
+		start = terra_time_to_int(&cmd->start);
+	}
+	else
+	{
+		step = (double)terra_time_diff(&entries[len - 1].tm, &entries[0].tm) / DRAW_WIDTH;
+		start = terra_time_to_int(&entries[0].tm);
+	}
 
 	step = (double)terra_time_diff(&entries[len - 1].tm, &entries[0].tm) / DRAW_WIDTH;
 	start = terra_time_to_int(&entries[0].tm);

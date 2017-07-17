@@ -55,13 +55,16 @@ typedef int terra_visual_mode;
 
 typedef struct
 {
+	ssize_t visual_argc;
 	terra_time start;
 	terra_time end;
+
 	ssize_t days_past;
 } terra_visual_cmd;
 
 static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)
 {
+	cmd->visual_argc = argc - 2;
 	cmd->days_past = 0;
 
 	if (argc == 2)
