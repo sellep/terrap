@@ -63,7 +63,7 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 	config_lookup_int(src, "hygro.repeats", &dest->hy.repeats);
 	config_lookup_string(src, "hygro.delay", &str);
 
-	terra_time_read(&time, str);
+	terra_time_parse(&time, str, HOUR_MIN_SEC);
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
