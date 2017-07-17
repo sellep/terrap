@@ -74,7 +74,7 @@ static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const 
 
 	if (!terra_time_parse(&cmd->start, argv[3], HOUR_MIN))
 	{
-		terra_log_error("[terra_visual_arg] failed to parse start time\n");
+		terra_log_error("[terra_visual_arg] failed to parse start time (%s)\n", argv[3]);
 		return FALSE;
 	}
 
@@ -83,7 +83,7 @@ static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const 
 
 	if (!terra_time_parse(&cmd->end, argv[4], HOUR_MIN))
 	{
-		terra_log_error("[terra_visual_arg] failed to parse end time\n");
+		terra_log_error("[terra_visual_arg] failed to parse end time (%s)\n", argv[4]);
 		return FALSE;
 	}
 
