@@ -35,8 +35,8 @@ typedef struct
 	float *vals_y;
 	size_t *vals_x;
 
-	ssize_t *vals_humi;
-	ssize_t *vals_temp;
+	int *vals_humi;
+	int *vals_temp;
 
 	float min_humi;
 	float max_humi;

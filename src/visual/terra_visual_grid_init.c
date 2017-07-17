@@ -1,5 +1,7 @@
 #include "terra_visual.h"
 
+#define VISUAL_X_THRESHOLD (5 * 60) / 2
+
 static void grid_bounding_y(float * const min_y, float * const max_y, terra_visual_grid * const grid, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
 {
 	size_t i;
@@ -128,65 +130,88 @@ static inline void compute_vals_x(terra_visual_grid * const grid, ssize_t const 
 	}
 }
 
-static inline eval_entries_humi(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entry, ssize_t const x)
+static inline int eval_get_idx_x(terra_data_entry const * const entries, size_t const len, ssize_t const x)
 {
-	ssize_t y;
+	ssize_t i;
+	size_t time_x, time_i, diff = 0;
+
+	time_x = grid->vals_x[x];
+
+	for (i = 0; i < len; i++)
+	{
+		time_i = terra_time_to_int(&entries[i].tm);
+
+		if (time_x == time_i)
+			return i;
+
+		if (time_x < time_i)
+		{
+			if (diff < time_i - time_x)
+				return diff < VISUAL_X_THRESHOLD ? i - 1 : -1;
+
+			return time_i - time_x < VISUAL_X_THRESHOLD ? i : -1;
+		}
+
+		diff = time_x - time_i;
+	}
+
+	return diff < VISUAL_X_THRESHOLD ? i - 1 : -1;
+}
+
+static inline int eval_entry_humi(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entries, size_t const len, ssize_t const x)
+{
+	ssize_t i, y;
+
+	i = eval_get_idx_x(entries, len, x);
+	if (i == -1)
+		return -1;
 
 	for (y = 1; y < DRAW_HEIGHT; y++)
 	{
-		if (grid->vals_y[y] < entry->humi)
-			continue;
-	
-		grid->vals_humi[x] = y;
-		break;
+		if (grid->vals_y[y] >= entries[i].humi)
+			return y;
 	}
 }
 
-static inline eval_entries_temp(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entry, ssize_t const x)
+static inline int eval_entry_temp(terra_visual_grid * const grid, ssize_t const height, terra_data_entry const * const entries, size_t const len, ssize_t const x)
 {
-	ssize_t y;
+	ssize_t i, y;
+
+	i = eval_get_idx_x(entries, len, x);
+	if (i == -1)
+		return -1;
 
 	for (y = 1; y < DRAW_HEIGHT; y++)
 	{
-		if (grid->vals_y[y] < entry->temp)
-			continue;
-	
-		grid->vals_temp[x] = y;
-		break;
+		if (grid->vals_y[y] >= entries[i].temp)
+			return y;
 	}
 }
 
 static inline void eval_entries(terra_visual_grid * const grid, ssize_t const width, ssize_t const height, terra_data_entry const * const entries, size_t const len, terra_visual_mode const mode)
 {
-	terra_data_entry *entry;
 	ssize_t x;
 
 	if (mode == TERRA_BOTH)
 	{
-		for (x = 0; x < DRAW_WIDTH; x++)
+		for (x = 1; x < DRAW_WIDTH ; x++)
 		{
-			entry = &entries[x * len / (DRAW_WIDTH - 1)];
-
-			eval_entries_humi(grid, height, entry, x);
-			eval_entries_temp(grid, height, entry, x);
+			grid->vals_humi[x - 1] = eval_entries_humi(grid, height, entries, len, x);
+			grid->vals_temp[x - 1] = eval_entries_temp(grid, height, entries, len, x);
 		}
 	}
 	else if (mode == TERRA_HUMI)
 	{
-		for (x = 0; x < DRAW_WIDTH; x++)
+		for (x = 1; x < DRAW_WIDTH; x++)
 		{
-			entry = &entries[x * len / (DRAW_WIDTH - 1)];
-	
-			eval_entries_humi(grid, height, entry, x);
+			grid->vals_humi[x - 1] = eval_entries_humi(grid, height, entries, len, x);
 		}
 	}
 	else
 	{
-		for (x = 0; x < DRAW_WIDTH; x++)
+		for (x = 1; x < DRAW_WIDTH; x++)
 		{
-			entry = &entries[x * len / (DRAW_WIDTH - 1)];
-	
-			eval_entries_temp(grid, height, entry, x);
+			grid->vals_temp[x - 1] = eval_entries_temp(grid, height, entries, len, x);
 		}
 	}
 }
@@ -195,8 +220,8 @@ void terra_visual_grid_init(terra_visual_grid * const grid, ssize_t const width,
 {
 	grid->vals_y = (float*) malloc(sizeof(float) * DRAW_HEIGHT);
 	grid->vals_x = (size_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
-	grid->vals_humi = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
-	grid->vals_temp = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
+	grid->vals_humi = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH - 1);
+	grid->vals_temp = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH - 1);
 
 	compute_vals_y(grid, height, entries, len, mode);
 	compute_vals_x(grid, width, entries, len);
