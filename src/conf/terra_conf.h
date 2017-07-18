@@ -71,8 +71,9 @@ typedef struct
 
 	float act;
 	float deact;
-
 	BOOL invers;
+
+	terra_time start;
 } terra_schedule_temp;
 
 typedef struct

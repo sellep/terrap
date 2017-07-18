@@ -46,21 +46,18 @@ static inline void terra_heart_beat()
 	terra_led_set(CONF_HEART.pin, heart_off);
 }
 
-static float _humi;
-static float _temp;
-
 static inline void schedule_run_hygro()
 {
 	if (DO_HYGRO_READ())
 	{
-		if (!terra_hygro_run(&_humi, &_temp, &CONF_HYGRO, &NOW))
+		if (!terra_hygro_run(&RUNTIME_HUMI, &RUNTIME_TEMP, &CONF_HYGRO, &NOW))
 		{
 			runtime.hygro_err++;
 		}
 		else
 		{
 			runtime.hygro_err = 0;
-			terra_hygro_write(_humi, _temp, &NOW);
+			terra_hygro_write(RUNTIME_HUMI, RUNTIME_TEMP, &NOW);
 		}
 	}
 }
@@ -124,12 +121,19 @@ static inline void schedule_run_schedules()
 
 static inline void schedule_init()
 {
+	size_t i;
+
 	terra_pin_set_out(CONF_GLOBAL.pin_alert);
 	terra_pin_set_out(CONF_HEART.pin);
 	terra_pin_set_out(CONF_SWITCH.pin);
 
 	terra_led_set(CONF_GLOBAL.pin_alert, FALSE);
 	terra_led_set(CONF_HEART.pin, FALSE);
+
+	for (i = 0; i < CONF_GLOBAL.temp_len; i++)
+	{
+		terra_schedule_init_temp(SCHEDULE_GET_TEMP(i));
+	}
 }
 
 void terra_schedule_run()

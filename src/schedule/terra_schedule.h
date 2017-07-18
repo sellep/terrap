@@ -5,6 +5,8 @@
 
 extern void terra_schedule_run();
 
+extern void terra_schedule_init_temp(terra_schedule_temp * const);
+
 extern void terra_schedule_run_clock(terra_schedule_clock * const);
 extern void terra_schedule_run_period(terra_schedule_period * const);
 extern void terra_schedule_run_temp(terra_schedule_temp * const);
