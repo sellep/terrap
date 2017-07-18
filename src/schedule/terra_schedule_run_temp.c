@@ -15,10 +15,10 @@ void terra_schedule_run_temp(terra_schedule_temp * const temp)
 	terra_schedule *sched = SCHEDULE(temp);
 	size_t start;
 
-	if (!terra_schedule_depcheck(sched))
-		goto end;
+	/*if (!terra_schedule_depcheck(sched))
+		goto end;*/
 
-	if (RUNTIME_SWITCH_ON(sched))
+	if (RUNTIME_SWITCH_ON(sched->socket))
 	{
 		if (RUNTIME_TEMP >= temp->deact)
 			goto end;
@@ -30,7 +30,7 @@ void terra_schedule_run_temp(terra_schedule_temp * const temp)
 		RUNTIME_SWITCH_SET_OFF(sched->socket);
 		terra_time_cpy(&temp->start, &NOW);
 	}
-	else if (RUNTIME_SWITCH_OFF(sched))
+	else if (RUNTIME_SWITCH_OFF(sched->socket))
 	{
 		if (RUNTIME_TEMP < temp->act)
 			goto end;
