@@ -6,14 +6,7 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 	ssize_t t;
 
 	if (!terra_schedule_depcheck(sched))
-	{
-		if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
-		{
-			RUNTIME_SWITCH_SET_OFF(sched->socket);
-		}
-
 		goto end;
-	}
 
 	for (t = 0; t < clock->time_len; t++)
 	{

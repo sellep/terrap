@@ -16,14 +16,7 @@ void terra_schedule_run_temp(terra_schedule_temp * const temp)
 	size_t start;
 
 	if (!terra_schedule_depcheck(sched))
-	{
-		if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
-		{
-			RUNTIME_SWITCH_SET_OFF(sched->socket);
-		}
-
 		goto end;
-	}
 
 	if (RUNTIME_SWITCH_ON(sched))
 	{
