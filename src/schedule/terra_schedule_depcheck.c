@@ -1,12 +1,14 @@
 #include "terra_schedule.h"
 
-#define DEP_NAME(s) SCHEDULE_INVERS_DEP(s) ? (s)->dep + 1 : (s)->dep
+#define DEP_NAME(s) SCHEDULE_INVERS_DEP(s) ? ((s)->dep + 1) : (s)->dep
 
 static inline terra_schedule* terra_schedule_get_dep(terra_schedule const * const sched)
 {
 	terra_schedule *target;
 	char *dep_name = DEP_NAME(sched);
 	ssize_t i;
+
+	printf(":: %s\n", dep_name);
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
@@ -36,7 +38,6 @@ BOOL terra_schedule_depcheck(terra_schedule const * const sched)
 	if (SCHEDULE_NO_DEP(sched))
 		return TRUE;
 
-	printf("try get dep of %s\n", sched->name);
 	dep = terra_schedule_get_dep(sched);
 
 	if (UNLIKELY(SCHEDULE_NOT_RUN(dep)))
