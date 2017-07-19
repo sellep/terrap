@@ -69,7 +69,6 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 
 static void terra_conf_schedule_parse(terra_schedule * const sched, config_setting_t const * const src)
 {
-	terra_time time;
 	char *str;
 
 	sched->use_begin = FALSE;
@@ -85,23 +84,6 @@ static void terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 	if (config_setting_lookup_string(src, "depends", &str) == CONFIG_TRUE)
 	{
 		string_copy(&sched->dep, str);
-	}
-
-	if (config_setting_lookup_string(src, "begin", &str) == CONFIG_TRUE)
-	{
-		if (terra_time_parse(&time, str, HOUR_MIN_SEC))
-		{
-			sched->begin = terra_time_to_int(&time);
-
-			if (config_setting_lookup_string(src, "end", &str) == CONFIG_TRUE)
-			{
-				if (terra_time_parse(&time, str, HOUR_MIN_SEC))
-				{
-					sched->end = terra_time_to_int(&time);
-					sched->use_begin = TRUE;
-				}
-			}
-		}
 	}
 }
 
