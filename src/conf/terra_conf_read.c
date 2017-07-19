@@ -71,8 +71,6 @@ static void terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 {
 	char *str;
 
-	sched->use_begin = FALSE;
-
 	config_setting_lookup_string(src, "name", &str);
 	string_copy(&sched->name, str);
 
