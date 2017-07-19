@@ -34,7 +34,7 @@ BOOL terra_schedule_dep_enabled(terra_schedule const * const sched)
 	if (SCHEDULE_NO_DEP(sched))
 		return sched->enabled;
 
-	return terra_schedule_dep_disabled(terra_schedule_get_dep(sched));
+	return terra_schedule_dep_enabled(terra_schedule_get_dep(sched));
 }
 
 BOOL terra_schedule_dep_check(terra_schedule const * const sched)
