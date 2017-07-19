@@ -41,8 +41,8 @@ extern BOOL terra_runtime_init(char const * const);
 #define NOW runtime.now
 
 #define RUNTIME_SWITCH_GET(s) terra_runtime_switch_get(s)
-#define RUNTIME_SWITCH_SET_ON(s) terra_runtime_switch_set_on(s)
-#define RUNTIME_SWITCH_SET_OFF(s) terra_runtime_switch_set_off(s)
+#define RUNTIME_SWITCH_SET_ON(s, sender) terra_runtime_switch_set_on(s, sender)
+#define RUNTIME_SWITCH_SET_OFF(s, sender) terra_runtime_switch_set_off(s, sender)
 #define RUNTIME_SWITCH_NOT_ON(s) RUNTIME_SWITCH_GET(s) != SWITCH_ON
 #define RUNTIME_SWITCH_NOT_OFF(s) RUNTIME_SWITCH_GET(s) != SWITCH_OFF
 #define RUNTIME_SWITCH_ON(s) RUNTIME_SWITCH_GET(s) == SWITCH_ON
@@ -58,18 +58,18 @@ static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 	return runtime.switch_modes[2];
 }
 
-static inline void terra_runtime_switch_set_on(char const sock)
+static inline void terra_runtime_switch_set_on(char const sock, char const * const sender)
 {
-	terra_switch_set_on(&CONF_SWITCH, sock);
+	terra_switch_set_on(&CONF_SWITCH, sock, sender);
 
 	if (sock == 'a') runtime.switch_modes[0] = SWITCH_ON;
 	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_ON;
 	else runtime.switch_modes[2] = SWITCH_ON;
 }
 
-static inline void terra_runtime_switch_set_off(char const sock)
+static inline void terra_runtime_switch_set_off(char const sock, char const * const sender)
 {
-	terra_switch_set_off(&CONF_SWITCH, sock);
+	terra_switch_set_off(&CONF_SWITCH, sock, sender);
 
 	if (sock == 'a') runtime.switch_modes[0] = SWITCH_OFF;
 	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_OFF;

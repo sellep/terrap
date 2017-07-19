@@ -39,7 +39,7 @@ void terra_schedule_run_temp(terra_schedule_temp * const temp)
 		if (start < MIN_RUN)
 			goto end;
 
-		RUNTIME_SWITCH_SET_OFF(sched->socket);
+		RUNTIME_SWITCH_SET_OFF(sched->socket, sched->name);
 		terra_time_cpy(&temp->start, &NOW);
 	}
 	else if (RUNTIME_SWITCH_OFF(sched->socket))
@@ -51,18 +51,18 @@ void terra_schedule_run_temp(terra_schedule_temp * const temp)
 		if (start < MIN_PAUSE)
 			goto end;
 
-		RUNTIME_SWITCH_SET_ON(sched->socket);
+		RUNTIME_SWITCH_SET_ON(sched->socket, sched->name);
 		terra_time_cpy(&temp->start, &NOW);
 	}
 	else
 	{
 		if (RUNTIME_TEMP > temp->act)
 		{
-			RUNTIME_SWITCH_SET_ON(sched->socket);
+			RUNTIME_SWITCH_SET_ON(sched->socket, sched->name);
 		}
 		else
 		{
-			RUNTIME_SWITCH_SET_OFF(sched->socket);
+			RUNTIME_SWITCH_SET_OFF(sched->socket, sched->name);
 		}
 
 		terra_time_cpy(&temp->start, &NOW);
