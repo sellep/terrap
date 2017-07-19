@@ -24,9 +24,9 @@ static inline terra_schedule* terra_schedule_get_dep(terra_schedule const * cons
 			return target;
 	}
 
-	//terra_exit(1);
 	terra_log_error("[schedule_get_dep] dependency %s not found\n", dep_name);
-	return NULL;
+	terra_exit(1);
+	return sched;
 }
 
 BOOL terra_schedule_depcheck(terra_schedule const * const sched)
@@ -36,8 +36,8 @@ BOOL terra_schedule_depcheck(terra_schedule const * const sched)
 	if (SCHEDULE_NO_DEP(sched))
 		return TRUE;
 
+	printf("try get dep of %s\n", sched->name);
 	dep = terra_schedule_get_dep(sched);
-	printf("dep of %s is %s\n", sched->name, dep->name);
 
 	if (UNLIKELY(SCHEDULE_NOT_RUN(dep)))
 	{
