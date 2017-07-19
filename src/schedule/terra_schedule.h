@@ -24,7 +24,7 @@ extern BOOL terra_schedule_depcheck(terra_schedule const * const);
 #define SCHEDULE_DISABLED(s) !((s)->enabled)
 
 #define SCHEDULE_NO_DEP(s) (s)->dep == NULL
-#define SCHEDULE_INVERS_DEP(s) (s)->name[0] == "!"
+#define SCHEDULE_INVERS_DEP(s) (s)->dep[0] == "!"
 
 #define SCHEDULE_NOT_RUN(s) (s)->run == FALSE
 
