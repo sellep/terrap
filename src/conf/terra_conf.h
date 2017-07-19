@@ -54,7 +54,7 @@ typedef struct
 	BOOL enabled;
 	char *dep;
 
-	BOOL use_start;
+	BOOL use_begin;
 	size_t begin;
 	size_t end;
 
