@@ -130,6 +130,11 @@ static inline void schedule_init()
 	terra_led_set(CONF_GLOBAL.pin_alert, FALSE);
 	terra_led_set(CONF_HEART.pin, FALSE);
 
+	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
+	{
+		terra_schedule_init_clock(SCHEDULE_GET_CLOCK(i));
+	}
+
 	for (i = 0; i < CONF_GLOBAL.temp_len; i++)
 	{
 		terra_schedule_init_temp(SCHEDULE_GET_TEMP(i));

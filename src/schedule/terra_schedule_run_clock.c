@@ -1,11 +1,24 @@
 #include "terra_schedule.h"
 
+void terra_schedule_init_clock(terra_schedule_clock * const clock)
+{
+	if (clock->enabled)
+	{
+		clock->enabled = terra_schedule_dep_check(clock);
+
+		if (!clock->enabled)
+		{
+			terra_log_info("[terra_schedule_init_clock] disabled schedule %s\n", clock->name);
+		}
+	}
+}
+
 void terra_schedule_run_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
 	ssize_t t;
 
-	if (!terra_schedule_depcheck(sched))
+	if (!terra_schedule_dep_check(sched))
 		goto end;
 
 	for (t = 0; t < clock->time_len; t++)

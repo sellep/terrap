@@ -31,7 +31,7 @@ OBJ=pi_2_mmio.o \
 	terra_schedule_run_period.o \
 	terra_schedule_run_clock.o \
 	terra_schedule_run_temp.o \
-	terra_schedule_depcheck.o \
+	terra_schedule_dependency.o \
 	terra_schedule_run.o \
 
 %.o : src/%.c

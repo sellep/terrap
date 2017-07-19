@@ -8,8 +8,6 @@ static inline terra_schedule* terra_schedule_get_dep(terra_schedule const * cons
 	char *dep_name = DEP_NAME(sched);
 	ssize_t i;
 
-	printf(":: %s\n", dep_name);
-
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
 		target = SCHEDULE(SCHEDULE_GET_CLOCK(i));
@@ -31,7 +29,15 @@ static inline terra_schedule* terra_schedule_get_dep(terra_schedule const * cons
 	return sched;
 }
 
-BOOL terra_schedule_depcheck(terra_schedule const * const sched)
+BOOL terra_schedule_dep_enabled(terra_schedule const * const sched)
+{
+	if (SCHEDULE_NO_DEP(sched))
+		return sched->enabled;
+
+	return terra_schedule_dep_disabled(terra_schedule_get_dep(sched));
+}
+
+BOOL terra_schedule_dep_check(terra_schedule const * const sched)
 {
 	terra_schedule *dep;
 

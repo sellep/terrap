@@ -5,6 +5,16 @@
 
 void terra_schedule_init_temp(terra_schedule_temp * const temp)
 {
+	if (temp->enabled)
+	{
+		temp->enabled = terra_schedule_dep_check(temp);
+
+		if (!temp->enabled)
+		{
+			terra_log_info("[terra_schedule_init_temp] disabled schedule %s\n", temp->name);
+		}
+	}
+
 	temp->start.hour = 0;
 	temp->start.min = 0;
 	temp->start.sec = 0;
@@ -15,7 +25,7 @@ void terra_schedule_run_temp(terra_schedule_temp * const temp)
 	terra_schedule *sched = SCHEDULE(temp);
 	size_t start;
 
-	if (!terra_schedule_depcheck(sched))
+	if (!terra_schedule_dep_check(sched))
 		goto end;
 
 	if (RUNTIME_SWITCH_ON(sched->socket))
