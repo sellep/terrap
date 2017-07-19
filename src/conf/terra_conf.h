@@ -54,6 +54,10 @@ typedef struct
 	BOOL enabled;
 	char *dep;
 
+	BOOL use_start;
+	size_t begin;
+	size_t end;
+
 	BOOL run;
 } terra_schedule;
 

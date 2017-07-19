@@ -2,10 +2,29 @@
 
 static inline void print_schedule(terra_schedule const * const sched)
 {
+	terra_time tmp;
+
 	printf("name = %s\n", sched->name);
 	printf("socket = %c\n", sched->socket);
 	printf("enabled = %i\n", sched->enabled);
 	printf("depends = %s\n", sched->dep);
+
+	if (sched->use_begin)
+	{
+		printf("use_begin = true\n");
+
+		terra_time_from_int(&tmp, sched->begin);
+		printf("begin = ");
+		terra_time_print(&tmp)
+
+		terra_time_from_int(&tmp, sched->end);
+		printf("end = ");
+		terra_time_print(&tmp)
+	}
+	else
+	{
+		printf("use_begin = false\n");
+	}
 }
 
 void terra_conf_print(terra_conf const * const c)
@@ -51,8 +70,7 @@ void terra_conf_print(terra_conf const * const c)
 			printf("time(%i) = ", j);
 			terra_time_printnl(&c->clocks[i].times[j].start);
 			printf(" - ");
-			terra_time_printnl(&c->clocks[i].times[j].stop);
-			printf("\n");
+			terra_time_print(&c->clocks[i].times[j].stop);
 		}
 	}
 
