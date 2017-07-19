@@ -5,13 +5,15 @@
 
 void terra_schedule_init_temp(terra_schedule_temp * const temp)
 {
-	if (temp->enabled)
-	{
-		temp->enabled = terra_schedule_dep_check(temp);
+	terra_schedule *sched = SCHEDULE(temp);
 
-		if (!temp->enabled)
+	if (SCHEDULE_ENABLED(sched))
+	{
+		sched->enabled = terra_schedule_dep_check(temp);
+
+		if (SCHEDULE_DISABLED(sched))
 		{
-			terra_log_info("[terra_schedule_init_temp] disabled schedule %s\n", temp->name);
+			terra_log_info("[terra_schedule_init_temp] disabled schedule %s\n", sched->name);
 		}
 	}
 

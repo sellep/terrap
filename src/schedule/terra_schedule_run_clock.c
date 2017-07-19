@@ -2,13 +2,15 @@
 
 void terra_schedule_init_clock(terra_schedule_clock * const clock)
 {
-	if (clock->enabled)
-	{
-		clock->enabled = terra_schedule_dep_check(clock);
+	terra_schedule *sched = SCHEDULE(clock);
 
-		if (!clock->enabled)
+	if (SCHEDULE_ENABLED(sched))
+	{
+		sched->enabled = terra_schedule_dep_check(clock);
+
+		if (SCHEDULE_DISABLED(sched))
 		{
-			terra_log_info("[terra_schedule_init_clock] disabled schedule %s\n", clock->name);
+			terra_log_info("[terra_schedule_init_clock] disabled schedule %s\n", sched->name);
 		}
 	}
 }
