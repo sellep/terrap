@@ -10,7 +10,7 @@
 
 static void signal_handler(int signum)
 {
-	if (signum == SIGHUB)
+	if (signum == SIGHUP)
 	{
 		terra_log_info("received signal SIGHUP(%i)\n", signum);
 		RUNTIME_SET_RELOAD();
