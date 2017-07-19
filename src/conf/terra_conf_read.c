@@ -105,7 +105,7 @@ static void terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 	}
 }
 
-static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
+static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
 {
 	config_setting_t *src_clocks;
 	config_setting_t *src_clock;
@@ -128,12 +128,31 @@ static void terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 		dest->clocks[i].time_len = 1;
 		dest->clocks[i].times = (terra_start_stop*) malloc(sizeof(terra_start_stop) * dest->clocks[i].time_len);
 
-		config_setting_lookup_string(src_clock, "start", &str);
-		terra_time_parse(&dest->clocks[i].times[0].start, str, HOUR_MIN_SEC);
+		if (!config_setting_lookup_string(src_clock, "start", &str))
+		{
+			terra_log_error("[terra_conf_clocks_parse] missing start time\n");
+			return FALSE;
+		}
+		if (!terra_time_parse(&(dest->clocks[i].times[0].start), str, HOUR_MIN_SEC))
+		{
+			terra_log_error("[terra_conf_clocks_parse] invalid start time\n");
+			return FALSE;
+		}
 
-		config_setting_lookup_string(src_clock, "stop", &str);
-		terra_time_parse(&dest->clocks[i].times[0].stop, str, HOUR_MIN_SEC);
+		if (!config_setting_lookup_string(src_clock, "stop", &str))
+		{
+			terra_log_error("[terra_conf_clocks_parse] missing stop time\n");
+			return FALSE;
+		}
+
+		if (terra_time_parse(&(dest->clocks[i].times[0].stop), str, HOUR_MIN_SEC))
+		{
+			terra_log_error("[terra_conf_clocks_parse] invalid stop time\n");
+			return FALSE;
+		}
 	}
+
+	return TRUE;
 }
 
 static BOOL terra_conf_temps_parse(terra_conf * const dest, config_t const * const src)
