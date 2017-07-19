@@ -65,6 +65,8 @@ void terra_conf_print(terra_conf const * const c)
 		printf("\n###### clock %zu ######\n", i);
 		print_schedule(&c->clocks[i].schedule);
 
+		printf("times = %i\n", c->clocks[i].time_len);
+
 		for (j = 0; j < c->clocks[i].time_len; j++)
 		{
 			printf("time(%i) = ", j);

@@ -89,13 +89,13 @@ static void terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 
 	if (config_setting_lookup_string(src, "begin", &str) == CONFIG_TRUE)
 	{
-		if (terra_time_parse(&time, str, HOUR_MIN))
+		if (terra_time_parse(&time, str, HOUR_MIN_SEC))
 		{
 			sched->begin = terra_time_to_int(&time);
 
 			if (config_setting_lookup_string(src, "end", &str) == CONFIG_TRUE)
 			{
-				if (terra_time_parse(&time, str, HOUR_MIN))
+				if (terra_time_parse(&time, str, HOUR_MIN_SEC))
 				{
 					sched->end = terra_time_to_int(&time);
 					sched->use_begin = TRUE;
