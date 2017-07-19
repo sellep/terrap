@@ -30,10 +30,13 @@ static inline void send_sighup()
 	fclose(f);
 
 	pid = atoi(buf);
+	if (pid == 0)
+	{
+		terra_log_error("[terra] failed to parse pid\n");
+		return;
+	}
 
-	printf("pid %i\n", pid);
-
-	//kill(pid, SIGHUP);
+	kill(pid, SIGHUP);
 }
 
 int main(int argc, char ** argv)
