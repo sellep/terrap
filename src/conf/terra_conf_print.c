@@ -15,11 +15,11 @@ static inline void print_schedule(terra_schedule const * const sched)
 
 		terra_time_from_int(&tmp, sched->begin);
 		printf("begin = ");
-		terra_time_print(&tmp)
+		terra_time_print(&tmp);
 
 		terra_time_from_int(&tmp, sched->end);
 		printf("end = ");
-		terra_time_print(&tmp)
+		terra_time_print(&tmp);
 	}
 	else
 	{
