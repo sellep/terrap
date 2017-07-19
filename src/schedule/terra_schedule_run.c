@@ -178,7 +178,11 @@ void terra_schedule_run()
 			goto exit;
 
 		CONF_FREE();
-		break;
+		if (!CONF_LOAD())
+		{
+			terra_log_error("[terra_schedule_run] failed to load config file\n");
+			goto exit;
+		}
 	}
 
 exit:
