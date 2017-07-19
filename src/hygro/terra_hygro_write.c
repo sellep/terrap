@@ -9,7 +9,12 @@ BOOL terra_hygro_write(float const h, float const t, terra_time const * const no
 	entry.humi = h;
 	entry.temp = t;
 
+#ifdef DEBUG
+	res = TRUE;
+#else
 	res = terra_data_append(&entry);
+#endif
+
 	if (!res)
 	{
 		terra_log_error("[terra_hygro_write] failed to append entry\n");
