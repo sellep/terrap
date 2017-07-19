@@ -119,14 +119,14 @@ static inline void terra_conf_free(terra_conf * const conf)
 
 	for (i = 0; i < conf->clock_len; i++)
 	{
-		terra_schedule_free(&conf->clocks[i].sched);
+		terra_schedule_free(&conf->clocks[i].schedule);
 
 		free(conf->clocks[i].times);
 	}
 
 	for (i = 0; i < conf->temp_len; i++)
 	{
-		terra_schedule_free(&conf->temps[i].sched);
+		terra_schedule_free(&conf->temps[i].schedule);
 	}
 
 	free(conf->clocks);
