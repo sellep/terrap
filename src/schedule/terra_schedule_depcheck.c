@@ -8,6 +8,8 @@ static inline terra_schedule* terra_schedule_get_dep(terra_schedule const * cons
 	char *dep_name = DEP_NAME(sched);
 	ssize_t i;
 
+	printf("dep name of %s is %s\n", sched->name, dep_name);
+
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
 		target = SCHEDULE(SCHEDULE_GET_CLOCK(i));
