@@ -8,18 +8,21 @@
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
 
-static BOOL volatile _terminate = FALSE;
-
-void signal_handler(int signum)
+static void signal_handler(int signum)
 {
-#ifdef DEBUG
-	terra_log_info("received signal %s(%u)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
-#endif
-
-	_terminate = TRUE;
+	if (signum == SIGHUB)
+	{
+		terra_log_info("received signal SIGHUP(%i)\n", signum);
+		RUNTIME_SET_RELOAD();
+	}
+	else
+	{
+		terra_log_info("received signal %s(%i)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
+		RUNTIME_SET_TERMINATE();
+	}
 }
 
-BOOL register_signal_handler()
+static inline BOOL register_signal_handler()
 {
 	if (signal(SIGINT, signal_handler) == SIG_ERR)
 	{
@@ -30,6 +33,12 @@ BOOL register_signal_handler()
 	if (signal(SIGTERM, signal_handler) == SIG_ERR)
 	{
 		terra_log_error("unable to register signal handler for SIGTERM\n");
+		return FALSE;
+	}
+
+	if (signal(SIGHUP, signal_handler) == SIG_ERR)
+	{
+		terra_log_error("unable to register signal handler for SIGHUP\n");
 		return FALSE;
 	}
 
@@ -64,7 +73,7 @@ static inline void schedule_run_hygro()
 
 static inline void schedule_run_read_only()
 {
-	while (!_terminate)
+	while (!RUNTIME_BREAK())
 	{
 		terra_runtime_tick();
 		DO_HEART_BEAT();
@@ -80,7 +89,7 @@ static inline void schedule_run_schedules()
 	terra_schedule *sched;
 	size_t i;
 
-	while (!_terminate)
+	while (!RUNTIME_BREAK())
 	{
 		schedule_reset();
 
@@ -152,13 +161,24 @@ void terra_schedule_run()
 	runtime.switch_modes[1] = SWITCH_UNKNOWN;
 	runtime.switch_modes[2] = SWITCH_UNKNOWN;
 
-	if (CONF_GLOBAL.read_only)
+	while (TRUE)
 	{
-		schedule_run_read_only();
-	}
-	else
-	{
-		schedule_run_schedules();
+		RUNTIME_RESET_RELOAD();
+
+		if (CONF_GLOBAL.read_only)
+		{
+			schedule_run_read_only();
+		}
+		else
+		{
+			schedule_run_schedules();
+		}
+
+		if (RUNTIME_TERMINATE())
+			goto exit;
+
+		CONF_FREE();
+		break;
 	}
 
 exit:

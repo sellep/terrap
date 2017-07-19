@@ -17,6 +17,8 @@
 typedef struct
 {
 	terra_conf conf;
+	BOOL terminate;
+	BOOL reload;
 
 	uint64_t tick;
 	terra_time now;
@@ -33,10 +35,19 @@ terra_runtime runtime;
 
 extern BOOL terra_runtime_init(char const * const);
 
+#define RUNTIME_SET_TERMINATE() runtime.terminate = TRUE
+#define RUNTIME_SET_RELOAD() runtime.reload = TRUE
+#define RUNTIME_TERMINATE() runtime.terminate
+#define RUNTIME_RELOAD() runtime.reload
+#define RUNTIME_BREAK() (RUNTIME_TERMINATE() || RUNTIME_RELOAD())
+#define RUNTIME_RESET_RELOAD() runtime.reload = FALSE
+
 #define CONF_GLOBAL runtime.conf
 #define CONF_HEART runtime.conf.he
 #define CONF_SWITCH runtime.conf.sw
 #define CONF_HYGRO runtime.conf.hy
+
+#define CONF_FREE() terra_conf_free(&runtime.conf)
 
 #define NOW runtime.now
 

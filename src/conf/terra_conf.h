@@ -103,4 +103,34 @@ typedef struct
 extern BOOL terra_conf_read(terra_conf * const, char const * const);
 extern void terra_conf_print(terra_conf const * const);
 
+static inline void terra_schedule_free(terra_schedule * const sched)
+{
+	free(sched->name);
+
+	if (sched->dep)
+	{
+		free(sched->dep);
+	}
+}
+
+static inline void terra_conf_free(terra_conf * const conf)
+{
+	size_t i;
+
+	for (i = 0; i < conf->clock_len; i++)
+	{
+		terra_schedule_free(&conf->clocks[i].sched);
+
+		free(conf->clocks[i].times);
+	}
+
+	for (i = 0; i < conf->temp_len; i++)
+	{
+		terra_schedule_free(&conf->temps[i].sched);
+	}
+
+	free(conf->clocks);
+	free(conf->temps);
+}
+
 #endif
