@@ -133,9 +133,9 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 			terra_log_error("[terra_conf_clocks_parse] missing start time\n");
 			return FALSE;
 		}
-		if (!terra_time_parse(&(dest->clocks[i].times[0].start), str, HOUR_MIN_SEC))
+		if (!terra_time_parse(&dest->clocks[i].times[0].start, str, HOUR_MIN_SEC))
 		{
-			terra_log_error("[terra_conf_clocks_parse] invalid start time\n");
+			terra_log_error("[terra_conf_clocks_parse] invalid start time (%s)\n", str);
 			return FALSE;
 		}
 
@@ -145,9 +145,9 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 			return FALSE;
 		}
 
-		if (terra_time_parse(&(dest->clocks[i].times[0].stop), str, HOUR_MIN_SEC))
+		if (terra_time_parse(&dest->clocks[i].times[0].stop, str, HOUR_MIN_SEC))
 		{
-			terra_log_error("[terra_conf_clocks_parse] invalid stop time\n");
+			terra_log_error("[terra_conf_clocks_parse] invalid stop time (%s)\n", str);
 			return FALSE;
 		}
 	}
