@@ -70,8 +70,7 @@ void terra_conf_print(terra_conf const * const c)
 		for (j = 0; j < c->clocks[i].time_len; j++)
 		{
 			printf("time(%i) = ", j);
-			printf("%zu\n", c->clocks[i].times[j].stop.hour);
-			//terra_start_stop_print(&c->clocks[i].times[j]);
+			terra_start_stop_print(&c->clocks[i].times[j]);
 		}
 	}
 

@@ -4,22 +4,22 @@ void terra_time_printnl(terra_time const * const time)
 {
 	if (time->hour < 10)
 	{
-		terra_log_info("0");
+		printf("0");
 	}
 
-	terra_log_info("%u:", time->hour);
+	printf("%u:", time->hour);
 
 	if (time->min < 10)
 	{
-		terra_log_info("0");
+		printf("0");
 	}
 
-	terra_log_info("%u:", time->min);
+	printf("%u:", time->min);
 
 	if (time->sec < 10)
 	{
-		terra_log_info("0");
+		printf("0");
 	}
 
-	terra_log_info("%u", time->sec);
+	printf("%u", time->sec);
 }
