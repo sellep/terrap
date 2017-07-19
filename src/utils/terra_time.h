@@ -178,4 +178,11 @@ static inline void terra_time_difft(terra_time * const c, terra_time const * con
 	c->sec -= secs - c->min * 60;
 }
 
+static inline void terra_start_stop_print(terra_start_stop const * const ss)
+{
+	terra_time_printnl(&ss->start);
+	printf(" - ");
+	terra_time_print(&ss->stop);
+}
+
 #endif
