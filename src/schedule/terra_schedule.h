@@ -12,6 +12,7 @@ extern void terra_schedule_run_clock(terra_schedule_clock * const);
 extern void terra_schedule_run_period(terra_schedule_period * const);
 extern void terra_schedule_run_temp(terra_schedule_temp * const);
 
+extern BOOL terra_schedule_dep_enabled(terra_schedule const * const);
 extern BOOL terra_schedule_dep_check(terra_schedule const * const);
 
 #define SCHEDULE_IS_CLOCK(s) (s)->type == SCHEDULE_CLOCK

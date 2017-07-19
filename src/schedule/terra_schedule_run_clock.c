@@ -6,7 +6,7 @@ void terra_schedule_init_clock(terra_schedule_clock * const clock)
 
 	if (SCHEDULE_ENABLED(sched))
 	{
-		sched->enabled = terra_schedule_dep_check(clock);
+		sched->enabled = terra_schedule_dep_enabled(clock);
 
 		if (SCHEDULE_DISABLED(sched))
 		{
