@@ -30,7 +30,7 @@ static inline void send_sighup()
 	fclose(f);
 
 	pid = atoi(buf);
-	if (pid == 0)
+	if (!pid)
 	{
 		terra_log_error("[terra] failed to parse pid\n");
 		return;
