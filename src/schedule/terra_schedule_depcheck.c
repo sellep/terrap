@@ -37,6 +37,7 @@ BOOL terra_schedule_depcheck(terra_schedule const * const sched)
 		return TRUE;
 
 	dep = terra_schedule_get_dep(sched);
+	printf("dep of %s is %s\n", sched->name, dep->name);
 
 	if (UNLIKELY(SCHEDULE_NOT_RUN(dep)))
 	{
