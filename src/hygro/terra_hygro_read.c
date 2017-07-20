@@ -45,21 +45,39 @@ static inline hygro_status hygro_read(float * const h, float * const t, terra_co
 BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const * const conf, size_t * const err_count)
 {
 	hygro_status status = hygro_read(h, t, conf);
-	if (LIKELY(status == HYGRO_OK))
-	{
-		err_count[0] = 0;
-		return TRUE;
-	}
 
-	err_count[0]++;
-
-	if (LIKELY(status == HYGRO_REPEATED_FAILED))
+	if (LIKELY(err_count))
 	{
-		terra_log_error("[terra_hygro_run] failed to read dht repeated (%zu)\n", err_count[0]);
+		if (LIKELY(status == HYGRO_OK))
+		{
+			err_count[0] = 0;
+			return TRUE;
+		}
+	
+		err_count[0]++;
+	
+		if (LIKELY(status == HYGRO_REPEATED_FAILED))
+		{
+			terra_log_error("[terra_hygro_run] failed to read dht repeated (%zu)\n", err_count[0]);
+		}
+		else
+		{
+			terra_log_error("[terra_hygro_run] failed to read dht (%zu)\n", err_count[0]);
+		}
 	}
 	else
 	{
-		terra_log_error("[terra_hygro_run] failed to read dht (%zu)\n", err_count[0]);
+		if (LIKELY(status == HYGRO_OK))
+			return TRUE;
+
+		if (LIKELY(status == HYGRO_REPEATED_FAILED))
+		{
+			terra_log_error("[terra_hygro_run] failed to read dht repeated\n");
+		}
+		else
+		{
+			terra_log_error("[terra_hygro_run] failed to read dht\n");
+		}
 	}
 
 	return FALSE;

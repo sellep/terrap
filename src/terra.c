@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_HYGRO) == 0)
 	{
-		if (!terra_hygro_read(&humi, &temp, &CONF_HYGRO))
+		if (!terra_hygro_read(&humi, &temp, &CONF_HYGRO, (size_t*) NULL))
 			return 1;
 
 		terra_log_info("humidity %.1f, temperature: %.1f\n", humi, temp);
