@@ -23,7 +23,7 @@ typedef struct
 	uint64_t tick;
 	terra_time now;
 	terra_time hygro_last;
-	int hygro_err;
+	size_t hygro_err;
 
 	terra_switch_mode switch_modes[3];
 

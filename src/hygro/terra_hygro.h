@@ -10,9 +10,9 @@ extern BOOL terra_hygro_write(float const, float const, terra_time const * const
 
 static terra_time hygro_last = { 0, 0, 0 };
 
-static inline BOOL hygro_wait(terra_conf_hygro const * const conf, terra_time const * const now)
+static inline BOOL hygro_wait(terra_conf_hygro const * const conf, terra_time const * const now, size_t const hygro_err)
 {
-	return terra_time_diff(now, &hygro_last) > conf->delay ? FALSE : TRUE;
+	return terra_time_diff(now, &hygro_last) > (conf->delay * (hygro_err + 1)) ? FALSE : TRUE;
 }
 
 static inline BOOL terra_hygro_run(float * const h, float * const t, terra_conf_hygro const * const conf, terra_time const * const now)
