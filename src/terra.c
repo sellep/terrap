@@ -1,4 +1,5 @@
 #include "terra_runtime.h"
+#include "schedule/terra_schedule.h"
 #include "visual/terra_visual.h"
 #include "utils/terra_signal.h"
 
