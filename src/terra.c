@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
