@@ -6,7 +6,7 @@
 #define ARG_LED_ON "on"
 #define ARG_LED_OFF "off"
 
-terra_led_cmd terra_led_arg(int const argc, char const * const * const argv)
+terra_led_cmd terra_led_arg(int const argc, char * * const argv)
 {
 	terra_led_cmd res;
 

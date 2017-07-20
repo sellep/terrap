@@ -17,7 +17,7 @@ enum led_cmds
 
 typedef int terra_led_cmd;
 
-extern terra_led_cmd terra_led_arg(int const argc, char const * const * const argv);
+extern terra_led_cmd terra_led_arg(int const, char * * const);
 
 static inline void terra_led_set(ssize_t const pin, terra_led_cmd const set)
 {

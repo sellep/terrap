@@ -62,7 +62,7 @@ typedef struct
 	ssize_t days_past;
 } terra_visual_cmd;
 
-static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char const * const * const argv)
+static inline BOOL terra_visual_arg(terra_visual_cmd * const cmd, ssize_t const argc, char * * const argv)
 {
 	cmd->visual_argc = argc - 2;
 	cmd->days_past = 0;

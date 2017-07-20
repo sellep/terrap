@@ -21,7 +21,7 @@ typedef struct
 	terra_switch_mode mode;
 } terra_switch_req;
 
-extern BOOL terra_switch_arg(terra_switch_req * const, int const, char const * const * const);
+extern BOOL terra_switch_arg(terra_switch_req * const, int const, char * * const);
 extern void terra_switch_transmit(terra_conf_switch const * const, int const);
 
 static inline void terra_switch_set_on(terra_conf_switch const * const conf, char const socket, char const * const sender)
