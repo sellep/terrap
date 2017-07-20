@@ -1,5 +1,7 @@
 #include "terra_conf.h"
 
+#define SCHEDULE_SET_TYPE(s, t) (s)->type = (t)
+
 static inline string_copy(char * * const dest, char const * const src)
 {
 	dest[0] = (char*) malloc(sizeof(char) * (strlen(src)));
@@ -102,6 +104,7 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 		src_clock = config_setting_get_elem(src_clocks, i);
 
 		terra_conf_schedule_parse(&dest->clocks[i].schedule, src_clock);
+		SCHEDULE_SET_TYPE(&dest->clocks[i].schedule, SCHEDULE_CLOCK);
 
 		//TODO: multi times parsing
 
@@ -153,6 +156,7 @@ static BOOL terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 		src_temp = config_setting_get_elem(src_temps, i);
 
 		terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp);
+		SCHEDULE_SET_TYPE(&dest->temps[i].schedule, SCHEDULE_TEMP);
 
 		if (!parse_float(&dest->temps[i].act, src_temp, "activation"))
 		{
@@ -187,6 +191,7 @@ static BOOL terra_conf_periods_parse(terra_conf * const dest, config_t const * c
 		src_period = config_setting_get_elem(src_periods, i);
 
 		terra_conf_schedule_parse(&dest->periods[i].schedule, src_period);
+		SCHEDULE_SET_TYPE(&dest->periods[i].schedule, SCHEDULE_PERIOD);
 
 		if (!config_setting_lookup_string(src_period, "active", &str))
 		{
