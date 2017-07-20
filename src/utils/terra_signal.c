@@ -8,12 +8,12 @@ void terra_signal_handler(int const signum)
 {
 	if (signum == SIGHUP)
 	{
-		terra_log_info("[signal_handler] received signal SIGHUP(%i)\n", signum);
+		terra_log_info("[terra_signal_handler] received signal SIGHUP(%i)\n", signum);
 		RUNTIME_SET_RELOAD();
 	}
 	else
 	{
-		terra_log_info("[signal_handler] received signal %s(%i)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
+		terra_log_info("[terra_signal_handler] received signal %s(%i)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
 		RUNTIME_SET_TERMINATE();
 	}
 }
