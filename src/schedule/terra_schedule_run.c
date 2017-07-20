@@ -128,10 +128,8 @@ static inline void schedule_run_schedules()
 			period = SCHEDULE_GET_PERIOD(i);
 			sched = SCHEDULE(period);
 
-			printf("enabled: %i,m run: %i\n", SCHEDULE_ENABLED(sched), sched->run);
 			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 			{
-				printf("u\n");
 				terra_schedule_run_period(period);
 			}
 		}
