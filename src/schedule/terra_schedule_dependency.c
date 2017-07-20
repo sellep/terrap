@@ -52,13 +52,13 @@ BOOL terra_schedule_dep_check(terra_schedule const * const sched)
 		{
 			terra_schedule_run_clock(dep);
 		}
-		else if (SCHEDULE_IS_PERIOD(dep))
-		{
-			terra_schedule_run_period(dep);
-		}
 		else if (SCHEDULE_IS_TEMP(dep))
 		{
 			terra_schedule_run_temp(dep);
+		}
+		else if (SCHEDULE_IS_PERIOD(dep))
+		{
+			terra_schedule_run_period(dep);
 		}
 		else
 		{

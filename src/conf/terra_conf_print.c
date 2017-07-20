@@ -78,6 +78,6 @@ void terra_conf_print(terra_conf const * const c)
 		printf("deactivation = ");
 		terra_time_print(&time);
 
-		printf("active_first = %s\n", c->periods[i].act_first ? "true" : "false");
+		printf("active_first = %i\n", c->periods[i].act_first);
 	}
 }
