@@ -1,2 +1,4 @@
  - dynamic switch configuration
  - renaming switch to socket
+ - config validation
+    - infinity loop detection
