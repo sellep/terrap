@@ -17,11 +17,11 @@ static inline void terra_heart_beat()
 	}
 	else
 	{
-		terra_led_set(CONF.pin_alert, LED_ON);
+		terra_led_set(CONF_GLOBAL.pin_alert, LED_ON);
 		terra_led_set(CONF_HEART.pin, LED_ON);
 		sleep_milliseconds(CONF_HEART.duration);
 		terra_led_set(CONF_HEART.pin, LED_OFF);
-		terra_led_set(CONF.pin_alert, LED_OFF);
+		terra_led_set(CONF_GLOBAL.pin_alert, LED_OFF);
 	}
 }
 

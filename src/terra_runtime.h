@@ -107,7 +107,7 @@ static inline void terra_runtime_tick()
 static inline void terra_exit(int const code)
 {
 	terra_daemon_kill();
-	terra_led_set(CONF.pin_alert | LED_ON);
+	terra_led_set(CONF_GLOBAL.pin_alert | LED_ON);
 	exit(code);
 }
 
