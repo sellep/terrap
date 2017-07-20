@@ -26,7 +26,7 @@ static inline terra_schedule* terra_schedule_get_dep(terra_schedule const * cons
 
 	terra_log_error("[schedule_get_dep] dependency %s not found\n", dep_name);
 	terra_exit(1);
-	return sched;
+	return NULL;
 }
 
 BOOL terra_schedule_dep_enabled(terra_schedule const * const sched)

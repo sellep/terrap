@@ -88,7 +88,7 @@ static inline void terra_runtime_switch_set_off(char const sock, char const * co
 	else runtime.switch_modes[2] = SWITCH_OFF;
 }
 
-static inline terra_pin_set_out(int const pin)
+static inline void terra_pin_set_out(int const pin)
 {
 	LOCK();
 #ifndef DEBUG
