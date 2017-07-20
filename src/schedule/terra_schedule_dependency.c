@@ -50,15 +50,15 @@ BOOL terra_schedule_dep_check(terra_schedule const * const sched)
 	{
 		if (SCHEDULE_IS_CLOCK(dep))
 		{
-			terra_schedule_run_clock(dep);
+			terra_schedule_run_clock((terra_schedule_clock*) dep);
 		}
 		else if (SCHEDULE_IS_TEMP(dep))
 		{
-			terra_schedule_run_temp(dep);
+			terra_schedule_run_temp((terra_schedule_temp*) dep);
 		}
 		else if (SCHEDULE_IS_PERIOD(dep))
 		{
-			terra_schedule_run_period(dep);
+			terra_schedule_run_period((terra_schedule_period*) dep);
 		}
 		else
 		{
