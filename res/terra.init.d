@@ -1,9 +1,5 @@
 #!/sbin/openrc-run
 
-depend() {
-
-}
-
 start() {
 	ebegin "Starting terra service"
 
@@ -12,7 +8,7 @@ start() {
 	eend $?
 }
 
-end() {
+stop() {
 	ebegin "Stopping terra service"
 
 	start-stop-daemon --stop --exec /usr/local/bin/terra --pidfile /var/run/terra --remove-pidfile
