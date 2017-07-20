@@ -1,9 +1,9 @@
 #include "terra_runtime.h"
 #include "visual/terra_visual.h"
+#include "utils/terra_signal.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <signal.h>
 
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
@@ -12,32 +12,6 @@
 #define ARG_MODE_CONFIG "conf"
 #define ARG_MODE_DAEMON "daemon"
 #define ARG_MODE_RELOAD "reload"
-
-static inline void send_sighup()
-{
-	char buf[10];
-	int num, pid;
-
-	FILE *f = fopen("/var/run/terra", "r");
-	if (!f)
-	{
-		terra_log_error("[terra] daemon not running\n");
-		return;
-	}
-
-	num = fread(buf, 1, sizeof buf, f);
-
-	fclose(f);
-
-	pid = atoi(buf);
-	if (!pid)
-	{
-		terra_log_error("[terra] failed to parse pid\n");
-		return;
-	}
-
-	kill(pid, SIGHUP);
-}
 
 int main(int argc, char ** argv)
 {
@@ -99,7 +73,7 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_RELOAD) == 0)
 	{
-		send_sighup();
+		terra_signal_sighup();
 	}
 	else
 	{

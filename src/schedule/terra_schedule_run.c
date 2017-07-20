@@ -1,49 +1,11 @@
 #include "terra_schedule.h"
 
-#include <stdint.h>
-#include <signal.h>
+#include "utils/terra_signal.h"
 
 #define DO_HEART_BEAT() if (runtime.tick % CONF_HEART.tick == 0) terra_heart_beat()
 #define DO_HYGRO_READ() (CONF_HYGRO.enabled && !hygro_wait(&CONF_HYGRO, &NOW))
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
-
-static void signal_handler(int signum)
-{
-	if (signum == SIGHUP)
-	{
-		terra_log_info("[signal_handler] received signal SIGHUP(%i)\n", signum);
-		RUNTIME_SET_RELOAD();
-	}
-	else
-	{
-		terra_log_info("[signal_handler] received signal %s(%i)\n", signum == 2 ? "SIGINT" : "SIGTERM", signum);
-		RUNTIME_SET_TERMINATE();
-	}
-}
-
-static inline BOOL register_signal_handler()
-{
-	if (signal(SIGINT, signal_handler) == SIG_ERR)
-	{
-		terra_log_error("[register_signal_handler] unable to register signal handler for SIGINT\n");
-		return FALSE;
-	}
-
-	if (signal(SIGTERM, signal_handler) == SIG_ERR)
-	{
-		terra_log_error("[register_signal_handler] unable to register signal handler for SIGTERM\n");
-		return FALSE;
-	}
-
-	if (signal(SIGHUP, signal_handler) == SIG_ERR)
-	{
-		terra_log_error("[register_signal_handler] unable to register signal handler for SIGHUP\n");
-		return FALSE;
-	}
-
-	return TRUE;
-}
 
 static inline void terra_heart_beat()
 {
@@ -167,7 +129,7 @@ static inline void schedule_init()
 
 void terra_schedule_run()
 {
-	if (!register_signal_handler())
+	if (!terra_signal_reg())
 		goto exit;
 
 	schedule_init();
