@@ -7,6 +7,6 @@ void terra_schedule_arg(int const argc, char const * const * const argv)
 	if (argc == 3 && strcmp(argv[2], ARG_SCHEDULE_LOGFILE) == 0)
 	{
 		terra_log_info("[terra_schedule_arg] use log file\n");
-		LOG_USE_FILE();
+		terra_log_use_file();
 	}
 }
