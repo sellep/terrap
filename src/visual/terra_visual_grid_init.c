@@ -235,8 +235,8 @@ void terra_visual_grid_init(terra_visual_grid * const grid, terra_visual_cmd con
 {
 	grid->vals_y = (float*) malloc(sizeof(float) * DRAW_HEIGHT);
 	grid->vals_x = (size_t*) malloc(sizeof(size_t) * DRAW_WIDTH);
-	grid->vals_humi = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH - 1);
-	grid->vals_temp = (ssize_t*) malloc(sizeof(size_t) * DRAW_WIDTH - 1);
+	grid->vals_humi = (int*) malloc(sizeof(int) * (DRAW_WIDTH - 1));
+	grid->vals_temp = (int*) malloc(sizeof(int) * (DRAW_WIDTH - 1));
 
 	compute_vals_y(grid, height, entries, len, mode);
 	compute_vals_x(grid, cmd, width, entries, len);
