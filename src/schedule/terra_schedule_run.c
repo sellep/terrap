@@ -19,7 +19,7 @@ static inline void terra_heart_beat()
 
 static inline BOOL schedule_run_hygro()
 {
-	if (DO_HYGRO_READ())
+	if (UNLIKELY(DO_HYGRO_READ()))
 	{
 		if (LIKELY(terra_hygro_run(&RUNTIME_HUMI, &RUNTIME_TEMP, &CONF_HYGRO, &NOW, &runtime.hygro_err)))
 		{
