@@ -103,4 +103,10 @@ static inline void terra_runtime_tick()
 	terra_time_now(&runtime.now);
 }
 
+static inline void terra_exit(int const code)
+{
+	//TODO: set led alert on
+	exit(code);
+}
+
 #endif

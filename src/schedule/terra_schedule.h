@@ -54,10 +54,4 @@ static inline void schedule_reset()
 	}
 }
 
-static inline void terra_exit(int const code)
-{
-	//TODO: set led alert on
-	exit(code);
-}
-
 #endif

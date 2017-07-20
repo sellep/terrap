@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
 	if (!terra_runtime_init(CONF_PATH))
 	{
 		terra_log_error("[terra] failed to initialize runtime\n");
-		exit(1);
+		return 1;
 	}
 
 	if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
@@ -76,7 +76,7 @@ int main(int argc, char ** argv)
 			if (execl("/usr/local/bin/terra", "/usr/local/bin/terra", "schedule", "logfile", (char*) NULL) == -1)
 			{
 				terra_log_error("[terra] failed to execl (%s)\n", strerror(errno));
-				exit(1);
+				terra_exit(1);
 			}
 		}
 	} 
