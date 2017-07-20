@@ -21,13 +21,8 @@ static inline BOOL schedule_run_hygro()
 {
 	if (DO_HYGRO_READ())
 	{
-		if (!terra_hygro_run(&RUNTIME_HUMI, &RUNTIME_TEMP, &CONF_HYGRO, &NOW))
+		if (LIKELY(terra_hygro_run(&RUNTIME_HUMI, &RUNTIME_TEMP, &CONF_HYGRO, &NOW, &runtime.hygro_err)))
 		{
-			runtime.hygro_err++;
-		}
-		else
-		{
-			runtime.hygro_err = 0;
 			terra_hygro_write(RUNTIME_HUMI, RUNTIME_TEMP, &NOW);
 			return TRUE;
 		}

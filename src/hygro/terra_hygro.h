@@ -5,7 +5,7 @@
 #include "../utils/terra_time.h"
 #include "../utils/terra_data.h"
 
-extern BOOL terra_hygro_read(float * const, float * const, terra_conf_hygro const * const);
+extern BOOL terra_hygro_read(float * const, float * const, terra_conf_hygro const * const, size_t * const);
 extern BOOL terra_hygro_write(float const, float const, terra_time const * const);
 
 static terra_time hygro_last = { 0, 0, 0 };

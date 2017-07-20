@@ -1,10 +1,18 @@
 #include "terra_hygro.h"
 
-BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const * const conf)
+enum hygro_statuses
+{
+	HYGRO_OK,
+	HYGRO_DHT_FAILED,
+	HYGRO_REPEATED_FAILED
+};
+
+typedef int hygro_status;
+
+static inline hygro_status hygro_read(float * const h, float * const t, terra_conf_hygro const * const conf)
 {
 #ifdef DEBUG
-	terra_log_info("[terra_hygro_run] debug compilation\n");
-	return TRUE;
+	return HYGRO_OK;
 #else
 	ssize_t i;
 	int status;
@@ -12,25 +20,47 @@ BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const *
 	for (i = 0; i <= conf->repeats; i++)
 	{
 		status = pi_2_dht_read(DHT22, conf->pin, h, t);
-		if (status == DHT_SUCCESS)
+		if (LIKELY(status == DHT_SUCCESS))
 		{
-			if (h[0] > 100 || t[0] > 100 || h[0] == 0 || t[0] == 0)
+			if (UNLIKELY(h[0] > 100 || t[0] > 100 || h[0] == 0 || t[0] == 0))
 				continue;
 
-			return TRUE;
+			return HYGRO_OK;
 		}
 
-		if (UNLIKELY(status == DHT_ERROR_TIMEOUT))
+		if (status == DHT_ERROR_TIMEOUT)
 			continue;
 
 		if (status == DHT_ERROR_CHECKSUM)
 			continue;
 
-		terra_log_error("[terra_hygro_run] failed to read dht (%i)\n", status);
-		return FALSE;
+		return HYGRO_DHT_FAILED;
 	}
 
-	terra_log_error("[terra_hygro_run] failed to read dht repeated\n");
-	return FALSE;
+	return HYGRO_REPEATED_FAILED;
 #endif
+}
+
+
+BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const * const conf, size_t * const hygro_err)
+{
+	hygro_status status = hygro_read(h, t, conf);
+	if (LIKELY(status == HYGRO_OK))
+	{
+		hygro_err[0] = 0;
+		return TRUE;
+	}
+
+	hygro_err[0]++;
+
+	if (LIKELY(status == HYGRO_REPEATED_FAILED))
+	{
+		terra_log_error("[terra_hygro_run] failed to read dht repeated (%zu)\n", hygro_err[0]);
+	}
+	else
+	{
+		terra_log_error("[terra_hygro_run] failed to read dht (%zu)\n", hygro_err[0]);
+	}
+
+	return FALSE;
 }
