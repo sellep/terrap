@@ -172,5 +172,5 @@ void terra_schedule_run()
 	}
 
 exit:
-	terra_led_set(CONF_GLOBAL.pin_alert, TRUE);
+	terra_led_set(CONF_GLOBAL.pin_alert, LED_ON);
 }
