@@ -3,7 +3,7 @@
 #define ARG_SCHEDULE_LOGFILE "logfile"
 #define ARG_SCHEDULE_PIDFILE "pidfile"
 
-void terra_schedule_arg(int const argc, char * * const argv)
+BOOL terra_schedule_arg(int const argc, char * * const argv)
 {
 	if (argc >= 3 && strcmp(argv[2], ARG_SCHEDULE_LOGFILE) == 0)
 	{
@@ -12,6 +12,9 @@ void terra_schedule_arg(int const argc, char * * const argv)
 
 	if (argc >= 4 && strcmp(argv[3], ARG_SCHEDULE_PIDFILE) == 0)
 	{
-		terra_daemon_pid();
+		if (!terra_daemon_pid())
+			return FALSE;
 	}
+
+	return TRUE;
 }

@@ -24,6 +24,7 @@ BOOL terra_daemon_pid()
 
 	sprintf(str,"%d\n",getpid());
 	write(pid_h, str, strlen(str));
+	return TRUE;
 }
 
 void terra_daemon_kill()
