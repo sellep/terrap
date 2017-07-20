@@ -129,6 +129,8 @@ static inline void schedule_init()
 
 void terra_schedule_run()
 {
+	LOG_USE_FILE();
+
 	if (!terra_signal_reg())
 		goto exit;
 

@@ -4,7 +4,6 @@ NCURSESW5 := $(shell which ncursesw5-config 2> /dev/null)
 CC=@gcc
 CFLAGS=-v -fomit-frame-pointer -pipe -O3
 LIBS=-lrt -pthread `pkg-config --libs libconfig`
-SYSLOG=-DSYSLOG_ENABLED
 
 OBJ=pi_2_mmio.o \
 	common_dht_read.o \
@@ -60,7 +59,7 @@ OBJ=pi_2_mmio.o \
 	$(CC) $(CFLAGS) -o obj/$@ -c $<
 
 all: clean ncursesd_flags $(OBJ)
-	$(CC) $(CFLAGS) $(SYSLOG) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) $(LIBS)
+	$(CC) $(CFLAGS) -o bin/terra src/terra.c $(addprefix obj/, $(OBJ)) $(LIBS)
 
 ncursesd_flags:
 ifneq (, $(NCURSESW6))

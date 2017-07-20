@@ -1,13 +1,13 @@
 #!/sbin/openrc-run
 
 depend() {
-	use logger
+
 }
 
 start() {
 	ebegin "Starting terra service"
 
-	start-stop-daemon --start --background --exec /usr/local/bin/terra --pidfile /var/run/terra --make-pidfile -- daemon
+	start-stop-daemon --start --exec /usr/local/bin/terra --pidfile /var/run/terra --make-pidfile -- daemon
 
 	eend $?
 }

@@ -68,8 +68,10 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
 	{
-		terra_log_info("[terra] do not start daemon from command line, use '/etc/init.d/terra start'\n");
-		terra_schedule_run();
+		if (fork() == 0)
+		{
+			terra_schedule_run();
+		}
 	}
 	else if (strcmp(argv[1], ARG_MODE_RELOAD) == 0)
 	{
