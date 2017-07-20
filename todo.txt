@@ -1,0 +1,2 @@
+ - dynamic switch configuration
+ - renaming switch to socket
