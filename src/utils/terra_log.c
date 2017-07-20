@@ -19,7 +19,7 @@ static inline struct tm log_time()
 
 void terra_log_use_file()
 {
-	use_file = TRUE;
+	//use_file = TRUE;
 }
 
 void terra_log_info(char const * const msg, ...)
