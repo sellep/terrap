@@ -20,6 +20,7 @@ extern BOOL terra_schedule_dep_check(terra_schedule const * const);
 #define SCHEDULE_IS_CLOCK(s) (s)->type == SCHEDULE_CLOCK
 #define SCHEDULE_IS_TEMP(s) (s)->type == SCHEDULE_TEMP
 #define SCHEDULE_IS_PERIOD(s) (s)->type == SCHEDULE_PERIOD
+#define SCHEDULE_IS_NOT_TEMP(s) (s)->type != SCHEDULE_TEMP
 
 #define SCHEDULE_GET_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
 #define SCHEDULE_GET_TEMP(i) (&CONF_GLOBAL.temps[(i)])

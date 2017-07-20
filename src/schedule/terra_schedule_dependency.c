@@ -46,24 +46,15 @@ BOOL terra_schedule_dep_check(terra_schedule const * const sched)
 
 	dep = terra_schedule_get_dep(sched);
 
-	if (UNLIKELY(SCHEDULE_NOT_RUN(dep)))
+	if (LIKELY(SCHEDULE_IS_NOT_TEMP(dep)) && SCHEDULE_NOT_RUN(dep))
 	{
-		if (SCHEDULE_IS_CLOCK(dep))
+		if (LIKELY(SCHEDULE_IS_CLOCK(dep)))
 		{
 			terra_schedule_run_clock((terra_schedule_clock*) dep);
-		}
-		else if (SCHEDULE_IS_TEMP(dep))
-		{
-			terra_schedule_run_temp((terra_schedule_temp*) dep);
 		}
 		else if (SCHEDULE_IS_PERIOD(dep))
 		{
 			terra_schedule_run_period((terra_schedule_period*) dep);
-		}
-		else
-		{
-			terra_log_error("[terra_schedule_dep_check] unknown dependency type for %s", dep->name);
-			terra_exit(1);
 		}
 	}
 

@@ -17,7 +17,7 @@ static inline void terra_heart_beat()
 	terra_led_set(CONF_HEART.pin, heart_off);
 }
 
-static inline void schedule_run_hygro()
+static inline BOOL schedule_run_hygro()
 {
 	if (DO_HYGRO_READ())
 	{
@@ -29,8 +29,11 @@ static inline void schedule_run_hygro()
 		{
 			runtime.hygro_err = 0;
 			terra_hygro_write(RUNTIME_HUMI, RUNTIME_TEMP, &NOW);
+			return TRUE;
 		}
 	}
+
+	return FALSE;
 }
 
 static inline void schedule_run_read_only()
@@ -61,7 +64,19 @@ static inline void schedule_run_schedules()
 		terra_runtime_tick();
 		DO_HEART_BEAT();
 
-		schedule_run_hygro();
+		if (schedule_run_hygro())
+		{
+			for (i = 0; i < CONF_GLOBAL.temp_len; i++)
+			{
+				temp = SCHEDULE_GET_TEMP(i);
+				sched = SCHEDULE(temp);
+
+				if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
+				{
+					terra_schedule_run_temp(temp);
+				}
+			}
+		}
 
 		for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 		{
@@ -71,17 +86,6 @@ static inline void schedule_run_schedules()
 			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 			{
 				terra_schedule_run_clock(clock);
-			}
-		}
-
-		for (i = 0; i < CONF_GLOBAL.temp_len; i++)
-		{
-			temp = SCHEDULE_GET_TEMP(i);
-			sched = SCHEDULE(temp);
-
-			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
-			{
-				terra_schedule_run_temp(temp);
 			}
 		}
 
