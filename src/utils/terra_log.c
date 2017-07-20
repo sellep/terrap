@@ -32,7 +32,7 @@ void terra_log_info(char const * const msg, ...)
 
 	struct tm ts = log_time();
 
-	if (terra_log_file)
+	if (use_file)
 	{
 		f = fopen(FILE_PATH, "a");
 		if (!f)
@@ -62,7 +62,7 @@ void terra_log_error(char const * const msg, ...)
 
 	struct tm ts = log_time();
 
-	if (terra_log_file)
+	if (use_file)
 	{
 		f = fopen(FILE_PATH, "a");
 		if (!f)
