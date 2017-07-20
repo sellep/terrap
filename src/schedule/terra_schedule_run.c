@@ -194,6 +194,7 @@ void terra_schedule_run()
 
 		terra_log_info("[terra_schedule_run] reload conf\n");
 		CONF_FREE();
+
 		if (!CONF_LOAD())
 		{
 			terra_log_error("[terra_schedule_run] failed to load config file\n");

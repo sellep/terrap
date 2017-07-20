@@ -139,9 +139,20 @@ static inline void terra_conf_free(terra_conf * const conf)
 		terra_schedule_free(&conf->periods[i].schedule);
 	}
 
-	free(conf->clocks);
-	free(conf->temps);
-	free(conf->periods);
+	if (conf->clock_len > 0)
+	{
+		free(conf->clocks);
+	}
+
+	if (conf->temp_len > 0)
+	{
+		free(conf->temps);
+	}
+
+	if (conf->period_len > 0)
+	{
+		free(conf->periods);
+	}
 }
 
 #endif
