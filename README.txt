@@ -1,7 +1,7 @@
 terra README
 ===============
 
- terra is a service to control electrical (radio) outlets, based on clock, periodically and hygrometer data scheduling
+ terra is a service to control electrical (radio) outlets, based on clock, periodically or hygrometer data scheduling
 
 
 Prerequisites
@@ -11,8 +11,7 @@ Prerequisites
 
  terra depends on
  	- OpenRC
- 	- ncursesw 5+ (wide character support)
- 	- syslog
+ 	- ncursesw 5+ (wide character support, optional)
  	- libconfig
 
 
