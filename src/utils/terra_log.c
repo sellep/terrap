@@ -37,7 +37,7 @@ void terra_log_info(char const * const msg, ...)
 		f = fopen(FILE_PATH, "a");
 		if (!f)
 		{
-			fprintf(stderr, "[terra_log_info] failed to open file");
+			fprintf(stderr, "[terra_log_info] failed to open file\n");
 		}
 
 		sprintf(INFO_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
@@ -67,7 +67,7 @@ void terra_log_error(char const * const msg, ...)
 		f = fopen(FILE_PATH, "a");
 		if (!f)
 		{
-			fprintf(stderr, "[terra_log_error] failed to open file");
+			fprintf(stderr, "[terra_log_error] failed to open file\n");
 		}
 
 		sprintf(ERROR_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);

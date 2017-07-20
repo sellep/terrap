@@ -82,7 +82,7 @@ int main(int argc, char ** argv)
 	} 
 	else if (strcmp(argv[1], ARG_MODE_SCHEDULE) == 0)
 	{
-		terra_schedule_arg(argc, argv);
+		//terra_schedule_arg(argc, argv);
 		terra_schedule_run();
 	}
 	else if (strcmp(argv[1], ARG_MODE_RELOAD) == 0)
