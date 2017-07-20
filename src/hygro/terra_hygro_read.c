@@ -55,11 +55,11 @@ BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const *
 
 	if (LIKELY(status == HYGRO_REPEATED_FAILED))
 	{
-		terra_log_error("[terra_hygro_run] failed to read dht repeated (%zu)\n", hygro_err[0]);
+		terra_log_error("[terra_hygro_run] failed to read dht repeated (%zu)\n", err_count[0]);
 	}
 	else
 	{
-		terra_log_error("[terra_hygro_run] failed to read dht (%zu)\n", hygro_err[0]);
+		terra_log_error("[terra_hygro_run] failed to read dht (%zu)\n", err_count[0]);
 	}
 
 	return FALSE;
