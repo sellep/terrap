@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 #include "common_dht_read.h"
 #include "pi_2_mmio.h"
