@@ -6,7 +6,7 @@ void terra_schedule_init_temp(terra_schedule_temp * const temp)
 
 	if (SCHEDULE_ENABLED(sched))
 	{
-		sched->enabled = terra_schedule_dep_enabled(temp);
+		sched->enabled = terra_schedule_dep_enabled(sched);
 
 		if (SCHEDULE_DISABLED(sched))
 		{

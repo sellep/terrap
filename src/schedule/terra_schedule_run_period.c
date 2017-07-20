@@ -11,7 +11,7 @@ void terra_schedule_init_period(terra_schedule_period * const period)
 
 	if (SCHEDULE_ENABLED(sched))
 	{
-		sched->enabled = terra_schedule_dep_enabled(period);
+		sched->enabled = terra_schedule_dep_enabled(sched);
 
 		if (SCHEDULE_DISABLED(sched))
 		{
