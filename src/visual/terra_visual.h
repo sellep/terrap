@@ -5,6 +5,10 @@
 #include "../utils/terra_time.h"
 #include "../utils/terra_data.h"
 
+#ifdef NCURSES
+#include <ncurses.h>
+#endif
+
 #define GRID_OFFSET_TOP 2
 #define GRID_OFFSET_BOTTOM 1
 #define GRID_OFFSET_LEFT 5
