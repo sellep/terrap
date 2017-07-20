@@ -9,7 +9,7 @@
 #define FILE_PATH "/var/log/terra"
 
 static char buf[MAX_BUF_LEN];
-BOOL terra_log_use_file = FALSE;
+static BOOL terra_log_use_file = FALSE;
 
 static inline struct tm log_time()
 {
