@@ -42,16 +42,16 @@ static inline hygro_status hygro_read(float * const h, float * const t, terra_co
 }
 
 
-BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const * const conf, size_t * const hygro_err)
+BOOL terra_hygro_read(float * const h, float * const t, terra_conf_hygro const * const conf, size_t * const err_count)
 {
 	hygro_status status = hygro_read(h, t, conf);
 	if (LIKELY(status == HYGRO_OK))
 	{
-		hygro_err[0] = 0;
+		err_count[0] = 0;
 		return TRUE;
 	}
 
-	hygro_err[0]++;
+	err_count[0]++;
 
 	if (LIKELY(status == HYGRO_REPEATED_FAILED))
 	{
