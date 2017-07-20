@@ -6,11 +6,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-BOOL terra_log_file = FALSE;
-
-#define LOG_USE_FILE() terra_log_file = TRUE
-
+extern void terra_log_use_file();
 extern void terra_log_info(char const * const, ...);
 extern void terra_log_error(char const * const, ...);
+
+#define LOG_USE_FILE() terra_log_use_file()
 
 #endif
