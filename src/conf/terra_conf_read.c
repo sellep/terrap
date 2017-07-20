@@ -217,7 +217,7 @@ static BOOL terra_conf_periods_parse(terra_conf * const dest, config_t const * c
 		}
 		dest->periods[i].deact = terra_time_to_int(&time);
 
-		config_setting_lookup_bool(src_period, "act_first", &dest->periods[i].act_first);
+		config_setting_lookup_bool(src_period, "active_first", &dest->periods[i].act_first);
 	}
 
 	return TRUE;
