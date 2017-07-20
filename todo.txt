@@ -2,3 +2,5 @@
  - renaming switch to socket
  - config validation
     - infinity loop detection
+ - cpu flags makefile
+    - check for cpuid2cpuflags and use the cpu flags
