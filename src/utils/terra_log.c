@@ -9,12 +9,17 @@
 #define FILE_PATH "/var/log/terra"
 
 static char buf[MAX_BUF_LEN];
-static BOOL use_log = TRUE;
+static BOOL use_log = FALSE;
 
 static inline struct tm log_time()
 {
 	time_t t = time(NULL);
 	return *localtime(&t);
+}
+
+void terra_log_use_file()
+{
+	use_log = TRUE;
 }
 
 void terra_log_info(char const * const msg, ...)
@@ -27,7 +32,7 @@ void terra_log_info(char const * const msg, ...)
 
 	struct tm ts = log_time();
 
-	if (1)
+	if (use_log)
 	{
 		f = fopen(FILE_PATH, "a");
 		if (!f)
@@ -57,7 +62,7 @@ void terra_log_error(char const * const msg, ...)
 
 	struct tm ts = log_time();
 
-	if (1)
+	if (use_log)
 	{
 		f = fopen(FILE_PATH, "a");
 		if (!f)

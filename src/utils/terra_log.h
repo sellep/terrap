@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+extern void terra_log_use_file();
 extern void terra_log_info(char const * const, ...);
 extern void terra_log_error(char const * const, ...);
 
