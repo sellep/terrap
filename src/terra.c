@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
 
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
@@ -12,6 +13,7 @@
 #define ARG_MODE_VISUAL "show"
 #define ARG_MODE_CONFIG "conf"
 #define ARG_MODE_DAEMON "daemon"
+#define ARG_MODE_SCHEDULE "schedule"
 #define ARG_MODE_RELOAD "reload"
 
 int main(int argc, char ** argv)
@@ -71,8 +73,16 @@ int main(int argc, char ** argv)
 	{
 		if (fork() == 0)
 		{
-			terra_schedule_run();
+			if (execl("/usr/local/bin/terra", "/usr/local/bin/terra", "schedule", "logfile", (char*) NULL) == -1)
+			{
+				terra_log_error("[terra] failed to execl (%s)\n", strerror(errno));
+				exit(1);
+			}
 		}
+	} 
+	else if (strcmp(argv[1], ARG_MODE_SCHEDULE) == 0)
+	{
+		terra_schedule_run();
 	}
 	else if (strcmp(argv[1], ARG_MODE_RELOAD) == 0)
 	{
