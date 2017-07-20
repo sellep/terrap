@@ -24,7 +24,7 @@ extern BOOL terra_schedule_dep_check(terra_schedule const * const);
 #define SCHEDULE_GET_TEMP(i) (&CONF_GLOBAL.temps[(i)])
 #define SCHEDULE_GET_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
 
-#define SCHEDULE(s) ((terra_schedule*)(s))
+#define SCHEDULE(s) (&((s)->schedule))
 #define SCHEDULE_ENABLED(s) (s)->enabled
 #define SCHEDULE_DISABLED(s) !(SCHEDULE_ENABLED(s))
 
@@ -45,6 +45,11 @@ static inline void schedule_reset()
 	for (i = 0; i < CONF_GLOBAL.temp_len; i++)
 	{
 		SCHEDULE(SCHEDULE_GET_TEMP(i))->run = FALSE;
+	}
+
+	for (i = 0; i < CONF_GLOBAL.period_len; i++)
+	{
+		SCHEDULE(SCHEDULE_GET_PERIOD(i))->run = FALSE;
 	}
 }
 
