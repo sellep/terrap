@@ -77,10 +77,12 @@ typedef struct
 {
 	terra_schedule schedule;
 
-	terra_time act;
-	terra_time deact;
+	size_t act;
+	size_t deact;
+	BOOL act_first;
+	BOOL run_act_first;
 
-	BOOL active_first;
+	terra_time start;
 } terra_schedule_period;
 
 typedef struct
@@ -98,6 +100,9 @@ typedef struct
 
 	int temp_len;
 	terra_schedule_temp *temps;
+
+	int period_len;
+	terra_schedule_period *periods;
 } terra_conf;
 
 extern BOOL terra_conf_read(terra_conf * const, char const * const);
@@ -129,8 +134,14 @@ static inline void terra_conf_free(terra_conf * const conf)
 		terra_schedule_free(&conf->temps[i].schedule);
 	}
 
+	for (i = 0; i < conf->period_len; i++)
+	{
+		terra_schedule_free(&conf->periods[i].schedule);
+	}
+
 	free(conf->clocks);
 	free(conf->temps);
+	free(conf->periods);
 }
 
 #endif

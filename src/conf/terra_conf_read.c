@@ -169,6 +169,55 @@ static BOOL terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 	return TRUE;
 }
 
+static BOOL terra_conf_periods_parse(terra_conf * const dest, config_t const * const src)
+{
+	config_setting_t *src_periods;
+	config_setting_t *src_period;
+	terra_time time;
+	char *str;
+	size_t i;
+
+	src_periods = config_lookup(src, "periods");
+
+	dest->period_len = config_setting_length(src_periods);
+	dest->periods = (terra_schedule_period*) malloc(sizeof(terra_schedule_period) * dest->period_len);
+
+	for (i = 0; i < dest->period_len; i++)
+	{
+		src_period = config_setting_get_elem(src_periods, i);
+
+		terra_conf_schedule_parse(&dest->periods[i].schedule, src_period);
+
+		if (!config_setting_lookup_string(src_period, "active", &str))
+		{
+			terra_log_error("[terra_conf_periods_parse] unable to read active (%zu)\n", i);
+			return FALSE;
+		}
+		if (!terra_time_parse(&time, str, HOUR_MIN_SEC))
+		{
+			terra_log_error("[terra_conf_periods_parse] unable to parse active (%s)\n", str);
+			return FALSE;
+		}
+		dest->periods[i].act = terra_time_to_int(&time);
+
+		if (!config_setting_lookup_string(src_period, "deactive", &str))
+		{
+			terra_log_error("[terra_conf_periods_parse] unable to read deactive (%zu)\n", i);
+			return FALSE;
+		}
+		if (!terra_time_parse(&time, str, HOUR_MIN_SEC))
+		{
+			terra_log_error("[terra_conf_periods_parse] unable to parse deactive (%s)\n", str);
+			return FALSE;
+		}
+		dest->periods[i].deact = terra_time_to_int(&time);
+
+		config_setting_lookup_bool(src_period, "act_first", &dest->periods[i].act_first);
+	}
+
+	return TRUE;
+}
+
 BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 {
 	BOOL status = FALSE;
@@ -189,10 +238,22 @@ BOOL terra_conf_read(terra_conf * const dest, char const * const path)
 	terra_conf_heart_parse(dest, &libconf);
 	terra_conf_switch_parse(dest, &libconf);
 	terra_conf_hygro_parse(dest, &libconf);
-	terra_conf_clocks_parse(dest, &libconf);
+
+	if (!terra_conf_clocks_parse(dest, &libconf))
+	{
+		terra_log_error("[terra_conf_read] failed to parse clocks\n");
+		goto exit;
+	}
+
 	if (!terra_conf_temps_parse(dest, &libconf))
 	{
 		terra_log_error("[terra_conf_read] failed to parse temps\n");
+		goto exit;
+	}
+
+	if (!terra_conf_periods_parse(dest, &libconf))
+	{
+		terra_log_error("[terra_conf_read] failed to parse periods\n");
 		goto exit;
 	}
 

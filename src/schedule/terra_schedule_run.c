@@ -86,6 +86,9 @@ static inline void schedule_run_read_only()
 
 static inline void schedule_run_schedules()
 {
+	terra_schedule_clock *clock;
+	terra_schedule_temp *temp;
+	terra_schedule_period *period;
 	terra_schedule *sched;
 	size_t i;
 
@@ -100,27 +103,34 @@ static inline void schedule_run_schedules()
 
 		for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 		{
-			sched = SCHEDULE(SCHEDULE_GET_CLOCK(i));
+			clock = SCHEDULE_GET_CLOCK(i);
+			sched = SCHEDULE(clock);
 
-			if (SCHEDULE_DISABLED(sched))
-				continue;
-
-			if (SCHEDULE_NOT_RUN(sched))
+			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 			{
-				terra_schedule_run_clock((terra_schedule_clock*) sched);
+				terra_schedule_run_clock(clock);
 			}
 		}
 
 		for (i = 0; i < CONF_GLOBAL.temp_len; i++)
 		{
-			sched = SCHEDULE(SCHEDULE_GET_TEMP(i));
+			temp = SCHEDULE_GET_TEMP(i);
+			sched = SCHEDULE(temp);
 
-			if (SCHEDULE_DISABLED(sched))
-				continue;
-
-			if (SCHEDULE_NOT_RUN(sched))
+			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 			{
-				terra_schedule_run_temp((terra_schedule_temp*) sched);
+				terra_schedule_run_temp(temp);
+			}
+		}
+
+		for (i = 0; i < CONF_GLOBAL.period_len; i++)
+		{
+			period = SCHEDULE_GET_PERIOD(i);
+			sched = SCHEDULE(period);
+
+			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
+			{
+				terra_schedule_run_temp(period);
 			}
 		}
 
@@ -147,6 +157,11 @@ static inline void schedule_init()
 	for (i = 0; i < CONF_GLOBAL.temp_len; i++)
 	{
 		terra_schedule_init_temp(SCHEDULE_GET_TEMP(i));
+	}
+
+	for (i = 0; i < CONF_GLOBAL.period_len; i++)
+	{
+		terra_schedule_init_period(SCHEDULE_GET_PERIOD(i));
 	}
 }
 

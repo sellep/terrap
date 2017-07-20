@@ -7,21 +7,22 @@ extern void terra_schedule_run();
 
 extern void terra_schedule_init_clock(terra_schedule_clock * const);
 extern void terra_schedule_init_temp(terra_schedule_temp * const);
+extern void terra_schedule_init_period(terra_schedule_period * const);
 
 extern void terra_schedule_run_clock(terra_schedule_clock * const);
-extern void terra_schedule_run_period(terra_schedule_period * const);
 extern void terra_schedule_run_temp(terra_schedule_temp * const);
+extern void terra_schedule_run_period(terra_schedule_period * const);
 
 extern BOOL terra_schedule_dep_enabled(terra_schedule const * const);
 extern BOOL terra_schedule_dep_check(terra_schedule const * const);
 
-#define SCHEDULE_IS_CLOCK(s) (s)->type == SCHEDULE_CLOCK
-#define SCHEDULE_IS_PERIOD(s) (s)->type == SCHEDULE_PERIOD
+/*#define SCHEDULE_IS_CLOCK(s) (s)->type == SCHEDULE_CLOCK
 #define SCHEDULE_IS_TEMP(s) (s)->type == SCHEDULE_TEMP
+#define SCHEDULE_IS_PERIOD(s) (s)->type == SCHEDULE_PERIOD*/
 
 #define SCHEDULE_GET_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
-#define SCHEDULE_GET_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
 #define SCHEDULE_GET_TEMP(i) (&CONF_GLOBAL.temps[(i)])
+#define SCHEDULE_GET_PERIOD(i) (&CONF_GLOBAL.periods[(i)])
 
 #define SCHEDULE(s) ((terra_schedule*)(s))
 #define SCHEDULE_ENABLED(s) (s)->enabled

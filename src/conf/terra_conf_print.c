@@ -10,6 +10,7 @@ static inline void print_schedule(terra_schedule const * const sched)
 
 void terra_conf_print(terra_conf const * const c)
 {
+	terra_time time;
 	ssize_t i, j;
 
 	printf("###### global ######\n");
@@ -62,5 +63,21 @@ void terra_conf_print(terra_conf const * const c)
 
 		printf("activation = %.2f\n", c->temps[i].act);
 		printf("deactivation = %.2f\n", c->temps[i].deact);
+	}
+
+	for (i = 0; i < c->period_len; i++)
+	{
+		printf("\n###### period %zu ######\n", i);
+		print_schedule(&c->periods[i].schedule);
+
+		terra_time_from_int(&time, c->periods[i].act);
+		printf("activation = ");
+		terra_time_print(&time);
+
+		terra_time_from_int(&time, c->periods[i].deact);
+		printf("deactivation = ");
+		terra_time_print(&time);
+
+		printf("active_first = %s\n", c->periods[i].act_first ? "true" : "false");
 	}
 }
