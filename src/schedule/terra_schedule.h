@@ -2,6 +2,7 @@
 #define __P_TERRA_SCHEDULE_H
 
 #include "../terra_runtime.h"
+#include "../utils/terra_daemon.h"
 
 extern void terra_schedule_arg(int const, char * * const);
 extern void terra_schedule_run();

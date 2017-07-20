@@ -72,14 +72,7 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
 	{
-		if (fork() == 0)
-		{
-			if (execl("/usr/local/bin/terra", "/usr/local/bin/terra", "schedule", "logfile", (char*) NULL) == -1)
-			{
-				terra_log_error("[terra] failed to execl (%s)\n", strerror(errno));
-				terra_exit(1);
-			}
-		}
+		terra_daemonize();
 	} 
 	else if (strcmp(argv[1], ARG_MODE_SCHEDULE) == 0)
 	{

@@ -3,7 +3,7 @@
 start() {
 	ebegin "Starting terra service"
 
-	start-stop-daemon --start --exec /usr/local/bin/terra --pidfile /var/run/terra.pid --make-pidfile -- daemon
+	start-stop-daemon --start --exec /usr/local/bin/terra --background -- daemon
 
 	eend $?
 }
@@ -11,7 +11,7 @@ start() {
 stop() {
 	ebegin "Stopping terra service"
 
-	start-stop-daemon --stop --exec /usr/local/bin/terra --pidfile /var/run/terra.pid
+	start-stop-daemon --stop --exec /usr/local/bin/terra
 
 	eend $?
 }
