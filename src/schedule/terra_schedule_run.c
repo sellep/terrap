@@ -9,12 +9,20 @@
 
 static inline void terra_heart_beat()
 {
-	const terra_led_cmd heart_on = LED_ON | LED_HEART;
-	const terra_led_cmd heart_off = LED_OFF | LED_HEART;
-
-	terra_led_set(CONF_HEART.pin, heart_on);
-	sleep_milliseconds(CONF_HEART.duration);
-	terra_led_set(CONF_HEART.pin, heart_off);
+	if (LIKELY(runtime.hygro_err == 0))
+	{
+		terra_led_set(CONF_HEART.pin, LED_ON);
+		sleep_milliseconds(CONF_HEART.duration);
+		terra_led_set(CONF_HEART.pin, LED_OFF);
+	}
+	else
+	{
+		terra_led_set(CONF.pin_alert, LED_ON);
+		terra_led_set(CONF_HEART.pin, LED_ON);
+		sleep_milliseconds(CONF_HEART.duration);
+		terra_led_set(CONF_HEART.pin, LED_OFF);
+		terra_led_set(CONF.pin_alert, LED_OFF);
+	}
 }
 
 static inline BOOL schedule_run_hygro()
