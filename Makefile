@@ -32,6 +32,7 @@ OBJ=pi_2_mmio.o \
 	terra_schedule_run_temp.o \
 	terra_schedule_dependency.o \
 	terra_schedule_run.o \
+	terra_schedule_arg.o \
 	terra_signal.o
 
 %.o : src/%.c

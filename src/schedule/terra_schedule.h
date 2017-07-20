@@ -3,6 +3,7 @@
 
 #include "../terra_runtime.h"
 
+extern void terra_schedule_arg(int const, char const * const * const);
 extern void terra_schedule_run();
 
 extern void terra_schedule_init_clock(terra_schedule_clock * const);
