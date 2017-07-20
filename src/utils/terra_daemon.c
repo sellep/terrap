@@ -42,7 +42,6 @@ void terra_daemonize()
 		if (execl("/usr/local/bin/terra", "/usr/local/bin/terra", "schedule", "logfile", "pidfile", (char*) NULL) == -1)
 		{
 			terra_log_error("[terra] failed to execl (%s)\n", strerror(errno));
-			terra_exit(1);
 		}
 	}
 }

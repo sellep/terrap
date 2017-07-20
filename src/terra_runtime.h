@@ -10,6 +10,7 @@
 #include "utils/terra_log.h"
 #include "utils/terra_lock.h"
 #include "utils/terra_time.h"
+#include "utils/terra_daemon.h"
 #include "switch/terra_switch.h"
 #include "led/terra_led.h"
 #include "hygro/terra_hygro.h"
@@ -105,7 +106,7 @@ static inline void terra_runtime_tick()
 
 static inline void terra_exit(int const code)
 {
-	//TODO: set led alert on
+	terra_daemon_kill();
 	exit(code);
 }
 
