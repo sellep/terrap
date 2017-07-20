@@ -130,7 +130,7 @@ static inline void schedule_run_schedules()
 
 			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 			{
-				terra_schedule_run_temp(period);
+				terra_schedule_run_period(period);
 			}
 		}
 
