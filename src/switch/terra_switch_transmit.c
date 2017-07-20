@@ -11,7 +11,7 @@
 #define SIGNAL_ONE_HIGH 3
 #define SIGNAL_ONE_LOW 1
 
-static inline sleep_microseconds(size_t const us)
+static inline void sleep_microseconds(size_t const us)
 {
 	struct timespec sleeper;
 	size_t sec;

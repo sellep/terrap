@@ -44,21 +44,21 @@ void terra_conf_print(terra_conf const * const c)
 
 	for (i = 0; i < c->clock_len; i++)
 	{
-		printf("\n###### clock %zu ######\n", i);
+		printf("\n###### clock %hu ######\n", i);
 		print_schedule(&c->clocks[i].schedule);
 
 		printf("times = %i\n", c->clocks[i].time_len);
 
 		for (j = 0; j < c->clocks[i].time_len; j++)
 		{
-			printf("time(%i) = ", j);
+			printf("time(%hu) = ", j);
 			terra_start_stop_print(&c->clocks[i].times[j]);
 		}
 	}
 
 	for (i = 0; i < c->temp_len; i++)
 	{
-		printf("\n###### temp %zu ######\n", i);
+		printf("\n###### temp %hu ######\n", i);
 		print_schedule(&c->temps[i].schedule);
 
 		printf("activation = %.2f\n", c->temps[i].act);
@@ -67,7 +67,7 @@ void terra_conf_print(terra_conf const * const c)
 
 	for (i = 0; i < c->period_len; i++)
 	{
-		printf("\n###### period %zu ######\n", i);
+		printf("\n###### period %hu ######\n", i);
 		print_schedule(&c->periods[i].schedule);
 
 		terra_time_from_int(&time, c->periods[i].act);
