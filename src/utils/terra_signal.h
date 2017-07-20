@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <signal.h>
 
+#include "../terra_defs.h"
 #include "terra_log.h"
 
 extern void terra_signal_handler(int const);
