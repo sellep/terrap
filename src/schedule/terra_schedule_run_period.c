@@ -41,47 +41,37 @@ void terra_schedule_run_period(terra_schedule_period * const period)
 	terra_schedule *sched = SCHEDULE(period);
 	size_t diff;
 
-	printf("terra_schedule_run_period\n");
-
 	if (!terra_schedule_dep_check(sched))
 		goto end;
 
 	if (period->run_act_first)
 	{
-		printf("into run act first\n");
 		period_switch_on(period, sched);
 		period->run_act_first = FALSE;
 		goto end;
 	}
 
 	diff = terra_time_diff(&NOW, &period->start);
-	printf("diff %zu\n", diff);
 
 	if (RUNTIME_SWITCH_ON(sched->socket))
 	{
-		printf("RUNTIME_SWITCH_ON\n");
 		if (diff > period->act)
 		{
-			printf("period_switch_off\n");
 			period_switch_off(period, sched);
 		}
 	}
 	else if (RUNTIME_SWITCH_OFF(sched->socket))
 	{
-		printf("RUNTIME_SWITCH_OFF\n");
 		if (diff > period->deact)
 		{
-			printf("period_switch_on\n");
 			period_switch_on(period, sched);
 		}
 	}
 	else
 	{
-		printf("period_switch_off\n");
 		period_switch_off(period, sched);
 	}
 
 end:
-	printf("end\n");
 	sched->run = TRUE;
 }
