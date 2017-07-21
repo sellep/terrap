@@ -47,7 +47,7 @@ void terra_switch_transmit(terra_conf_switch const * const conf, int const code)
 
 	for (rep = 0; rep < conf->repeats; rep++)
 	{
-		for (i = conf->channel - 1; i >= 0; i--)
+		for (i = conf->groups[0].channel - 1; i >= 0; i--)
 		{
 			if (code & (1L << i))
 			{

@@ -48,22 +48,22 @@ static inline void terra_conf_switch_groups_parse(terra_conf_switch * const dest
 	config_setting_t *src_group;
 	size_t g;
 
-	src_groups = config_lookup(src, "groups");
+	src_groups = config_setting_lookup(src, "groups");
 
-	dest->group_len = config_setting_length(src_clocks);
+	dest->group_len = config_setting_length(src_groups);
 	dest->groups = (terra_switch_group*) malloc(sizeof(terra_switch_group) * dest->group_len);
 
 	for (g = 0; g < dest->group_len; g++)
 	{
 		src_group = config_setting_get_elem(src_groups, g);
 
-		config_setting_lookup_int(src, "channel", &dest->groups[g].channel);
-		config_setting_lookup_int(src, "code_aon", &dest->groups[g].code_aon);
-		config_setting_lookup_int(src, "code_aoff", &dest->groups[g].code_aoff);
-		config_setting_lookup_int(src, "code_bon", &dest->groups[g].code_bon);
-		config_setting_lookup_int(src, "code_boff", &dest->groups[g].code_boff);
-		config_setting_lookup_int(src, "code_con", &dest->groups[g].code_con);
-		config_setting_lookup_int(src, "code_coff", &dest->groups[g].code_coff);
+		config_setting_lookup_int(src_group, "channel", &dest->groups[g].channel);
+		config_setting_lookup_int(src_group, "code_aon", &dest->groups[g].code_aon);
+		config_setting_lookup_int(src_group, "code_aoff", &dest->groups[g].code_aoff);
+		config_setting_lookup_int(src_group, "code_bon", &dest->groups[g].code_bon);
+		config_setting_lookup_int(src_group, "code_boff", &dest->groups[g].code_boff);
+		config_setting_lookup_int(src_group, "code_con", &dest->groups[g].code_con);
+		config_setting_lookup_int(src_group, "code_coff", &dest->groups[g].code_coff);
 	}
 }
 
@@ -73,8 +73,8 @@ static inline void terra_conf_switch_parse(terra_conf * const dest, config_t con
 
 	src_switch = config_lookup(src, "switch");
 
-	config_setting_lookup_int(src, "pin", &dest->sw.pin);
-	config_setting_lookup_int(src, "repeats", &dest->sw.repeats);
+	config_setting_lookup_int(src_switch, "pin", &dest->sw.pin);
+	config_setting_lookup_int(src_switch, "repeats", &dest->sw.repeats);
 
 	terra_conf_switch_groups_parse(&dest->sw, src_switch);
 }
