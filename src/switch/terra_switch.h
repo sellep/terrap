@@ -28,15 +28,15 @@ static inline void terra_switch_set_on(terra_conf_switch const * const conf, cha
 {
 	if (socket == 'a')
 	{
-		terra_switch_transmit(conf, conf->code_aon);
+		terra_switch_transmit(conf, conf->groups[0].code_aon);
 	}
 	else if (socket == 'b')
 	{
-		terra_switch_transmit(conf, conf->code_bon);
+		terra_switch_transmit(conf, conf->groups[0].code_bon);
 	}
 	else
 	{
-		terra_switch_transmit(conf, conf->code_con);
+		terra_switch_transmit(conf, conf->groups[0].code_con);
 	}
 
 	terra_log_info("[terra_switch] set switch %c to on (%s)\n", socket, sender);
@@ -46,15 +46,15 @@ static inline void terra_switch_set_off(terra_conf_switch const * const conf, ch
 {
 	if (socket == 'a')
 	{
-		terra_switch_transmit(conf, conf->code_aoff);
+		terra_switch_transmit(conf, conf->groups[0].code_aoff);
 	}
 	else if (socket == 'b')
 	{
-		terra_switch_transmit(conf, conf->code_boff);
+		terra_switch_transmit(conf, conf->groups[0].code_boff);
 	}
 	else
 	{
-		terra_switch_transmit(conf, conf->code_coff);
+		terra_switch_transmit(conf, conf->groups[0].code_coff);
 	}
 
 	terra_log_info("[terra_switch] set switch %c to off (%s)\n", socket, sender);

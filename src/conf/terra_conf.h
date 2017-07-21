@@ -17,8 +17,6 @@ typedef struct
 
 typedef struct
 {
-	int pin;
-	int repeats;
 	int channel;
 	int code_aon;
 	int code_aoff;
@@ -26,6 +24,15 @@ typedef struct
 	int code_boff;
 	int code_con;
 	int code_coff;
+} terra_switch_group;
+
+typedef struct
+{
+	int pin;
+	int repeats;
+
+	int group_len;
+	terra_switch_group *groups;
 } terra_conf_switch;
 
 typedef struct
@@ -121,6 +128,8 @@ static inline void terra_schedule_free(terra_schedule * const sched)
 static inline void terra_conf_free(terra_conf * const conf)
 {
 	size_t i;
+
+	free(conf->sw.groups);
 
 	for (i = 0; i < conf->clock_len; i++)
 	{
