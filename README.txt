@@ -26,3 +26,21 @@ Installation
 
  IMPORTANT:
  Please check the configuration file, you might want to modify the BCM GPIO pins and other settings.
+
+
+Usage
+===============
+
+ Start the daemon
+	- /etc/init.d/terra start
+	or
+	- terra daemon
+
+ Read hygrometer manually
+	- terra hygrometer
+
+ Set socket manually
+	- terra switch <a/b/c> <on/off>
+
+ Show hygrometer recorded data
+	- terra show
