@@ -44,7 +44,7 @@ static inline terra_switch_group* terra_switch_group_get(terra_conf_switch const
 
 static inline void terra_switch_set_on(terra_conf_switch const * const conf, char const socket, int const channel, char const * const sender)
 {
-	terra_switch_group *group = terra_switch_group_get(channel);
+	terra_switch_group *group = terra_switch_group_get(conf, channel);
 
 	if (socket == 'a')
 	{
@@ -64,7 +64,7 @@ static inline void terra_switch_set_on(terra_conf_switch const * const conf, cha
 
 static inline void terra_switch_set_off(terra_conf_switch const * const conf, char const socket, int const channel, char const * const sender)
 {
-	terra_switch_group *group = terra_switch_group_get(channel);
+	terra_switch_group *group = terra_switch_group_get(conf, channel);
 
 	if (socket == 'a')
 	{

@@ -11,12 +11,6 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 		return FALSE;
 	}
 
-	if (strlen(argv[2]) != 1)
-	{
-		terra_log_error("[terra_switch_arg] invalid socket argument length\n");
-		return FALSE;
-	}
-
 	if (   argv[2][0] != 'a'
 		&& argv[2][0] != 'A'
 		&& argv[2][0] != 'b'
@@ -51,7 +45,7 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 		if (argv[2][1] != ':')
 		{
 			terra_log_error("[terra_switch_arg] invalid socket channel\n");
-			return false;
+			return FALSE;
 		}
 
 		switch_req->channel = atoi(argv[2] + 2);

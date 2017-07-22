@@ -73,7 +73,7 @@ static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 
 static inline void terra_runtime_switch_set_on(char const socket, int const channel, char const * const sender)
 {
-	terra_switch_set_on(&CONF_SWITCH, socket, sender);
+	terra_switch_set_on(&CONF_SWITCH, socket, channel, sender);
 
 	if (socket == 'a') runtime.switch_modes[0] = SWITCH_ON;
 	else if (socket == 'b') runtime.switch_modes[1] = SWITCH_ON;
@@ -94,7 +94,7 @@ static inline void terra_pin_set_out(int const pin)
 	LOCK();
 #ifndef DEBUG
 	pi_2_mmio_set_output(pin);
-#endif	
+#endif
 	UNLOCK();
 }
 
