@@ -37,7 +37,7 @@ Usage
 	- terra daemon
 
  Read hygrometer manually
-	- terra hygrometer
+	- terra hygro
 
  Set socket manually
 	- terra switch <a/b/c> <on/off>
