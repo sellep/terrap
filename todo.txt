@@ -1,4 +1,9 @@
  x dynamic sockets
+ - extracting type definitions
+    x extract switch conf
+    x extract hygro conf
+    - extract or rather create led conf
+    - extract schedule conf
  - renaming switch to socket
  - config validation
     - infinity loop detection
