@@ -3,19 +3,13 @@
 
 #include "../terra_defs.h"
 #include "../utils/terra_time.h"
+#include "../led/terra_led.h"
 #include "../switch/terra_switch.h"
 #include "../hygro/terra_hygro.h"
 
 #include <libconfig.h>
 
 #define CONF_PATH "/etc/terra/terra.conf"
-
-typedef struct
-{
-	int pin;
-	int tick;
-	int duration;
-} terra_conf_heart;
 
 enum schedule_types
 {
@@ -73,9 +67,8 @@ typedef struct
 {
 	int delay;
 	BOOL read_only;
-	int pin_alert;
 
-	terra_conf_heart he;
+	terra_conf_led ld;
 	terra_conf_switch sw;
 	terra_conf_hygro hy;
 

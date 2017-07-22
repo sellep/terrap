@@ -2,7 +2,7 @@
 
 #include "../utils/terra_signal.h"
 
-#define DO_HEART_BEAT() if (runtime.tick % CONF_HEART.tick == 0) terra_heart_beat()
+#define DO_HEART_BEAT() if (runtime.tick % CONF_LED.heart_tick == 0) terra_heart_beat()
 #define DO_HYGRO_READ() (CONF_HYGRO.enabled && !hygro_wait(&CONF_HYGRO, &NOW, runtime.hygro_err))
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
@@ -11,17 +11,17 @@ static inline void terra_heart_beat()
 {
 	if (LIKELY(runtime.hygro_err == 0))
 	{
-		terra_led_set(CONF_HEART.pin, LED_ON);
-		sleep_milliseconds(CONF_HEART.duration);
-		terra_led_set(CONF_HEART.pin, LED_OFF);
+		terra_led_set(CONF_LED.heart_pin, LED_ON);
+		sleep_milliseconds(CONF_LED.heart_duration);
+		terra_led_set(CONF_LED.heart_pin, LED_OFF);
 	}
 	else
 	{
-		terra_led_set(CONF_GLOBAL.pin_alert, LED_ON);
-		terra_led_set(CONF_HEART.pin, LED_ON);
-		sleep_milliseconds(CONF_HEART.duration);
-		terra_led_set(CONF_HEART.pin, LED_OFF);
-		terra_led_set(CONF_GLOBAL.pin_alert, LED_OFF);
+		terra_led_set(CONF_LED.err_pin, LED_ON);
+		terra_led_set(CONF_LED.heart_pin, LED_ON);
+		sleep_milliseconds(CONF_LED.heart_duration);
+		terra_led_set(CONF_LED.heart_pin, LED_OFF);
+		terra_led_set(CONF_LED.err_pin, LED_OFF);
 	}
 }
 
@@ -111,12 +111,13 @@ static inline void schedule_init()
 {
 	size_t i;
 
-	terra_pin_set_out(CONF_GLOBAL.pin_alert);
-	terra_pin_set_out(CONF_HEART.pin);
+	terra_pin_set_out(CONF_LED.err_pin);
+	terra_pin_set_out(CONF_LED.heart_pin);
 	terra_pin_set_out(CONF_SWITCH.pin);
 
-	terra_led_set(CONF_GLOBAL.pin_alert, FALSE);
-	terra_led_set(CONF_HEART.pin, FALSE);
+	terra_led_set(CONF_LED.heart_pin, FALSE);
+	terra_led_set(CONF_LED.err_pin, FALSE);
+
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
@@ -172,5 +173,5 @@ void terra_schedule_run()
 	}
 
 exit:
-	terra_led_set(CONF_GLOBAL.pin_alert, LED_ON);
+	terra_led_set(CONF_LED.err_pin, LED_ON);
 }

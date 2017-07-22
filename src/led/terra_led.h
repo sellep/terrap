@@ -2,9 +2,16 @@
 #define __P_TERRA_LED_H
 
 #include "../terra_defs.h"
-#include "../conf/terra_conf.h"
 #include "../utils/terra_log.h"
 #include "../utils/terra_lock.h"
+
+typedef struct
+{
+	int err_pin;
+	int heart_pin;
+	int heart_tick;
+	int heart_duration;
+} terra_conf_led;
 
 enum led_cmds
 {
@@ -39,19 +46,19 @@ static inline void terra_led_set(ssize_t const pin, terra_led_cmd const set)
 	UNLOCK();
 }
 
-static inline BOOL terra_led_set_from_cmd(terra_conf const * const conf, terra_led_cmd const cmd)
+static inline BOOL terra_led_set_from_cmd(terra_conf_led const * const conf, terra_led_cmd const cmd)
 {
 	if (cmd == LED_NONE)
 		return TRUE;
 
 	if (cmd & LED_ERR)
 	{
-		terra_led_set(conf->pin_alert, cmd);
+		terra_led_set(conf->err_pin, cmd);
 		return TRUE;
 	}
 	else if (cmd & LED_HEART)
 	{
-		terra_led_set(conf->he.pin, cmd);
+		terra_led_set(conf->heart_pin, cmd);
 		return TRUE;
 	}
 

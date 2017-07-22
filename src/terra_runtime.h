@@ -44,7 +44,7 @@ extern BOOL terra_runtime_init(char const * const);
 #define RUNTIME_RESET_RELOAD() runtime.reload = FALSE
 
 #define CONF_GLOBAL runtime.conf
-#define CONF_HEART runtime.conf.he
+#define CONF_LED runtime.conf.ld
 #define CONF_SWITCH runtime.conf.sw
 #define CONF_HYGRO runtime.conf.hy
 
@@ -66,8 +66,12 @@ extern BOOL terra_runtime_init(char const * const);
 
 static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 {
-	if (sock == 'a') return runtime.switch_modes[0];
-	if (sock == 'b') return runtime.switch_modes[1];
+	if (sock == 'a')
+		return runtime.switch_modes[0];
+
+	if (sock == 'b')
+		return runtime.switch_modes[1];
+
 	return runtime.switch_modes[2];
 }
 
@@ -75,18 +79,36 @@ static inline void terra_runtime_switch_set_on(char const socket, int const chan
 {
 	terra_switch_set_on(&CONF_SWITCH, socket, channel, sender);
 
-	if (socket == 'a') runtime.switch_modes[0] = SWITCH_ON;
-	else if (socket == 'b') runtime.switch_modes[1] = SWITCH_ON;
-	else runtime.switch_modes[2] = SWITCH_ON;
+	if (socket == 'a')
+	{
+		runtime.switch_modes[0] = SWITCH_ON;
+	}
+	else if (socket == 'b')
+	{
+		runtime.switch_modes[1] = SWITCH_ON;
+	}
+	else
+	{
+		runtime.switch_modes[2] = SWITCH_ON;
+	}
 }
 
 static inline void terra_runtime_switch_set_off(char const socket, int const channel, char const * const sender)
 {
 	terra_switch_set_off(&CONF_SWITCH, socket, channel, sender);
 
-	if (socket == 'a') runtime.switch_modes[0] = SWITCH_OFF;
-	else if (socket == 'b') runtime.switch_modes[1] = SWITCH_OFF;
-	else runtime.switch_modes[2] = SWITCH_OFF;
+	if (socket == 'a')
+	{
+		runtime.switch_modes[0] = SWITCH_OFF;
+	}
+	else if (socket == 'b')
+	{
+		runtime.switch_modes[1] = SWITCH_OFF;
+	}
+	else
+	{
+		runtime.switch_modes[2] = SWITCH_OFF;
+	}
 }
 
 static inline void terra_pin_set_out(int const pin)
@@ -107,7 +129,7 @@ static inline void terra_runtime_tick()
 static inline void terra_exit(int const code)
 {
 	terra_daemon_kill();
-	terra_led_set(CONF_GLOBAL.pin_alert, LED_ON);
+	terra_led_set(CONF_LED.err_pin, LED_ON);
 	exit(code);
 }
 

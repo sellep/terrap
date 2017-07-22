@@ -25,8 +25,8 @@ BOOL terra_runtime_init(char const * const conf_path)
 	runtime.hygro_err = 0;
 
 	terra_pin_set_out(CONF_SWITCH.pin);
-	terra_pin_set_out(CONF_HEART.pin);
-	terra_pin_set_out(CONF_GLOBAL.pin_alert);
+	terra_pin_set_out(CONF_LED.heart_pin);
+	terra_pin_set_out(CONF_LED.err_pin);
 
 	runtime.tick = 0;
 	terra_time_now(&runtime.now);

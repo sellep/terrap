@@ -26,12 +26,12 @@ void terra_conf_print(terra_conf const * const c)
 	printf("###### global ######\n");
 	printf("delay = %i\n", c->delay);
 	printf("read_only = %i\n", c->read_only);
-	printf("pin_alert = %i\n", c->pin_alert);
 
-	printf("\n###### heart ######\n");
-	printf("pin = %i\n", c->he.pin);
-	printf("tick = %i\n", c->he.tick);
-	printf("duration = %i\n", c->he.duration);
+	printf("\n###### led ######\n");
+	printf("err_pin = %i\n", c->ld.err_pin);
+	printf("heart_pin = %i\n", c->ld.heart_pin);
+	printf("heart_tick = %i\n", c->ld.heart_tick);
+	printf("heart_duration = %i\n", c->ld.heart_duration);
 
 	printf("\n###### switch ######\n");
 	printf("pin = %i\n", c->sw.pin);
