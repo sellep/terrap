@@ -36,6 +36,19 @@ extern BOOL terra_schedule_dep_check(terra_schedule const * const);
 
 #define SCHEDULE_NOT_RUN(s) (s)->run == FALSE
 
+#define SCHEDULE_SWITCH_SET_ON(s) terra_schedule_set_switch_on(s)
+#define SCHEDULE_SWITCH_SET_OFF(s) terra_schedule_set_switch_off(s)
+
+static inline void terra_schedule_set_switch_on(terra_schedule const * const sched)
+{
+	terra_runtime_switch_set_on(sched->socket, sched->channel, sched->name);
+}
+
+static inline void terra_schedule_set_switch_off(terra_schedule const * const sched)
+{
+	terra_runtime_switch_set_off(sched->socket, sched->channel, sched->name);
+}
+
 static inline void schedule_reset()
 {
 	ssize_t i;

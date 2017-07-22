@@ -7,13 +7,13 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 {
 	if (argc != 4)
 	{
-		terra_log_error("insufficient switch argument count\n");
+		terra_log_error("[terra_switch_arg] insufficient switch argument count\n");
 		return FALSE;
 	}
 
 	if (strlen(argv[2]) != 1)
 	{
-		terra_log_error("invalid socket argument length\n");
+		terra_log_error("[terra_switch_arg] invalid socket argument length\n");
 		return FALSE;
 	}
 
@@ -25,7 +25,7 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 		&& argv[2][0] != 'C'
 		)
 	{
-		terra_log_error("invalid socket\n");
+		terra_log_error("[terra_switch_arg] invalid socket\n");
 		return FALSE;
 	}
 
@@ -44,6 +44,21 @@ BOOL terra_switch_arg(terra_switch_req * const switch_req, int const argc, char 
 	else
 	{
 		switch_req->socket = argv[2][0];
+	}
+
+	if (strlen(argv[2]) > 2)
+	{
+		if (argv[2][1] != ':')
+		{
+			terra_log_error("[terra_switch_arg] invalid socket channel\n");
+			return false;
+		}
+
+		switch_req->channel = atoi(argv[2] + 2);
+	}
+	else
+	{
+		switch_req->channel = 0;
 	}
 
 	if (strcmp(argv[3], ARG_MODE_SWITCH_ON) == 0)

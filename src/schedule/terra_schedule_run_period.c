@@ -26,13 +26,13 @@ void terra_schedule_init_period(terra_schedule_period * const period)
 
 static inline void period_switch_off(terra_schedule_period * const period, terra_schedule const * const sched)
 {
-	RUNTIME_SWITCH_SET_OFF(sched->socket, sched->name);
+	SCHEDULE_SWITCH_SET_OFF(sched);
 	terra_time_cpy(&period->start, &NOW);
 }
 
 static inline void period_switch_on(terra_schedule_period * const period, terra_schedule const * const sched)
 {
-	RUNTIME_SWITCH_SET_ON(sched->socket, sched->name);
+	SCHEDULE_SWITCH_SET_ON(sched);
 	terra_time_cpy(&period->start, &NOW);
 }
 

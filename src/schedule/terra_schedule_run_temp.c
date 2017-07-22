@@ -29,24 +29,24 @@ void terra_schedule_run_temp(terra_schedule_temp * const temp)
 			goto end;
 
 
-		RUNTIME_SWITCH_SET_OFF(sched->socket, sched->name);
+		SCHEDULE_SWITCH_SET_OFF(sched);
 	}
 	else if (RUNTIME_SWITCH_OFF(sched->socket))
 	{
 		if (RUNTIME_TEMP < temp->act)
 			goto end;
 
-		RUNTIME_SWITCH_SET_ON(sched->socket, sched->name);
+		SCHEDULE_SWITCH_SET_ON(sched);
 	}
 	else
 	{
 		if (RUNTIME_TEMP > temp->act)
 		{
-			RUNTIME_SWITCH_SET_ON(sched->socket, sched->name);
+			SCHEDULE_SWITCH_SET_ON(sched);
 		}
 		else
 		{
-			RUNTIME_SWITCH_SET_OFF(sched->socket, sched->name);
+			SCHEDULE_SWITCH_SET_OFF(sched);
 		}
 	}
 

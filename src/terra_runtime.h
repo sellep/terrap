@@ -71,21 +71,21 @@ static inline terra_switch_mode terra_runtime_switch_get(char const sock)
 	return runtime.switch_modes[2];
 }
 
-static inline void terra_runtime_switch_set_on(char const sock, char const * const sender)
+static inline void terra_runtime_switch_set_on(char const socket, int const channel, char const * const sender)
 {
-	terra_switch_set_on(&CONF_SWITCH, sock, sender);
+	terra_switch_set_on(&CONF_SWITCH, socket, sender);
 
-	if (sock == 'a') runtime.switch_modes[0] = SWITCH_ON;
-	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_ON;
+	if (socket == 'a') runtime.switch_modes[0] = SWITCH_ON;
+	else if (socket == 'b') runtime.switch_modes[1] = SWITCH_ON;
 	else runtime.switch_modes[2] = SWITCH_ON;
 }
 
-static inline void terra_runtime_switch_set_off(char const sock, char const * const sender)
+static inline void terra_runtime_switch_set_off(char const socket, int const channel, char const * const sender)
 {
-	terra_switch_set_off(&CONF_SWITCH, sock, sender);
+	terra_switch_set_off(&CONF_SWITCH, socket, channel, sender);
 
-	if (sock == 'a') runtime.switch_modes[0] = SWITCH_OFF;
-	else if (sock == 'b') runtime.switch_modes[1] = SWITCH_OFF;
+	if (socket == 'a') runtime.switch_modes[0] = SWITCH_OFF;
+	else if (socket == 'b') runtime.switch_modes[1] = SWITCH_OFF;
 	else runtime.switch_modes[2] = SWITCH_OFF;
 }
 

@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
 		if (!terra_switch_arg(&switch_req, argc, argv))
 			return 1;
 
-		terra_switch_set(&CONF_SWITCH, switch_req.socket, switch_req.mode, (char*) NULL);
+		terra_switch_set(&CONF_SWITCH, switch_req.socket, switch_req.channel, switch_req.mode, (char*) NULL);
 	}
 	else if (strcmp(argv[1], ARG_MODE_LED) == 0)
 	{
