@@ -93,7 +93,7 @@ static inline void terra_conf_hygro_parse(terra_conf * const dest, config_t cons
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
-static void terra_conf_schedule_parse(terra_schedule * const sched, config_setting_t const * const src)
+static BOOL terra_conf_schedule_parse(terra_schedule * const sched, config_setting_t const * const src)
 {
 	char *str;
 
@@ -103,12 +103,29 @@ static void terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 	config_setting_lookup_string(src, "socket", &str);
 	sched->socket = str[0];
 
+	if (strlen(str) > 2)
+	{
+		if (str[1] != ':')
+		{
+			terra_log_error("[terra_conf_schedule_parse] socket syntax error\n");
+			return FALSE;
+		}
+
+		sched->channel = atoi(str + 2);
+	}
+	else
+	{
+		sched->channel = 0;
+	}
+
 	config_setting_lookup_bool(src, "enabled", &sched->enabled);
 
 	if (config_setting_lookup_string(src, "depends", &str) == CONFIG_TRUE)
 	{
 		string_copy(&sched->dep, str);
 	}
+
+	return TRUE;
 }
 
 static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * const src)
@@ -127,7 +144,12 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 	{
 		src_clock = config_setting_get_elem(src_clocks, i);
 
-		terra_conf_schedule_parse(&dest->clocks[i].schedule, src_clock);
+		if (!terra_conf_schedule_parse(&dest->clocks[i].schedule, src_clock))
+		{
+			terra_log_error("[terra_conf_clocks_parse] failed to parse schedule\n");
+			return FALSE;
+		}
+
 		SCHEDULE_SET_TYPE(&dest->clocks[i].schedule, SCHEDULE_CLOCK);
 
 		//TODO: multi times parsing
@@ -179,7 +201,12 @@ static BOOL terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 	{
 		src_temp = config_setting_get_elem(src_temps, i);
 
-		terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp);
+		if (!terra_conf_schedule_parse(&dest->temps[i].schedule, src_temp))
+		{
+			terra_log_error("[terra_conf_temps_parse] failed to parse schedule\n");
+			return FALSE;
+		}
+
 		SCHEDULE_SET_TYPE(&dest->temps[i].schedule, SCHEDULE_TEMP);
 
 		if (!parse_float(&dest->temps[i].act, src_temp, "activation"))
@@ -214,7 +241,13 @@ static BOOL terra_conf_periods_parse(terra_conf * const dest, config_t const * c
 	{
 		src_period = config_setting_get_elem(src_periods, i);
 
-		terra_conf_schedule_parse(&dest->periods[i].schedule, src_period);
+		if (!terra_conf_schedule_parse(&dest->periods[i].schedule, src_period))
+		{
+			terra_log_error("[terra_conf_periods_parse] failed to parse schedule\n");
+			return FALSE;
+		}
+
+
 		SCHEDULE_SET_TYPE(&dest->periods[i].schedule, SCHEDULE_PERIOD);
 
 		if (!config_setting_lookup_string(src_period, "active", &str))

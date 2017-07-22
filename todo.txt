@@ -1,4 +1,6 @@
  - dynamic switch configuration
+    x configuration support done
+    - implement use
  - renaming switch to socket
  - config validation
     - infinity loop detection

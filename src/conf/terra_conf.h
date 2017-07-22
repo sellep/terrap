@@ -57,7 +57,10 @@ typedef struct
 {
 	char *name;
 	schedule_type type;
+
 	char socket;
+	int channel;
+
 	BOOL enabled;
 	char *dep;
 

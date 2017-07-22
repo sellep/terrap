@@ -3,7 +3,17 @@
 static inline void print_schedule(terra_schedule const * const sched)
 {
 	printf("name = %s\n", sched->name);
+
 	printf("socket = %c\n", sched->socket);
+	if (sched->channel > 0)
+	{
+		printf("channel = %i\n", sched->channel);
+	}
+	else
+	{
+		printf("channel = -\n");
+	}
+
 	printf("enabled = %i\n", sched->enabled);
 	printf("depends = %s\n", sched->dep);
 }
