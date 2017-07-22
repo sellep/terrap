@@ -30,6 +30,12 @@ int main(int argc, char ** argv)
 		return 1;
 	}
 
+	if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
+	{
+		terra_daemonize();
+		return 0;
+	} 
+
 	if (!terra_runtime_init(CONF_PATH))
 	{
 		terra_log_error("[terra] failed to initialize runtime\n");
@@ -70,10 +76,6 @@ int main(int argc, char ** argv)
 	{
 		terra_conf_print(&CONF_GLOBAL);
 	}
-	else if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
-	{
-		terra_daemonize();
-	} 
 	else if (strcmp(argv[1], ARG_MODE_SCHEDULE) == 0)
 	{
 		if (terra_schedule_arg(argc, argv))
