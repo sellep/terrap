@@ -4,6 +4,7 @@
 #include "../terra_defs.h"
 #include "../utils/terra_time.h"
 #include "../switch/terra_switch.h"
+#include "../hygro/terra_hygro.h"
 
 #include <libconfig.h>
 
@@ -15,14 +16,6 @@ typedef struct
 	int tick;
 	int duration;
 } terra_conf_heart;
-
-typedef struct
-{
-	BOOL enabled;
-	int pin;
-	int repeats;
-	int delay;
-} terra_conf_hygro;
 
 enum schedule_types
 {

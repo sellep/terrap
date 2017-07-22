@@ -1,9 +1,16 @@
 #ifndef __P_TERRA_HYGRO_H
 #define __P_TERRA_HYGRO_H
 
-#include "../conf/terra_conf.h"
 #include "../utils/terra_time.h"
 #include "../utils/terra_data.h"
+
+typedef struct
+{
+	BOOL enabled;
+	int pin;
+	int repeats;
+	int delay;
+} terra_conf_hygro;
 
 extern BOOL terra_hygro_read(float * const, float * const, terra_conf_hygro const * const, size_t * const);
 extern BOOL terra_hygro_write(float const, float const, terra_time const * const);
