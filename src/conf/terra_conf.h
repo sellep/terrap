@@ -117,6 +117,7 @@ typedef struct
 
 extern BOOL terra_conf_read(terra_conf * const, char const * const);
 extern void terra_conf_print(terra_conf const * const);
+extern BOOL terra_conf_valid(terra_conf * const);
 
 static inline void terra_schedule_free(terra_schedule * const sched)
 {

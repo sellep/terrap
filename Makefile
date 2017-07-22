@@ -17,6 +17,7 @@ OBJ=pi_2_mmio.o \
 	terra_led_arg.o \
 	terra_conf_read.o \
 	terra_conf_print.o \
+	terra_conf_valid.o \
 	terra_switch_arg.o \
 	terra_switch_transmit.o \
 	terra_hygro_read.o \
