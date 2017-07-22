@@ -3,6 +3,7 @@
 
 #include "../terra_defs.h"
 #include "../utils/terra_time.h"
+#include "../switch/terra_switch.h"
 
 #include <libconfig.h>
 
@@ -14,26 +15,6 @@ typedef struct
 	int tick;
 	int duration;
 } terra_conf_heart;
-
-typedef struct
-{
-	int channel;
-	int code_aon;
-	int code_aoff;
-	int code_bon;
-	int code_boff;
-	int code_con;
-	int code_coff;
-} terra_switch_group;
-
-typedef struct
-{
-	int pin;
-	int repeats;
-
-	int group_len;
-	terra_switch_group *groups;
-} terra_conf_switch;
 
 typedef struct
 {

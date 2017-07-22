@@ -2,9 +2,28 @@
 #define __P_TERRA_SWITCH_H
 
 #include "../terra_defs.h"
-#include "../conf/terra_conf.h"
 #include "../utils/terra_log.h"
 #include "../utils/terra_lock.h"
+
+typedef struct
+{
+	int channel;
+	int code_aon;
+	int code_aoff;
+	int code_bon;
+	int code_boff;
+	int code_con;
+	int code_coff;
+} terra_switch_group;
+
+typedef struct
+{
+	int pin;
+	int repeats;
+
+	int group_len;
+	terra_switch_group *groups;
+} terra_conf_switch;
 
 enum terra_switch_modes
 {
