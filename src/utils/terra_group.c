@@ -47,6 +47,7 @@ BOOL terra_group_write(char const * const name)
 		return FALSE;
 	}
 
+	truncate(group_h, 0);
 	write(group_h, name, strlen(name));
 	close(group_h);
 
