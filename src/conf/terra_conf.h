@@ -3,6 +3,7 @@
 
 #include "../terra_defs.h"
 #include "../utils/terra_time.h"
+#include "../utils/terra_group.h"
 #include "../led/terra_led.h"
 #include "../switch/terra_switch.h"
 #include "../hygro/terra_hygro.h"
@@ -30,6 +31,7 @@ typedef struct
 	int channel;
 
 	BOOL enabled;
+	terra_group group;
 	char *dep;
 
 	BOOL run;

@@ -36,6 +36,7 @@ int main(int argc, char ** argv)
 		{
 			return 1;
 		}
+		return 0;
 	} 
 
 	if (!terra_runtime_init(CONF_PATH))
