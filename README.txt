@@ -40,7 +40,7 @@ Usage
 	- terra hygro
 
  Set socket manually
-	- terra switch <a/b/c> <on/off>
+	- terra switch <a/b/c>(:<channel>) <on/off>
 
  Show hygrometer recorded data
 	- terra show
