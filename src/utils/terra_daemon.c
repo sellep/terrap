@@ -1,7 +1,6 @@
 #include "terra_daemon.h"
 
 #define PID_FILE "/var/run/terra.pid"
-#define OWNER_READ_WRITE 600
 
 static int pid_h = 0;
 

@@ -14,6 +14,7 @@ OBJ=pi_2_mmio.o \
 	terra_time_parse.o \
 	terra_data_append.o \
 	terra_data_read.o \
+	terra_group.o \
 	terra_led_arg.o \
 	terra_conf_read.o \
 	terra_conf_print.o \

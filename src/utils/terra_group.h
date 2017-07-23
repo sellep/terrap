@@ -3,7 +3,7 @@
 
 #include "../terra_defs.h"
 
-#define GROUP_NAME_MAX 20;
+#define GROUP_NAME_MAX 20
 
 typedef struct
 {

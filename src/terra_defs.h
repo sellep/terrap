@@ -20,4 +20,6 @@
 #define LIKELY(x)       __builtin_expect((x),1)
 #define UNLIKELY(x)     __builtin_expect((x),0)
 
+#define OWNER_READ_WRITE 600
+
 #endif
