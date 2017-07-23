@@ -26,7 +26,7 @@ static inline void terra_daemon_stop()
 	}
 }
 
-static inline BOOL terra_daemon_run(int const argc, char * * const char)
+static inline BOOL terra_daemon_run(int const argc, char * * const argv)
 {
 	if (argc == 2)
 	{
