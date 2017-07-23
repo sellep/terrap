@@ -34,7 +34,7 @@ Usage
  Start the daemon
 	- /etc/init.d/terra start
 	or
-	- terra daemon
+	- terra daemon start (use `terra daemon` for running out of OpenRC scope)
 
  Read hygrometer manually
 	- terra hygro
