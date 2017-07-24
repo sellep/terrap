@@ -31,7 +31,6 @@ typedef struct
 	int channel;
 
 	BOOL enabled;
-	terra_group group;
 	char *dep;
 
 	BOOL run;
@@ -39,10 +38,18 @@ typedef struct
 
 typedef struct
 {
+	char name[20];
+	terra_start_stop time;
+} terra_schedule_clock_mode;
+
+typedef struct
+{
 	terra_schedule schedule;
 
-	int time_len;
-	terra_start_stop *times;
+	terra_start_stop time;
+
+	int modes_len;
+	terra_schedule_clock_mode *modes;
 } terra_schedule_clock;
 
 typedef struct

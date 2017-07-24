@@ -15,27 +15,47 @@ void terra_schedule_init_clock(terra_schedule_clock * const clock)
 	}
 }
 
+static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const * const clock)
+{
+	size_t i;
+
+	if (RUNTIME_MODE == NULL)
+	{
+		time[0] = &clock->time;
+		return TRUE;
+	}
+
+	for (i = 0; i < clock->mode_len; i++)
+	{
+		if (strcmp(RUNTIME_MODE, clock->mode[i].name) == 0)
+		{
+			time[0] = &clock->mode[i].time;
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
 void terra_schedule_run_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
-	ssize_t t;
+	terra_time *time;
 
 	if (!terra_schedule_dep_check(sched))
 		goto end;
 
-	for (t = 0; t < clock->time_len; t++)
-	{
-		if (
-				terra_time_diff(&NOW, &clock->times[t].start) == 0
-			||	terra_time_between(&NOW, &clock->times[t].start, &clock->times[t].stop)
-		)
-		{
-			if (RUNTIME_SWITCH_NOT_ON(sched->socket))
-			{
-				SCHEDULE_SWITCH_SET_ON(sched);
-			}
+	if(!clock_get_time(&time, clock))
+		goto end;
 
-			goto end;
+	if (
+			terra_time_diff(&NOW, &time->start) == 0
+		||	terra_time_between(&NOW, &time->start, &time->stop)
+	)
+	{
+		if (RUNTIME_SWITCH_NOT_ON(sched->socket))
+		{
+			SCHEDULE_SWITCH_SET_ON(sched);
 		}
 	}
 

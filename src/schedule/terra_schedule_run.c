@@ -107,15 +107,13 @@ static inline void schedule_run_schedules()
 	}
 }
 
-static BOOL schedule_init()
+static void schedule_init()
 {
-	terra_schedule *sched;
 	terra_schedule_clock *clock;
 	terra_schedule_temp *temp;
 	terra_schedule_period *period;
 
 	size_t i;
-	BOOL status = FALSE;
 
 	terra_pin_set_out(CONF_LED.err_pin);
 	terra_pin_set_out(CONF_LED.heart_pin);
@@ -127,61 +125,20 @@ static BOOL schedule_init()
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
 		clock = SCHEDULE_GET_CLOCK(i);
-		sched = SCHEDULE(clock);
-
-		if (!SCHEDULE_IN_GROUP(sched))
-		{
-			SCHEDULE_DISABLE(sched);
-		}
-		else
-		{
-			terra_schedule_init_clock(clock);
-			if (SCHEDULE_ENABLED(sched))
-			{
-				status = TRUE;
-			}
-		}
+		terra_schedule_init_clock(clock);
 	}
 
 	for (i = 0; i < CONF_GLOBAL.temp_len; i++)
 	{
 		temp = SCHEDULE_GET_TEMP(i);
-		sched = SCHEDULE(temp);
-
-		if (!SCHEDULE_IN_GROUP(sched))
-		{
-			SCHEDULE_DISABLE(sched);
-		}
-		else
-		{
-			terra_schedule_init_temp(temp);
-			if (SCHEDULE_ENABLED(sched))
-			{
-				status = TRUE;
-			}
-		}
+		terra_schedule_init_temp(temp);
 	}
 
 	for (i = 0; i < CONF_GLOBAL.period_len; i++)
 	{
 		period = SCHEDULE_GET_PERIOD(i);
-		sched = SCHEDULE(period);
-
-		if (!SCHEDULE_IN_GROUP(sched))
-		{
-			SCHEDULE_DISABLE(sched);
-		}
-		else
-		{
-			terra_schedule_init_period(period);
-			if (SCHEDULE_ENABLED(sched))
-			{
-				status = TRUE;
-			}
-		}
+		terra_schedule_init_period(period);
 	}
-
-	return status;
 }
 
 void terra_schedule_run()
@@ -189,17 +146,11 @@ void terra_schedule_run()
 	if (!terra_signal_reg())
 		goto exit;
 
-	if (!schedule_init())
-	{
-		terra_log_info("[terra_schedule_run] no enabled schedule, switching to read only\n");
-		CONF_GLOBAL.read_only = TRUE;
-	}
-	else
-	{
-		runtime.switch_modes[0] = SWITCH_UNKNOWN;
-		runtime.switch_modes[1] = SWITCH_UNKNOWN;
-		runtime.switch_modes[2] = SWITCH_UNKNOWN;
-	}
+	schedule_init();
+
+	runtime.switch_modes[0] = SWITCH_UNKNOWN;
+	runtime.switch_modes[1] = SWITCH_UNKNOWN;
+	runtime.switch_modes[2] = SWITCH_UNKNOWN;
 
 	while (TRUE)
 	{

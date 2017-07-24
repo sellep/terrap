@@ -63,12 +63,13 @@ void terra_conf_print(terra_conf const * const c)
 		printf("\n###### clock %hu ######\n", i);
 		print_schedule(&c->clocks[i].schedule);
 
-		printf("times = %i\n", c->clocks[i].time_len);
+		printf("time = ");
+		terra_start_stop_print(&c->clocks[i].time);
 
-		for (j = 0; j < c->clocks[i].time_len; j++)
+		for (j = 0; j < c->clocks[i].mode_len; j++)
 		{
-			printf("time(%hu) = ", j);
-			terra_start_stop_print(&c->clocks[i].times[j]);
+			printf("mode %s = ", c->clocks[i].modes[j].name);
+			terra_start_stop_print(&c->clocks[i].modes[j].time);
 		}
 	}
 

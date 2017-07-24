@@ -2,7 +2,7 @@
 #include "schedule/terra_schedule.h"
 #include "visual/terra_visual.h"
 #include "utils/terra_signal.h"
-#include "utils/terra_group.h"
+#include "utils/terra_mode.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,7 +15,7 @@
 #define ARG_MODE_VISUAL "show"
 #define ARG_MODE_CONFIG "conf"
 #define ARG_MODE_DAEMON "daemon"
-#define ARG_MODE_GROUP "group"
+#define ARG_MODE_MODE "mode"
 #define ARG_MODE_SCHEDULE "schedule"
 #define ARG_MODE_RELOAD "reload"
 
@@ -45,9 +45,9 @@ int main(int argc, char ** argv)
 
 		goto exit;
 	}
-	else if (strcmp(argv[1], ARG_MODE_GROUP) == 0)
+	else if (strcmp(argv[1], ARG_MODE_MODE) == 0)
 	{
-		if (!terra_group_run(argc, argv))
+		if (!terra_mode_run(argc, argv))
 			return 1;
 
 		goto exit;

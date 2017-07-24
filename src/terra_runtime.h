@@ -32,7 +32,7 @@ typedef struct
 	float temp;
 	float humi;
 
-	terra_group group;
+	terra_mode mode;
 } terra_runtime;
 
 terra_runtime runtime;
@@ -54,7 +54,7 @@ extern BOOL terra_runtime_init(char const * const);
 #define CONF_FREE() terra_conf_free(&runtime.conf)
 #define CONF_LOAD() terra_conf_read(&CONF_GLOBAL, CONF_PATH)
 
-#define RUNTIME_GROUP runtime.group.name
+#define RUNTIME_MODE runtime.mode
 
 #define NOW runtime.now
 
