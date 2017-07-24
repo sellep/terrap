@@ -85,7 +85,7 @@ BOOL terra_group_read(terra_group * const group)
 		return FALSE;
 	}
 
-	if (read(group_h, buf, sizeof buf) == -1)
+	if ((n = read(group_h, buf, sizeof buf)) == -1)
 	{
 		terra_log_error("[terra_group_read] failed to read group file\n");
 		status = FALSE;
@@ -95,8 +95,7 @@ BOOL terra_group_read(terra_group * const group)
 
 	UNLOCK();
 
-	n = strcspn(buf, "\n");
-	strncpy(group->name, buf, n);
+	strncpy(group->name, buf, n - 1);
 
 	return status;
 }
