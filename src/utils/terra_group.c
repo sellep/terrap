@@ -95,7 +95,7 @@ BOOL terra_group_read(terra_group * const group)
 
 	UNLOCK();
 
-	n = strcpn(buf, "\n");
+	n = strcspn(buf, "\n");
 	strncpy(group->name, buf, n);
 
 	return status;
