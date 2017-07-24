@@ -64,6 +64,7 @@ BOOL terra_group_write(char const * const name)
 
 BOOL terra_group_read(terra_group * const group)
 {
+	char buf[GROUP_NAME_MAX + 1];
 	BOOL status;
 	int group_h;
 
@@ -79,7 +80,7 @@ BOOL terra_group_read(terra_group * const group)
 		return FALSE;
 	}
 
-	if (read(group_h, group->name, GROUP_NAME_MAX) == -1)
+	if (read(group_h, buf, sizeof buf) == -1)
 	{
 		terra_log_error("[terra_group_read] failed to read group file\n");
 		status = FALSE;
@@ -88,6 +89,8 @@ BOOL terra_group_read(terra_group * const group)
 	close(group_h);
 
 	UNLOCK();
+
+	strncpy(group->name, buf, GROUP_NAME_MAX);
 
 	return status;
 }
