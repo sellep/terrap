@@ -157,7 +157,7 @@ static BOOL terra_conf_schedule_parse(terra_schedule * const sched, config_setti
 	return TRUE;
 }
 
-static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, config_setting_t const * const src)
+static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, config_setting_t * const src)
 {
 	config_setting_t *src_modes;
 	config_setting_t *src_mode;
@@ -176,7 +176,7 @@ static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, confi
 	{
 		src_mode = config_setting_get_elem(src_modes, i);
 
-		if (!config_setting_lookup_string(src_mode, "mode", &str))
+		/*if (!config_setting_lookup_string(src_mode, "mode", &str))
 		{
 			terra_log_error("[terra_conf_clock_mode_parse] missing mode name\n");
 			return FALSE;
@@ -188,7 +188,7 @@ static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, confi
 		{
 			terra_log_error("[terra_conf_clock_mode_parse] failed to parse start stop time\n");
 			return FALSE;
-		}
+		}*/
 	}
 
 	return TRUE;
@@ -224,11 +224,11 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 			return FALSE;
 		}
 
-		/*if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))
+		if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))
 		{
 			terra_log_error("[terra_conf_clocks_parse] failed to parse clock modes\n");
 			return FALSE;
-		}*/
+		}
 	}
 
 	return TRUE;
