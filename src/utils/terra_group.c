@@ -18,6 +18,8 @@ BOOL terra_group_run(int const argc, char * * const argv)
 			terra_log_error("[terra_group_run] failed to read group\n");
 			return FALSE;
 		}
+
+		terra_log_info("[terra_group_run] %s\n", group.name);
 	}
 	else if (argc == 4)
 	{
@@ -34,6 +36,8 @@ BOOL terra_group_run(int const argc, char * * const argv)
 		terra_log_error("[terra_group_run] invalid group args\n");
 		return FALSE;
 	}
+
+	return TRUE;
 }
 
 BOOL terra_group_write(char const * const name)
