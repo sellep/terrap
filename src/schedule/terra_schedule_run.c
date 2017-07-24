@@ -145,7 +145,7 @@ static BOOL schedule_init()
 
 	for (i = 0; i < CONF_GLOBAL.temp_len; i++)
 	{
-		temp = SCHEDULE_GET_CLOCK(i);
+		temp = SCHEDULE_GET_TEMP(i);
 		sched = SCHEDULE(temp);
 
 		if (!SCHEDULE_IN_GROUP(sched))
@@ -154,7 +154,7 @@ static BOOL schedule_init()
 		}
 		else
 		{
-			terra_schedule_init_temp(SCHEDULE_GET_TEMP(temp));
+			terra_schedule_init_temp(temp);
 			if (SCHEDULE_ENABLED(sched))
 			{
 				status = TRUE;
@@ -164,7 +164,7 @@ static BOOL schedule_init()
 
 	for (i = 0; i < CONF_GLOBAL.period_len; i++)
 	{
-		period = SCHEDULE_GET_CLOCK(i);
+		period = SCHEDULE_GET_PERIOD(i);
 		sched = SCHEDULE(period);
 
 		if (!SCHEDULE_IN_GROUP(sched))
