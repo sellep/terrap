@@ -48,7 +48,7 @@ typedef struct
 
 	terra_start_stop time;
 
-	int modes_len;
+	int mode_len;
 	terra_schedule_clock_mode *modes;
 } terra_schedule_clock;
 
