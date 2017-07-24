@@ -1,5 +1,5 @@
-#ifndef __P_TERRA_UTILS_GROUP_H
-#define __P_TERRA_UTILS_GROUP_H
+#ifndef __P_TERRA_UTILS_MODE_H
+#define __P_TERRA_UTILS_MODE_H
 
 #include "../terra_defs.h"
 
