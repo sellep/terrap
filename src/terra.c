@@ -32,6 +32,12 @@ int main(int argc, char ** argv)
 		return 1;
 	}
 
+	if (!terra_runtime_init(CONF_PATH))
+	{
+		terra_log_error("[terra] failed to initialize runtime\n");
+		return 1;
+	}
+
 	if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
 	{
 		if (!terra_daemon_run(argc, argv))
@@ -39,22 +45,14 @@ int main(int argc, char ** argv)
 
 		goto exit;
 	}
-
-	if (strcmp(argv[1], ARG_MODE_GROUP) == 0)
+	else if (strcmp(argv[1], ARG_MODE_GROUP) == 0)
 	{
 		if (!terra_group_run(argc, argv))
 			return 1;
 
 		goto exit;
 	}
-
-	if (!terra_runtime_init(CONF_PATH))
-	{
-		terra_log_error("[terra] failed to initialize runtime\n");
-		return 1;
-	}
-
-	if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
+	else if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
 	{
 		if (!terra_switch_arg(&switch_req, argc, argv))
 			return 1;
