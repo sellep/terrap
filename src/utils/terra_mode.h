@@ -8,6 +8,6 @@
 typedef char* terra_mode;
 
 extern BOOL terra_mode_run(int const, char * * const);
-extern BOOL terra_mode_read(terra_mode);
+extern BOOL terra_mode_read(terra_mode * const);
 
 #endif

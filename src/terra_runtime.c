@@ -26,10 +26,6 @@ BOOL terra_runtime_init(char const * const conf_path)
 	{
 		runtime.mode = NULL;
 	}
-	else
-	{
-		terra_log_info("[terra_runtime_init] mode %s\n", runtime.mode);
-	}
 
 	runtime.hygro_err = 0;
 

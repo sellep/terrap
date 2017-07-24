@@ -66,7 +66,7 @@ BOOL terra_mode_write(terra_mode mode)
 	return TRUE;
 }
 
-BOOL terra_mode_read(terra_mode *mode)
+BOOL terra_mode_read(terra_mode * const mode)
 {
 	char buf[MODE_NAME_MAX + 1];
 	BOOL status;
