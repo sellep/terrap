@@ -64,7 +64,14 @@ void terra_conf_print(terra_conf const * const c)
 		print_schedule(&c->clocks[i].schedule);
 
 		printf("time = ");
-		terra_start_stop_print(&c->clocks[i].time);
+		if (c->clocks[i].time != NULL)
+		{
+			terra_start_stop_print(&c->clocks[i].time);
+		}
+		else
+		{
+			printf("(null)\n");
+		}
 
 		for (j = 0; j < c->clocks[i].mode_len; j++)
 		{

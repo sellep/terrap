@@ -21,6 +21,9 @@ static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const
 
 	if (RUNTIME_MODE == NULL)
 	{
+		if (clock->time == NULL)
+			return FALSE;
+
 		time[0] = &clock->time;
 		return TRUE;
 	}
@@ -33,6 +36,9 @@ static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const
 			return TRUE;
 		}
 	}
+
+	if (clock->time == NULL)
+		return FALSE;
 
 	time[0] = &clock->time;
 	return TRUE;

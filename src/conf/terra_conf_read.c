@@ -13,10 +13,8 @@ static inline BOOL parse_start_stop(terra_start_stop * const time, config_settin
 	char *str;
 
 	if (!config_setting_lookup_string(src, "start", &str))
-	{
-		terra_log_error("[parse_start_stop] missing start time\n");
 		return FALSE;
-	}
+
 	if (!terra_time_parse(&time->start, str, HOUR_MIN_SEC))
 	{
 		terra_log_error("[parse_start_stop] invalid start time (%s)\n", str);
@@ -191,8 +189,7 @@ static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, confi
 
 		if (!parse_start_stop(&dest->modes[i].time, src_mode))
 		{
-			terra_log_error("[terra_conf_clock_mode_parse] failed to parse start stop time\n");
-			return FALSE;
+			dest->modes[i].time = NULL;
 		}
 	}
 
