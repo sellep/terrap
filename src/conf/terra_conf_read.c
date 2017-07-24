@@ -187,7 +187,7 @@ static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, confi
 			return FALSE;
 		}
 
-		string_copy(dest->modes[i].name, str);
+		string_copy(&dest->modes[i].name, str);
 
 		if (!parse_start_stop(&dest->modes[i].time, src_mode))
 		{
