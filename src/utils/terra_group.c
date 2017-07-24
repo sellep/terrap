@@ -71,6 +71,7 @@ BOOL terra_group_read(terra_group * const group)
 	char buf[GROUP_NAME_MAX + 1];
 	BOOL status;
 	int group_h;
+	int n;
 
 	status = TRUE;
 
@@ -94,7 +95,8 @@ BOOL terra_group_read(terra_group * const group)
 
 	UNLOCK();
 
-	strncpy(group->name, buf, GROUP_NAME_MAX);
+	n = strcpn(buf, "\n");
+	strncpy(group->name, buf, n);
 
 	return status;
 }
