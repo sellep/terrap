@@ -66,7 +66,7 @@ void terra_conf_print(terra_conf const * const c)
 		printf("time = ");
 		if (c->clocks[i].time != NULL)
 		{
-			terra_start_stop_print(&c->clocks[i].time);
+			terra_start_stop_print(c->clocks[i].time);
 		}
 		else
 		{
