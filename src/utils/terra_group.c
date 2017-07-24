@@ -78,7 +78,6 @@ BOOL terra_group_read(terra_group * const group)
 	if (read(group_h, group->name, GROUP_NAME_MAX) == -1)
 	{
 		terra_log_error("[terra_group_read] failed to read group file\n");
-		UNLOCK();
 		status = FALSE;
 	}
 
