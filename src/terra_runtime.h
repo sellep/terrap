@@ -11,7 +11,7 @@
 #include "utils/terra_lock.h"
 #include "utils/terra_time.h"
 #include "utils/terra_daemon.h"
-#include "utils/terra_group.h"
+#include "utils/terra_mode.h"
 #include "switch/terra_switch.h"
 #include "led/terra_led.h"
 #include "hygro/terra_hygro.h"
