@@ -27,9 +27,9 @@ static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const
 
 	for (i = 0; i < clock->mode_len; i++)
 	{
-		if (strcmp(RUNTIME_MODE, clock->mode[i].name) == 0)
+		if (strcmp(RUNTIME_MODE, clock->modes[i].name) == 0)
 		{
-			time[0] = &clock->mode[i].time;
+			time[0] = &clock->modes[i].time;
 			return TRUE;
 		}
 	}
