@@ -42,7 +42,7 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 
 BOOL terra_mode_write(terra_mode mode)
 {
-	char buf[GROUP_NAME_MAX + 1];
+	char buf[MODE_NAME_MAX + 1];
 	int mode_h;
 
 	sprintf(buf, "%s\n", mode);
