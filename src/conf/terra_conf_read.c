@@ -8,7 +8,7 @@ static inline string_copy(char * * const dest, char const * const src)
 	strcpy(dest[0], src);
 }
 
-static inline BOOL parse_start_stop(terra_start_stop * const time, config_setting_ t * const src)
+static inline BOOL parse_start_stop(terra_start_stop * const time, config_setting_t * const src)
 {
 	char *str;
 
@@ -53,7 +53,7 @@ static inline BOOL parse_float(float * const f, config_setting_t const * const s
 		f[0] = (float) i;
 		return TRUE;
 	}
-printf("nooooo\n");
+
 	return FALSE;
 }
 
