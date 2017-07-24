@@ -38,9 +38,14 @@ BOOL terra_group_run(int const argc, char * * const argv)
 
 BOOL terra_group_write(char const * const name)
 {
+	char buf[GROUP_NAME_MAX + 1];
+	int group_h;
+
+	sprintf(buf, "%s\n", name);
+
 	LOCK();
 
-	int group_h = open(GROUP_FILE, O_WRONLY | O_CREAT, OWNER_READ_WRITE);
+	open(GROUP_FILE, O_WRONLY | O_CREAT, OWNER_READ_WRITE);
 
 	if (group_h == -1)
 	{
@@ -50,7 +55,7 @@ BOOL terra_group_write(char const * const name)
 	}
 
 	truncate(group_h, 0);
-	write(group_h, name, strlen(name));
+	write(group_h, buf, strlen(buf));
 	close(group_h);
 
 	UNLOCK();
