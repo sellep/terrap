@@ -49,7 +49,7 @@ BOOL terra_mode_write(terra_mode mode)
 
 	LOCK();
 
-	mode_h = open(MODE_FILE, O_WRONLY | O_CREAT | O_TRUNC);
+	mode_h = open(MODE_FILE, O_WRONLY | O_CREAT | O_TRUNC, USER_WRITE);
 
 	if (mode_h == -1)
 	{
