@@ -11,6 +11,7 @@
 #include "utils/terra_lock.h"
 #include "utils/terra_time.h"
 #include "utils/terra_daemon.h"
+#include "utils/terra_group.h"
 #include "switch/terra_switch.h"
 #include "led/terra_led.h"
 #include "hygro/terra_hygro.h"
@@ -30,6 +31,8 @@ typedef struct
 
 	float temp;
 	float humi;
+
+	terra_group group;
 } terra_runtime;
 
 terra_runtime runtime;
@@ -50,6 +53,8 @@ extern BOOL terra_runtime_init(char const * const);
 
 #define CONF_FREE() terra_conf_free(&runtime.conf)
 #define CONF_LOAD() terra_conf_read(&CONF_GLOBAL, CONF_PATH)
+
+#define RUNTIME_GROUP runtime.group
 
 #define NOW runtime.now
 

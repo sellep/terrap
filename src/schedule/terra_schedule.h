@@ -30,11 +30,13 @@ extern BOOL terra_schedule_dep_check(terra_schedule const * const);
 #define SCHEDULE(s) (&((s)->schedule))
 #define SCHEDULE_ENABLED(s) (s)->enabled
 #define SCHEDULE_DISABLED(s) !(SCHEDULE_ENABLED(s))
+#define SCHEDULE_DISABLE(s) (s)->enabled = FALSE
 
 #define SCHEDULE_NO_DEP(s) (s)->dep == NULL
 #define SCHEDULE_INVERS_DEP(s) (s)->dep[0] == '!'
 
 #define SCHEDULE_NOT_RUN(s) (s)->run == FALSE
+#define SCHEDULE_IN_GROUP(s) (RUNTIME_GROUP == NULL || (s)->group == NULL || strcmp(RUNTIME_GROUP, (s)->group) == 0)
 
 #define SCHEDULE_SWITCH_SET_ON(s) terra_schedule_set_switch_on(s)
 #define SCHEDULE_SWITCH_SET_OFF(s) terra_schedule_set_switch_off(s)
