@@ -8,31 +8,31 @@ static inline string_copy(char * * const dest, char const * const src)
 	strcpy(dest[0], src);
 }
 
-static inline BOOL parse_start_stop(terra_start_stop * const time, config_setting_t * const src)
+static inline int parse_start_stop(terra_start_stop * const time, config_setting_t * const src)
 {
 	char *str;
 
 	if (!config_setting_lookup_string(src, "start", &str))
-		return FALSE;
+		return 0;
 
 	if (!terra_time_parse(&time->start, str, HOUR_MIN_SEC))
 	{
 		terra_log_error("[parse_start_stop] invalid start time (%s)\n", str);
-		return FALSE;
+		return -1;
 	}
 
 	if (!config_setting_lookup_string(src, "stop", &str))
 	{
 		terra_log_error("[parse_start_stop] missing stop time\n");
-		return FALSE;
+		return -1;
 	}
 	if (!terra_time_parse(&time->stop, str, HOUR_MIN_SEC))
 	{
 		terra_log_error("[parse_start_stop] invalid stop time (%s)\n", str);
-		return FALSE;
+		return -1;
 	}
 
-	return TRUE;
+	return 1;
 }
 
 static inline BOOL parse_float(float * const f, config_setting_t const * const src, char const * const name)
@@ -187,9 +187,10 @@ static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, confi
 
 		string_copy(&dest->modes[i].name, str);
 
-		if (!parse_start_stop(&dest->modes[i].time, src_mode))
+		if (parse_start_stop(&dest->modes[i].time, src_mode) <= 0)
 		{
-			dest->modes[i].time = NULL;
+			terra_log_error("[terra_conf_clock_mode_parse] error parsing start stop time\n");
+			return FALSE;
 		}
 	}
 
@@ -202,6 +203,7 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 	config_setting_t *src_clock;
 	char *str;
 	size_t i;
+	int result;
 
 	src_clocks = config_lookup(src, "clocks");
 
@@ -220,10 +222,19 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 
 		SCHEDULE_SET_TYPE(&dest->clocks[i].schedule, SCHEDULE_CLOCK);
 
-		if (!parse_start_stop(&dest->clocks[i].time, src_clock))
+		result = parse_start_stop(&dest->clocks[i].time_val, src_clock);
+		if (result == -1)
 		{
 			terra_log_error("[terra_conf_clocks_parse] failed to parse start stop time\n");
 			return FALSE;
+		}
+		if (result == TRUE)
+		{
+			dest->clocks[i].time = &dest->clocks[i].time_val;
+		}
+		else
+		{
+			dest->clocks[i].time = NULL;
 		}
 
 		if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))

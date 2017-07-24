@@ -24,7 +24,7 @@ static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const
 		if (clock->time == NULL)
 			return FALSE;
 
-		time[0] = &clock->time;
+		time[0] = clock->time;
 		return TRUE;
 	}
 
@@ -40,7 +40,7 @@ static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const
 	if (clock->time == NULL)
 		return FALSE;
 
-	time[0] = &clock->time;
+	time[0] = clock->time;
 	return TRUE;
 }
 
