@@ -147,7 +147,7 @@ static BOOL terra_conf_clock_mode_parse(terra_schedule_clock * const dest, confi
 	{
 		src_mode = config_setting_get_elem(src_modes, i);
 
-		if (!config_setting_lookup_string(src_mode, "name", &str))
+		if (!config_setting_lookup_string(src_mode, "mode", &str))
 		{
 			terra_log_error("[terra_conf_clock_mode_parse] missing mode name\n");
 			return FALSE;
