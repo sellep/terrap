@@ -97,7 +97,7 @@ BOOL terra_mode_read(terra_mode * const mode)
 
 	mode[0] = (char*) malloc(sizeof(char) * MODE_NAME_MAX);
 	strcpy(mode[0], buf);
-	//mode[0][n - 2] = '\0';
+	mode[0][strlen(buf) - 1] = '\0';
 
 	return status;
 }
