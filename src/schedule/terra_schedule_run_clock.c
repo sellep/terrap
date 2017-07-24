@@ -41,7 +41,7 @@ static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const
 void terra_schedule_run_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
-	terra_time *time;
+	terra_start_stop *time;
 
 	if (!terra_schedule_dep_check(sched))
 		goto end;
