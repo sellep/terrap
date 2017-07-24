@@ -45,7 +45,7 @@ BOOL terra_group_write(char const * const name)
 
 	LOCK();
 
-	open(GROUP_FILE, O_WRONLY | O_CREAT, OWNER_READ_WRITE);
+	group_h = open(GROUP_FILE, O_WRONLY | O_CREAT, OWNER_READ_WRITE);
 
 	if (group_h == -1)
 	{
