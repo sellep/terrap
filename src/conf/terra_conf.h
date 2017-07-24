@@ -3,7 +3,7 @@
 
 #include "../terra_defs.h"
 #include "../utils/terra_time.h"
-#include "../utils/terra_group.h"
+#include "../utils/terra_mode.h"
 #include "../led/terra_led.h"
 #include "../switch/terra_switch.h"
 #include "../hygro/terra_hygro.h"
