@@ -107,7 +107,7 @@ static inline void schedule_run_schedules()
 	}
 }
 
-static void schedule_init()
+static BOOL schedule_init()
 {
 	terra_schedule *sched;
 	terra_schedule_clock *clock;
