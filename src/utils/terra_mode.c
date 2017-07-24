@@ -5,7 +5,7 @@
 #define ARG_MODE_WRITE "write"
 #define MODE_FILE "/var/lib/terra/mode"
 
-extern BOOL terra_mode_write(char const * const);
+extern BOOL terra_mode_write(terra_mode);
 
 BOOL terra_mode_run(int const argc, char * * const argv)
 {
