@@ -224,11 +224,11 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 			return FALSE;
 		}
 
-		if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))
+		/*if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))
 		{
 			terra_log_error("[terra_conf_clocks_parse] failed to parse clock modes\n");
 			return FALSE;
-		}
+		}*/
 	}
 
 	return TRUE;
