@@ -115,7 +115,10 @@ static inline void terra_conf_free(terra_conf * const conf)
 	{
 		terra_schedule_free(&conf->clocks[i].schedule);
 
-		free(conf->clocks[i].times);
+		if (conf->clocks[i].mode_len > 0)
+		{
+			free(conf->clocks[i].modes);
+		}
 	}
 
 	for (i = 0; i < conf->temp_len; i++)
