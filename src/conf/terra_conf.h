@@ -38,7 +38,7 @@ typedef struct
 
 typedef struct
 {
-	char name[20];
+	char *name;
 	terra_start_stop time;
 } terra_schedule_clock_mode;
 
