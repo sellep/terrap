@@ -9,17 +9,18 @@ extern BOOL terra_mode_write(terra_mode);
 
 BOOL terra_mode_run(int const argc, char * * const argv)
 {
-	char mode[MODE_NAME_MAX];
+	terra_mode mode;
 
 	if (argc == 2)
 	{
-		if (!terra_mode_read(mode))
+		if (!terra_mode_read(&mode))
 		{
 			terra_log_error("[terra_mode_run] failed to read group\n");
 			return FALSE;
 		}
 
 		terra_log_info("[terra_mode_run] %s\n", mode);
+		free(mode);
 	}
 	else if (argc == 4)
 	{
