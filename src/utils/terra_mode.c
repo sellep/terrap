@@ -95,12 +95,12 @@ BOOL terra_mode_read(terra_mode * const mode)
 	close(mode_h);
 
 	UNLOCK();
-	
+
 	printf("n: %i\n", n);
 
-	mode[0] = (char*) malloc(sizeof(char) * n);
-	strcpy(mode[0], buf);
-	//mode[0][n - 1] = '\0';
+	mode[0] = (char*) malloc(sizeof(char) * (n - 1));
+	strncpy(mode[0], buf, n - 1);
+	mode[0][n - 2] = '\0';
 
 	return status;
 }
