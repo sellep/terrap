@@ -45,7 +45,7 @@ BOOL terra_group_write(char const * const name)
 
 	LOCK();
 
-	group_h = open(GROUP_FILE, O_WRONLY | O_CREAT, OWNER_READ_WRITE);
+	group_h = open(GROUP_FILE, O_WRONLY | O_CREAT | O_TRUNC , OWNER_READ_WRITE);
 
 	if (group_h == -1)
 	{
@@ -54,7 +54,6 @@ BOOL terra_group_write(char const * const name)
 		return FALSE;
 	}
 
-	truncate(group_h, 0);
 	write(group_h, buf, strlen(buf));
 	close(group_h);
 
