@@ -6,9 +6,9 @@ static BOOL clock_set_timep(terra_schedule_clock * const clock)
 
 	if (RUNTIME_MODE == null)
 	{
-		if (clock->time_def)
+		if (clock->time_def_set)
 		{
-			clock->timep = &clock->time;
+			clock->time = &clock->time_def;
 			return TRUE;
 		}
 
@@ -19,7 +19,7 @@ static BOOL clock_set_timep(terra_schedule_clock * const clock)
 	{
 		if (strcmp(RUNTIME_MODE, clock->modes[i].name) == 0)
 		{
-			clock->timep = &clock->modes[i].time;
+			clock->time = &clock->modes[i].time;
 			return TRUE;
 		}
 	}
@@ -56,8 +56,8 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 		goto end;
 
 	if (
-			terra_time_diff(&NOW, &clock->timep->start) == 0
-		||	terra_time_between(&NOW, &clock->timep->start, &clock->timep->stop)
+			terra_time_diff(&NOW, &clock->time->start) == 0
+		||	terra_time_between(&NOW, &clock->time->start, &clock->time->stop)
 	)
 	{
 		if (RUNTIME_SWITCH_NOT_ON(sched->socket))

@@ -63,10 +63,10 @@ void terra_conf_print(terra_conf const * const c)
 		printf("\n###### clock %hu ######\n", i);
 		print_schedule(&c->clocks[i].schedule);
 
-		printf("time = ");
-		if (c->clocks[i].time != NULL)
+		printf("time (default) = ");
+		if (c->clocks[i].time_def_set)
 		{
-			terra_start_stop_print(c->clocks[i].time);
+			terra_start_stop_print(&c->clocks[i].time_def);
 		}
 		else
 		{
@@ -75,7 +75,7 @@ void terra_conf_print(terra_conf const * const c)
 
 		for (j = 0; j < c->clocks[i].mode_len; j++)
 		{
-			printf("mode %s = ", c->clocks[i].modes[j].name);
+			printf("mode (%s) = ", c->clocks[i].modes[j].name);
 			terra_start_stop_print(&c->clocks[i].modes[j].time);
 		}
 	}

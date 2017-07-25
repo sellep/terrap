@@ -222,14 +222,14 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 
 		SCHEDULE_SET_TYPE(&dest->clocks[i].schedule, SCHEDULE_CLOCK);
 
-		result = parse_start_stop(&dest->clocks[i].time_val, src_clock);
+		result = parse_start_stop(&dest->clocks[i].time_def, src_clock);
 		if (result == -1)
 		{
-			terra_log_error("[terra_conf_clocks_parse] failed to parse start stop time\n");
+			terra_log_error("[terra_conf_clocks_parse] failed to parse default start stop time\n");
 			return FALSE;
 		}
 
-		&dest->clocks[i].time_def = result;
+		&dest->clocks[i].time_def_set = result;
 
 		if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))
 		{

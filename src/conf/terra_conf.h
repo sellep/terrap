@@ -46,13 +46,13 @@ typedef struct
 {
 	terra_schedule schedule;
 
-	terra_start_stop time;
-	BOOL time_def;
+	terra_start_stop time_def;
+	BOOL time_def_set;
 
 	int mode_len;
 	terra_schedule_clock_mode *modes;
 
-	terra_start_stop *timep;
+	terra_start_stop *time;
 } terra_schedule_clock;
 
 typedef struct
