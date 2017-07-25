@@ -91,6 +91,7 @@ BOOL terra_mode_read(terra_mode * const mode)
 	char buf[MODE_NAME_MAX + 1];
 	BOOL status;
 	int mode_h;
+	int n;
 
 	status = TRUE;
 
@@ -104,9 +105,12 @@ BOOL terra_mode_read(terra_mode * const mode)
 		return FALSE;
 	}
 
-	if (read(mode_h, buf, sizeof buf) == -1)
+	if ((n = read(mode_h, buf, sizeof buf)) == -1)
 	{
 		terra_log_error("[terra_mode_read] failed to read mode file\n");
+	}
+	else if (n < 1)
+	{
 		status = FALSE;
 	}
 
@@ -114,9 +118,12 @@ BOOL terra_mode_read(terra_mode * const mode)
 
 	UNLOCK();
 
-	mode[0] = (char*) malloc(sizeof(char) * MODE_NAME_MAX);
-	strcpy(mode[0], buf);
-	mode[0][strlen(buf) - 1] = '\0';
+	if (status)
+	{
+		mode[0] = (char*) malloc(sizeof(char) * MODE_NAME_MAX);
+		strcpy(mode[0], buf);
+		mode[0][strlen(buf) - 1] = '\0';
+	}
 
 	return status;
 }
