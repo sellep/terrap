@@ -146,6 +146,11 @@ void terra_schedule_run()
 	if (!terra_signal_reg())
 		goto exit;
 
+	if (!terra_mode_read(&RUNTIME_MODE))
+	{
+		RUNTIME_MODE = NULL;
+	}
+
 	schedule_init();
 
 	runtime.switch_modes[0] = SWITCH_UNKNOWN;
