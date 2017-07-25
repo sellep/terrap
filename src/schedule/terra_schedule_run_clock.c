@@ -1,5 +1,32 @@
 #include "terra_schedule.h"
 
+static BOOL clock_set_timep(terra_schedule_clock * const clock)
+{
+	size_t i;
+
+	if (RUNTIME_MODE == null)
+	{
+		if (clock->time_def)
+		{
+			clock->timep = &clock->time;
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	for (i = 0; i < clock->mode_len; i++)
+	{
+		if (strcmp(RUNTIME_MODE, clock->modes[i].name) == 0)
+		{
+			clock->timep = &clock->modes[i].time;
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
 void terra_schedule_init_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
@@ -7,52 +34,25 @@ void terra_schedule_init_clock(terra_schedule_clock * const clock)
 	if (SCHEDULE_ENABLED(sched))
 	{
 		sched->enabled = terra_schedule_dep_enabled(sched);
-
 		if (SCHEDULE_DISABLED(sched))
 		{
-			terra_log_info("[terra_schedule_init_clock] disabled schedule %s\n", sched->name);
+			terra_log_info("[terra_schedule_init_clock] schedule %s disabled by dependency\n", sched->name);
+			return;
 		}
-	}
-}
 
-static BOOL clock_get_time(terra_time * * const time, terra_schedule_clock const * const clock)
-{
-	size_t i;
-
-	if (RUNTIME_MODE == NULL)
-	{
-		if (clock->time == NULL)
-			return FALSE;
-
-		time[0] = clock->time;
-		return TRUE;
-	}
-
-	for (i = 0; i < clock->mode_len; i++)
-	{
-		if (strcmp(RUNTIME_MODE, clock->modes[i].name) == 0)
+		sched->enabled = clock_set_timep(clock);
+		if (SCHEDULE_DISABLED(sched))
 		{
-			time[0] = &clock->modes[i].time;
-			return TRUE;
+			terra_log_info("[terra_schedule_init_clock] schedule %s disabled by mode\n", sched->name);
 		}
 	}
-
-	if (clock->time == NULL)
-		return FALSE;
-
-	time[0] = clock->time;
-	return TRUE;
 }
 
 void terra_schedule_run_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
-	terra_start_stop *time;
 
 	if (!terra_schedule_dep_check(sched))
-		goto end;
-
-	if(!clock_get_time(&time, clock))
 		goto end;
 
 	if (

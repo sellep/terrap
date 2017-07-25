@@ -13,7 +13,7 @@ static inline int parse_start_stop(terra_start_stop * const time, config_setting
 	char *str;
 
 	if (!config_setting_lookup_string(src, "start", &str))
-		return 0;
+		return FALSE;
 
 	if (!terra_time_parse(&time->start, str, HOUR_MIN_SEC))
 	{
@@ -32,7 +32,7 @@ static inline int parse_start_stop(terra_start_stop * const time, config_setting
 		return -1;
 	}
 
-	return 1;
+	return TRUE;
 }
 
 static inline BOOL parse_float(float * const f, config_setting_t const * const src, char const * const name)
@@ -228,14 +228,8 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 			terra_log_error("[terra_conf_clocks_parse] failed to parse start stop time\n");
 			return FALSE;
 		}
-		if (result == TRUE)
-		{
-			dest->clocks[i].time = &dest->clocks[i].time_val;
-		}
-		else
-		{
-			dest->clocks[i].time = NULL;
-		}
+
+		&dest->clocks[i].time_def = result;
 
 		if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))
 		{
