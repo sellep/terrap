@@ -32,7 +32,7 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 			return FALSE;
 		}
 
-		return terra_mode_write("");
+		return terra_mode_write(NULL);
 	}
 	else if (argc == 4)
 	{
@@ -58,7 +58,14 @@ BOOL terra_mode_write(terra_mode mode)
 	char buf[MODE_NAME_MAX + 1];
 	int mode_h;
 
-	sprintf(buf, "%s\n", mode);
+	if (mode == NULL)
+	{
+		buf[0] = "\0";
+	}
+	else
+	{
+		sprintf(buf, "%s\n", mode);
+	}
 
 	LOCK();
 
