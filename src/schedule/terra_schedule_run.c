@@ -146,7 +146,11 @@ void terra_schedule_run()
 	if (!terra_signal_reg())
 		goto exit;
 
-	if (!terra_mode_read(&RUNTIME_MODE))
+	if (terra_mode_read(&RUNTIME_MODE))
+	{
+		terra_log_info("[terra_schedule_run] mode %s\n", RUNTIME_MODE);
+	}
+	else
 	{
 		RUNTIME_MODE = NULL;
 	}
