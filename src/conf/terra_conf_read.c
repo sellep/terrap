@@ -229,7 +229,7 @@ static BOOL terra_conf_clocks_parse(terra_conf * const dest, config_t const * co
 			return FALSE;
 		}
 
-		&dest->clocks[i].time_def_set = result;
+		dest->clocks[i].time_def_set = result;
 
 		if (!terra_conf_clock_mode_parse(&dest->clocks[i], src_clock))
 		{
