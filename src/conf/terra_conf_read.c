@@ -249,7 +249,7 @@ static BOOL terra_conf_temps_parse(terra_conf * const dest, config_t const * con
 	size_t i;
 	double val;
 
-	if (!src_temps = config_lookup(src, "temps"))
+	if (!(src_temps = config_lookup(src, "temps")))
 		return TRUE;
 
 	dest->temp_len = config_setting_length(src_temps);
@@ -290,7 +290,7 @@ static BOOL terra_conf_periods_parse(terra_conf * const dest, config_t const * c
 	char *str;
 	size_t i;
 
-	if (!src_periods = config_lookup(src, "periods"))
+	if (!(src_periods = config_lookup(src, "periods")))
 		return TRUE;
 
 	dest->period_len = config_setting_length(src_periods);
