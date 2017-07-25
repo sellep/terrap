@@ -56,8 +56,8 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 		goto end;
 
 	if (
-			terra_time_diff(&NOW, &time->start) == 0
-		||	terra_time_between(&NOW, &time->start, &time->stop)
+			terra_time_diff(&NOW, &clock->timep->start) == 0
+		||	terra_time_between(&NOW, &clock->timep->start, &clock->timep->stop)
 	)
 	{
 		if (RUNTIME_SWITCH_NOT_ON(sched->socket))
