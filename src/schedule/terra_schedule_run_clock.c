@@ -4,7 +4,7 @@ static BOOL clock_set_timep(terra_schedule_clock * const clock)
 {
 	size_t i;
 
-	if (RUNTIME_MODE == null)
+	if (RUNTIME_MODE == NULL)
 	{
 		if (clock->time_def_set)
 		{
