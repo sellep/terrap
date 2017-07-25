@@ -16,10 +16,7 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 	if (argc == 2)
 	{
 		if (!terra_mode_read(&mode))
-		{
-			terra_log_error("[terra_mode_run] failed to read group\n");
-			return FALSE;
-		}
+			return TRUE;
 
 		terra_log_info("[terra_mode_run] %s\n", mode);
 		free(mode);
