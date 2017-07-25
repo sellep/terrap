@@ -55,6 +55,11 @@ void terra_schedule_run_clock(terra_schedule_clock * const clock)
 	if (!terra_schedule_dep_check(sched))
 		goto end;
 
+	printf("start = ");
+	terra_time_print(&clock->time->start);
+	printf("stop = ");
+	terra_time_print(&clock->time->stop);
+	
 	if (
 			terra_time_diff(&NOW, &clock->time->start) == 0
 		||	terra_time_between(&NOW, &clock->time->start, &clock->time->stop)
