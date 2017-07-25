@@ -22,10 +22,10 @@ BOOL terra_runtime_init(char const * const conf_path)
 		return FALSE;
 	}
 
-	/*if (!terra_mode_read(&runtime.mode))
+	if (!terra_mode_read(&runtime.mode))
 	{
 		runtime.mode = NULL;
-	}*/
+	}
 
 	runtime.hygro_err = 0;
 
