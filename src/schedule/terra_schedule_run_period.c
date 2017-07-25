@@ -15,7 +15,7 @@ void terra_schedule_init_period(terra_schedule_period * const period)
 
 		if (SCHEDULE_DISABLED(sched))
 		{
-			terra_log_info("[terra_schedule_init_period] disabled schedule %s\n", sched->name);
+			terra_log_info("[terra_schedule_init_period] schedule %s disabled by dependency\n", sched->name);
 		}
 		else
 		{
