@@ -3,6 +3,8 @@
 #include "terra_lock.h"
 
 #define ARG_MODE_WRITE "write"
+#define ARG_MODE_RESET "reset"
+
 #define MODE_FILE "/var/lib/terra/mode"
 
 extern BOOL terra_mode_write(terra_mode);
@@ -21,6 +23,16 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 
 		terra_log_info("[terra_mode_run] %s\n", mode);
 		free(mode);
+	}
+	else if (argc == 3)
+	{
+		if (strcmp(argv[2], ARG_MODE_RESET) != 0)
+		{
+			terra_log_error("[terra_mode_run] invalid mode %s\n", argv[2]);
+			return FALSE;
+		}
+
+		return terra_mode_write("");
 	}
 	else if (argc == 4)
 	{
