@@ -58,11 +58,7 @@ BOOL terra_mode_write(terra_mode mode)
 	char buf[MODE_NAME_MAX + 1];
 	int mode_h;
 
-	if (mode == NULL)
-	{
-		buf[0] = "\0";
-	}
-	else
+	if (mode != NULL)
 	{
 		sprintf(buf, "%s\n", mode);
 	}
@@ -78,7 +74,11 @@ BOOL terra_mode_write(terra_mode mode)
 		return FALSE;
 	}
 
-	write(mode_h, buf, strlen(buf));
+	if (mode != NULL)
+	{
+		write(mode_h, buf, strlen(buf));
+	}
+
 	close(mode_h);
 
 	UNLOCK();
