@@ -61,32 +61,7 @@ void terra_conf_print(terra_conf const * const c)
 	for (i = 0; i < c->clock_len; i++)
 	{
 		printf("\n###### clock %hu ######\n", i);
-		print_schedule(&c->clocks[i].schedule);
-
-		printf("time (default) = ");
-		if (c->clocks[i].time_def_set)
-		{
-			terra_start_stop_print(&c->clocks[i].time_def);
-		}
-		else
-		{
-			printf("(null)\n");
-		}
-
-		for (j = 0; j < c->clocks[i].mode_len; j++)
-		{
-			printf("mode (%s) = ", c->clocks[i].modes[j].name);
-			terra_start_stop_print(&c->clocks[i].modes[j].time);
-		}
-	}
-
-	for (i = 0; i < c->temp_len; i++)
-	{
-		printf("\n###### temp %hu ######\n", i);
-		print_schedule(&c->temps[i].schedule);
-
-		printf("activation = %.2f\n", c->temps[i].act);
-		printf("deactivation = %.2f\n", c->temps[i].deact);
+		terra_conf_clock_print(&c->clock[i]);
 	}
 
 	for (i = 0; i < c->period_len; i++)
@@ -104,4 +79,11 @@ void terra_conf_print(terra_conf const * const c)
 
 		printf("active_first = %i\n", c->periods[i].act_first);
 	}
+
+	for (i = 0; i < c->hygro_len; i++)
+	{
+		printf("\n###### hygro %hu ######\n", i);
+		terra_conf_hygro_print(&c->hygro[i]);
+	}
+
 }

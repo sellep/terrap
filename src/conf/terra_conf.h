@@ -16,8 +16,7 @@ enum schedule_types
 {
 	SCHEDULE_CLOCK,
 	SCHEDULE_PERIOD,
-	SCHEDULE_TEMP,
-	SCHEDULE_HUMI
+	SCHEDULE_HYGRO
 };
 
 typedef int schedule_type;
@@ -34,46 +33,7 @@ typedef struct
 	char *dep;
 
 	BOOL run;
-} terra_schedule;
-
-typedef struct
-{
-	char *name;
-	terra_start_stop time;
-} terra_schedule_clock_mode;
-
-typedef struct
-{
-	terra_schedule schedule;
-
-	terra_start_stop time_def;
-	BOOL time_def_set;
-
-	int mode_len;
-	terra_schedule_clock_mode *modes;
-
-	terra_start_stop *time;
-} terra_schedule_clock;
-
-typedef struct
-{
-	terra_schedule schedule;
-
-	float act;
-	float deact;
-} terra_schedule_temp;
-
-typedef struct
-{
-	terra_schedule schedule;
-
-	size_t act;
-	size_t deact;
-	BOOL act_first;
-	BOOL run_act_first;
-
-	terra_time start;
-} terra_schedule_period;
+} terra_conf_schedule;
 
 typedef struct
 {

@@ -8,7 +8,7 @@ static inline string_copy(char * * const dest, char const * const src)
 	strcpy(dest[0], src);
 }
 
-static inline int parse_start_stop(terra_start_stop * const time, config_setting_t * const src)
+/*static inline int parse_start_stop(terra_start_stop * const time, config_setting_t * const src)
 {
 	char *str;
 
@@ -33,9 +33,9 @@ static inline int parse_start_stop(terra_start_stop * const time, config_setting
 	}
 
 	return TRUE;
-}
+}*/
 
-static inline BOOL parse_float(float * const f, config_setting_t const * const src, char const * const name)
+/*static inline BOOL parse_float(float * const f, config_setting_t const * const src, char const * const name)
 {
 	int i;
 	double d;
@@ -53,7 +53,7 @@ static inline BOOL parse_float(float * const f, config_setting_t const * const s
 	}
 
 	return FALSE;
-}
+}*/
 
 static inline void terra_conf_global_parse(terra_conf * const dest, config_t const * const src)
 {
