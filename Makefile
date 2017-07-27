@@ -30,9 +30,8 @@ OBJ=pi_2_mmio.o \
 	terra_visual_draw_grid.o \
 	terra_visual_draw_labels.o \
 	terra_runtime.o \
-	terra_schedule_run_clock.o \
-	terra_schedule_run_temp.o \
-	terra_schedule_dependency.o \
+	terra_schedule_clock.o \
+	terra_schedule_hygro.o \
 	terra_schedule_run.o \
 	terra_schedule_arg.o \
 	terra_signal.o \
