@@ -1,8 +1,6 @@
-#include "terra_schedule_hygro.h"
+#include "terra_schedule.h"
 
-#include "../conf/terra_conf_hygro.h"
-
-static inline BOOL hygro_mode_check(terra_schedule_hygro * const hygro, terra_schedule const * const sched)
+static inline BOOL hygro_mode_init(terra_schedule_hygro * const hygro, terra_schedule const * const sched)
 {
 	size_t i;
 
@@ -29,39 +27,36 @@ static inline BOOL hygro_mode_check(terra_schedule_hygro * const hygro, terra_sc
 	return FALSE;
 }
 
-void terra_schedule_hygro_init(terra_schedule_hygro * const hygro)
+BOOL terra_schedule_hygro_init(terra_schedule_hygro * const hygro)
 {
 	terra_schedule *sched = SCHEDULE(hygro);
 
 	if (SCHHEDULE_DISABLED(sched))
-		return;
+		return FALSE;
 
-	//dependency check
+	//dependency init
 
-	SCHEDULE_DEP_INIT(sched);
-
-	if (SCHEDULE_DEP_DISABLED(sched))
+	if (!SCHEDULE_DEP_INIT(sched))
 	{
 		SCHEDULE_DISABLE(sched);
 		terra_log_info("[terra_schedule_hygro_init] schedule %s disabled by dependency\n", sched->name);
-		return;
 	}
 
-	//mode check
+	//mode init
 
-	if (!hygro_mode_check(hygro, sched))
+	else if (!hygro_mode_init(hygro, sched))
 	{
 		SCHEDULE_DISABLE(sched);
 		terra_log_info("[terra_schedule_hygro_init] schedule %s disabled by mode\n", sched->name);
 	}
+
+	return sched->enabled;
 }
 
-void terra_schedule_hygro_run(terra_conf_hygro const * const hygro)
+void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule * const sched)
 {
-	terra_schedule *sched = SCHEDULE(hygro);
-
 	if (!SCHEDULE_DEP_RUN(sched))
-		return;
+		goto end;
 
 	if (hygro->set->target == HYGRO_HUMI)
 	{
@@ -114,5 +109,8 @@ void terra_schedule_hygro_run(terra_conf_hygro const * const hygro)
 			}
 		}
 	}
+
+end:
+	SCHEDULE_RUN_FINISHED(sched);
 }
 
