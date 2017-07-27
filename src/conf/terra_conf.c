@@ -54,8 +54,6 @@ void terra_conf_print(terra_conf const * const c)
 
 void terra_conf_free(terra_conf * const conf)
 {
-	size_t i;
-
 	free(conf->sw.groups);
 
 	terra_conf_schedule_clock_free(conf->clocks, conf->clock_len);
