@@ -134,7 +134,7 @@ void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hyg
 	}
 }
 
-void terra_conf_hygro_free(terra_conf_schedule_hygro * const hygros, int const hygro_len)
+void terra_conf_schedule_hygro_free(terra_conf_schedule_hygro * const hygros, int const hygro_len)
 {
 	size_t h, m;
 
