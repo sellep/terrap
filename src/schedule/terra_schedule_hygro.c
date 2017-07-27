@@ -31,7 +31,7 @@ BOOL terra_schedule_hygro_init(terra_schedule_hygro * const hygro)
 {
 	terra_schedule *sched = SCHEDULE(hygro);
 
-	if (SCHHEDULE_DISABLED(sched))
+	if (SCHEDULE_DISABLED(sched))
 		return FALSE;
 
 	//dependency init
@@ -64,14 +64,14 @@ void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule
 		{
 			if (RUNTIME_HUMI > hygro->set->humi_act)
 			{
-				RUNTIME_SWITCH_SET_ON(sched);
+				SCHEDULE_SWITCH_SET_ON(sched);
 			}
 		}
 		else if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
 		{
 			if (RUNTIME_HUMI < hugro->set->humi_deact)
 			{
-				RUNTIME_SWITCH_SET_OFF(sched);
+				SCHEDULE_SWITCH_SET_OFF(sched);
 			}
 		}
 	}
@@ -81,14 +81,14 @@ void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule
 		{
 			if (RUNTIME_TEMP > hygro->set->temp_act)
 			{
-				RUNTIME_SWITCH_SET_ON(sched);
+				SCHEDULE_SWITCH_SET_ON(sched);
 			}
 		}
 		else if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
 		{
 			if (RUNTIME_TEMP < hugro->set->temp_deact)
 			{
-				RUNTIME_SWITCH_SET_OFF(sched);
+				SCHEDULE_SWITCH_SET_OFF(sched);
 			}
 		}
 	}
@@ -98,14 +98,14 @@ void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule
 		{
 			if (RUNTIME_HUMI > hygro->set->humi_act || RUNTIME_TEMP > hygro->set->temp_act)
 			{
-				RUNTIME_SWITCH_SET_ON(sched);
+				SCHEDULE_SWITCH_SET_ON(sched);
 			}
 		}
 		else if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
 		{
 			if (RUNTIME_HUMI < hygro->set->humi_deact || RUNTIME_TEMP < hygro->set->temp_deact)
 			{
-				RUNTIME_SWITCH_SET_ON(sched);
+				RUNTIME_SWITCH_SET_OFF(sched);
 			}
 		}
 	}

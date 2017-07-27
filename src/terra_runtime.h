@@ -55,6 +55,7 @@ extern BOOL terra_runtime_init(char const * const);
 #define CONF_LOAD() terra_conf_read(&CONF_GLOBAL, CONF_PATH)
 
 #define RUNTIME_MODE runtime.mode
+#define RUNTIME_DEFAULT_MODE() runtime.mode == NULL
 
 #define NOW runtime.now
 
