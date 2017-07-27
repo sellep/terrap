@@ -87,7 +87,7 @@ BOOL terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks,
 				return FALSE;
 			}
 
-			config_string_copy(&clocks[0][i].modes[j].name, src);
+			config_string_copy(&clocks[0][i].modes[j].name, str);
 
 			if (clock_parse_start_stop(&clocks[0][i].modes[j].time, lib_mode) != TRUE)
 			{
