@@ -1,23 +1,5 @@
 #include "terra_conf.h"
 
-static inline void print_schedule(terra_schedule const * const sched)
-{
-	printf("name = %s\n", sched->name);
-
-	printf("socket = %c\n", sched->socket);
-	if (sched->channel > 0)
-	{
-		printf("channel = %i\n", sched->channel);
-	}
-	else
-	{
-		printf("channel = -\n");
-	}
-
-	printf("enabled = %i\n", sched->enabled);
-	printf("depends = %s\n", sched->dep);
-}
-
 void terra_conf_print(terra_conf const * const c)
 {
 	terra_time time;
@@ -40,7 +22,6 @@ void terra_conf_print(terra_conf const * const c)
 	for (i = 0; i < c->sw.group_len; i++)
 	{
 		printf("\n###### group %hu ######\n", i);
-
 		printf("channel = %i\n", c->sw.groups[i].channel);
 		printf("code_aon = %i\n", c->sw.groups[i].code_aon);
 		printf("code_aoff = %i\n", c->sw.groups[i].code_aoff);
@@ -61,29 +42,22 @@ void terra_conf_print(terra_conf const * const c)
 	for (i = 0; i < c->clock_len; i++)
 	{
 		printf("\n###### clock %hu ######\n", i);
-		terra_conf_clock_print(&c->clock[i]);
-	}
-
-	for (i = 0; i < c->period_len; i++)
-	{
-		printf("\n###### period %hu ######\n", i);
-		print_schedule(&c->periods[i].schedule);
-
-		terra_time_from_int(&time, c->periods[i].act);
-		printf("activation = ");
-		terra_time_print(&time);
-
-		terra_time_from_int(&time, c->periods[i].deact);
-		printf("deactivation = ");
-		terra_time_print(&time);
-
-		printf("active_first = %i\n", c->periods[i].act_first);
+		terra_conf_schedule_clock_print(&c->clock[i]);
 	}
 
 	for (i = 0; i < c->hygro_len; i++)
 	{
 		printf("\n###### hygro %hu ######\n", i);
-		terra_conf_hygro_print(&c->hygro[i]);
+		terra_conf_schedule_hygro_print(&c->hygro[i]);
 	}
+}
 
+void terra_conf_free(terra_conf * const conf)
+{
+	size_t i;
+
+	free(conf->sw.groups);
+
+	terra_conf_schedule_clock_free(conf->clocks, conf->clock_len);
+	terra_conf_schedule_hygro_free(conf->hygros, conf->hygro_len);
 }

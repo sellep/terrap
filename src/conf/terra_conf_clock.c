@@ -27,7 +27,7 @@ static inline int clock_parse_start_stop(terra_start_stop * const time, config_s
 	return TRUE;
 }
 
-BOOL terra_conf_clock_parse(terra_conf_clock * * const conf, int * const len, config_t * const lib)
+BOOL terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks, int * const len, config_t * const lib)
 {
 	config_setting_t *lib_clocks;
 	config_setting_t *lib_clock;
@@ -46,37 +46,37 @@ BOOL terra_conf_clock_parse(terra_conf_clock * * const conf, int * const len, co
 	if (len[0] == 0)
 		return TRUE;
 
-	conf[0] = (terra_conf_clock*) malloc(sizeof(terra_conf_clock) * len[0]);
+	clocks[0] = (terra_conf_schedule_clock*) malloc(sizeof(terra_conf_schedule_clock) * len[0]);
 
 	for (i = 0; i < len[0]; i++)
 	{
 		lib_clock = config_setting_get_elem(lib_clocks, i);
 
-		if (!terra_conf_schedule_parse(&conf[0][i].schedule, lib_clock, SCHEDULE_CLOCK))
+		if (!terra_conf_schedule_parse(&clocks[0][i].schedule, lib_clock, SCHEDULE_CLOCK))
 		{
 			terra_log_error("[terra_conf_clock_parse] failed to parse schedule (%zu)\n", i);
 			return FALSE;
 		}
 
-		status = clock_parse_start_stop(&conf[0][i].default_time, lib_clock);
+		status = clock_parse_start_stop(&clocks[0][i].default_time, lib_clock);
 		if (status == -1)
 		{
 			terra_log_error("[terra_conf_clock_parse] failed to parse default start stop time (%s)\n", conf[0][i].schedule.name);
 			return FALSE;
 		}
 
-		conf[0][i].default_time_set = status;
+		clocks[0][i].default_time_set = status;
 
 		if (!(lib_modes = config_setting_lookup(lib_clock, "modes")))
 			return TRUE;
 
-		conf[0][i].mode_len = config_setting_length(lib_modes);
-		if (conf[0][i].mode_len == 0)
+		clocks[0][i].mode_len = config_setting_length(lib_modes);
+		if (clocks[0][i].mode_len == 0)
 			return TRUE;
 
-		conf[0][i].modes = (terra_clock_mode*) malloc(sizeof(terra_clock_mode) * conf[0][i].mode_len);
+		clocks[0][i].modes = (terra_conf_clock_mode*) malloc(sizeof(terra_conf_clock_mode) * clocks[0][i].mode_len);
 
-		for (j = 0; j < conf[0][i].mode_len; j++)
+		for (j = 0; j < clocks[0][i].mode_len; j++)
 		{
 			lib_mode = config_setting_get_elem(lib_modes, j);
 
@@ -86,9 +86,9 @@ BOOL terra_conf_clock_parse(terra_conf_clock * * const conf, int * const len, co
 				return FALSE;
 			}
 
-			config_string_copy(&conf[0][i].modes[j].name, src);
+			config_string_copy(&clocks[0][i].modes[j].name, src);
 
-			if (clock_parse_start_stop(&conf[0][i].modes[j].time, lib_mode) != TRUE)
+			if (clock_parse_start_stop(&clocks[0][i].modes[j].time, lib_mode) != TRUE)
 			{
 				terra_log_error("[terra_conf_clock_parse] failed to parse mode start stop time (%s)\n", conf[0][i].modes[j].name);
 				return FALSE;
@@ -99,30 +99,30 @@ BOOL terra_conf_clock_parse(terra_conf_clock * * const conf, int * const len, co
 	return TRUE;
 }
 
-void terra_conf_clock_print(terra_conf_clock const * const conf)
+void terra_conf_schedule_clock_print(terra_conf_schedule_clock const * const clock)
 {
 	size_t m;
 
-	terra_conf_schedule_print(&conf->schedule);
+	terra_conf_schedule_print(&clock->schedule);
 
 	printf("time (default) = ");
-	if (conf->default_time_set)
+	if (clock->default_time_set)
 	{
-		terra_start_stop_print(&conf->default_time);
+		terra_start_stop_print(&clock->default_time);
 	}
 	else
 	{
 		printf("(null)\n");
 	}
 
-	for (m = 0; m < conf->mode_len; m++)
+	for (m = 0; m < clock->mode_len; m++)
 	{
-		printf("mode (%s) = ", conf->modes[m].name);
-		terra_start_stop_print(&conf->modes[m].time);
+		printf("mode (%s) = ", clock->modes[m].name);
+		terra_start_stop_print(&clock->modes[m].time);
 	}
 }
 
-void terra_conf_clock_free(terra_conf_clock * const clocks, int const clock_len)
+void terra_conf_schedule_clock_free(terra_conf_schedule_clock * const clocks, int const clock_len)
 {
 	size_t c, m;
 

@@ -16,9 +16,12 @@ OBJ=pi_2_mmio.o \
 	terra_data_read.o \
 	terra_mode.o \
 	terra_led_arg.o \
-	terra_conf_read.o \
+	terra_conf_parse.o \
 	terra_conf_print.o \
 	terra_conf_valid.o \
+	terra_conf_schedule.o \
+	terra_conf_clock.o \
+	terra_conf_hygro.o \
 	terra_switch_arg.o \
 	terra_switch_transmit.o \
 	terra_hygro_read.o \
