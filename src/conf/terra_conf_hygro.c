@@ -89,11 +89,11 @@ BOOL terra_conf_schedule_hygro_parse(terra_conf_schedule_hygro * * const hygros,
 				return FALSE;
 			}
 
-			config_string_copy(&hygros[0][i].modes[j].name, src);
+			config_string_copy(&hygros[0][i].modes[j].name, str);
 
 			if (!hygro_parse_set(&hygros[0][i].modes[j].set, lib_mode))
 			{
-				terra_log_error("[terra_conf_hygro_parse] failed to parse mode set (%s)\n", );
+				terra_log_error("[terra_conf_hygro_parse] failed to parse mode set (%s)\n", hygros[0][i].modes[j].name);
 				return FALSE;
 			}
 		}
@@ -108,12 +108,12 @@ void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hyg
 
 	terra_conf_schedule_print(&hygro->schedule);
 
-	if (hygro->default_set.target == HYGRO_BOTH || hygro->default_set.target == HYGRO_HUMI)
+	if (hygro->default_set.target & HYGRO_HUMI)
 	{
 		printf("humi_activation (default) = %.2f\n", hygro->default_set.humi_act);
 		printf("humi_deactivation (default) = %.2f\n", hygro->default_set.humi_deact);
 	}
-	if (hygro->default_set.target == HYGRO_BOTH || hygro->default_set.target == HYGRO_TEMP)
+	if (hygro->default_set.target & HYGRO_TEMP)
 	{
 		printf("temp_activation (default) = %.2f\n", c->hygro[i].default_set.temp_act);
 		printf("temp_deactivation (default) = %.2f\n", c->hygro[i].default_set.temp_deact);
@@ -121,12 +121,12 @@ void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hyg
 
 	for (m = 0; m < hygro->mode_len; m++)
 	{
-		if (hygro->modes[m].set.target == HYGRO_BOTH || hygro->modes[m].set.target == HYGRO_HUMI)
+		if (hygro->modes[m].set.target & HYGRO_HUMI)
 		{
 			printf("humi_activation (%s) = %.2f\n", conf->modes[m].name, hygro->modes[m].set.humi_act);
 			printf("humi_deactivation (%s) = %.2f\n", hygro->modes[m].name, hygro->modes[m].set.humi_deact);
 		}
-		if (hygro->modes[m].set.target == HYGRO_BOTH || hygro->modes[m].set.target == HYGRO_TEMP)
+		if (hygro->modes[m].set.target & HYGRO_TEMP)
 		{
 			printf("temp_activation (%s) = %.2f\n", hygro->modes[m].set.temp_act);
 			printf("temp_deactivation (%s) = %.2f\n", hygro->modes[m].set.temp_deact);
