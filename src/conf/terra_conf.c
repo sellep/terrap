@@ -45,11 +45,11 @@ void terra_conf_print(terra_conf const * const c)
 		terra_conf_schedule_clock_print(&c->clocks[i]);
 	}
 
-	/*for (i = 0; i < c->hygro_len; i++)
+	for (i = 0; i < c->hygro_len; i++)
 	{
 		printf("\n###### hygro %zd ######\n", i);
 		terra_conf_schedule_hygro_print(&c->hygros[i]);
-	}*/
+	}
 }
 
 void terra_conf_free(terra_conf * const conf)
