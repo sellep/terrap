@@ -67,7 +67,7 @@ BOOL terra_schedule_dep_init(terra_schedule const * const base)
 	terra_schedule *dep;
 	BOOL result;
 
-	if (SCHEDULE_INDEPEND(base))
+	if (SCHEDULE_INDEPENDENT(base))
 		return TRUE;
 
 	dep = schedule_dep(base);

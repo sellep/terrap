@@ -20,6 +20,7 @@ OBJ=pi_2_mmio.o \
 	terra_conf_schedule.o \
 	terra_conf_clock.o \
 	terra_conf_hygro.o \
+	terra_conf.o \
 	terra_switch_arg.o \
 	terra_switch_transmit.o \
 	terra_hygro_read.o \
