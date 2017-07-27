@@ -100,7 +100,7 @@ BOOL terra_conf_parse(terra_conf * const conf, char const * const path)
 
 	if (!config_read_file(&lib, path))
 	{
-		terra_log_error("[terra_conf_parse] %s:%d - %s\n",
+		terra_log_error("[terra_conf_parse] %s(%d) - %s\n",
 			config_error_file(&lib),
 			config_error_line(&lib),
 			config_error_text(&lib));
