@@ -16,7 +16,7 @@ static inline BOOL hygro_mode_init(terra_schedule_hygro * const hygro, terra_sch
 	{
 		for (i = 0; i < hygro->mode_len; i++)
 		{
-			if (strcmp(RUNTIME_MODE, hygro->modes[i].name))
+			if (strcmp(RUNTIME_MODE, hygro->modes[i].name) == 0)
 			{
 				hygro->set = &hygro->modes[i].set;
 				return TRUE;

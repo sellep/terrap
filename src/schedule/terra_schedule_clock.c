@@ -1,32 +1,5 @@
 #include "terra_schedule.h"
 
-/*static BOOL clock_set_timep(terra_schedule_clock * const clock)
-{
-	size_t i;
-
-	if (RUNTIME_MODE == NULL)
-	{
-		if (clock->time_def_set)
-		{
-			clock->time = &clock->time_def;
-			return TRUE;
-		}
-
-		return FALSE;
-	}
-
-	for (i = 0; i < clock->mode_len; i++)
-	{
-		if (strcmp(RUNTIME_MODE, clock->modes[i].name) == 0)
-		{
-			clock->time = &clock->modes[i].time;
-			return TRUE;
-		}
-	}
-
-	return FALSE;
-}*/
-
 static inline BOOL clock_mode_init(terra_schedule_clock * const clock, terra_schedule const * const sched)
 {
 	size_t i;
@@ -43,7 +16,7 @@ static inline BOOL clock_mode_init(terra_schedule_clock * const clock, terra_sch
 	{
 		for (i = 0; i < clock->mode_len; i++)
 		{
-			if (strcmp(RUNTIME_MODE, clock->modes[i].name))
+			if (strcmp(RUNTIME_MODE, clock->modes[i].name) == 0)
 			{
 				clock->time = &clock->modes[i].time;
 				return TRUE;
