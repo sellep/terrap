@@ -115,8 +115,8 @@ void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hyg
 	}
 	if (hygro->default_set.target & HYGRO_TEMP)
 	{
-		printf("temp_activation (default) = %.2f\n", c->hygro[i].default_set.temp_act);
-		printf("temp_deactivation (default) = %.2f\n", c->hygro[i].default_set.temp_deact);
+		printf("temp_activation (default) = %.2f\n", hygro->default_set.temp_act);
+		printf("temp_deactivation (default) = %.2f\n", hygro->default_set.temp_deact);
 	}
 
 	for (m = 0; m < hygro->mode_len; m++)
@@ -134,7 +134,7 @@ void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hyg
 	}
 }
 
-void terra_conf_hygro_free(terra_conf_hygro * const hygros, int const hygro_len)
+void terra_conf_hygro_free(terra_conf_schedule_hygro * const hygros, int const hygro_len)
 {
 	size_t h, m;
 
