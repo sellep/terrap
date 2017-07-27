@@ -74,14 +74,14 @@ BOOL terra_schedule_dep_init(terra_schedule const * const base)
 
 	if (SCHEDULE_IS_CLOCK(dep))
 	{
-		result = terra_schedule_clock_init((terra_schedule_clock*) dep);
+		return terra_schedule_clock_init((terra_schedule_clock*) dep);
 	}
 	else if (SCHEDULE_IS_HYGRO(dep))
 	{
-		result = terra_schedule_hygro_init((terra_schedule_hygro*) dep);
+		return terra_schedule_hygro_init((terra_schedule_hygro*) dep);
 	}
 
-	return INVERS_DEP(base) ? !result : result;
+	return FALSE;
 }
 
 void terra_schedule_init()
