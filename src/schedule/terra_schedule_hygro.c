@@ -69,7 +69,7 @@ void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule
 		}
 		else if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
 		{
-			if (RUNTIME_HUMI < hugro->set->humi_deact)
+			if (RUNTIME_HUMI < hygro->set->humi_deact)
 			{
 				SCHEDULE_SWITCH_SET_OFF(sched);
 			}
@@ -105,7 +105,7 @@ void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule
 		{
 			if (RUNTIME_HUMI < hygro->set->humi_deact || RUNTIME_TEMP < hygro->set->temp_deact)
 			{
-				RUNTIME_SWITCH_SET_OFF(sched);
+				SCHEDULE_SWITCH_SET_OFF(sched);
 			}
 		}
 	}
