@@ -6,7 +6,7 @@ static inline BOOL hygro_parse_set(terra_conf_hygro_set * const set, config_sett
 
 	if (config_parse_float(&set->humi_act, lib, "humi_activation"))
 	{
-		if (config_parse_float(&set->humi_deact, lib, "humi_deactivation")
+		if (config_parse_float(&set->humi_deact, lib, "humi_deactivation"))
 		{
 			set->target = HYGRO_HUMI;
 		}

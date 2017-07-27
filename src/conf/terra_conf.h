@@ -68,7 +68,7 @@ typedef int terra_hygro_target;
 typedef struct
 {
 	float humi_act;
-	float humi_dact;
+	float humi_deact;
 	float temp_act;
 	float temp_deact;
 	terra_hygro_target target;
