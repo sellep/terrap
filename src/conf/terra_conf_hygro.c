@@ -1,4 +1,4 @@
-#include "terra_conf_hygro.h"
+#include "terra_conf.h"
 
 static inline BOOL hygro_parse_set(terra_conf_hygro_set * const set, config_setting_t * const lib)
 {

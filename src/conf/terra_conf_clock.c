@@ -1,4 +1,4 @@
-#include "terra_conf_clock.h"
+#include "terra_conf.h"
 
 static inline int clock_parse_start_stop(terra_start_stop * const time, config_setting_t * const lib)
 {
