@@ -56,10 +56,7 @@ BOOL terra_schedule_hygro_init(terra_schedule_hygro * const hygro)
 void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule * const sched)
 {
 	if (!SCHEDULE_DEP_RUN(sched))
-	{
-		printf("%s goto exit\n", sched->name);
 		goto end;
-	}
 
 	if (hygro->set->target == HYGRO_HUMI)
 	{
