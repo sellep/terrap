@@ -88,6 +88,14 @@ static inline void schedule_run_schedules()
 				hygro = SCHEDULE_GET_HYGRO(i);
 				sched = SCHEDULE(hygro);
 
+				if (SCHEDULE_DISABLED(sched))
+				{
+					printf("%s disabled ..\n", sched->name);
+				}
+				if (!(SCHEDULE_NOT_RUN(sched)))
+				{
+					printf("%s already run ..\n", sched->name);
+				}
 				if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 				{
 					terra_schedule_hygro_run(hygro, sched);
