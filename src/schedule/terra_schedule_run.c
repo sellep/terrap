@@ -98,6 +98,7 @@ static inline void schedule_run_schedules()
 				}
 				if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 				{
+					printf("run hygro %s\n", sched->name);
 					terra_schedule_hygro_run(hygro, sched);
 				}
 			}
