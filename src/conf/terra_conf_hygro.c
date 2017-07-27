@@ -83,7 +83,7 @@ BOOL terra_conf_schedule_hygro_parse(terra_conf_schedule_hygro * * const hygros,
 		{
 			lib_mode = config_setting_get_elem(lib_modes, j);
 
-			if (!config_setting_lookup_string(lib_mode, "name", &str))
+			if (!config_setting_lookup_string(lib_mode, "mode", &str))
 			{
 				terra_log_error("[terra_conf_hygro_parse] failed to parse mode name (%zu)\n", j);
 				return FALSE;

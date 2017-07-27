@@ -81,7 +81,7 @@ BOOL terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks,
 		{
 			lib_mode = config_setting_get_elem(lib_modes, j);
 
-			if (!config_setting_lookup_string(lib_mode, "name", &str))
+			if (!config_setting_lookup_string(lib_mode, "mode", &str))
 			{
 				terra_log_error("[terra_conf_clock_parse] failed to parse mode name (%zu)\n", j);
 				return FALSE;
