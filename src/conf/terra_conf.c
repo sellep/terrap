@@ -21,7 +21,7 @@ void terra_conf_print(terra_conf const * const c)
 
 	for (i = 0; i < c->sw.group_len; i++)
 	{
-		printf("\n###### group %hu ######\n", i);
+		printf("\n###### group %zd ######\n", i);
 		printf("channel = %i\n", c->sw.groups[i].channel);
 		printf("code_aon = %i\n", c->sw.groups[i].code_aon);
 		printf("code_aoff = %i\n", c->sw.groups[i].code_aoff);
@@ -41,14 +41,14 @@ void terra_conf_print(terra_conf const * const c)
 
 	for (i = 0; i < c->clock_len; i++)
 	{
-		printf("\n###### clock %hu ######\n", i);
-		terra_conf_schedule_clock_print(&c->clock[i]);
+		printf("\n###### clock %zd ######\n", i);
+		terra_conf_schedule_clock_print(&c->clocks[i]);
 	}
 
 	for (i = 0; i < c->hygro_len; i++)
 	{
-		printf("\n###### hygro %hu ######\n", i);
-		terra_conf_schedule_hygro_print(&c->hygro[i]);
+		printf("\n###### hygro %zd ######\n", i);
+		terra_conf_schedule_hygro_print(&c->hygros[i]);
 	}
 }
 
