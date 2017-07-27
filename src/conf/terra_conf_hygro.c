@@ -123,7 +123,7 @@ void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hyg
 	{
 		if (hygro->modes[m].set.target & HYGRO_HUMI)
 		{
-			printf("humi_activation (%s) = %.2f\n", conf->modes[m].name, hygro->modes[m].set.humi_act);
+			printf("humi_activation (%s) = %.2f\n", hygro->modes[m].name, hygro->modes[m].set.humi_act);
 			printf("humi_deactivation (%s) = %.2f\n", hygro->modes[m].name, hygro->modes[m].set.humi_deact);
 		}
 		if (hygro->modes[m].set.target & HYGRO_TEMP)
