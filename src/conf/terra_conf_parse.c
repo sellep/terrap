@@ -93,8 +93,8 @@ static inline void hygro_parse(terra_conf * const dest, config_t * const lib)
 
 BOOL terra_conf_parse(terra_conf * const conf, char const * const path)
 {
-	BOOL status = FALSE;
 	config_t lib;
+	BOOL status = FALSE;
 
 	config_init(&lib);
 
@@ -123,6 +123,8 @@ BOOL terra_conf_parse(terra_conf * const conf, char const * const path)
 		terra_log_error("[terra_conf_parse] failed to parse hygro schedules\n");
 		goto exit;
 	}
+
+	status = TRUE;
 
 exit:
 	config_destroy(&lib);
