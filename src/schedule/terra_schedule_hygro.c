@@ -86,7 +86,7 @@ void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule
 		}
 		else if (RUNTIME_SWITCH_NOT_OFF(sched->socket))
 		{
-			if (RUNTIME_TEMP < hugro->set->temp_deact)
+			if (RUNTIME_TEMP < hygro->set->temp_deact)
 			{
 				SCHEDULE_SWITCH_SET_OFF(sched);
 			}
