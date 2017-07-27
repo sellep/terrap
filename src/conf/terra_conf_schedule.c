@@ -22,7 +22,7 @@ BOOL terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting
 {
 	char *str;
 
-	if (!config_setting_lookup_string(src, "name", &str))
+	if (!config_setting_lookup_string(lib, "name", &str))
 	{
 		terra_log_error("[terra_schedule_parse] missing name\n");
 		return FALSE;
@@ -30,7 +30,7 @@ BOOL terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting
 
 	config_string_copy(&sched->name, str);
 
-	if (!config_setting_lookup_string(src, "socket", &str))
+	if (!config_setting_lookup_string(lib, "socket", &str))
 	{
 		terra_log_error("[terra_schedule_parse] missing socket\n");
 		return FALSE;
@@ -59,9 +59,9 @@ BOOL terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting
 		sched->channel = 0;
 	}
 
-	config_setting_lookup_bool(src, "enabled", &sched->enabled);
+	config_setting_lookup_bool(lib, "enabled", &sched->enabled);
 
-	if (config_setting_lookup_string(src, "depends", &str) == CONFIG_TRUE)
+	if (config_setting_lookup_string(lib, "depends", &str) == CONFIG_TRUE)
 	{
 		config_string_copy(&sched->dep, str);
 	}
@@ -75,7 +75,7 @@ BOOL terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting
 	return TRUE;
 }
 
-void terra_conf_schedule_free(terra_conf_schedule * const sched);
+void terra_conf_schedule_free(terra_conf_schedule * const sched)
 {
 	free(sched->name);
 
