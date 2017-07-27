@@ -35,6 +35,7 @@ BOOL terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks,
 	config_setting_t *lib_mode;
 	size_t i, j;
 	int status;
+	char *str;
 
 	if (!(lib_clocks = config_lookup(lib, "clocks")))
 	{
