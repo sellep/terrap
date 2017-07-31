@@ -7,10 +7,7 @@ static inline int terra_time_parse_hours_min(terra_time * const time, char const
 	ssize_t i;
 
 	if (!isdigit(str[0]))
-	{
-		terra_log_error("[terra_time_parse_hours_min] not starting with digit\n");
 		return -1;
-	}
 
 	if (str[1] == ':')
 	{
@@ -24,7 +21,6 @@ static inline int terra_time_parse_hours_min(terra_time * const time, char const
 	}
 	else
 	{
-		terra_log_error("[terra_time_parse_hours_min] failed to parse hour\n");
 		return -1;
 	}
 
@@ -34,13 +30,11 @@ static inline int terra_time_parse_hours_min(terra_time * const time, char const
 	}
 	else
 	{
-		terra_log_error("[terra_time_parse_hours_min] failed to parse min\n");
 		return -1;
 	}
 
 	if (time->hour > 23 || time->min > 59)
 	{
-		terra_log_error("[terra_time_parse_hours_min] hour/min out of range\n");
 		return -1;
 	}
 
@@ -69,12 +63,18 @@ BOOL terra_time_parse(terra_time * const time, char const * const str, time_form
 	ssize_t i;
 
 	if ((i = terra_time_parse_hours_min(time, str)) < 0)
-		goto error;
+	{
+		printf("ERROR H/M");
+		return FALSE;
+	}
 
 	if (format == HOUR_MIN_SEC)
 	{
 		if (!terra_time_parse_secs(time, str + i))
-			goto error;
+		{
+			printf("ERROR S");
+			return FALSE;
+		}
 	}
 	else
 	{
@@ -82,7 +82,4 @@ BOOL terra_time_parse(terra_time * const time, char const * const str, time_form
 	}
 
 	return TRUE;
-
-error:
-	return FALSE;
 }
