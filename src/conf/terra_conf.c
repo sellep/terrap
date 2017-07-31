@@ -35,7 +35,10 @@ void terra_conf_print(terra_conf const * const c)
 	printf("enabled = %i\n", c->hy.enabled);
 	printf("pin = %i\n", c->hy.pin);
 	printf("repeats = %i\n", c->hy.repeats);
-	printf("delay = %i\n", c->hy.delay);
+
+	terra_time_from_int(&time, c->hy.delay);
+	printf("delay = ");
+	terra_time_print(&time);
 
 	printf("\n###### schedules ######\n");
 
