@@ -141,7 +141,7 @@ terra_parse_result terra_conf_parse(terra_conf * const conf, char const * const 
 		goto exit;
 	}
 
-	/*if (terra_conf_parse_schedule_hygro(&conf->hygros, &conf->hygro_len, &lib) != CONFIG_PARSE_OK)
+	if (terra_conf_parse_schedule_hygro(&conf->hygros, &conf->hygro_len, &lib) != CONFIG_PARSE_OK)
 	{
 		terra_log_error("[terra_conf_parse] failed to parse hygro schedules\n");
 		goto exit;
@@ -151,7 +151,7 @@ terra_parse_result terra_conf_parse(terra_conf * const conf, char const * const 
 	{
 		terra_log_error("[terra_conf_parse] failed to parse period schedules\n");
 		goto exit;
-	}*/
+	}
 
 	status = CONFIG_PARSE_OK;
 
