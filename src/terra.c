@@ -38,8 +38,6 @@ int main(int argc, char ** argv)
 		return 1;
 	}
 
-	return 0;
-
 	if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
 	{
 		if (!terra_daemon_run(argc, argv))
