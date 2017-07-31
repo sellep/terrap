@@ -18,17 +18,15 @@ void terra_conf_schedule_print(terra_conf_schedule const * const sched)
 	printf("depends = %s\n", sched->dep);
 }
 
-BOOL terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting_t * const lib, terra_schedule_type const type)
+terra_parse_result terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting_t * const lib, terra_schedule_type const type)
 {
 	char *str;
 
-	if (!config_setting_lookup_string(lib, "name", &str))
+	if (config_parse_string(&sched->name, lib, "name") != CONFIG_PARSE_OK)
 	{
-		terra_log_error("[terra_schedule_parse] missing name\n");
-		return FALSE;
+		terra_log_error("[terra_schedule_parse] failed to parse name\n");
+		return CONFIG_PARSE_FAILED;
 	}
-
-	config_string_copy(&sched->name, str);
 
 	if (!config_setting_lookup_string(lib, "socket", &str))
 	{
@@ -61,11 +59,7 @@ BOOL terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting
 
 	config_setting_lookup_bool(lib, "enabled", &sched->enabled);
 
-	if (config_setting_lookup_string(lib, "depends", &str) == CONFIG_TRUE)
-	{
-		config_string_copy(&sched->dep, str);
-	}
-	else
+	if (config_parse_string(&sched->dep, lib, "depends") != CONFIG_PARSE_OK)
 	{
 		sched->dep = NULL;
 	}
