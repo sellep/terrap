@@ -1,51 +1,55 @@
 #include "terra_conf.h"
 
-static inline int clock_parse_start_stop(terra_start_stop * const time, config_setting_t * const lib)
+static int clock_parse_start_stop(terra_start_stop * const time, config_setting_t * const lib)
 {
-	char *str;
+	terra_parse_result status;
 
-	if (!config_setting_lookup_string(lib, "start", &str))
-		return FALSE;
+	status = config_parse_time(&time->start, lib, "start");
 
-	if (!terra_time_parse(&time->start, str, HOUR_MIN_SEC))
+	if (status == CONFIG_PARSE_FAILED)
 	{
-		terra_log_error("[clock_parse_start_stop] invalid start time (%s)\n", str);
-		return -1;
+		terra_log_error("[clock_parse_start_stop] invalid start time\n");
+		return CONFIG_PARSE_FAILED;
 	}
 
-	if (!config_setting_lookup_string(lib, "stop", &str))
+	if (status == CONFIG_PARSE_UNSET)
+		return CONFIG_PARSE_UNSET;
+
+	status = config_parse_time(&time->stop, lib, "stop");
+
+	if (status == CONFIG_PARSE_FAILED)
+	{
+		terra_log_error("[clock_parse_start_stop] invalid stop time\n");
+		return CONFIG_PARSE_FAILED;
+	}
+
+	if (status == CONFIG_PARSE_UNSET)
 	{
 		terra_log_error("[clock_parse_start_stop] missing stop time\n");
-		return -1;
-	}
-	if (!terra_time_parse(&time->stop, str, HOUR_MIN_SEC))
-	{
-		terra_log_error("[clock_parse_start_stop] invalid stop time (%s)\n", str);
-		return -1;
+		return CONFIG_PARSE_FAILED;
 	}
 
-	return TRUE;
+	return CONFIG_PARSE_OK;
 }
 
-BOOL terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks, int * const len, config_t * const lib)
+terra_parse_result terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks, int * const len, config_t * const lib)
 {
 	config_setting_t *lib_clocks;
 	config_setting_t *lib_clock;
 	config_setting_t *lib_modes;
 	config_setting_t *lib_mode;
 	size_t i, j;
-	int status;
-	char *str;
+	terra_parse_result status;
 
-	if (!(lib_clocks = config_lookup(lib, "clocks")))
+	if (lib_clocks = config_lookup(lib, "clocks") != CONFIG_TRUE)
 	{
 		len[0] = 0;
-		return TRUE;
+		return CONFIG_PARSE_OK;
 	}
 
 	len[0] = config_setting_length(lib_clocks);
 	if (len[0] == 0)
-		return TRUE;
+		return CONFIG_PARSE_OK;
 
 	clocks[0] = (terra_conf_schedule_clock*) malloc(sizeof(terra_conf_schedule_clock) * len[0]);
 
@@ -53,27 +57,27 @@ BOOL terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks,
 	{
 		lib_clock = config_setting_get_elem(lib_clocks, i);
 
-		if (!terra_conf_schedule_parse(&clocks[0][i].schedule, lib_clock, SCHEDULE_CLOCK))
+		if (terra_conf_schedule_parse(&clocks[0][i].schedule, lib_clock, SCHEDULE_CLOCK) != CONFIG_PARSE_OK)
 		{
 			terra_log_error("[terra_conf_clock_parse] failed to parse schedule (%zu)\n", i);
 			return FALSE;
 		}
 
 		status = clock_parse_start_stop(&clocks[0][i].default_time, lib_clock);
-		if (status == -1)
+		if (status == CONFIG_PARSE_FAILED)
 		{
 			terra_log_error("[terra_conf_clock_parse] failed to parse default start stop time (%s)\n", clocks[0][i].schedule.name);
-			return FALSE;
+			return CONFIG_PARSE_FAILED;
 		}
 
-		clocks[0][i].default_time_set = status;
+		clocks[0][i].default_time_set = status == CONFIG_PARSE_OK ? TRUE : FALSE;
 
-		if (!(lib_modes = config_setting_lookup(lib_clock, "modes")))
-			return TRUE;
+		if (lib_modes = config_setting_lookup(lib_clock, "modes") != CONFIG_TRUE)
+			return CONFIG_PARSE_OK;
 
 		clocks[0][i].mode_len = config_setting_length(lib_modes);
 		if (clocks[0][i].mode_len == 0)
-			return TRUE;
+			return CONFIG_PARSE_OK;
 
 		clocks[0][i].modes = (terra_conf_clock_mode*) malloc(sizeof(terra_conf_clock_mode) * clocks[0][i].mode_len);
 
@@ -81,23 +85,21 @@ BOOL terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const clocks,
 		{
 			lib_mode = config_setting_get_elem(lib_modes, j);
 
-			if (!config_setting_lookup_string(lib_mode, "mode", &str))
+			if (config_parse_string(&clocks[0][i].modes[j].name, lib_mode, "mode") != CONFIG_PARSE_OK)
 			{
 				terra_log_error("[terra_conf_clock_parse] failed to parse mode name (%zu)\n", j);
-				return FALSE;
+				return CONFIG_PARSE_FAILED;
 			}
 
-			config_string_copy(&clocks[0][i].modes[j].name, str);
-
-			if (clock_parse_start_stop(&clocks[0][i].modes[j].time, lib_mode) != TRUE)
+			if (clock_parse_start_stop(&clocks[0][i].modes[j].time, lib_mode) != CONFIG_PARSE_OK)
 			{
 				terra_log_error("[terra_conf_clock_parse] failed to parse mode start stop time (%s)\n", clocks[0][i].modes[j].name);
-				return FALSE;
+				return CONFIG_PARSE_FAILED;
 			}
 		}
 	}
 
-	return TRUE;
+	return CONFIG_PARSE_OK;
 }
 
 void terra_conf_schedule_clock_print(terra_conf_schedule_clock const * const clock)

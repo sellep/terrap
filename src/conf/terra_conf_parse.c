@@ -1,12 +1,6 @@
 #include "terra_conf.h"
 
-void config_string_copy(char * * const dest, char const * const src)
-{
-	dest[0] = (char*) malloc(sizeof(char) * (strlen(src)));
-	strcpy(dest[0], src);
-}
-
-BOOL config_parse_float(float * const f, config_setting_t * const lib, char const * const name)
+terra_parse_result config_parse_float(float * const f, config_setting_t * const lib, char const * const name)
 {
 	int i;
 	double d;
@@ -14,25 +8,53 @@ BOOL config_parse_float(float * const f, config_setting_t * const lib, char cons
 	if (config_setting_lookup_float(lib, name, &d) == CONFIG_TRUE)
 	{
 		f[0] = (float) d;
-		return TRUE;
+		return CONFIG_PARSE_OK;
 	}
 
 	if (config_setting_lookup_int(lib, name, &i) == CONFIG_TRUE)
 	{
 		f[0] = (float) i;
-		return TRUE;
+		return CONFIG_PARSE_OK;
 	}
 
-	return FALSE;
+	return CONFIG_PARSE_FAILED;
 }
 
-static inline void global_parse(terra_conf * const dest, config_t * const lib)
+terra_parse_result config_parse_string(char * * const dest, config_setting_t * const lib, char const * const name)
+{
+	char *str;
+
+	if (config_setting_lookup_string(lib, name, &str) != CONFIG_TRUE)
+		return CONFIG_PARSE_UNSET;
+
+	dest[0] = (char*) malloc(sizeof(char) * (strlen(str)));
+	strcpy(dest[0], str);
+	return CONFIG_PARSE_OK;
+}
+
+terra_parse_result config_parse_time(terra_time * const time, config_setting_t * const lib, char const * const name)
+{
+	char *str;
+
+	if (config_setting_lookup_string(lib, name, &str) != CONFIG_TRUE)
+		return CONFIG_PARSE_UNSET;
+
+	if (terra_time_parse(&time, str, HOUR_MIN_SEC))
+		return CONFIG_PARSE_OK;
+
+	if (terra_time_parse(&time, str, HOUR_MIN))
+		return CONFIG_PARSE_OK;
+
+	return CONFIG_PARSE_FAILED;
+}
+
+static void global_parse(terra_conf * const dest, config_t * const lib)
 {
 	config_lookup_bool(lib, "read_only", &dest->read_only);
 	config_lookup_int(lib, "delay", &dest->delay);
 }
 
-static inline void led_parse(terra_conf_led * const dest, config_t * const lib)
+static void led_parse(terra_conf_led * const dest, config_t * const lib)
 {
 	config_lookup_int(lib, "led.err_pin", &dest->err_pin);
 	config_lookup_int(lib, "led.heart_pin", &dest->heart_pin);
@@ -40,7 +62,7 @@ static inline void led_parse(terra_conf_led * const dest, config_t * const lib)
 	config_lookup_int(lib, "led.heart_duration", &dest->heart_duration);
 }
 
-static inline void switch_groups_parse(terra_conf_switch * const dest, config_setting_t const * const lib)
+static void switch_groups_parse(terra_conf_switch * const dest, config_setting_t const * const lib)
 {
 	config_setting_t *lib_groups;
 	config_setting_t *lib_group;
@@ -65,7 +87,7 @@ static inline void switch_groups_parse(terra_conf_switch * const dest, config_se
 	}
 }
 
-static inline void switch_parse(terra_conf * const dest, config_t * const lib)
+static void switch_parse(terra_conf * const dest, config_t * const lib)
 {
 	config_setting_t *lib_switch;
 
@@ -77,24 +99,22 @@ static inline void switch_parse(terra_conf * const dest, config_t * const lib)
 	switch_groups_parse(&dest->sw, lib_switch);
 }
 
-static inline void hygro_parse(terra_conf * const dest, config_t * const lib)
+static void hygro_parse(terra_conf * const dest, config_t * const lib)
 {
 	terra_time time;
-	char *str;
 
 	config_lookup_bool(lib, "hygro.enabled", &dest->hy.enabled);
 	config_lookup_int(lib, "hygro.pin", &dest->hy.pin);
 	config_lookup_int(lib, "hygro.repeats", &dest->hy.repeats);
-	config_lookup_string(lib, "hygro.delay", &str);
+	config_parse_time(&time, lib, "hygro.delay");
 
-	terra_time_parse(&time, str, HOUR_MIN_SEC);
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
-BOOL terra_conf_parse(terra_conf * const conf, char const * const path)
+int terra_conf_parse(terra_conf * const conf, char const * const path)
 {
 	config_t lib;
-	BOOL status = FALSE;
+	int status = CONFIG_PARSE_FAILED;
 
 	config_init(&lib);
 
@@ -112,19 +132,25 @@ BOOL terra_conf_parse(terra_conf * const conf, char const * const path)
 	switch_parse(conf, &lib);
 	hygro_parse(conf, &lib);
 
-	if (!terra_conf_schedule_clock_parse(&conf->clocks, &conf->clock_len, &lib))
+	if (terra_conf_schedule_clock_parse(&conf->clocks, &conf->clock_len, &lib) != CONFIG_PARSE_OK)
 	{
 		terra_log_error("[terra_conf_parse] failed to parse clock schedules\n");
 		goto exit;
 	}
 
-	if (!terra_conf_schedule_hygro_parse(&conf->hygros, &conf->hygro_len, &lib))
+	if (terra_conf_schedule_hygro_parse(&conf->hygros, &conf->hygro_len, &lib) != CONFIG_PARSE_OK)
 	{
 		terra_log_error("[terra_conf_parse] failed to parse hygro schedules\n");
 		goto exit;
 	}
 
-	status = TRUE;
+	if (terra_conf_schedule_period_parse(&conf->periods, &conf->period_len, &lib) != CONFIG_PARSE_OK)
+	{
+		terra_log_error("[terra_conf_parse] failed to parse period schedules\n");
+		goto exit;
+	}
+
+	status = CONFIG_PARSE_OK;
 
 exit:
 	config_destroy(&lib);
