@@ -132,7 +132,7 @@ typedef struct
 	BOOL has_default_set;
 
 	int mode_len;
-	terra_period_mode modes;
+	terra_period_mode *modes;
 
 	terra_conf_period_set *set;
 } terra_conf_schedule_period;
