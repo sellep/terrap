@@ -27,7 +27,6 @@ static inline int terra_time_parse_hours_min(terra_time * const time, char const
 	if (isdigit(str[i]) && isdigit(str[i + 1]))
 	{
 		time->min = atoi(str + i);
-		printf("MIN!! %hu\n", time->min);
 	}
 	else
 	{
@@ -60,22 +59,15 @@ static inline BOOL terra_time_parse_secs(terra_time * const time, char const * c
 
 BOOL terra_time_parse(terra_time * const time, char const * const str, time_format const format)
 {
-	printf("try to parse time: %s\n", str);
 	ssize_t i;
 
 	if ((i = terra_time_parse_hours_min(time, str)) < 0)
-	{
-		printf("ERROR H/M");
 		return FALSE;
-	}
 
 	if (format == HOUR_MIN_SEC)
 	{
 		if (!terra_time_parse_secs(time, str + i))
-		{
-			printf("ERROR S");
 			return FALSE;
-		}
 	}
 	else
 	{

@@ -39,10 +39,10 @@ terra_parse_result config_parse_time(terra_time * const time, config_setting_t *
 	if (config_setting_lookup_string(lib, name, &str) != CONFIG_TRUE)
 		return CONFIG_PARSE_UNSET;
 
-	if (terra_time_parse(&time, str, HOUR_MIN_SEC))
+	if (terra_time_parse(time, str, HOUR_MIN_SEC))
 		return CONFIG_PARSE_OK;
 
-	if (terra_time_parse(&time, str, HOUR_MIN))
+	if (terra_time_parse(time, str, HOUR_MIN))
 		return CONFIG_PARSE_OK;
 
 	return CONFIG_PARSE_FAILED;
