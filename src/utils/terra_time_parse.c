@@ -2,24 +2,24 @@
 
 #include <ctype.h>
 
-static inline int terra_time_parse_hours_min(terra_time * const time, char const * const line)
+static inline int terra_time_parse_hours_min(terra_time * const time, char const * const str)
 {
 	ssize_t i;
 
-	if (!isdigit(line[0]))
+	if (!isdigit(str[0]))
 	{
 		terra_log_error("[terra_time_parse_hours_min] not starting with digit\n");
 		return -1;
 	}
 
-	if (line[1] == ':')
+	if (str[1] == ':')
 	{
-		time->hour = atoi(line);
+		time->hour = atoi(str);
 		i = 2;
 	}
-	else if (isdigit(line[1]) && line[2] == ':')
+	else if (isdigit(str[1]) && str[2] == ':')
 	{
-		time->hour = atoi(line);
+		time->hour = atoi(str);
 		i = 3;
 	}
 	else
@@ -28,9 +28,9 @@ static inline int terra_time_parse_hours_min(terra_time * const time, char const
 		return -1;
 	}
 
-	if (isdigit(line[i]) && isdigit(line[i + 1]))
+	if (isdigit(str[i]) && isdigit(str[i + 1]))
 	{
-		time->min = atoi(line + i);
+		time->min = atoi(str + i);
 	}
 	else
 	{
@@ -47,41 +47,33 @@ static inline int terra_time_parse_hours_min(terra_time * const time, char const
 	return i + 2;
 }
 
-static inline BOOL terra_time_parse_secs(terra_time * const time, char const * const line)
+static inline BOOL terra_time_parse_secs(terra_time * const time, char const * const str)
 {
-	if (line[0] != ':')
-	{
-		terra_log_error("[terra_time_parse_secs] missing separator\n");
+	if (str[0] != ':')
 		return FALSE;
-	}
 
-	if (!isdigit(line[1]) && !isdigit(line[2]))
-	{
-		terra_log_error("[terra_time_parse_secs] missing digits\n");
+	if (!isdigit(str[1]) && !isdigit(str[2]))
 		return FALSE;
-	}
 
-	time->sec = atoi(line + 1);
+	time->sec = atoi(str + 1);
 
 	if (time->sec > 59)
-	{
-		terra_log_error("[terra_time_parse_secs] sec out of range\n");
 		return FALSE;
-	}
 
 	return TRUE;
 }
 
-BOOL terra_time_parse(terra_time * const time, char const * const line, time_format const format)
+BOOL terra_time_parse(terra_time * const time, char const * const str, time_format const format)
 {
+	printf("try to parse time: %s\n", str);
 	ssize_t i;
 
-	if ((i = terra_time_parse_hours_min(time, line)) < 0)
+	if ((i = terra_time_parse_hours_min(time, str)) < 0)
 		goto error;
 
 	if (format == HOUR_MIN_SEC)
 	{
-		if (!terra_time_parse_secs(time, line + i))
+		if (!terra_time_parse_secs(time, str + i))
 			goto error;
 	}
 	else
@@ -92,6 +84,5 @@ BOOL terra_time_parse(terra_time * const time, char const * const line, time_for
 	return TRUE;
 
 error:
-	terra_log_error("[terra_time_parse] failed to parse time (%s)\n", line);
 	return FALSE;
 }
