@@ -43,11 +43,7 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 	size_t i, j;
 	terra_parse_result status;
 
-	if (!(lib_periods = config_lookup(lib, "periods")))
-	{
-		len[0] = 0;
-		return CONFIG_PARSE_OK;
-	}
+	lib_periods = config_lookup(lib, "periods");
 
 	len[0] = config_setting_length(lib_periods);
 	if (len[0] == 0)
