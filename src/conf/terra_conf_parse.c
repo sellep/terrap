@@ -102,11 +102,14 @@ static void switch_parse(terra_conf * const dest, config_t * const lib)
 static void hygro_parse(terra_conf * const dest, config_t * const lib)
 {
 	terra_time time;
+	config_setting_t lib_hygro;
 
-	config_lookup_bool(lib, "hygro.enabled", &dest->hy.enabled);
-	config_lookup_int(lib, "hygro.pin", &dest->hy.pin);
-	config_lookup_int(lib, "hygro.repeats", &dest->hy.repeats);
-	config_parse_time(&time, lib, "hygro.delay");
+	lib_hygro = config_lookup(lib, "hygro");
+
+	config_setting_lookup_bool(lib_hygro, "enabled", &dest->hy.enabled);
+	config_setting_lookup_int(lib_hygro, "pin", &dest->hy.pin);
+	config_setting_lookup_int(lib_hygro, "repeats", &dest->hy.repeats);
+	config_parse_time(&time, lib_hygro, "delay");
 
 	dest->hy.delay = terra_time_to_int(&time);
 }
