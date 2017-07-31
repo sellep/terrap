@@ -102,7 +102,7 @@ static void switch_parse(terra_conf * const dest, config_t * const lib)
 static void hygro_parse(terra_conf * const dest, config_t * const lib)
 {
 	terra_time time;
-	config_setting_t lib_hygro;
+	config_setting_t *lib_hygro;
 
 	lib_hygro = config_lookup(lib, "hygro");
 
