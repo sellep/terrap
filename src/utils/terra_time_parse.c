@@ -27,6 +27,7 @@ static inline int terra_time_parse_hours_min(terra_time * const time, char const
 	if (isdigit(str[i]) && isdigit(str[i + 1]))
 	{
 		time->min = atoi(str + i);
+		printf("MIN!! %hu\n", time->min);
 	}
 	else
 	{

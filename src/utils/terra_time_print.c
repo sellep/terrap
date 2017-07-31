@@ -7,19 +7,19 @@ void terra_time_printnl(terra_time const * const time)
 		printf("0");
 	}
 
-	printf("%u:", time->hour);
+	printf("%hu:", time->hour);
 
 	if (time->min < 10)
 	{
 		printf("0");
 	}
 
-	printf("%u:", time->min);
+	printf("%hu:", time->min);
 
 	if (time->sec < 10)
 	{
 		printf("0");
 	}
 
-	printf("%u", time->sec);
+	printf("%hu", time->sec);
 }
