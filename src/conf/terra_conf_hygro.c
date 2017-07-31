@@ -41,7 +41,7 @@ terra_parse_result terra_conf_parse_schedule_hygro(terra_conf_schedule_hygro * *
 	config_setting_t *lib_mode;
 	size_t i, j;
 
-	lib_hygros = config_lookup(lib, "hygros"));
+	lib_hygros = config_lookup(lib, "hygros");
 
 	len[0] = config_setting_length(lib_hygros);
 	if (len[0] == 0)
