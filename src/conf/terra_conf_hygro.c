@@ -1,6 +1,6 @@
 #include "terra_conf.h"
 
-static terra_parse_result hygro_parse_set(terra_conf_hygro_set * const set, config_setting_t * const lib)
+static terra_parse_result parse_hygro_set(terra_conf_hygro_set * const set, config_setting_t * const lib)
 {
 	set->target = HYGRO_NONE;
 
@@ -33,7 +33,7 @@ static terra_parse_result hygro_parse_set(terra_conf_hygro_set * const set, conf
 	return CONFIG_PARSE_OK;
 }
 
-terra_parse_result terra_conf_schedule_hygro_parse(terra_conf_schedule_hygro * * const hygros, int * const len, config_t * const lib)
+terra_parse_result terra_conf_parse_schedule_hygro(terra_conf_schedule_hygro * * const hygros, int * const len, config_t * const lib)
 {
 	config_setting_t *lib_hygros;
 	config_setting_t *lib_hygro;
@@ -57,13 +57,13 @@ terra_parse_result terra_conf_schedule_hygro_parse(terra_conf_schedule_hygro * *
 	{
 		lib_hygro = config_setting_get_elem(lib_hygros, i);
 
-		if (terra_conf_schedule_parse(&hygros[0][i].schedule, lib_hygro, SCHEDULE_HYGRO) != CONFIG_PARSE_OK)
+		if (terra_conf_parse_schedule(&hygros[0][i].schedule, lib_hygro, SCHEDULE_HYGRO) != CONFIG_PARSE_OK)
 		{
 			terra_log_error("[terra_conf_hygro_parse] failed to parse schedule (%zu)\n", i);
 			return CONFIG_PARSE_FAILED;
 		}
 
-		if (hygro_parse_set(&hygros[0][i].default_set, lib_hygro) != CONFIG_PARSE_OK)
+		if (parse_hygro_set(&hygros[0][i].default_set, lib_hygro) != CONFIG_PARSE_OK)
 		{
 			terra_log_error("[terra_conf_hygro_parse] failed to parse default set (%s)\n", hygros[0][i].schedule.name);
 			return CONFIG_PARSE_FAILED;
@@ -88,7 +88,7 @@ terra_parse_result terra_conf_schedule_hygro_parse(terra_conf_schedule_hygro * *
 				return CONFIG_PARSE_FAILED;
 			}
 
-			if (!hygro_parse_set(&hygros[0][i].modes[j].set, lib_mode))
+			if (parse_hygro_set(&hygros[0][i].modes[j].set, lib_mode) != CONFIG_PARSE_OK)
 			{
 				terra_log_error("[terra_conf_hygro_parse] failed to parse mode set (%s)\n", hygros[0][i].modes[j].name);
 				return CONFIG_PARSE_FAILED;
@@ -99,11 +99,11 @@ terra_parse_result terra_conf_schedule_hygro_parse(terra_conf_schedule_hygro * *
 	return CONFIG_PARSE_OK;
 }
 
-void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hygro)
+void terra_conf_print_schedule_hygro(terra_conf_schedule_hygro const * const hygro)
 {
 	size_t m;
 
-	terra_conf_schedule_print(&hygro->schedule);
+	terra_conf_print_schedule(&hygro->schedule);
 
 	if (hygro->default_set.target & HYGRO_HUMI)
 	{
@@ -132,13 +132,13 @@ void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const hyg
 	}
 }
 
-void terra_conf_schedule_hygro_free(terra_conf_schedule_hygro * const hygros, int const hygro_len)
+void terra_conf_free_schedule_hygro(terra_conf_schedule_hygro * const hygros, int const hygro_len)
 {
 	size_t h, m;
 
 	for (h = 0; h < hygro_len; h++)
 	{
-		terra_conf_schedule_free(&hygros[h].schedule);
+		terra_conf_free_schedule(&hygros[h].schedule);
 
 		for (m = 0; m < hygros[h].mode_len; m++)
 		{

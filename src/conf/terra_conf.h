@@ -162,21 +162,21 @@ extern terra_parse_result terra_conf_parse(terra_conf * const, char const * cons
 extern void terra_conf_print(terra_conf const * const);
 extern void terra_conf_free(terra_conf * const);
 
-extern void terra_conf_schedule_print(terra_conf_schedule const * const);
-extern terra_parse_result terra_conf_schedule_parse(terra_conf_schedule * const, config_setting_t * const, terra_schedule_type const);
-extern void terra_conf_schedule_free(terra_conf_schedule * const);
+extern void terra_conf_print_schedule(terra_conf_schedule const * const);
+extern terra_parse_result terra_conf_parse_schedule(terra_conf_schedule * const, config_setting_t * const, terra_schedule_type const);
+extern void terra_conf_free_schedule(terra_conf_schedule * const);
 
-extern void terra_conf_schedule_clock_print(terra_conf_schedule_clock const * const);
-extern terra_parse_result terra_conf_schedule_clock_parse(terra_conf_schedule_clock * * const, int * const, config_t * const);
-extern void terra_conf_schedule_clock_free(terra_conf_schedule_clock * const, int const);
+extern void terra_conf_print_schedule_clock(terra_conf_schedule_clock const * const);
+extern terra_parse_result terra_conf_parse_schedule_clock(terra_conf_schedule_clock * * const, int * const, config_t * const);
+extern void terra_conf_free_schedule_clock(terra_conf_schedule_clock * const, int const);
 
-extern void terra_conf_schedule_hygro_print(terra_conf_schedule_hygro const * const);
-extern terra_parse_result terra_conf_schedule_hygro_parse(terra_conf_schedule_hygro * * const, int * const, config_t * const);
-extern void terra_conf_schedule_hygro_free(terra_conf_schedule_hygro * const, int const);
+extern void terra_conf_print_schedule_hygro(terra_conf_schedule_hygro const * const);
+extern terra_parse_result terra_conf_parse_schedule_hygro(terra_conf_schedule_hygro * * const, int * const, config_t * const);
+extern void terra_conf_free_schedule_hygro(terra_conf_schedule_hygro * const, int const);
 
-extern void terra_conf_schedule_period_print(terra_conf_schedule_period const * const);
-extern terra_parse_result terra_conf_schedule_period_parse(terra_conf_schedule_period * * const, int * const, config_t * const);
-extern void terra_conf_schedule_period_free(terra_conf_schedule_period * const, int const);
+extern void terra_conf_print_schedule_period(terra_conf_schedule_period const * const);
+extern terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period * * const, int * const, config_t * const);
+extern void terra_conf_free_schedule_period(terra_conf_schedule_period * const, int const);
 
 extern terra_parse_result config_parse_string(char * * const, config_setting_t * const, char const * const);
 extern terra_parse_result config_parse_float(float * const, config_setting_t * const, char const * const);

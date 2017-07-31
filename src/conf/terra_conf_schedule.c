@@ -1,6 +1,6 @@
 #include "terra_conf.h"
 
-void terra_conf_schedule_print(terra_conf_schedule const * const sched)
+void terra_conf_print_schedule(terra_conf_schedule const * const sched)
 {
 	printf("name = %s\n", sched->name);
 
@@ -18,25 +18,25 @@ void terra_conf_schedule_print(terra_conf_schedule const * const sched)
 	printf("depends = %s\n", sched->dep);
 }
 
-terra_parse_result terra_conf_schedule_parse(terra_conf_schedule * const sched, config_setting_t * const lib, terra_schedule_type const type)
+terra_parse_result terra_conf_parse_schedule(terra_conf_schedule * const sched, config_setting_t * const lib, terra_schedule_type const type)
 {
 	char *str;
 
 	if (config_parse_string(&sched->name, lib, "name") != CONFIG_PARSE_OK)
 	{
-		terra_log_error("[terra_schedule_parse] failed to parse name\n");
+		terra_log_error("[terra_conf_parse_schedule] failed to parse name\n");
 		return CONFIG_PARSE_FAILED;
 	}
 
 	if (!config_setting_lookup_string(lib, "socket", &str))
 	{
-		terra_log_error("[terra_schedule_parse] missing socket\n");
+		terra_log_error("[terra_conf_parse_schedule] missing socket\n");
 		return FALSE;
 	}
 
 	if (strlen(str) == 0)
 	{
-		terra_log_error("[terra_schedule_parse] missing socket value\n");
+		terra_log_error("[terra_conf_parse_schedule] missing socket value\n");
 		return FALSE;
 	}
 
@@ -46,7 +46,7 @@ terra_parse_result terra_conf_schedule_parse(terra_conf_schedule * const sched, 
 	{
 		if (str[1] != ':')
 		{
-			terra_log_error("[terra_schedule_parse] socket syntax error\n");
+			terra_log_error("[terra_conf_parse_schedule] socket syntax error\n");
 			return FALSE;
 		}
 
@@ -69,7 +69,7 @@ terra_parse_result terra_conf_schedule_parse(terra_conf_schedule * const sched, 
 	return TRUE;
 }
 
-void terra_conf_schedule_free(terra_conf_schedule * const sched)
+void terra_conf_free_schedule(terra_conf_schedule * const sched)
 {
 	free(sched->name);
 
