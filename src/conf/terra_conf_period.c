@@ -142,7 +142,7 @@ void terra_conf_free_schedule_period(terra_conf_schedule_period * const periods,
 
 	for (p = 0; p < period_len; p++)
 	{
-		terra_conf_schedule_free(&periods[p].schedule);
+		terra_conf_free_schedule(&periods[p].schedule);
 
 		for (m = 0; m < periods[p].mode_len; m++)
 		{

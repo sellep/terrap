@@ -131,7 +131,7 @@ void terra_conf_free_schedule_clock(terra_conf_schedule_clock * const clocks, in
 
 	for (c = 0; c < clock_len; c++)
 	{
-		terra_conf_schedule_free(&clocks[c].schedule);
+		terra_conf_free_schedule(&clocks[c].schedule);
 
 		for (m = 0; m < clocks[c].mode_len; m++)
 		{
