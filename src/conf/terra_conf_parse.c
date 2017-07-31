@@ -111,6 +111,9 @@ static void hygro_parse(terra_conf * const dest, config_t * const lib)
 	config_setting_lookup_int(lib_hygro, "repeats", &dest->hy.repeats);
 	config_parse_time(&time, lib_hygro, "delay");
 
+	printf("TIME   :    ");
+	terra_time_print(&time);
+	
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
