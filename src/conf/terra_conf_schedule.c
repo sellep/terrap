@@ -31,13 +31,13 @@ terra_parse_result terra_conf_parse_schedule(terra_conf_schedule * const sched, 
 	if (!config_setting_lookup_string(lib, "socket", &str))
 	{
 		terra_log_error("[terra_conf_parse_schedule] missing socket\n");
-		return FALSE;
+		return CONFIG_PARSE_FAILED;
 	}
 
 	if (strlen(str) == 0)
 	{
 		terra_log_error("[terra_conf_parse_schedule] missing socket value\n");
-		return FALSE;
+		return CONFIG_PARSE_FAILED;
 	}
 
 	sched->socket = str[0];
@@ -47,7 +47,7 @@ terra_parse_result terra_conf_parse_schedule(terra_conf_schedule * const sched, 
 		if (str[1] != ':')
 		{
 			terra_log_error("[terra_conf_parse_schedule] socket syntax error\n");
-			return FALSE;
+			return CONFIG_PARSE_FAILED;
 		}
 
 		sched->channel = atoi(str + 2);
@@ -66,7 +66,7 @@ terra_parse_result terra_conf_parse_schedule(terra_conf_schedule * const sched, 
 
 	sched->type = type;
 
-	return TRUE;
+	return CONFIG_PARSE_OK;
 }
 
 void terra_conf_free_schedule(terra_conf_schedule * const sched)
