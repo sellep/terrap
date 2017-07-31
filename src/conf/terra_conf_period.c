@@ -112,12 +112,12 @@ void terra_conf_schedule_period_print(terra_conf_schedule_period const * const p
 	terra_conf_schedule_print(&period->schedule);
 
 	printf("period time (default) = ");
-	if (period->has_default_time)
+	if (period->has_default_set)
 	{
-		terra_time_from_int(&time, period->on_time);
+		terra_time_from_int(&time, period->default_set.on_time);
 		terra_time_printnl(&time);
 		printf("/");
-		terra_time_from_int(&time, period->off_time);
+		terra_time_from_int(&time, period->default_set.off_time);
 		terra_time_print(&time);
 	}
 	else
