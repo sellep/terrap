@@ -120,8 +120,6 @@ void terra_conf_print_schedule_clock(terra_conf_schedule_clock const * const clo
 	{
 		printf("(null)\n");
 	}
-	
-	printf("clock mode len : %i\n", clock->mode_len);
 
 	for (m = 0; m < clock->mode_len; m++)
 	{
