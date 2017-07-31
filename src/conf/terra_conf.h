@@ -153,6 +153,9 @@ typedef struct
 
 	int hygro_len;
 	terra_conf_schedule_hygro *hygros;
+
+	int period_len;
+	terra_conf_schedule_period *periods;
 } terra_conf;
 
 extern terra_parse_result terra_conf_parse(terra_conf * const, char const * const);

@@ -50,6 +50,12 @@ void terra_conf_print(terra_conf const * const c)
 		printf("\n###### hygro %zd ######\n", i);
 		terra_conf_schedule_hygro_print(&c->hygros[i]);
 	}
+
+	for (i = 0; i < c->period_len; i++)
+	{
+		printf("\n###### period %zd ######\n", i);
+		terra_conf_schedule_period_print(&c->periods[i]);
+	}
 }
 
 void terra_conf_free(terra_conf * const conf)
@@ -58,4 +64,5 @@ void terra_conf_free(terra_conf * const conf)
 
 	terra_conf_schedule_clock_free(conf->clocks, conf->clock_len);
 	terra_conf_schedule_hygro_free(conf->hygros, conf->hygro_len);
+	terra_conf_schedule_period_free(conf->periods, conf->period_len);
 }
