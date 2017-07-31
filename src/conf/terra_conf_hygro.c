@@ -41,7 +41,7 @@ terra_parse_result terra_conf_parse_schedule_hygro(terra_conf_schedule_hygro * *
 	config_setting_t *lib_mode;
 	size_t i, j;
 
-	if (lib_hygros = config_lookup(lib, "hygros"))
+	if (!(lib_hygros = config_lookup(lib, "hygros")))
 	{
 		len[0] = 0;
 		return CONFIG_PARSE_OK;
@@ -69,7 +69,7 @@ terra_parse_result terra_conf_parse_schedule_hygro(terra_conf_schedule_hygro * *
 			return CONFIG_PARSE_FAILED;
 		}
 
-		if (!(lib_modes = config_setting_lookup(lib_hygro, "modes"))
+		if (!(lib_modes = config_setting_lookup(lib_hygro, "modes")))
 		{
 			hygros[0][i].mode_len = 0;
 			return CONFIG_PARSE_OK;

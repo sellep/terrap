@@ -41,7 +41,7 @@ terra_parse_result terra_conf_parse_schedule_clock(terra_conf_schedule_clock * *
 	size_t i, j;
 	terra_parse_result status;
 
-	if (!lib_clocks = config_lookup(lib, "clocks"))
+	if (!(lib_clocks = config_lookup(lib, "clocks")))
 	{
 		len[0] = 0;
 		return CONFIG_PARSE_OK;
@@ -72,7 +72,7 @@ terra_parse_result terra_conf_parse_schedule_clock(terra_conf_schedule_clock * *
 
 		clocks[0][i].default_time_set = status == CONFIG_PARSE_OK ? TRUE : FALSE;
 
-		if (!(lib_modes = config_setting_lookup(lib_clock, "modes"))
+		if (!(lib_modes = config_setting_lookup(lib_clock, "modes")))
 		{
 			clocks[0][i].mode_len = 0;
 			return CONFIG_PARSE_OK;

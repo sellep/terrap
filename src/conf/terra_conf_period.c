@@ -43,7 +43,7 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 	size_t i, j;
 	terra_parse_result status;
 
-	if (!(lib_periods = config_lookup(lib, "periods"))
+	if (!(lib_periods = config_lookup(lib, "periods")))
 	{
 		len[0] = 0;
 		return CONFIG_PARSE_OK;
@@ -74,7 +74,7 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 
 		periods[0][i].has_default_set = status == CONFIG_PARSE_OK ? TRUE : FALSE;
 
-		if (!(lib_modes = config_setting_lookup(lib_period, "modes"))
+		if (!(lib_modes = config_setting_lookup(lib_period, "modes")))
 		{
 			periods[0][i].mode_len = 0;
 			return CONFIG_PARSE_OK;
