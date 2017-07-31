@@ -71,7 +71,7 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 		periods[0][i].has_default_set = status == CONFIG_PARSE_OK ? TRUE : FALSE;
 
 		if (lib_modes = config_setting_lookup(lib_period, "modes") != CONFIG_TRUE)
-			return TRUE;
+			return CONFIG_PARSE_OK;
 
 		periods[0][i].mode_len = config_setting_length(lib_modes);
 		if (periods[0][i].mode_len == 0)

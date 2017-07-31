@@ -44,7 +44,6 @@ terra_parse_result terra_conf_parse_schedule_clock(terra_conf_schedule_clock * *
 	lib_clocks = config_lookup(lib, "clocks");
 
 	len[0] = config_setting_length(lib_clocks);
-	printf("LEN : %i\n", *len);
 	if (len[0] == 0)
 		return CONFIG_PARSE_OK;
 
