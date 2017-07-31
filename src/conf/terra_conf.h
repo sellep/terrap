@@ -134,7 +134,7 @@ typedef struct
 	int mode_len;
 	terra_period_mode modes;
 
-	terra_conf_period_set *set
+	terra_conf_period_set *set;
 } terra_conf_schedule_period;
 
 /** end */
@@ -178,7 +178,7 @@ extern void terra_conf_schedule_period_print(terra_conf_schedule_period const * 
 extern terra_parse_result terra_conf_schedule_period_parse(terra_conf_schedule_period * * const, int * const, config_t * const);
 extern void terra_conf_schedule_period_free(terra_conf_schedule_period * const, int const);
 
-extern terra_parse_result config_parse_string(char * * const, char const * const);
+extern terra_parse_result config_parse_string(char * * const, config_setting_t * const, char const * const);
 extern terra_parse_result config_parse_float(float * const, config_setting_t * const, char const * const);
 extern terra_parse_result config_parse_time(terra_time * const, config_setting_t * const, char const * const);
 
