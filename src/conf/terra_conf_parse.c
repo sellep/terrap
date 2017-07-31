@@ -111,7 +111,7 @@ static void hygro_parse(terra_conf * const dest, config_t * const lib)
 	dest->hy.delay = terra_time_to_int(&time);
 }
 
-int terra_conf_parse(terra_conf * const conf, char const * const path)
+terra_parse_result terra_conf_parse(terra_conf * const conf, char const * const path)
 {
 	config_t lib;
 	int status = CONFIG_PARSE_FAILED;

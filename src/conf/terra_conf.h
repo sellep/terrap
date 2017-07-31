@@ -17,7 +17,7 @@ enum terra_config_results
 	CONFIG_PARSE_FAILED,
 	CONFIG_PARSE_UNSET,
 	CONFIG_PARSE_OK
-}
+};
 
 typedef int terra_parse_result;
 
