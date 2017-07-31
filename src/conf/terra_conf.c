@@ -39,6 +39,8 @@ void terra_conf_print(terra_conf const * const c)
 
 	printf("\n###### schedules ######\n");
 
+	printf("UUUUUUUU %i\n", c->clock_len);
+	
 	for (i = 0; i < c->clock_len; i++)
 	{
 		printf("\n###### clock %zd ######\n", i);
