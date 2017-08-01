@@ -75,12 +75,12 @@ terra_parse_result terra_conf_parse_schedule_clock(terra_conf_schedule_clock * *
 		if (!(lib_modes = config_setting_lookup(lib_clock, "modes")))
 		{
 			clocks[0][i].mode_len = 0;
-			return CONFIG_PARSE_OK;
+			continue;
 		}
 
 		clocks[0][i].mode_len = config_setting_length(lib_modes);
 		if (clocks[0][i].mode_len == 0)
-			return CONFIG_PARSE_OK;
+			continue;
 
 		clocks[0][i].modes = (terra_conf_clock_mode*) malloc(sizeof(terra_conf_clock_mode) * clocks[0][i].mode_len);
 

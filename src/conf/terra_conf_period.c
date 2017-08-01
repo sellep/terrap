@@ -79,7 +79,7 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 		if (!(lib_modes = config_setting_lookup(lib_period, "modes")))
 		{
 			periods[0][i].mode_len = 0;
-			return CONFIG_PARSE_OK;
+			continue;
 		}
 
 		periods[0][i].mode_len = config_setting_length(lib_modes);

@@ -72,12 +72,12 @@ terra_parse_result terra_conf_parse_schedule_hygro(terra_conf_schedule_hygro * *
 		if (!(lib_modes = config_setting_lookup(lib_hygro, "modes")))
 		{
 			hygros[0][i].mode_len = 0;
-			return CONFIG_PARSE_OK;
+			continue;
 		}
 
 		hygros[0][i].mode_len = config_setting_length(lib_modes);
 		if (hygros[0][i].mode_len == 0)
-			return CONFIG_PARSE_OK;
+			continue;
 
 		hygros[0][i].modes = (terra_hygro_mode*) malloc(sizeof(terra_hygro_mode) * hygros[0][i].mode_len);
 
