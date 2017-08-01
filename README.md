@@ -18,9 +18,9 @@ Prerequisites
 Installation
 ===============
 
- git clone https://github.com/sellep/terrap.git
+ `git clone https://github.com/sellep/terrap.git
  cd terrap
- make && sudo make install
+ make && sudo make install`
 
  `make install` will copy the default configuration file (res/terra.conf) to /etc/terra/terra.conf, the init script (res/terra.init.d) to /etc/init.d/terra and the binary to /usr/local/bin.
 
