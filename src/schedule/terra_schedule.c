@@ -109,10 +109,6 @@ void terra_schedule_reset()
 
 void terra_schedule_init()
 {
-	terra_schedule_clock *clock;
-	terra_schedule_hygro *hygro;
-	terra_schedule_period *period;
-
 	size_t i;
 
 	terra_pin_set_out(CONF_LED.err_pin);
@@ -135,29 +131,17 @@ void terra_schedule_init()
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
-		clock = SCHEDULE_GET_CLOCK(i);
-		if (SCHEDULE_INITIALIZED(clock->sched))
-			continue;
-
-		terra_schedule_clock_init(clock);
+		terra_schedule_clock_init(SCHEDULE_GET_CLOCK(i));
 	}
 
 	for (i = 0; i < CONF_GLOBAL.hygro_len; i++)
 	{
-		hygro = SCHEDULE_GET_HYGRO(i);
-		if (SCHEDULE_INITIALIZED(hygro->sched))
-			continue;
-
-		terra_schedule_hygro_init(hygro);
+		terra_schedule_hygro_init(SCHEDULE_GET_HYGRO(i));
 	}
 
 	for (i = 0; i < CONF_GLOBAL.period_len; i++)
 	{
-		period = SCHEDULE_GET_PERIOD(i);
-		if (SCHEDULE_INITIALIZED(period->sched))
-			continue;
-
-		terra_schedule_init_period(period);
+		terra_schedule_init_period(SCHEDULE_GET_PERIOD(i));
 	}
 
 	runtime.switch_modes[0] = SWITCH_UNKNOWN;
