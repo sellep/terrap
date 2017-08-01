@@ -30,7 +30,7 @@ extern BOOL terra_schedule_dep_run(terra_schedule const * const);
 
 #define SCHEDULE_IS_CLOCK(s) (s)->type == SCHEDULE_CLOCK
 #define SCHEDULE_IS_HYGRO(s) (s)->type == SCHEDULE_HYGRO
-#define SCHEDULE_IS_HYGRO(s) (s)->type == SCHEDULE_PERIOD
+#define SCHEDULE_IS_PERIOD(s) (s)->type == SCHEDULE_PERIOD
 
 #define SCHEDULE_GET_CLOCK(i) (&CONF_GLOBAL.clocks[(i)])
 #define SCHEDULE_GET_HYGRO(i) (&CONF_GLOBAL.hygros[(i)])

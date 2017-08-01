@@ -53,6 +53,10 @@ BOOL terra_schedule_dep_run(terra_schedule const * const base)
 		{
 			terra_schedule_run_period((terra_schedule_period*) dep, dep);
 		}
+		else
+		{
+			return FALSE;
+		}
 	}
 
 	if (INVERS_DEP(base))
@@ -131,12 +135,12 @@ void terra_schedule_init()
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
-		terra_schedule_clock_init(SCHEDULE_GET_CLOCK(i));
+		terra_schedule_init_clock(SCHEDULE_GET_CLOCK(i));
 	}
 
 	for (i = 0; i < CONF_GLOBAL.hygro_len; i++)
 	{
-		terra_schedule_hygro_init(SCHEDULE_GET_HYGRO(i));
+		terra_schedule_init_hygro(SCHEDULE_GET_HYGRO(i));
 	}
 
 	for (i = 0; i < CONF_GLOBAL.period_len; i++)
