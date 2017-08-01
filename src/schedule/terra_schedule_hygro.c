@@ -1,6 +1,6 @@
 #include "terra_schedule.h"
 
-static inline BOOL hygro_mode_init(terra_schedule_hygro * const hygro, terra_schedule const * const sched)
+static BOOL hygro_mode_init(terra_schedule_hygro * const hygro, terra_schedule const * const sched)
 {
 	size_t i;
 
@@ -27,7 +27,7 @@ static inline BOOL hygro_mode_init(terra_schedule_hygro * const hygro, terra_sch
 	return FALSE;
 }
 
-BOOL terra_schedule_hygro_init(terra_schedule_hygro * const hygro)
+BOOL terra_schedule_init_hygro(terra_schedule_hygro * const hygro)
 {
 	terra_schedule *sched = SCHEDULE(hygro);
 
@@ -53,7 +53,7 @@ BOOL terra_schedule_hygro_init(terra_schedule_hygro * const hygro)
 	return sched->enabled;
 }
 
-void terra_schedule_hygro_run(terra_schedule_hygro * const hygro, terra_schedule * const sched)
+void terra_schedule_run_hygro(terra_schedule_hygro * const hygro, terra_schedule * const sched)
 {
 	if (!SCHEDULE_DEP_RUN(sched))
 		goto end;

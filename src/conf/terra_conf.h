@@ -135,6 +135,8 @@ typedef struct
 	terra_period_mode *modes;
 
 	terra_conf_period_set *set;
+	terra_switch_mode state;
+	terra_time start;
 } terra_conf_schedule_period;
 
 /** end */

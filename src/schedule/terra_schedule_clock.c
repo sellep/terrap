@@ -1,6 +1,6 @@
 #include "terra_schedule.h"
 
-static inline BOOL clock_mode_init(terra_schedule_clock * const clock, terra_schedule const * const sched)
+static BOOL clock_mode_init(terra_schedule_clock * const clock, terra_schedule const * const sched)
 {
 	size_t i;
 
@@ -27,7 +27,7 @@ static inline BOOL clock_mode_init(terra_schedule_clock * const clock, terra_sch
 	return FALSE;
 }
 
-BOOL terra_schedule_clock_init(terra_schedule_clock * const clock)
+BOOL terra_schedule_init_clock(terra_schedule_clock * const clock)
 {
 	terra_schedule *sched = SCHEDULE(clock);
 
@@ -53,7 +53,7 @@ BOOL terra_schedule_clock_init(terra_schedule_clock * const clock)
 	return sched->enabled;
 }
 
-void terra_schedule_clock_run(terra_schedule_clock * const clock, terra_schedule * const sched)
+void terra_schedule_run_clock(terra_schedule_clock * const clock, terra_schedule * const sched)
 {
 	if (!SCHEDULE_DEP_RUN(sched))
 		goto end;

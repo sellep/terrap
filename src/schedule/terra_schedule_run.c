@@ -65,12 +65,18 @@ static inline void schedule_reset()
 	{
 		SCHEDULE(SCHEDULE_GET_HYGRO(i))->run = FALSE;
 	}
+
+	for (i = 0; i < CONF_GLOBAL.period_len; i++)
+	{
+		SCHEDULE(SCHEDULE_GET_PERIOD(i))->run = FALSE;
+	}
 }
 
 static inline void schedule_run_schedules()
 {
 	terra_schedule_clock *clock;
 	terra_schedule_hygro *hygro;
+	terra_schedule_period *period;
 	terra_schedule *sched;
 	size_t i;
 
@@ -90,7 +96,7 @@ static inline void schedule_run_schedules()
 
 				if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 				{
-					terra_schedule_hygro_run(hygro, sched);
+					terra_schedule_run_hygro(hygro, sched);
 				}
 			}
 		}
@@ -102,7 +108,18 @@ static inline void schedule_run_schedules()
 
 			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
 			{
-				terra_schedule_clock_run(clock, sched);
+				terra_schedule_run_clock(clock, sched);
+			}
+		}
+
+		for (i = 0; i < CONF_GLOBAL.period_len; i++)
+		{
+			period = SCHEDULE_GET_PERIOD(i);
+			sched = SCHEDULE(period);
+
+			if (SCHEDULE_ENABLED(sched) && SCHEDULE_NOT_RUN(sched))
+			{
+				terra_schedule_run_period(period, sched);
 			}
 		}
 
