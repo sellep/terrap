@@ -44,3 +44,4 @@ Usage
 
  Show hygrometer recorded data
 	- terra show
+	![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
