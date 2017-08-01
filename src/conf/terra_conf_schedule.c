@@ -57,7 +57,10 @@ terra_parse_result terra_conf_parse_schedule(terra_conf_schedule * const sched, 
 		sched->channel = 0;
 	}
 
-	config_setting_lookup_bool(lib, "enabled", &sched->enabled);
+	if (!config_setting_lookup_bool(lib, "enabled", &sched->enabled))
+	{
+		sched->enabled = FALSE;
+	}
 
 	if (config_parse_string(&sched->dep, lib, "depends") != CONFIG_PARSE_OK)
 	{

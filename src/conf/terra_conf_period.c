@@ -30,6 +30,11 @@ static terra_parse_result parse_period_set(terra_conf_period_set * const set, co
 		return CONFIG_PARSE_FAILED;
 	}
 
+	if (!config_setting_lookup_bool(lib, "off_start", &set->off_start))
+	{
+		set->off_start = FALSE;
+	}
+
 	set->off_time = terra_time_to_int(&time);
 	return CONFIG_PARSE_OK;
 } 
