@@ -6,7 +6,7 @@ static BOOL period_mode_init(terra_schedule_period * const period, terra_schedul
 
 	if (RUNTIME_DEFAULT_MODE())
 	{
-		if (hygro->has_defualt_set)
+		if (period->has_default_set)
 		{
 			period->set = &period->default_set;
 			return TRUE;
