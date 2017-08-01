@@ -52,26 +52,6 @@ static inline void schedule_run_read_only()
 	}
 }
 
-static inline void schedule_reset()
-{
-	ssize_t i;
-
-	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
-	{
-		SCHEDULE(SCHEDULE_GET_CLOCK(i))->run = FALSE;
-	}
-
-	for (i = 0; i < CONF_GLOBAL.hygro_len; i++)
-	{
-		SCHEDULE(SCHEDULE_GET_HYGRO(i))->run = FALSE;
-	}
-
-	for (i = 0; i < CONF_GLOBAL.period_len; i++)
-	{
-		SCHEDULE(SCHEDULE_GET_PERIOD(i))->run = FALSE;
-	}
-}
-
 static inline void schedule_run_schedules()
 {
 	terra_schedule_clock *clock;
@@ -82,7 +62,7 @@ static inline void schedule_run_schedules()
 
 	while (!RUNTIME_BREAK())
 	{
-		schedule_reset();
+		terra_schedule_reset();
 
 		terra_runtime_tick();
 		DO_HEART_BEAT();

@@ -43,11 +43,15 @@ BOOL terra_schedule_dep_run(terra_schedule const * const base)
 	{
 		if (SCHEDULE_IS_CLOCK(dep))
 		{
-			terra_schedule_clock_run((terra_schedule_clock*) dep, dep);
+			terra_schedule_run_clock((terra_schedule_clock*) dep, dep);
 		}
 		else if (SCHEDULE_IS_HYGRO(dep))
 		{
-			terra_schedule_hygro_run((terra_schedule_hygro*) dep, dep);
+			terra_schedule_run_hygro((terra_schedule_hygro*) dep, dep);
+		}
+		else if (SCHEDULE_IS_PERIOD(dep))
+		{
+			terra_schedule_run_period((terra_schedule_period*) dep, dep);
 		}
 	}
 
@@ -71,23 +75,56 @@ BOOL terra_schedule_dep_init(terra_schedule const * const base)
 		return TRUE;
 
 	dep = schedule_dep(base);
+	if (SCHEDULE_IS_INITIALIZED(dep))
+		return dep->enabled;
 
 	if (SCHEDULE_IS_CLOCK(dep))
 	{
-		return terra_schedule_clock_init((terra_schedule_clock*) dep);
+		result = terra_schedule_init_clock((terra_schedule_clock*) dep);
 	}
 	else if (SCHEDULE_IS_HYGRO(dep))
 	{
-		return terra_schedule_hygro_init((terra_schedule_hygro*) dep);
+		result = terra_schedule_init_hygro((terra_schedule_hygro*) dep);
+	}
+	else if (SCHEDULE_IS_PERIOD(dep))
+	{
+		result = terra_schedule_init_period((terra_schedule_period*) dep);
+	}
+	else
+	{
+		result = FALSE;
 	}
 
-	return FALSE;
+	SCHEDULE_INITIALIZED(dep);
+
+	return result;
+}
+
+void terra_schedule_reset()
+{
+	ssize_t i;
+
+	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
+	{
+		SCHEDULE(SCHEDULE_GET_CLOCK(i))->run = FALSE;
+	}
+
+	for (i = 0; i < CONF_GLOBAL.hygro_len; i++)
+	{
+		SCHEDULE(SCHEDULE_GET_HYGRO(i))->run = FALSE;
+	}
+
+	for (i = 0; i < CONF_GLOBAL.period_len; i++)
+	{
+		SCHEDULE(SCHEDULE_GET_PERIOD(i))->run = FALSE;
+	}
 }
 
 void terra_schedule_init()
 {
 	terra_schedule_clock *clock;
 	terra_schedule_hygro *hygro;
+	terra_schedule_period *period;
 
 	size_t i;
 
@@ -107,16 +144,33 @@ void terra_schedule_init()
 		RUNTIME_DEFAULT_MODE();
 	}
 
+	terra_schedule_reset();
+
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
 	{
 		clock = SCHEDULE_GET_CLOCK(i);
+		if (SCHEDULE_INITIALIZED(clock->sched))
+			continue;
+
 		terra_schedule_clock_init(clock);
 	}
 
 	for (i = 0; i < CONF_GLOBAL.hygro_len; i++)
 	{
 		hygro = SCHEDULE_GET_HYGRO(i);
+		if (SCHEDULE_INITIALIZED(hygro->sched))
+			continue;
+
 		terra_schedule_hygro_init(hygro);
+	}
+
+	for (i = 0; i < CONF_GLOBAL.period_len; i++)
+	{
+		period = SCHEDULE_GET_PERIOD(i);
+		if (SCHEDULE_INITIALIZED(period->sched))
+			continue;
+
+		terra_schedule_init_period(period);
 	}
 
 	runtime.switch_modes[0] = SWITCH_UNKNOWN;
