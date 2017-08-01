@@ -38,7 +38,7 @@ Usage
 	`terra hygro`
 
  Set socket manually  
-	`terra switch <a/b/c>(:<channel>) <on/off>`
+	`terra switch <a/b/c>(:<channel>) <on/off>` (example: `terra switch c off` or `terra switch a:24 on`)
 
  Show hygrometer recorded data  
 	`terra show`
