@@ -25,6 +25,14 @@ terra_schedule* schedule_dep(terra_schedule const * const base)
 			return dep;
 	}
 
+	for (i = 0; i < CONF_GLOBAL.period_len; i++)
+	{
+		dep = SCHEDULE(SCHEDULE_GET_PERIOD(i));
+
+		if (strcmp(name, dep->name) == 0)
+			return dep;
+	}
+
 	terra_log_error("[terra_schedule.dep_get] dependency %s not found\n", name);
 	terra_exit(1);
 	return NULL;
