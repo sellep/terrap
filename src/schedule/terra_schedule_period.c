@@ -34,26 +34,30 @@ BOOL terra_schedule_init_period(terra_schedule_period * const period)
 	if (SCHEDULE_DISABLED(sched))
 		return FALSE;
 
+	if (SCHEDULE_IS_INITIALIZED(sched))
+		return sched->enabled;
+
+	SCHEDULE_INITIALIZED(sched);
+
 	//dependency init
 
 	if (!SCHEDULE_DEP_INIT(sched))
 	{
 		SCHEDULE_DISABLE(sched);
 		terra_log_info("[terra_schedule_period_init] schedule %s disabled by dependency\n", sched->name);
-		return FALSE;
 	}
 
 	//mode init
 
-	if (!period_mode_init(period, sched))
+	else if (!period_mode_init(period, sched))
 	{
 		SCHEDULE_DISABLE(sched);
 		terra_log_info("[terra_schedule_period_init] schedule %s disabled by mode\n", sched->name);
-		return FALSE;
 	}
 
 	period->state = SWITCH_UNKNOWN;
-	return TRUE;
+
+	return sched->enabled;
 }
 
 static inline void period_switch_off(terra_schedule_period * const period, terra_schedule * const sched)

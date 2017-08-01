@@ -69,35 +69,22 @@ BOOL terra_schedule_dep_run(terra_schedule const * const base)
 BOOL terra_schedule_dep_init(terra_schedule const * const base)
 {
 	terra_schedule *dep;
-	BOOL result;
 
 	if (SCHEDULE_INDEPENDENT(base))
 		return TRUE;
 
 	dep = schedule_dep(base);
-	if (SCHEDULE_IS_INITIALIZED(dep))
-		return dep->enabled;
 
 	if (SCHEDULE_IS_CLOCK(dep))
-	{
-		result = terra_schedule_init_clock((terra_schedule_clock*) dep);
-	}
-	else if (SCHEDULE_IS_HYGRO(dep))
-	{
-		result = terra_schedule_init_hygro((terra_schedule_hygro*) dep);
-	}
-	else if (SCHEDULE_IS_PERIOD(dep))
-	{
-		result = terra_schedule_init_period((terra_schedule_period*) dep);
-	}
-	else
-	{
-		result = FALSE;
-	}
+		return terra_schedule_init_clock((terra_schedule_clock*) dep);
 
-	SCHEDULE_INITIALIZED(dep);
+	if (SCHEDULE_IS_HYGRO(dep))
+		return terra_schedule_init_hygro((terra_schedule_hygro*) dep);
 
-	return result;
+	if (SCHEDULE_IS_PERIOD(dep))
+		return terra_schedule_init_period((terra_schedule_period*) dep);
+
+	return FALSE;
 }
 
 void terra_schedule_reset()

@@ -34,6 +34,11 @@ BOOL terra_schedule_init_hygro(terra_schedule_hygro * const hygro)
 	if (SCHEDULE_DISABLED(sched))
 		return FALSE;
 
+	if (SCHEDULE_IS_INITIALIZED(sched))
+		return sched->enabled;
+
+	SCHEDULE_INITIALIZED(sched);
+
 	//dependency init
 
 	if (!SCHEDULE_DEP_INIT(sched))
