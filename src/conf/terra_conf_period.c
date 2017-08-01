@@ -64,8 +64,6 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 			terra_log_error("[terra_conf_parse_schedule_period] failed to parse schedule (%zu)\n", i);
 			return CONFIG_PARSE_FAILED;
 		}
-		
-		printf("conf period %s\n", periods[0][i].schedule.name);
 
 		status = parse_period_set(&periods[0][i].default_set, lib_period);
 		if (status == CONFIG_PARSE_FAILED)
