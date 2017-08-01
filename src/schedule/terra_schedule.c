@@ -69,13 +69,13 @@ BOOL terra_schedule_dep_run(terra_schedule const * const base)
 
 	if (INVERS_DEP(base))
 	{
-		printf("has invers dep: %s\n", base->name);
 		if (RUNTIME_SWITCH_OFF(dep->socket))
 			return TRUE;
 	}
 	if (RUNTIME_SWITCH_ON(dep->socket))
 		return TRUE;
 
+	printf("dep returning FALSE for %s\n", base->name);
 	return FALSE;
 }
 
