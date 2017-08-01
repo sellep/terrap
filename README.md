@@ -18,9 +18,7 @@ Prerequisites
 Installation
 ===============
 
- `git clone https://github.com/sellep/terrap.git  
- cd terrap  
- make && sudo make install`
+ `git clone https://github.com/sellep/terrap.git && cd terrap && make && sudo make install`
 
  `make install` will copy the default configuration file (res/terra.conf) to /etc/terra/terra.conf, the init script (res/terra.init.d) to /etc/init.d/terra and the binary to /usr/local/bin.
 
@@ -31,17 +29,17 @@ Installation
 Usage
 ===============
 
- Start the daemon
-	- /etc/init.d/terra start
+ Start the daemon  
+	`/etc/init.d/terra start`
 	or
-	- terra daemon start (use `terra daemon` for running out of OpenRC scope)
+	`terra daemon start` (use `terra daemon` for running out of OpenRC scope)
 
- Read hygrometer manually
-	- terra hygro
+ Read hygrometer manually  
+	`terra hygro`
 
- Set socket manually
-	- terra switch <a/b/c>(:<channel>) <on/off>
+ Set socket manually  
+	`terra switch <a/b/c>(:<channel>) <on/off>`
 
- Show hygrometer recorded data
-	- terra show
+ Show hygrometer recorded data  
+	`terra show`
 	![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
