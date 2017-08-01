@@ -10,7 +10,7 @@ typedef terra_conf_schedule_hygro terra_schedule_hygro;
 typedef terra_conf_schedule_period terra_schedule_period;
 
 extern BOOL terra_schedule_arg(int const, char * * const);
-extern terra_schedule_reset();
+extern void terra_schedule_reset();
 
 extern void terra_schedule_init();
 extern BOOL terra_schedule_init_clock(terra_schedule_clock * const);
