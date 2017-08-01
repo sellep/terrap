@@ -114,6 +114,7 @@ void terra_schedule_reset()
 void terra_schedule_init()
 {
 	size_t i;
+	printf("init\n");
 
 	terra_pin_set_out(CONF_LED.err_pin);
 	terra_pin_set_out(CONF_LED.heart_pin);
