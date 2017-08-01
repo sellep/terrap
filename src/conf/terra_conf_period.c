@@ -84,7 +84,7 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 
 		periods[0][i].mode_len = config_setting_length(lib_modes);
 		if (periods[0][i].mode_len == 0)
-			return CONFIG_PARSE_OK;
+			continue;
 
 		periods[0][i].modes = (terra_period_mode*) malloc(sizeof(terra_period_mode) * periods[0][i].mode_len);
 
