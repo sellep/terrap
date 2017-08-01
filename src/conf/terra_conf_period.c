@@ -55,6 +55,8 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 
 	periods[0] = (terra_conf_schedule_period*) malloc(sizeof(terra_conf_schedule_period) * len[0]);
 
+	printf("periods: %i\n", *len);
+
 	for (i = 0 ; i < len[0]; i++)
 	{
 		lib_period = config_setting_get_elem(lib_periods, i);
@@ -84,7 +86,6 @@ terra_parse_result terra_conf_parse_schedule_period(terra_conf_schedule_period *
 		if (periods[0][i].mode_len == 0)
 			return CONFIG_PARSE_OK;
 
-		printf("conf len %zu\n", periods[0][i].mode_len);
 		periods[0][i].modes = (terra_period_mode*) malloc(sizeof(terra_period_mode) * periods[0][i].mode_len);
 
 		for (j = 0; j < periods[0][i].mode_len; j++)
