@@ -3,8 +3,8 @@
 #include <time.h>
 
 #define MAX_BUF_LEN 1024
-#define INFO_MESSAGE_FORMAT "[INFO] %02zu:%02zu:%02zu %02zu.%02zu.%zu: %s"
-#define ERROR_MESSAGE_FORMAT "[ERROR] %02zu:%02zu:%02zu %02zu.%02zu.%zu: %s"
+#define INFO_MESSAGE_FORMAT "%02zu:%02zu:%02zu %02zu.%02zu.%zu [INFO] %s"
+#define ERROR_MESSAGE_FORMAT "%02zu:%02zu:%02zu %02zu.%02zu.%zu [ERROR] %s"
 
 #define FILE_PATH "/var/log/terra"
 
