@@ -38,6 +38,7 @@ void terra_log_info(char const * const msg, ...)
 		if (!f)
 		{
 			sprintf(stderr, "[terra_log_info] failed to open file\n");
+			goto end;
 		}
 
 		fprintf(f, INFO_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_sec, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
@@ -49,6 +50,7 @@ void terra_log_info(char const * const msg, ...)
 		printf(INFO_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_sec, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
 	}
 
+end:
 	va_end(args);
 }
 
@@ -68,6 +70,7 @@ void terra_log_error(char const * const msg, ...)
 		if (!f)
 		{
 			sprintf(stderr, "[terra_log_error] failed to open file\n");
+			goto end;
 		}
 
 		fprintf(f, ERROR_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
@@ -79,5 +82,6 @@ void terra_log_error(char const * const msg, ...)
 		fprintf(stderr, ERROR_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
 	}
 
+end:
 	va_end(args);
 }
