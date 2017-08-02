@@ -3,8 +3,8 @@
 #include <time.h>
 
 #define MAX_BUF_LEN 1024
-#define INFO_MESSAGE_FORMAT "terra [INFO] %02zu:%02zu %02zu.%02zu.%zu: %s"
-#define ERROR_MESSAGE_FORMAT "terra [ERROR] %02zu:%02zu %02zu.%02zu.%zu: %s"
+#define INFO_MESSAGE_FORMAT "terra [INFO] %02zu:%02zu:%03zu %02zu.%02zu.%zu: %s"
+#define ERROR_MESSAGE_FORMAT "terra [ERROR] %02zu:%02zu:%03zu %02zu.%02zu.%zu: %s"
 
 #define FILE_PATH "/var/log/terra"
 
@@ -40,13 +40,13 @@ void terra_log_info(char const * const msg, ...)
 			sprintf(stderr, "[terra_log_info] failed to open file\n");
 		}
 
-		fprintf(f, INFO_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
+		fprintf(f, INFO_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_sec, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
 
 		fclose(f);
 	}
 	else
 	{
-		printf(INFO_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
+		printf(INFO_MESSAGE_FORMAT, ts.tm_hour, ts.tm_min, ts.tm_sec, ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900, buf);
 	}
 
 	va_end(args);
