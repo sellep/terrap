@@ -10,9 +10,9 @@ Prerequisites
  terra is designed to run on Raspberry Pi 2/3 and Gentoo GNU/Linux.
 
  terra depends on  
- 	- OpenRC  
- 	- ncursesw 5+ (wide character support, optional)  
- 	- libconfig  
+ * OpenRC  
+ * ncursesw 5+ (wide character support, optional)  
+ * libconfig  
 
 
 Installation
