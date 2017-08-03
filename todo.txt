@@ -1,12 +1,5 @@
- x dynamic sockets
- - extracting type definitions
-    x extract switch conf
-    x extract hygro conf
-    x extract or rather create led conf
-    - extract schedule conf
- - introduce modes
-    - store in file /var/lib/terra/modes
-    - set with terra mode <mode>
+ - socket state to shared mem
+    - print socket state (terra switch)
  - renaming switch to socket
  - config validation
     - infinity loop detection
