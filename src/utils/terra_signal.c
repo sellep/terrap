@@ -2,8 +2,6 @@
 
 #include "../terra_runtime.h"
 
-#include <errno.h>
-
 void terra_signal_handler(int const signum)
 {
 	if (signum == SIGHUP)
@@ -26,7 +24,7 @@ void terra_signal_sighup()
 	FILE *f = fopen("/var/run/terra", "r");
 	if (!f)
 	{
-		terra_log_error("[terra_signal_sighup] daemon not running\n");
+		terra_log_info("[terra_signal_sighup] daemon not running\n");
 		return;
 	}
 

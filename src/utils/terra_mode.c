@@ -1,6 +1,7 @@
 #include "terra_mode.h"
 
 #include "terra_lock.h"
+#include "terra_signal.h"
 
 #define ARG_MODE_WRITE "write"
 #define ARG_MODE_RESET "reset"
@@ -29,7 +30,13 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 			return FALSE;
 		}
 
-		return terra_mode_write(NULL);
+		if (terra_mode_write(NULL))
+		{
+			terra_signal_sighup();
+			return TRUE;
+		}
+
+		return FALSE;
 	}
 	else if (argc == 4)
 	{
@@ -39,7 +46,13 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 			return FALSE;
 		}
 
-		return terra_mode_write(argv[3]);
+		if (terra_mode_write(argv[3]))
+		{
+			terra_signal_sighup();
+			return TRUE;
+		}
+
+		return FALSE;
 	}
 	else
 	{
