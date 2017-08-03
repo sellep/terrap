@@ -22,6 +22,12 @@ static BOOL hygro_mode_init(terra_schedule_hygro * const hygro, terra_schedule c
 				return TRUE;
 			}
 		}
+
+		if (hygro->default_set.target != HYGRO_NONE)
+		{
+			hygro->set = &hygro->default_set;
+			return TRUE;
+		}
 	}
 
 	return FALSE;

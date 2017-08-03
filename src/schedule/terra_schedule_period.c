@@ -22,6 +22,12 @@ BOOL period_init_mode(terra_schedule_period * const period, terra_schedule const
 				return TRUE;
 			}
 		}
+
+		if (period->has_default_set)
+		{
+			period->set = &period->default_set;
+			return TRUE;
+		}
 	}
 
 	return FALSE;

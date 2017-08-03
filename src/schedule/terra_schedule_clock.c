@@ -22,6 +22,12 @@ static BOOL clock_mode_init(terra_schedule_clock * const clock, terra_schedule c
 				return TRUE;
 			}
 		}
+
+		if (clock->default_time_set)
+		{
+			clock->time = &clock->default_time;
+			return TRUE;
+		}
 	}
 
 	return FALSE;
