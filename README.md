@@ -44,10 +44,10 @@ Usage
  ###### Read current schedule mode
  `sudo terra mode` will print the current mode to the terminal
  ###### Set new schedule mode
- `sudo terra mode set <mode>` will set <mode> as new mode
+ `sudo terra mode set <mode>` will set given argument as new mode
  ###### Reset schedule mode
  `sudo terra mode reset` will reset the mode
 
  ## Show hygrometer recorded data  
-	`terra show`
-	![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
+ `terra show`
+ ![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
