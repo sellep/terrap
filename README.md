@@ -34,10 +34,6 @@ Usage
  or
  `terra daemon start` (use `terra daemon` for running out of OpenRC scope)
 
- ## Hygrometer
- ###### Read hygrometer manually
- `terra hygro`
-
  ## Set socket manually
  `terra switch <a/b/c>(:<channel>) <on/off>` (example: `terra switch c off` or `terra switch a:24 on`)
 
@@ -50,6 +46,9 @@ Usage
  ###### Reset schedule mode
  `sudo terra mode reset` will reset the mode
 
- ## Show hygrometer recorded data
+ ## Hygrometer
+ ###### Read hygrometer manually
+ `terra hygro`
+ ###### Show hygrometer recorded data
  `terra show`
  ![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
