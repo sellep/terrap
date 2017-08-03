@@ -35,7 +35,8 @@ Usage
  `terra daemon start` (use `terra daemon` for running out of OpenRC scope)
 
  ## Set socket manually
- `terra switch <a/b/c>(:<channel>) <on/off>` (example: `terra switch c off` or `terra switch a:24 on`)
+ `terra switch <socket> <on/off>` to set a given socket on or off  
+ `terra switch <socket:channel> <on/off>` to set a given socket of a given channel on or off
 
  ## Schedule modes
  With modes, the behavior of schedules can be modified. Changing the mode will force the daemon to reload (SIGHUP) the config.
