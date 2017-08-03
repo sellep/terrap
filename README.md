@@ -23,10 +23,11 @@ Installation
  `make`  
  `sudo make install`  
 
- `make install` will copy the default configuration file (res/terra.conf) to /etc/terra/terra.conf, the init script (res/terra.init.d) to /etc/init.d/terra and the binary to /usr/local/bin.
+ `make install` will copy the default configuration file *res/terra.conf* to */etc/terra/terra.conf*, the init script *res/terra.init.d* to */etc/init.d/terra* and the binary to */usr/local/bin/terra*.
 
- IMPORTANT:
- Please check the configuration file, you might want to modify the BCM GPIO pins and other settings.
+ ```go
+ color.Println(color.Yellow("IMPORTANT: Please check the configuration file, you might want to modify the BCM GPIO pins and other settings."))
+ ```
 
 
 Usage
@@ -43,7 +44,7 @@ Usage
  #### Asynchronous
  `sudo terra daemon` will fork and exec `terra schedule logfile pidfile`
  #### OpenRC
- Requires Gentoos Helper function (https://dev.gentoo.org/~zmedico/portage/doc/ch06s02.html)
+ Requires Gentoos Helper Function (https://dev.gentoo.org/~zmedico/portage/doc/ch06s02.html)
  `sudo /etc/init.d/terra start`
 
  ## Set socket manually
