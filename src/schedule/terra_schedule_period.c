@@ -1,6 +1,6 @@
 #include "terra_schedule.h"
 
-static BOOL period_mode_init(terra_schedule_period * const period, terra_schedule const * const sched)
+BOOL period_init_mode(terra_schedule_period * const period, terra_schedule const * const sched)
 {
 	size_t i;
 
@@ -49,7 +49,7 @@ BOOL terra_schedule_init_period(terra_schedule_period * const period)
 
 	//mode init
 
-	else if (!period_mode_init(period, sched))
+	else if (!period_init_mode(period, sched))
 	{
 		SCHEDULE_DISABLE(sched);
 		terra_log_info("[terra_schedule_period_init] schedule %s disabled by mode\n", sched->name);

@@ -7,6 +7,11 @@
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
 
+static inline void mode_reinit()
+{
+	
+}
+
 static inline void terra_heart_beat()
 {
 	if (LIKELY(runtime.hygro_err == 0))
@@ -109,14 +114,16 @@ static inline void schedule_run_schedules()
 
 void terra_schedule_run()
 {
+	BOOL reinit;
+
 	if (!terra_signal_reg())
 		goto exit;
 
-	terra_schedule_init();
+	reinit = FALSE;
 
 	while (TRUE)
 	{
-		RUNTIME_RESET_RELOAD();
+		terra_schedule_init(reinit);
 
 		if (CONF_GLOBAL.read_only)
 		{
@@ -138,6 +145,8 @@ void terra_schedule_run()
 			terra_log_error("[terra_schedule_run] failed to load config file\n");
 			goto exit;
 		}
+
+		reinit = TRUE;
 	}
 
 exit:

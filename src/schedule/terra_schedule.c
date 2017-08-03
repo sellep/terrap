@@ -119,16 +119,23 @@ void terra_schedule_reset()
 	}
 }
 
-void terra_schedule_init()
+void terra_schedule_init(BOOL const reinit)
 {
 	size_t i;
 
-	terra_pin_set_out(CONF_LED.err_pin);
-	terra_pin_set_out(CONF_LED.heart_pin);
-	terra_pin_set_out(CONF_SWITCH.pin);
+	if (!reinit)
+	{
+		terra_pin_set_out(CONF_LED.err_pin);
+		terra_pin_set_out(CONF_LED.heart_pin);
+		terra_pin_set_out(CONF_SWITCH.pin);
 
-	terra_led_set(CONF_LED.heart_pin, FALSE);
-	terra_led_set(CONF_LED.err_pin, FALSE);
+		terra_led_set(CONF_LED.heart_pin, FALSE);
+		terra_led_set(CONF_LED.err_pin, FALSE);
+
+		runtime.switch_modes[0] = SWITCH_UNKNOWN;
+		runtime.switch_modes[1] = SWITCH_UNKNOWN;
+		runtime.switch_modes[2] = SWITCH_UNKNOWN;
+	}
 
 	if (terra_mode_read(&RUNTIME_MODE))
 	{
@@ -156,7 +163,5 @@ void terra_schedule_init()
 		terra_schedule_init_period(SCHEDULE_GET_PERIOD(i));
 	}
 
-	runtime.switch_modes[0] = SWITCH_UNKNOWN;
-	runtime.switch_modes[1] = SWITCH_UNKNOWN;
-	runtime.switch_modes[2] = SWITCH_UNKNOWN;
+	RUNTIME_RESET_RELOAD();
 }
