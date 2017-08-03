@@ -31,15 +31,15 @@ Usage
 
  ## Daemon
  There are several ways to start the terra daemon.
- ###### Synchronous
- It is recommended to use the asynchronous approach. But 
- `sudo terra schedule` will print logs to the current terminal  
- `sudo terra schedule logfile` will print logs to the terra log file (/var/log/terra)  
- `sudo terra schedule pidfile`  
-  * `pidfile` will use and lock /var/run/terra.pid. This allows to reload the configuration from the outside.
- ###### Asynchronous
+ #### Synchronous
+ It is recommended to use the asynchronous approach.  
+ `sudo terra schedule`
+ #### Parameter
+ * `logfile` will print all log messages to the log file (/var/log/terra).
+ * `pidfile` will use and lock /var/run/terra.pid.  This allows to reload the configuration from the outside.
+ #### Asynchronous
  `sudo terra daemon` will fork and exec `terra schedule logfile pidfile`
- ###### OpenRC
+ #### OpenRC
  `sudo /etc/init.d/terra start`
 
  ## Set socket manually
@@ -48,17 +48,17 @@ Usage
 
  ## Schedule modes
  With modes, the behavior of schedules can be modified. Changing the mode will force the daemon to reload (SIGHUP) the config.
- ###### Read current schedule mode
+ #### Read current schedule mode
  `sudo terra mode` will print the current mode to the terminal
- ###### Set new schedule mode
+ #### Set new schedule mode
  `sudo terra mode set <mode>` will set given argument as new mode
- ###### Reset schedule mode
+ #### Reset schedule mode
  `sudo terra mode reset` will reset the mode
 
  ## Hygrometer
- ###### Read hygrometer manually
+ #### Read hygrometer manually
  `terra hygro`
- ###### Show hygrometer recorded data
+ #### Show hygrometer recorded data
  `terra show`  
  `terra show <days_in_past>` to show past data  
  `terra show <days_in_past> <start_time>` to show past data starting at a given time (`terra show 0 15:00`)  
