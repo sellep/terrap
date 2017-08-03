@@ -50,5 +50,5 @@ Usage
  ###### Read hygrometer manually
  `terra hygro`
  ###### Show hygrometer recorded data
- `terra show`
+ `terra show`  
  ![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
