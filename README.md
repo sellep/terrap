@@ -1,3 +1,7 @@
+```sh
+go get github.com/labstack/gommon/color
+```
+
 terra
 ===============
 
