@@ -32,6 +32,7 @@ Usage
  ## Daemon
  There are several ways to start the terra daemon.
  ###### Synchronous
+ It is recommended to use the asynchronous approach.  
  `sudo terra schedule` will print logs to the current terminal  
  `sudo terra schedule logfile` will print logs to the terra log file (/var/log/terra)  
  ###### Asynchronous
