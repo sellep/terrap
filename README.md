@@ -33,7 +33,8 @@ Usage
  ## Configuration
  #### Print current configuration
  `terra conf`
-
+ #### Reload daemons configuration
+ `terra conf reload` if the daemon should reload the configuration.
  ## Daemon
  There are several ways to start the terra daemon.
  #### Synchronous

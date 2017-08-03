@@ -1,5 +1,28 @@
 #include "terra_conf.h"
 
+#define ARG_MODE_RELOAD "reload"
+
+extern void terra_conf_print(terra_conf const * const);
+
+BOOL terra_conf_run(int const argc, char * * const argv, terra_conf const * const conf)
+{
+	if (argc == 2)
+	{
+		terra_conf_print(conf);
+	}
+	else if (strcmp(argv[2], ARG_MODE_RELOAD) == 0)
+	{
+		terra_signal_sighup();
+	}
+	else
+	{
+		terra_log_error("[terra_conf_run] unknown argument %s\n", argv[2]);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
 void terra_conf_print(terra_conf const * const c)
 {
 	terra_time time;

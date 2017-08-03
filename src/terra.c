@@ -17,7 +17,6 @@
 #define ARG_MODE_DAEMON "daemon"
 #define ARG_MODE_MODE "mode"
 #define ARG_MODE_SCHEDULE "schedule"
-#define ARG_MODE_RELOAD "reload"
 
 int main(int argc, char ** argv)
 {
@@ -84,7 +83,8 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_CONFIG) == 0)
 	{
-		terra_conf_print(&CONF_GLOBAL);
+		if (!terra_conf_run(argc, argv, &CONF_GLOBAL))
+			return 1;
 	}
 	else if (strcmp(argv[1], ARG_MODE_SCHEDULE) == 0)
 	{
@@ -92,10 +92,6 @@ int main(int argc, char ** argv)
 		{
 			terra_schedule_run();
 		}
-	}
-	else if (strcmp(argv[1], ARG_MODE_RELOAD) == 0)
-	{
-		terra_signal_sighup();
 	}
 	else
 	{

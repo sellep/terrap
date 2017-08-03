@@ -4,6 +4,7 @@
 #include "../terra_defs.h"
 #include "../utils/terra_time.h"
 #include "../utils/terra_mode.h"
+#include "../utils/terra_signal.h"
 #include "../led/terra_led.h"
 #include "../switch/terra_switch.h"
 #include "../hygro/terra_hygro.h"
@@ -161,7 +162,7 @@ typedef struct
 } terra_conf;
 
 extern terra_parse_result terra_conf_parse(terra_conf * const, char const * const);
-extern void terra_conf_print(terra_conf const * const);
+extern BOOL terra_conf_run(int const, char * * const, terra_conf const * const);
 extern void terra_conf_free(terra_conf * const);
 
 extern void terra_conf_print_schedule(terra_conf_schedule const * const);
