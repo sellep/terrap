@@ -29,10 +29,15 @@ Installation
 Usage
 ===============
 
- ## Start the daemon
- `/etc/init.d/terra start`
- or
- `terra daemon start` (use `terra daemon` for running out of OpenRC scope)
+ ## Daemon
+ There are several ways to start the terra daemon.
+ ###### Synchronous
+ `sudo terra schedule` will print logs to the current terminal  
+ `sudo terra schedule logfile` will print logs to the terra log file (/var/log/terra)  
+ ###### Asynchronous
+ `sudo terra daemon` will fork and exec `terra schedule logfile pidfile`
+ ###### OpenRC
+ `sudo /etc/init.d/terra start`
 
  ## Set socket manually
  `terra switch <socket> <on/off>` to set a given socket on or off  
