@@ -4,7 +4,7 @@ static BOOL hygro_mode_init(terra_schedule_hygro * const hygro, terra_schedule c
 {
 	size_t i;
 
-	if (RUNTIME_DEFAULT_MODE())
+	if (RUNTIME_MODE_DEFAULT)
 	{
 		if (hygro->default_set.target != HYGRO_NONE)
 		{

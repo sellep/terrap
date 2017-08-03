@@ -4,7 +4,7 @@ BOOL period_init_mode(terra_schedule_period * const period, terra_schedule const
 {
 	size_t i;
 
-	if (RUNTIME_DEFAULT_MODE())
+	if (RUNTIME_MODE_DEFAULT)
 	{
 		if (period->has_default_set)
 		{

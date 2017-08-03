@@ -4,7 +4,7 @@ static BOOL clock_mode_init(terra_schedule_clock * const clock, terra_schedule c
 {
 	size_t i;
 
-	if (RUNTIME_DEFAULT_MODE())
+	if (RUNTIME_MODE_DEFAULT)
 	{
 		if (clock->default_time_set)
 		{
