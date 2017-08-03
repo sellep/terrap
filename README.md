@@ -34,7 +34,7 @@ Usage
  #### Synchronous
  It is recommended to use the asynchronous approach.  
  `sudo terra schedule`
- #### Parameter
+ ###### Parameter
  * `logfile` will print all log messages to the log file (/var/log/terra).
  * `pidfile` will use and lock /var/run/terra.pid.  This allows to reload the configuration from the outside.
  #### Asynchronous
