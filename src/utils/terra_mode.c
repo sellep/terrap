@@ -3,12 +3,12 @@
 #include "terra_lock.h"
 #include "terra_signal.h"
 
-#define ARG_MODE_WRITE "write"
+#define ARG_MODE_SET "set"
 #define ARG_MODE_RESET "reset"
 
 #define MODE_FILE "/var/lib/terra/mode"
 
-extern BOOL terra_mode_write(terra_mode);
+extern BOOL terra_mode_set(terra_mode);
 
 BOOL terra_mode_run(int const argc, char * * const argv)
 {
@@ -30,7 +30,7 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 			return FALSE;
 		}
 
-		if (terra_mode_write(NULL))
+		if (terra_mode_set(NULL))
 		{
 			terra_signal_sighup();
 			return TRUE;
@@ -40,13 +40,13 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 	}
 	else if (argc == 4)
 	{
-		if (strcmp(argv[2], ARG_MODE_WRITE) != 0)
+		if (strcmp(argv[2], ARG_MODE_SET) != 0)
 		{
 			terra_log_error("[terra_mode_run] invalid mode %s\n", argv[2]);
 			return FALSE;
 		}
 
-		if (terra_mode_write(argv[3]))
+		if (terra_mode_set(argv[3]))
 		{
 			terra_signal_sighup();
 			return TRUE;
@@ -63,7 +63,7 @@ BOOL terra_mode_run(int const argc, char * * const argv)
 	return TRUE;
 }
 
-BOOL terra_mode_write(terra_mode mode)
+BOOL terra_mode_set(terra_mode mode)
 {
 	char buf[MODE_NAME_MAX + 1];
 	int mode_h;
@@ -79,7 +79,7 @@ BOOL terra_mode_write(terra_mode mode)
 
 	if (mode_h == -1)
 	{
-		terra_log_error("[terra_mode_write] failed to create/open mode file\n");
+		terra_log_error("[terra_mode_set] failed to create/open mode file\n");
 		UNLOCK();
 		return FALSE;
 	}
