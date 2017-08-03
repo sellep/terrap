@@ -29,15 +29,16 @@ Installation
 Usage
 ===============
 
- ## Start the daemon  
+ ## Start the daemon
  `/etc/init.d/terra start`
  or
  `terra daemon start` (use `terra daemon` for running out of OpenRC scope)
 
- ## Read hygrometer manually  
+ ## Hygrometer
+ ###### Read hygrometer manually
  `terra hygro`
 
- ## Set socket manually  
+ ## Set socket manually
  `terra switch <a/b/c>(:<channel>) <on/off>` (example: `terra switch c off` or `terra switch a:24 on`)
 
  ## Schedule modes
@@ -48,6 +49,6 @@ Usage
  ###### Reset schedule mode
  `sudo terra mode reset` will reset the mode
 
- ## Show hygrometer recorded data  
+ ## Show hygrometer recorded data
  `terra show`
  ![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
