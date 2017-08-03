@@ -51,4 +51,7 @@ Usage
  `terra hygro`
  ###### Show hygrometer recorded data
  `terra show`  
+ `terra show <days_in_past>` to show past data  
+ `terra show <days_in_past> <start_time>` to show past data starting at a given time (`terra show 0 15:00`)  
+  
  ![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
