@@ -42,6 +42,7 @@ Usage
  `terra switch <a/b/c>(:<channel>) <on/off>` (example: `terra switch c off` or `terra switch a:24 on`)
 
  ## Schedule modes
+ With modes, the behavior of schedules can be modified. Changing the mode will force the daemon to reload (SIGHUP) the config.
  ###### Read current schedule mode
  `sudo terra mode` will print the current mode to the terminal
  ###### Set new schedule mode
