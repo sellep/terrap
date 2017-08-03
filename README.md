@@ -30,6 +30,9 @@ Installation
 
 Usage
 ===============
+ ## Configuration
+ #### Print current configuration
+ `terra conf`
 
  ## Daemon
  There are several ways to start the terra daemon.
