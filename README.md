@@ -1,7 +1,3 @@
-```sh
-go get github.com/labstack/gommon/color
-```
-
 terra
 ===============
 
@@ -29,9 +25,10 @@ Installation
 
  `make install` will copy the default configuration file *res/terra.conf* to */etc/terra/terra.conf*, the init script *res/terra.init.d* to */etc/init.d/terra* and the binary to */usr/local/bin/terra*.
 
- ```go
- color.Println(color.Yellow("IMPORTANT: Please check the configuration file, you might want to modify the BCM GPIO pins and other settings like schedules"))
+ ```html
+ <div style="background-color:yellow">ads</div>
  ```
+ IMPORTANT: Please check the configuration file, you might want to modify the BCM GPIO pins and other settings like schedules"))
 
 
 Usage
