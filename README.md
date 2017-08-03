@@ -35,11 +35,12 @@ Usage
  It is recommended to use the asynchronous approach.  
  `sudo terra schedule`
  ###### Parameter
- * `logfile` will print all log messages to the log file (/var/log/terra).
- * `pidfile` will use and lock /var/run/terra.pid.  This allows to reload the configuration from the outside.
+ * `logfile` will print all log messages to the log file */var/log/terra*.
+ * `pidfile` will use and lock */var/run/terra.pid*.  This allows to reload the configuration from the outside.
  #### Asynchronous
  `sudo terra daemon` will fork and exec `terra schedule logfile pidfile`
  #### OpenRC
+ Requires Gentoos Helper function (https://dev.gentoo.org/~zmedico/portage/doc/ch06s02.html)
  `sudo /etc/init.d/terra start`
 
  ## Set socket manually
