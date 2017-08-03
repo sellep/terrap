@@ -37,7 +37,7 @@ void terra_log_info(char const * const msg, ...)
 		f = fopen(FILE_PATH, "a");
 		if (!f)
 		{
-			sprintf(stderr, "[terra_log_info] failed to open file\n");
+			sprintf(stderr, "[CRITICAL] [terra_log_info] failed to open file\n");
 			goto end;
 		}
 
@@ -69,7 +69,7 @@ void terra_log_error(char const * const msg, ...)
 		f = fopen(FILE_PATH, "a");
 		if (!f)
 		{
-			sprintf(stderr, "[terra_log_error] failed to open file\n");
+			sprintf(stderr, "[CRITICAL] [terra_log_error] failed to open file\n");
 			goto end;
 		}
 
