@@ -144,6 +144,7 @@ void terra_schedule_init(BOOL const reinit)
 	else
 	{
 		RUNTIME_DEFAULT_MODE();
+		terra_log_info("[terra_schedule_init] mode: (default)\n");
 	}
 
 	terra_schedule_reset();
