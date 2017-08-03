@@ -23,4 +23,6 @@
 #define OWNER_READ_WRITE 600
 #define USER_WRITE 664
 
+#define TERRA_PID_FILE "/var/run/terra.pid"
+
 #endif

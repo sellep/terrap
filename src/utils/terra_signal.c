@@ -21,7 +21,7 @@ void terra_signal_sighup()
 	char buf[10];
 	int num, pid;
 
-	FILE *f = fopen("/var/run/terra", "r");
+	FILE *f = fopen(TERRA_PID_FILE, "r");
 	if (!f)
 	{
 		terra_log_info("[terra_signal_sighup] daemon not running\n");

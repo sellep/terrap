@@ -1,14 +1,12 @@
 #include "terra_daemon.h"
 
-#define PID_FILE "/var/run/terra.pid"
-
 static int pid_h = 0;
 
 BOOL terra_daemon_pid()
 {
 	char str[10];
 
-	pid_h = open(PID_FILE, O_RDWR | O_CREAT, OWNER_READ_WRITE);
+	pid_h = open(TERRA_PID_FILE, O_RDWR | O_CREAT, OWNER_READ_WRITE);
 	if (pid_h == -1)
 	{
 		terra_log_error("[terra_daemon_pid] failed to create pid file\n");
