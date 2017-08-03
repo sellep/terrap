@@ -30,23 +30,24 @@ Usage
 ===============
 
  ## Start the daemon  
-	`/etc/init.d/terra start`
-	or
-	`terra daemon start` (use `terra daemon` for running out of OpenRC scope)
+ `/etc/init.d/terra start`
+ or
+ `terra daemon start` (use `terra daemon` for running out of OpenRC scope)
 
  ## Read hygrometer manually  
-	`terra hygro`
+ `terra hygro`
 
  ## Set socket manually  
-	`terra switch <a/b/c>(:<channel>) <on/off>` (example: `terra switch c off` or `terra switch a:24 on`)
+ `terra switch <a/b/c>(:<channel>) <on/off>` (example: `terra switch c off` or `terra switch a:24 on`)
 
  ## Schedule modes
-	###### Read current schedule mode
-	`sudo terra mode` will print the current mode to the terminal
-	###### Set new schedule mode
-	`sudo terra mode set <mode>` will set <mode> as new mode
-	###### Reset schedule mode
-	`sudo terra mode reset` will reset the mode
- Show hygrometer recorded data  
+ ###### Read current schedule mode
+ `sudo terra mode` will print the current mode to the terminal
+ ###### Set new schedule mode
+ `sudo terra mode set <mode>` will set <mode> as new mode
+ ###### Reset schedule mode
+ `sudo terra mode reset` will reset the mode
+
+ ## Show hygrometer recorded data  
 	`terra show`
 	![alt text](https://github.com/sellep/terrap/blob/master/res/terra.show.png)
