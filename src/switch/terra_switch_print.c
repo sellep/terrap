@@ -20,7 +20,7 @@ void terra_switch_print(terra_switch_mode const * const modes, terra_conf_switch
 {
 	ssize_t s;
 
-	printf("switch a: %s\n", switch_print_get_string(modes[0]));
-	printf("switch b: %s\n", switch_print_get_string(modes[0]));
-	printf("switch c: %s\n", switch_print_get_string(modes[0]));
+	printf("switch socket a: %s\n", switch_print_get_string(modes[0]));
+	printf("switch socket b: %s\n", switch_print_get_string(modes[0]));
+	printf("switch socket c: %s\n", switch_print_get_string(modes[0]));
 }

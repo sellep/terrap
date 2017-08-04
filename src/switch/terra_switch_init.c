@@ -1,6 +1,6 @@
 #include "terra_switch.h"
 
-static int *file;
+static int file;
 
 BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch const * const conf)
 {
