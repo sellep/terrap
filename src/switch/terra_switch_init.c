@@ -1,6 +1,6 @@
 static int *file;
 
-BOOL terra_switch_init(terra_switch_modes * * const modes, terra_conf_switch const * const conf)
+BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch const * const conf)
 {
 	file = shm_open(SWITCH_FILE, O_CREAT | O_TRUNC | O_RDWR, S_IRWXU | S_IRWXG | S_IROTH);
 	if (file < 0)
