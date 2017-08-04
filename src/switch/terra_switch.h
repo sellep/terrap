@@ -5,6 +5,15 @@
 #include "../utils/terra_log.h"
 #include "../utils/terra_lock.h"
 
+#define SWITCH_FILE "terra_switch"
+
+enum terra_switch_modes
+{
+	SWITCH_UNKNOWN = -1,
+	SWITCH_OFF  = 0,
+	SWITCH_ON = 1
+};
+
 typedef struct
 {
 	int channel;
@@ -25,13 +34,6 @@ typedef struct
 	terra_switch_group *groups;
 } terra_conf_switch;
 
-enum terra_switch_modes
-{
-	SWITCH_UNKNOWN = -1,
-	SWITCH_OFF  = 0,
-	SWITCH_ON = 1
-};
-
 typedef int terra_switch_mode;
 
 typedef struct
@@ -43,7 +45,7 @@ typedef struct
 
 extern BOOL terra_switch_arg(terra_switch_req * const, int const, char * * const);
 extern void terra_switch_transmit(terra_conf_switch const * const, int const);
-extern void terra_switch_init(terra_conf_switch const * const);
+extern BOOL terra_switch_init(terra_switch_modes * * const, terra_conf_switch const * const)
 
 static inline terra_switch_group* terra_switch_group_get(terra_conf_switch const * const conf, int const channel)
 {

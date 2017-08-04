@@ -22,6 +22,12 @@ BOOL terra_runtime_init(char const * const conf_path)
 		return FALSE;
 	}
 
+	if (!terra_switch_init(&runtime.switch_modes, &CONF_SWITCH))
+	{
+		terra_log_error("[terra_runtime_init] failed to init sockets\n");
+		return FALSE;
+	}
+
 	runtime.hygro_err = 0;
 
 	terra_pin_set_out(CONF_SWITCH.pin);

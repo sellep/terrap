@@ -27,7 +27,7 @@ typedef struct
 	terra_time hygro_last;
 	size_t hygro_err;
 
-	terra_switch_mode switch_modes[3];
+	terra_switch_mode *switch_modes;
 
 	float temp;
 	float humi;
