@@ -5,6 +5,7 @@ static int *file;
 BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch const * const conf)
 {
 	file = shm_open(SWITCH_FILE, O_CREAT | O_TRUNC | O_RDWR, S_IRWXU | S_IRWXG | S_IROTH);
+	printf("file %p\n", file);
 	if (file < 0)
 	{
 		terra_log_error("[terra_switch_init] failed to create shared file (%s)\n", strerror(errno));
