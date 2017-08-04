@@ -10,7 +10,6 @@ static inline BOOL switch_open_file()
 
 	if (errno == EEXIST)
 	{
-		printf("EEXIST\n");
 		do_truncate = FALSE;
 
 		file = shm_open(SWITCH_FILE, O_RDWR, S_IRWXU | S_IRWXG | S_IROTH);
@@ -24,7 +23,6 @@ static inline BOOL switch_open_file()
 
 	if (do_truncate)
 	{
-		printf("do_truncate\n");
 		if (ftruncate(file, sizeof(terra_switch_mode) * 3) == -1)
 		{
 			terra_log_error("[terra_switch_init] failed to truncate shared file (%s)\n", strerror(errno));
@@ -51,7 +49,6 @@ BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch cons
 		return FALSE;
 	}
 
-	printf("mmap\n");
 
 	return TRUE;
 }
