@@ -12,6 +12,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "common_dht_read.h"
 #include "pi_2_mmio.h"

@@ -1,12 +1,5 @@
 #include "terra_lock.h"
 
-#include <unistd.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <fcntl.h>
-#include <errno.h>
-
 #define LOCK_FILE "terra_lock"
 
 static int sm_mutex;
