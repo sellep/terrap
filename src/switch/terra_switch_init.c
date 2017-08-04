@@ -46,5 +46,6 @@ BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch cons
 		terra_log_error("[terra_switch_init] failed to map shared file (%s)\n", strerror(errno));
 		return FALSE;
 	}
+
 	return TRUE;
 }
