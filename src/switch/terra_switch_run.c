@@ -1,7 +1,7 @@
 #include "terra_switch.h"
 
-#define SOCKET_RESULT(c) (*socket = (c); return TRUE;)
-#define MODE_RESULT(m) (*mode = (m); return TRUE;)
+#define SOCKET_RESULT(c) *socket = (c); return TRUE;
+#define MODE_RESULT(m) *mode = (m); return TRUE;
 
 static inline BOOL switch_socket(char * const socket, char const * const arg)
 {
