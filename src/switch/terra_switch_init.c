@@ -12,20 +12,17 @@ BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch cons
 		return FALSE;
 	}
 
+	if (ftruncate(file, sizeof(terra_switch_mode) * 3) == -1)
+	{
+		terra_log_error("[terra_switch_init] failed to truncate shared file (%s)\n", strerror(errno));
+		return FALSE;
+	}
+
 	modes[0] = mmap(NULL, sizeof(terra_switch_mode) * 3, PROT_READ | PROT_WRITE, MAP_SHARED, file, 0);
 	if (modes[0] == MAP_FAILED)
 	{
 		terra_log_error("[terra_switch_init] failed to map shared file (%s)\n", strerror(errno));
 		return FALSE;
 	}
-
-	printf("preACCESS\n");
-
-	modes[0][0] = SWITCH_UNKNOWN;
-	modes[0][1] = SWITCH_ON;
-	modes[0][2] = SWITCH_OFF;
-
-	printf("y\n");
-
 	return TRUE;
 }
