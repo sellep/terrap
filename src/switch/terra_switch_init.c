@@ -6,7 +6,7 @@ BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch cons
 	if (file < 0)
 	{
 		terra_log_error("[terra_switch_init] failed to create shared file (%s)\n", strerror(errno));
-		conf->file = NULL;
+		file = NULL;
 		return FALSE;
 	}
 
