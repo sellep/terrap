@@ -4,11 +4,6 @@
 #include "utils/terra_signal.h"
 #include "utils/terra_mode.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-
 #define ARG_MODE_SWITCH "switch"
 #define ARG_MODE_LED "led"
 #define ARG_MODE_HYGRO "hygro"
@@ -53,10 +48,8 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_SWITCH) == 0)
 	{
-		if (!terra_switch_arg(&switch_req, argc, argv))
+		if (!terra_switch_run(argc, argv, runtime.switch_modes, &CONF_SWITCH))
 			return 1;
-
-		terra_switch_set(&CONF_SWITCH, switch_req.socket, switch_req.channel, switch_req.mode, (char*) NULL);
 	}
 	else if (strcmp(argv[1], ARG_MODE_LED) == 0)
 	{

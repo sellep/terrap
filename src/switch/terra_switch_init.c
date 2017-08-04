@@ -13,7 +13,6 @@ BOOL terra_switch_init(terra_switch_mode * * const modes, terra_conf_switch cons
 	}
 
 	modes[0] = mmap(NULL, sizeof(terra_switch_mode) * 3, PROT_READ | PROT_WRITE, MAP_SHARED, file, 0);
-	printf("map %p\n", modes[0]);
 	if (modes[0] == MAP_FAILED)
 	{
 		terra_log_error("[terra_switch_init] failed to map shared file (%s)\n", strerror(errno));

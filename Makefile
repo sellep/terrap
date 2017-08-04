@@ -22,9 +22,10 @@ OBJ=pi_2_mmio.o \
 	terra_conf_clock.o \
 	terra_conf_hygro.o \
 	terra_conf.o \
-	terra_switch_arg.o \
 	terra_switch_transmit.o \
 	terra_switch_init.o \
+	terra_switch_print.o \
+	terra_switch_run.o \
 	terra_hygro_read.o \
 	terra_hygro_write.o \
 	terra_visual_show.o \

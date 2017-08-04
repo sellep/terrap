@@ -46,6 +46,7 @@ typedef struct
 extern BOOL terra_switch_arg(terra_switch_req * const, int const, char * * const);
 extern void terra_switch_transmit(terra_conf_switch const * const, int const);
 extern BOOL terra_switch_init(terra_switch_mode * * const, terra_conf_switch const * const);
+extern void terra_switch_print(terra_switch_mode const * const, terra_conf_switch const * const);
 
 static inline terra_switch_group* terra_switch_group_get(terra_conf_switch const * const conf, int const channel)
 {
