@@ -22,16 +22,22 @@ int main(int argc, char ** argv)
 
 	if (argc < 2)
 	{
+		printf("a\n");
 		terra_log_error("[terra] insufficient argument count\n");
 		return 1;
 	}
 
+	printf("a.0\n");
+	
 	if (!terra_runtime_init(CONF_PATH))
 	{
+		printf("a.1\n");
 		terra_log_error("[terra] failed to initialize runtime\n");
 		return 1;
 	}
 
+	printf("a.2\n");
+	
 	if (strcmp(argv[1], ARG_MODE_DAEMON) == 0)
 	{
 		if (!terra_daemon_run(argc, argv))
@@ -81,8 +87,12 @@ int main(int argc, char ** argv)
 	}
 	else if (strcmp(argv[1], ARG_MODE_SCHEDULE) == 0)
 	{
+		printf("a.5\n");
+		
 		if (terra_schedule_arg(argc, argv))
 		{
+			printf("a.6\n");
+			
 			terra_schedule_run();
 		}
 	}

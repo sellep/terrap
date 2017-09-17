@@ -7,6 +7,7 @@
 
 #define SLEEP() sleep_milliseconds(CONF_GLOBAL.delay)
 
+//TODO: check use
 static inline void mode_reinit()
 {
 	

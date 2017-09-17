@@ -123,8 +123,11 @@ void terra_schedule_init(BOOL const reinit)
 {
 	size_t i;
 
+	printf("f.1\n");
+	
 	if (!reinit)
 	{
+		printf("f.2\n");
 		terra_pin_set_out(CONF_LED.err_pin);
 		terra_pin_set_out(CONF_LED.heart_pin);
 		terra_pin_set_out(CONF_SWITCH.pin);
@@ -139,14 +142,16 @@ void terra_schedule_init(BOOL const reinit)
 
 	if (terra_mode_read(&RUNTIME_MODE))
 	{
+		printf("f.3\n");
 		terra_log_info("[terra_schedule_init] mode: %s\n", RUNTIME_MODE);
 	}
 	else
 	{
+		printf("f.4\n");
 		RUNTIME_MODE_SET_DEFAULT();
 		terra_log_info("[terra_schedule_init] mode: (default)\n");
 	}
-
+printf("f.5\n");
 	terra_schedule_reset();
 
 	for (i = 0; i < CONF_GLOBAL.clock_len; i++)
